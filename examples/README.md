@@ -32,3 +32,19 @@ npx remotion still src/index.ts SelfFix out/check_300.png --frame 300 --overwrit
 
 - `src/theme.ts` (dark tech) and `src/focuscat/theme2.ts` (warm editorial) are the two palettes from `references/design-rules.md`.
 - `src/focuscat/PixelCat.tsx` draws the mascot as a CSS pixel grid; swap the sprite strings to make your own.
+
+## SolitudeLyrics (Arabic lyric video, 9:16)
+
+Cinematic stills from Gemini image, turned into 3D camera moves with a depth map
+(parallax occlusion, depth fog, depth-of-field, rain between the layers in a WebGL shader).
+
+```bash
+export GEMINI_API_KEY=...        # Vertex AI express key or Gemini API key
+npm run lyrics:images            # 8 stills -> public/lyrics/shot-XX.png (skips existing)
+curl -L -o models/midas-small.onnx \
+  https://github.com/isl-org/MiDaS/releases/download/v2_1/model-small.onnx
+pip install onnxruntime pillow numpy
+npm run lyrics:depth             # shot-XX-depth.png next to each still
+node scripts/gen-lyrics-track.mjs
+npm run render:lyrics
+```
