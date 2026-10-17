@@ -37,7 +37,9 @@ npx remotion still src/index.ts SelfFix out/check_300.png --frame 300 --overwrit
 
 Set to the opening verse of Cairokee's "Wahdy". Cinematic stills from Gemini image,
 turned into 3D camera moves with a depth map (parallax occlusion, depth fog,
-depth-of-field, rain between the layers in a WebGL shader). Every word rises on
+depth-of-field, rain between the layers in a WebGL shader). The man is cut out
+and drawn as his own layer over a clean plate, so the camera moves around him
+without warping his body. Every word rises on
 the beat it is sung: word times come from an ElevenLabs Scribe transcript and
 live in `LYRICS[].at` (song seconds). The stills, depth maps and song clip are
 committed, so `npm run render:lyrics` works as-is.
@@ -45,9 +47,10 @@ committed, so `npm run render:lyrics` works as-is.
 ```bash
 export GEMINI_API_KEY=...        # Vertex AI express key or Gemini API key
 npm run lyrics:images            # 8 stills -> public/lyrics/shot-XX.png (skips existing)
+npm run lyrics:images -- --plates  # same stills with the man removed -> shot-XX-plate.png
 curl -L -o models/midas-small.onnx \
   https://github.com/isl-org/MiDaS/releases/download/v2_1/model-small.onnx
-pip install onnxruntime pillow numpy
-npm run lyrics:depth             # shot-XX-depth.png next to each still
+pip install onnxruntime pillow numpy "rembg[cpu]"
+npm run lyrics:depth             # plate depth, man cutout (shot-XX-fg.png), layers.json
 npm run render:lyrics
 ```

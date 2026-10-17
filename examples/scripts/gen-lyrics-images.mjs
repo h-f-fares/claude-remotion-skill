@@ -6,6 +6,10 @@
 // passed as a reference to every later shot so the man stays the same person.
 // Existing shots are skipped (no credits spent twice); pass --force to redo,
 // or shot numbers to redo only those: node scripts/gen-lyrics-images.mjs 3 5
+//
+// --plates: for each shot, ask Gemini to remove the man and keep everything
+// else, saving shot-XX-plate.png. gen-depth.py cuts him out from the
+// difference, so he moves as his own layer instead of being warped.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -98,8 +102,32 @@ const generate = async (parts) => {
 
 const args = process.argv.slice(2);
 const force = args.includes("--force");
+const plates = args.includes("--plates");
 const only = args.filter((a) => /^\d+$/.test(a)).map(Number);
 const file = (i) => join(OUT, `shot-${String(i + 1).padStart(2, "0")}.png`);
+const plate = (i) => join(OUT, `shot-${String(i + 1).padStart(2, "0")}-plate.png`);
+
+const PLATE_PROMPT =
+  "Edit this image: remove the man (and his reflection or shadow) completely and " +
+  "fill the area with the background that would be behind him. Keep everything " +
+  "else pixel-identical: same framing, camera, composition, lights, colors and " +
+  "grade. Do not crop, zoom, shift or add anything.";
+
+if (plates) {
+  for (let i = 0; i < SHOTS.length; i++) {
+    const wanted = only.length ? only.includes(i + 1) : force || !existsSync(plate(i));
+    if (!wanted || !existsSync(file(i))) continue;
+    console.log(`plate ${i + 1}/${SHOTS.length}…`);
+    const parts = [
+      { inlineData: { mimeType: "image/png", data: readFileSync(file(i)).toString("base64") } },
+      { text: PLATE_PROMPT },
+    ];
+    writeFileSync(plate(i), await generate(parts));
+    console.log(`  saved ${plate(i)} via ${endpoint.name}`);
+  }
+  console.log("done — next: python3 scripts/gen-depth.py");
+  process.exit(0);
+}
 
 for (let i = 0; i < SHOTS.length; i++) {
   const wanted = only.length ? only.includes(i + 1) : force || !existsSync(file(i));

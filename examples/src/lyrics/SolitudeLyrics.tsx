@@ -14,6 +14,8 @@ import {
   useVideoConfig,
 } from "remotion";
 import { Cam, DepthShot } from "./DepthShot";
+// depth of the man in each shot, written by scripts/gen-depth.py
+import layers from "../../public/lyrics/layers.json";
 
 // Cairo (OFL) bundled locally so renders work offline
 const cairo = "Cairo";
@@ -81,7 +83,6 @@ const lineEndS = (i: number) => (i + 1 < LYRICS.length ? lineStartS(i + 1) : CLI
 type Shot = {
   from: Cam;
   to: Cam;
-  focus: number;
   dof: number;
   fog: number;
   rain: number;
@@ -90,21 +91,21 @@ type Shot = {
 };
 const SHOTS: Shot[] = [
   // 1 walking away: slow push down the alley
-  { from: { x: -0.2, y: 0, zoom: 1, dolly: 0 }, to: { x: 0.3, y: -0.1, zoom: 1.06, dolly: 0.55 }, focus: 0.55, dof: 0.5, fog: 0.4, rain: 0.7, exposure: [0.9, 1] },
+  { from: { x: -0.15, y: 0, zoom: 1, dolly: 0 }, to: { x: 0.15, y: -0.05, zoom: 1.05, dolly: 0.35 }, dof: 0.5, fog: 0.4, rain: 0.7, exposure: [0.9, 1] },
   // 2 blocked road: lateral orbit past the rubble
-  { from: { x: -1, y: 0.1, zoom: 1.04, dolly: 0.2 }, to: { x: 1, y: -0.1, zoom: 1.08, dolly: 0.3 }, focus: 0.75, dof: 0.7, fog: 0.4, rain: 0.6, exposure: [1, 1] },
+  { from: { x: -0.5, y: 0.05, zoom: 1.04, dolly: 0.15 }, to: { x: 0.5, y: -0.05, zoom: 1.06, dolly: 0.25 }, dof: 0.7, fog: 0.4, rain: 0.6, exposure: [1, 1] },
   // 3 pitch dark: dolly-zoom (vertigo), light drains away
-  { from: { x: 0, y: 0, zoom: 1, dolly: 0.4 }, to: { x: 0, y: 0.1, zoom: 1.25, dolly: -0.3 }, focus: 0.5, dof: 0.4, fog: 0.55, rain: 0.4, exposure: [1, 0.6] },
+  { from: { x: 0, y: 0, zoom: 1, dolly: 0.3 }, to: { x: 0, y: 0.05, zoom: 1.15, dolly: -0.2 }, dof: 0.4, fog: 0.55, rain: 0.4, exposure: [1, 0.6] },
   // 4 the gate refuses: crane up the bars, impact on "رافضة"
-  { from: { x: 0.2, y: 1, zoom: 1.02, dolly: 0 }, to: { x: -0.2, y: -0.7, zoom: 1.1, dolly: 0.45 }, focus: 0.7, dof: 0.5, fog: 0.35, rain: 0.7, exposure: [0.95, 0.9], shake: 1 },
+  { from: { x: 0.1, y: 0.5, zoom: 1.02, dolly: 0 }, to: { x: -0.1, y: -0.4, zoom: 1.07, dolly: 0.3 }, dof: 0.5, fog: 0.35, rain: 0.7, exposure: [0.95, 0.9], shake: 1 },
   // 5 crying close-up: slow drift, heavy bokeh, heavy rain
-  { from: { x: 0.5, y: 0, zoom: 1, dolly: 0 }, to: { x: -0.3, y: 0.1, zoom: 1.12, dolly: 0.35 }, focus: 0.9, dof: 1.2, fog: 0.2, rain: 1, exposure: [0.95, 1] },
+  { from: { x: 0.3, y: 0, zoom: 1, dolly: 0 }, to: { x: -0.2, y: 0.05, zoom: 1.08, dolly: 0.25 }, dof: 1.2, fog: 0.2, rain: 1, exposure: [0.95, 1] },
   // 6 talking to himself: orbit around the steps
-  { from: { x: 0.9, y: -0.2, zoom: 1.05, dolly: 0.25 }, to: { x: -0.9, y: 0.1, zoom: 1.05, dolly: 0.35 }, focus: 0.65, dof: 0.6, fog: 0.35, rain: 0.8, exposure: [0.95, 0.95] },
+  { from: { x: 0.5, y: -0.1, zoom: 1.04, dolly: 0.2 }, to: { x: -0.5, y: 0.05, zoom: 1.04, dolly: 0.25 }, dof: 0.6, fog: 0.35, rain: 0.8, exposure: [0.95, 0.95] },
   // 7 his reflection: tilt down into the puddle
-  { from: { x: 0, y: -0.8, zoom: 1.02, dolly: 0.1 }, to: { x: 0.15, y: 0.8, zoom: 1.12, dolly: 0.5 }, focus: 0.8, dof: 0.8, fog: 0.3, rain: 0.7, exposure: [1, 0.95] },
+  { from: { x: 0, y: -0.5, zoom: 1.02, dolly: 0.1 }, to: { x: 0.1, y: 0.5, zoom: 1.08, dolly: 0.3 }, dof: 0.8, fog: 0.3, rain: 0.7, exposure: [1, 0.95] },
   // 8 alone in the street: crane pull-back, fade to night
-  { from: { x: 0, y: -0.4, zoom: 1.3, dolly: 0.6 }, to: { x: 0, y: 0.4, zoom: 1, dolly: -0.25 }, focus: 0.6, dof: 0.5, fog: 0.5, rain: 0.8, exposure: [1, 0.75] },
+  { from: { x: 0, y: -0.25, zoom: 1.18, dolly: 0.4 }, to: { x: 0, y: 0.25, zoom: 1, dolly: -0.15 }, dof: 0.5, fog: 0.5, rain: 0.8, exposure: [1, 0.75] },
 ];
 
 export const SOL_TOTAL_S = CLIP_END - CLIP_START;
@@ -136,33 +137,37 @@ const ShotLayer: React.FC<{ index: number; dur: number; cutF: number; last: bool
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const shot = SHOTS[index];
+  // the man is the focus plane: he stays sharp and steady, the world moves around him
+  const fgDepth = layers[`shot-${pad(index)}` as keyof typeof layers].fg;
   const p = interpolate(frame, [0, dur], [0, 1], { ...clamp, easing: t.ease.inOut });
   const cam = mixCam(shot.from, shot.to, p);
 
   // zoom-through: punch into the scene at the end, settle out of a push at the start
   const outP = last ? 0 : interpolate(frame, [dur - cutF, dur], [0, 1], { ...clamp, easing: t.ease.in });
   const inP = index === 0 ? 1 : interpolate(frame, [0, cutF * 1.6], [0, 1], { ...clamp, easing: t.ease.out });
-  cam.dolly += outP * 0.5 - (1 - inP) * 0.3;
-  cam.zoom *= 1 + outP * 0.35 + (1 - inP) * 0.14;
+  cam.dolly += outP * 0.2 - (1 - inP) * 0.12;
+  cam.zoom *= 1 + outP * 0.12 + (1 - inP) * 0.06;
 
   // handheld drift + impact shake on the hero word
   const s = frame / fps;
   const shake = shot.shake && frame >= hitAt ? Math.exp(-(frame - hitAt) / 5) * shot.shake : 0;
-  cam.x += noise(s * 0.6, index) * 0.08 + Math.sin(frame * 2.1) * shake * 0.35;
-  cam.y += noise(s * 0.5, index + 9) * 0.06 + Math.cos(frame * 2.7) * shake * 0.3;
+  cam.x += noise(s * 0.6, index) * 0.04 + Math.sin(frame * 2.1) * shake * 0.2;
+  cam.y += noise(s * 0.5, index + 9) * 0.03 + Math.cos(frame * 2.7) * shake * 0.18;
 
   const exposure = interpolate(p, [0, 1], shot.exposure) * (1 + shake * 0.25);
   const opacity = index === 0 ? 1 : interpolate(frame, [0, cutF], [0, 1], { ...clamp, easing: t.ease.out });
-  const blur = (1 - inP) * 14 + outP * 10;
+  const blur = (1 - inP) * 6 + outP * 4;
 
   return (
     <AbsoluteFill style={{ opacity, filter: blur > 0.3 ? `blur(${blur}px)` : undefined }}>
       <DepthShot
-        src={staticFile(`lyrics/shot-${pad(index)}.png`)}
+        src={staticFile(`lyrics/shot-${pad(index)}-plate.png`)}
         depth={staticFile(`lyrics/shot-${pad(index)}-depth.png`)}
+        fg={staticFile(`lyrics/shot-${pad(index)}-fg.png`)}
+        fgDepth={fgDepth}
         cam={cam}
         time={s}
-        focus={shot.focus}
+        focus={fgDepth}
         dof={shot.dof}
         fog={shot.fog}
         rain={shot.rain}

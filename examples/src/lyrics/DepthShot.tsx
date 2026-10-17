@@ -5,6 +5,10 @@ import { cancelRender, continueRender, delayRender } from "remotion";
 // pixel (parallax occlusion), so near objects slide and grow more than far
 // ones. Depth also drives fog, depth-of-field and rain that falls BETWEEN
 // the layers (hidden behind near objects).
+//
+// With fg (an RGBA cutout of the subject) the subject is not warped: src is the
+// clean plate, and the cutout is drawn as a flat card at fgDepth on top of it,
+// so the camera moves around him without bending his body.
 
 export type Cam = {
   x: number; // lateral camera offset (−1..1)
@@ -16,6 +20,8 @@ export type Cam = {
 export type DepthShotProps = {
   src: string;
   depth: string;
+  fg?: string; // RGBA cutout of the subject
+  fgDepth?: number; // depth of the subject's card (0 far … 1 near)
   cam: Cam;
   time: number; // seconds, for rain + flicker
   focus?: number; // depth that stays pinned (0 far … 1 near)
@@ -37,6 +43,8 @@ precision highp float;
 varying vec2 vUv;
 uniform sampler2D uImg;
 uniform sampler2D uDepth;
+uniform sampler2D uFg;
+uniform float uHasFg, uFgDepth;
 uniform vec2 uCover;   // uv scale for cover fit
 uniform vec2 uCam;
 uniform float uZoom, uDolly, uFocus, uFog, uDof, uRain, uTime, uExposure;
@@ -89,6 +97,13 @@ void main() {
     col = acc / 9.0;
   }
 
+  // subject card: sharp, unwarped, composited at its own depth
+  if (uHasFg > 0.5) {
+    vec4 fg = texture2D(uFg, project(vUv, uFgDepth));
+    col = mix(col, fg.rgb, fg.a);
+    hitD = mix(hitD, uFgDepth, fg.a);
+  }
+
   // atmospheric fog thickens with distance
   col = mix(col, uFogColor, (1.0 - hitD) * (1.0 - hitD) * uFog);
 
@@ -139,6 +154,8 @@ const texture = (gl: WebGLRenderingContext, unit: number, img: HTMLImageElement)
 export const DepthShot: React.FC<DepthShotProps> = ({
   src,
   depth,
+  fg,
+  fgDepth = 0.8,
   cam,
   time,
   focus = 0.5,
@@ -160,8 +177,8 @@ export const DepthShot: React.FC<DepthShotProps> = ({
       cancelRender(new Error("WebGL unavailable — render with --gl=angle or --gl=swangle"));
       return;
     }
-    Promise.all([loadImage(src), loadImage(depth)])
-      .then(([img, dep]) => {
+    Promise.all([loadImage(src), loadImage(depth), fg ? loadImage(fg) : null])
+      .then(([img, dep, fgImg]) => {
         const prog = gl.createProgram()!;
         gl.attachShader(prog, compile(gl, gl.VERTEX_SHADER, VERT));
         gl.attachShader(prog, compile(gl, gl.FRAGMENT_SHADER, FRAG));
@@ -175,12 +192,17 @@ export const DepthShot: React.FC<DepthShotProps> = ({
         gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
         texture(gl, 0, img);
         texture(gl, 1, dep);
+        // straight (not premultiplied) alpha for the cutout
+        gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+        texture(gl, 2, fgImg ?? dep);
         gl.uniform1i(gl.getUniformLocation(prog, "uImg"), 0);
         gl.uniform1i(gl.getUniformLocation(prog, "uDepth"), 1);
+        gl.uniform1i(gl.getUniformLocation(prog, "uFg"), 2);
+        gl.uniform1f(gl.getUniformLocation(prog, "uHasFg"), fgImg ? 1 : 0);
         setState({ gl, prog, imgSize: [img.naturalWidth, img.naturalHeight] });
       })
       .catch((err) => cancelRender(err));
-  }, [src, depth]);
+  }, [src, depth, fg]);
 
   useEffect(() => {
     if (!state) return;
@@ -197,6 +219,7 @@ export const DepthShot: React.FC<DepthShotProps> = ({
     gl.uniform1f(u("uZoom"), cam.zoom);
     gl.uniform1f(u("uDolly"), cam.dolly);
     gl.uniform1f(u("uFocus"), focus);
+    gl.uniform1f(u("uFgDepth"), fgDepth);
     gl.uniform1f(u("uFog"), fog);
     gl.uniform1f(u("uDof"), dof);
     gl.uniform1f(u("uRain"), rain);
@@ -208,7 +231,7 @@ export const DepthShot: React.FC<DepthShotProps> = ({
       released.current = true;
       continueRender(handle);
     }
-  }, [state, cam.x, cam.y, cam.zoom, cam.dolly, time, focus, fog, dof, rain, exposure, width, height, handle]);
+  }, [state, cam.x, cam.y, cam.zoom, cam.dolly, time, focus, fgDepth, fog, dof, rain, exposure, width, height, handle]);
 
   return <canvas ref={canvas} width={width} height={height} style={{ position: "absolute", inset: 0 }} />;
 };
