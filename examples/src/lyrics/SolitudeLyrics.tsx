@@ -18,7 +18,7 @@ import { Cam, DepthShot } from "./DepthShot";
 import layers from "../../public/lyrics/layers.json";
 
 // Cairo (OFL) bundled locally so renders work offline
-const cairo = "Cairo";
+export const cairo = "Cairo";
 const fontHandle = delayRender("Loading Cairo");
 const cairoFace = new FontFace(cairo, `url(${staticFile("fonts/Cairo-Arabic.woff2")}) format("woff2")`, {
   weight: "600 900",
@@ -32,7 +32,7 @@ cairoFace
   .catch((err) => cancelRender(err));
 
 // ── theme: night teal grade, one warm amber hero (the highlighted word only)
-const t = {
+export const t = {
   colors: {
     bg: "#05070A",
     hero: "#F0AE48",
@@ -110,16 +110,16 @@ const SHOTS: Shot[] = [
 
 export const SOL_TOTAL_S = CLIP_END - CLIP_START;
 
-const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
+export const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 const W = 1080;
 const H = 1920;
-const pad = (i: number) => String(i + 1).padStart(2, "0");
+export const pad = (i: number) => String(i + 1).padStart(2, "0");
 
 // smooth deterministic noise for handheld drift
-const noise = (x: number, seed: number) =>
+export const noise = (x: number, seed: number) =>
   Math.sin(x * 1.3 + seed) * 0.5 + Math.sin(x * 2.9 + seed * 2.1) * 0.3 + Math.sin(x * 5.3 + seed * 3.7) * 0.2;
 
-const mixCam = (a: Cam, b: Cam, p: number): Cam => ({
+export const mixCam = (a: Cam, b: Cam, p: number): Cam => ({
   x: a.x + (b.x - a.x) * p,
   y: a.y + (b.y - a.y) * p,
   zoom: a.zoom + (b.zoom - a.zoom) * p,
@@ -299,7 +299,7 @@ const Grade: React.FC = () => {
 };
 
 // Layer 5 — grain + vignette
-const Grain: React.FC = () => {
+export const Grain: React.FC = () => {
   const frame = useCurrentFrame();
   const n = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E")`;
   return (

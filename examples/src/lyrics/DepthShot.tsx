@@ -17,11 +17,20 @@ export type Cam = {
   dolly: number; // camera travel into the scene (0 = none, + = forward)
 };
 
+// transform of the subject around his anchor (image uv, usually his feet)
+export type FgMove = {
+  anchor: [number, number];
+  scale: [number, number];
+  shift: [number, number]; // image uv
+  rot: number; // radians
+};
+
 export type DepthShotProps = {
   src: string;
   depth: string;
   fg?: string; // RGBA cutout of the subject
   fgDepth?: number; // depth of the subject's card (0 far … 1 near)
+  fgMove?: FgMove; // animates the subject on his card (breathing, sway, steps)
   cam: Cam;
   time: number; // seconds, for rain + flicker
   focus?: number; // depth that stays pinned (0 far … 1 near)
@@ -44,7 +53,8 @@ varying vec2 vUv;
 uniform sampler2D uImg;
 uniform sampler2D uDepth;
 uniform sampler2D uFg;
-uniform float uHasFg, uFgDepth;
+uniform float uHasFg, uFgDepth, uFgRot, uImgAR;
+uniform vec2 uFgAnchor, uFgScale, uFgShift;
 uniform vec2 uCover;   // uv scale for cover fit
 uniform vec2 uCam;
 uniform float uZoom, uDolly, uFocus, uFog, uDof, uRain, uTime, uExposure;
@@ -99,7 +109,13 @@ void main() {
 
   // subject card: sharp, unwarped, composited at its own depth
   if (uHasFg > 0.5) {
-    vec4 fg = texture2D(uFg, project(vUv, uFgDepth));
+    vec2 d = project(vUv, uFgDepth) - uFgAnchor - uFgShift;
+    d.x *= uImgAR;
+    d = mat2(cos(uFgRot), sin(uFgRot), -sin(uFgRot), cos(uFgRot)) * d;
+    d.x /= uImgAR;
+    vec2 q = uFgAnchor + d / uFgScale;
+    vec4 fg = texture2D(uFg, q);
+    fg.a *= step(0.0, q.x) * step(q.x, 1.0) * step(0.0, q.y) * step(q.y, 1.0);
     col = mix(col, fg.rgb, fg.a);
     hitD = mix(hitD, uFgDepth, fg.a);
   }
@@ -156,6 +172,7 @@ export const DepthShot: React.FC<DepthShotProps> = ({
   depth,
   fg,
   fgDepth = 0.8,
+  fgMove,
   cam,
   time,
   focus = 0.5,
@@ -220,6 +237,12 @@ export const DepthShot: React.FC<DepthShotProps> = ({
     gl.uniform1f(u("uDolly"), cam.dolly);
     gl.uniform1f(u("uFocus"), focus);
     gl.uniform1f(u("uFgDepth"), fgDepth);
+    const m = fgMove ?? { anchor: [0.5, 1], scale: [1, 1], shift: [0, 0], rot: 0 };
+    gl.uniform2f(u("uFgAnchor"), m.anchor[0], m.anchor[1]);
+    gl.uniform2f(u("uFgScale"), m.scale[0], m.scale[1]);
+    gl.uniform2f(u("uFgShift"), m.shift[0], m.shift[1]);
+    gl.uniform1f(u("uFgRot"), m.rot);
+    gl.uniform1f(u("uImgAR"), imgAR);
     gl.uniform1f(u("uFog"), fog);
     gl.uniform1f(u("uDof"), dof);
     gl.uniform1f(u("uRain"), rain);
@@ -231,7 +254,7 @@ export const DepthShot: React.FC<DepthShotProps> = ({
       released.current = true;
       continueRender(handle);
     }
-  }, [state, cam.x, cam.y, cam.zoom, cam.dolly, time, focus, fgDepth, fog, dof, rain, exposure, width, height, handle]);
+  }, [state, cam.x, cam.y, cam.zoom, cam.dolly, time, focus, fgDepth, fgMove, fog, dof, rain, exposure, width, height, handle]);
 
   return <canvas ref={canvas} width={width} height={height} style={{ position: "absolute", inset: 0 }} />;
 };

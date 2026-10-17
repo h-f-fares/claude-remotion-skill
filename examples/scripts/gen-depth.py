@@ -84,7 +84,11 @@ def process(path: Path, session: ort.InferenceSession, seg, layers: dict) -> Non
         fg = float(np.median(d_bg[min(foot + 2, 255), cols]))
     else:
         fg = 0.5
-    layers[path.stem] = {"fg": round(min(max(fg, 0.0), 1.0), 3)}
+    # anchor for animating him (breathing, sway, steps): bottom-center of his
+    # silhouette, in image uv (0..1, y down)
+    ys, xs = np.nonzero(alpha > 0.5)
+    anchor = [round(float(xs.mean()) / img.width, 4), round(float(ys.max() + 1) / img.height, 4)] if xs.size else [0.5, 1.0]
+    layers[path.stem] = {"fg": round(min(max(fg, 0.0), 1.0), 3), "anchor": anchor}
     print(f"depth + cutout: {path.stem} (man at depth {layers[path.stem]['fg']})")
 
 
@@ -92,7 +96,7 @@ def main() -> None:
     if not MODEL.exists():
         sys.exit(f"missing {MODEL} — download model-small.onnx from the MiDaS v2_1 release")
     targets = [Path(p) for p in sys.argv[1:]] or sorted(
-        p for p in SHOTS.glob("shot-*.png") if re.fullmatch(r"shot-\d+", p.stem)
+        p for p in SHOTS.glob("*.png") if re.fullmatch(r"(shot|chorus)-\d+", p.stem)
     )
     session = ort.InferenceSession(str(MODEL), providers=["CPUExecutionProvider"])
     layers_path = SHOTS / "layers.json"

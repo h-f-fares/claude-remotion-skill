@@ -54,3 +54,25 @@ pip install onnxruntime pillow numpy "rembg[cpu]"
 npm run lyrics:depth             # plate depth, man cutout (shot-XX-fg.png), layers.json
 npm run render:lyrics
 ```
+
+## WahdyShort (viral 9:16 Short, 17s loop)
+
+The chorus of "Wahdy" cut to exactly 32 beats, so it loops seamlessly on TikTok,
+Reels and Shorts. Built for retention: it opens on the first sung word, keeps a
+caption hook and a song credit on screen the whole time, and keeps all text inside
+the platform safe area.
+
+- **Kinetic lyrics:** each word crashes in when sung and the sung word lights up.
+  «خايف» shivers with a red/cyan split, «عارف» glows, «البطولة» gets a gold sweep.
+- **Beat sync:** the picture punches on every beat, and each line opens on a
+  downbeat with a hard cut, a flash and a light streak.
+- **Graphics:** embers drifting up, and rings on the hero words.
+- **The man moves:** he is his own layer, so he breathes, sways, shivers, and in
+  shot 5 walks toward the camera with a step on every beat.
+
+```bash
+npm run lyrics:images -- --set chorus          # chorus-XX.png
+npm run lyrics:images -- --set chorus --plates # chorus-XX-plate.png
+npm run lyrics:depth
+npx remotion render src/lyrics/index.ts WahdyShort out/wahdy-short.mp4 --gl=angle
+```

@@ -6,6 +6,7 @@
 // passed as a reference to every later shot so the man stays the same person.
 // Existing shots are skipped (no credits spent twice); pass --force to redo,
 // or shot numbers to redo only those: node scripts/gen-lyrics-images.mjs 3 5
+// --set chorus makes the WahdyShort stills (chorus-XX.png) instead.
 //
 // --plates: for each shot, ask Gemini to remove the man and keep everything
 // else, saving shot-XX-plate.png. gen-depth.py cuts him out from the
@@ -35,7 +36,7 @@ const MAN =
   "jacket soaked by rain";
 
 // one shot per lyric line, in order
-const SHOTS = [
+const VERSE = [
   `Wide shot from behind: ${MAN} walking alone down a long, narrow old Cairo alley, ` +
     "wet stone, lanterns fading into the distance, nobody else around.",
   `The same alley now blocked: fallen wooden scaffolding, rubble and a collapsed cart ` +
@@ -52,6 +53,23 @@ const SHOTS = [
     "at himself in the water, his real figure out of focus at the top of the frame.",
   `High wide crane shot: ${MAN} sitting tiny in the middle of an empty wet street ` +
     "under a single amber streetlight, rain, darkness all around, deep loneliness.",
+];
+
+// WahdyShort: one shot per chorus line (--set chorus -> chorus-XX.png)
+const CHORUS = [
+  `Extreme close-up of the eyes and brow of ${MAN}, afraid, looking off to the side, ` +
+    "raindrops on his skin, one hard amber light from the side, the rest in deep shadow.",
+  `Medium shot: ${MAN} standing still in the middle of a narrow wet alley, looking ` +
+    "straight into the camera, calm and knowing, lanterns glowing behind him.",
+  `Wide shot from behind: ${MAN} standing alone on a Cairo rooftop edge at night, ` +
+    "the city lights and minarets far below in the rain, he is small against the sky.",
+  `Close-up of the open hands of ${MAN} held out in front of him, rain falling into ` +
+    "his palms, his face out of focus behind them, amber rim light.",
+  `${MAN} walking slowly toward the camera down a wet alley, determined, head up, ` +
+    "warm lanterns behind him making a halo through the rain, medium-wide shot.",
+  `Heroic shot from very low, at ground level looking up: ${MAN} standing tall, ` +
+    "seen full body against the sky, in a wide open empty square (not an alley), a " +
+    "single streetlight above him, heavy rain lit as bright streaks, light rays through the haze, epic.",
 ];
 
 const ENDPOINTS = [
@@ -103,9 +121,14 @@ const generate = async (parts) => {
 const args = process.argv.slice(2);
 const force = args.includes("--force");
 const plates = args.includes("--plates");
+const chorus = args[args.indexOf("--set") + 1] === "chorus" && args.includes("--set");
 const only = args.filter((a) => /^\d+$/.test(a)).map(Number);
-const file = (i) => join(OUT, `shot-${String(i + 1).padStart(2, "0")}.png`);
-const plate = (i) => join(OUT, `shot-${String(i + 1).padStart(2, "0")}-plate.png`);
+const SHOTS = chorus ? CHORUS : VERSE;
+const name = (i) => `${chorus ? "chorus" : "shot"}-${String(i + 1).padStart(2, "0")}`;
+const file = (i) => join(OUT, `${name(i)}.png`);
+const plate = (i) => join(OUT, `${name(i)}-plate.png`);
+// the man's look always comes from verse shot 01
+const reference = join(OUT, "shot-01.png");
 
 const PLATE_PROMPT =
   "Edit this image: remove the man (and his reflection or shadow) completely and " +
@@ -133,8 +156,8 @@ for (let i = 0; i < SHOTS.length; i++) {
   const wanted = only.length ? only.includes(i + 1) : force || !existsSync(file(i));
   if (!wanted) continue;
   const parts = [];
-  if (i > 0 && existsSync(file(0))) {
-    parts.push({ inlineData: { mimeType: "image/png", data: readFileSync(file(0)).toString("base64") } });
+  if (file(i) !== reference && existsSync(reference)) {
+    parts.push({ inlineData: { mimeType: "image/png", data: readFileSync(reference).toString("base64") } });
     parts.push({ text: "Reference image: keep this exact man (face, hair, beard, jacket) and this color grade." });
   }
   parts.push({ text: `${SHOTS[i]} ${STYLE}` });
