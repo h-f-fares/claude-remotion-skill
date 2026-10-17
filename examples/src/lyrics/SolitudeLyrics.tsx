@@ -52,24 +52,30 @@ const t = {
   },
 } as const;
 
-// ── timing (seconds) — mirrored in scripts/gen-lyrics-track.mjs
-const INTRO_S = 1.2;
-const LINE_S = 4.2;
-const OUTRO_S = 3.0;
-const CUT_S = 0.5; // zoom-through overlap between shots
+// ── timing (seconds): Cairokee – "Wahdy", synced to the sung words.
+// public/lyrics/wahdy.mp3 is the song cut from CLIP_START, so word times below
+// are song seconds (from an ElevenLabs Scribe transcript).
+const CLIP_START = 31.4;
+const CLIP_END = 62.9;
+const CUT_S = 0.4; // zoom-through overlap between shots
+const LEAD_S = 0.12; // words start rising just before they are sung
 
+// at: when each word is sung (song seconds)
 // br: index of the first word on the second row (balanced, no orphan words)
-type Line = { words: string[]; hero: number; br?: number };
+type Line = { words: string[]; at: number[]; hero: number; br?: number };
 const LYRICS: Line[] = [
-  { words: ["وحدي", "بمشي", "في", "كل", "سكة"], hero: 0, br: 2 },
-  { words: ["والسكك", "ما", "بقتش", "سالكة"], hero: 3, br: 3 },
-  { words: ["جوه", "منها", "الضلمة", "حالكة"], hero: 2, br: 2 },
-  { words: ["رافضة،", "مش", "قابلة", "بوصولي"], hero: 0, br: 1 },
-  { words: ["وحدي", "ببكي،", "ببكي", "جدًا"], hero: 3, br: 2 },
-  { words: ["بحكي", "ليا،", "وبأن"], hero: 2 },
-  { words: ["وأما", "بسمع", "نفسي،", "وافهم", "الوجع"], hero: 4, br: 3 },
-  { words: ["بصعب", "عليا"], hero: 1 },
+  { words: ["وحدي", "بمشي", "في", "كل", "سكة"], at: [34.44, 35.0, 35.42, 35.5, 36.02], hero: 0, br: 2 },
+  { words: ["والسكك", "ما", "بقتش", "سالكة"], at: [36.56, 37.4, 37.54, 38.14], hero: 3, br: 3 },
+  { words: ["جوه", "منها", "الضلمة", "حالكة"], at: [38.68, 39.22, 39.62, 40.26], hero: 2, br: 2 },
+  { words: ["رافضة،", "مش", "قابلة", "بوصولي"], at: [40.78, 41.36, 41.56, 42.2], hero: 0, br: 1 },
+  { words: ["وحدي", "ببكي،", "ببكي", "جدًا"], at: [43.84, 44.48, 46.04, 46.58], hero: 3, br: 2 },
+  { words: ["بحكي", "ليا،", "وبأن"], at: [48.16, 48.68, 50.24], hero: 2 },
+  { words: ["وأما", "بسمع", "نفسي،", "وافهم", "الوجع"], at: [52.36, 52.88, 53.42, 53.94, 56.04], hero: 4, br: 3 },
+  { words: ["بصعب", "عليا"], at: [57.36, 58.06], hero: 1 },
 ];
+// line i is on screen from just before its first word until the next line
+const lineStartS = (i: number) => LYRICS[i].at[0] - CLIP_START - LEAD_S - 0.15;
+const lineEndS = (i: number) => (i + 1 < LYRICS.length ? lineStartS(i + 1) : CLIP_END - CLIP_START);
 
 // one camera move per shot: from → to over the shot, eased
 type Shot = {
@@ -101,7 +107,7 @@ const SHOTS: Shot[] = [
   { from: { x: 0, y: -0.4, zoom: 1.3, dolly: 0.6 }, to: { x: 0, y: 0.4, zoom: 1, dolly: -0.25 }, focus: 0.6, dof: 0.5, fog: 0.5, rain: 0.8, exposure: [1, 0.75] },
 ];
 
-export const SOL_TOTAL_S = INTRO_S + LINE_S * LYRICS.length + OUTRO_S;
+export const SOL_TOTAL_S = CLIP_END - CLIP_START;
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 const W = 1080;
@@ -120,11 +126,12 @@ const mixCam = (a: Cam, b: Cam, p: number): Cam => ({
 });
 
 // Layers 1–2 — one shot: depth camera move, zoom-through in and out
-const ShotLayer: React.FC<{ index: number; dur: number; cutF: number; last: boolean }> = ({
+const ShotLayer: React.FC<{ index: number; dur: number; cutF: number; last: boolean; hitAt: number }> = ({
   index,
   dur,
   cutF,
   last,
+  hitAt,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -140,7 +147,6 @@ const ShotLayer: React.FC<{ index: number; dur: number; cutF: number; last: bool
 
   // handheld drift + impact shake on the hero word
   const s = frame / fps;
-  const hitAt = cutF + Math.round(fps * 0.16) * LYRICS[index].hero + 4;
   const shake = shot.shake && frame >= hitAt ? Math.exp(-(frame - hitAt) / 5) * shot.shake : 0;
   cam.x += noise(s * 0.6, index) * 0.08 + Math.sin(frame * 2.1) * shake * 0.35;
   cam.y += noise(s * 0.5, index + 9) * 0.06 + Math.cos(frame * 2.7) * shake * 0.3;
@@ -190,9 +196,10 @@ const LyricLine: React.FC<{ line: Line; dur: number; index: number }> = ({ line,
   const { fps } = useVideoConfig();
   const last = index === LYRICS.length - 1;
   const size = last ? 150 : 116;
-  const stagger = Math.round(fps * 0.16);
-  const exitF = Math.round(fps * 0.3);
-  const exitStart = dur - exitF - stagger;
+  // frame (within this line) at which word i starts rising
+  const wordF = (i: number) => Math.round((line.at[i] - CLIP_START - LEAD_S - lineStartS(index)) * fps);
+  const exitF = Math.round(fps * 0.25);
+  const exitStart = dur - exitF - 6;
   const drift = interpolate(frame, [0, dur], [0, -22], clamp);
   return (
     <AbsoluteFill style={{ alignItems: "center", justifyContent: "flex-start", paddingTop: 1170, perspective: 900 }}>
@@ -212,14 +219,14 @@ const LyricLine: React.FC<{ line: Line; dur: number; index: number }> = ({ line,
         }}
       >
         {line.words.map((w, i) => {
-          const s = spring({ frame: frame - i * stagger, fps, config: t.spring.word });
+          const s = spring({ frame: frame - wordF(i), fps, config: t.spring.word });
           const ex = last
             ? 0
             : interpolate(frame, [exitStart + i * 2, exitStart + i * 2 + exitF], [0, 1], { ...clamp, easing: t.ease.in });
           const isHero = i === line.hero;
-          const land = spring({ frame: frame - i * stagger - 3, fps, config: t.spring.hit });
+          const land = spring({ frame: frame - wordF(i) - 3, fps, config: t.spring.hit });
           // light sweep across the hero word once it lands
-          const sweep = interpolate(frame, [i * stagger + 8, i * stagger + 8 + fps * 0.9], [-60, 160], {
+          const sweep = interpolate(frame, [wordF(i) + 8, wordF(i) + 8 + fps * 0.9], [-60, 160], {
             ...clamp,
             easing: t.ease.inOut,
           });
@@ -314,21 +321,22 @@ const Grain: React.FC = () => {
 
 export const SolitudeLyrics: React.FC = () => {
   const { fps } = useVideoConfig();
-  const introF = Math.round(fps * INTRO_S);
-  const lineF = Math.round(fps * LINE_S);
-  const outroF = Math.round(fps * OUTRO_S);
   const cutF = Math.round(fps * CUT_S);
-  const lineStart = (i: number) => introF + i * lineF;
+  const lineStart = (i: number) => Math.round(fps * lineStartS(i));
+  const lineEnd = (i: number) => Math.round(fps * lineEndS(i));
   return (
     <AbsoluteFill style={{ background: t.colors.bg }}>
-      <Audio src={staticFile("sfx/lyrics-bed.wav")} volume={0.8} />
+      <Audio src={staticFile("lyrics/wahdy.mp3")} />
       {SHOTS.map((_, i) => {
         const last = i === SHOTS.length - 1;
+        // the cut lands on the first sung word of the line
         const from = i === 0 ? 0 : lineStart(i) - cutF;
-        const end = last ? lineStart(i) + lineF + outroF : lineStart(i + 1);
+        const end = last ? lineEnd(i) : lineStart(i + 1);
+        const line = LYRICS[i];
+        const hitAt = Math.round(fps * (line.at[line.hero] - CLIP_START)) - from + 3;
         return (
           <Sequence key={i} from={from} durationInFrames={end - from}>
-            <ShotLayer index={i} dur={end - from} cutF={cutF} last={last} />
+            <ShotLayer index={i} dur={end - from} cutF={cutF} last={last} hitAt={hitAt} />
           </Sequence>
         );
       })}
@@ -339,8 +347,8 @@ export const SolitudeLyrics: React.FC = () => {
       ))}
       <Grade />
       {LYRICS.map((line, i) => (
-        <Sequence key={i} from={lineStart(i)} durationInFrames={i === LYRICS.length - 1 ? lineF + outroF : lineF}>
-          <LyricLine line={line} dur={lineF} index={i} />
+        <Sequence key={i} from={lineStart(i)} durationInFrames={lineEnd(i) - lineStart(i)}>
+          <LyricLine line={line} dur={lineEnd(i) - lineStart(i)} index={i} />
         </Sequence>
       ))}
       <Grain />

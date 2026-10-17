@@ -35,8 +35,12 @@ npx remotion still src/index.ts SelfFix out/check_300.png --frame 300 --overwrit
 
 ## SolitudeLyrics (Arabic lyric video, 9:16)
 
-Cinematic stills from Gemini image, turned into 3D camera moves with a depth map
-(parallax occlusion, depth fog, depth-of-field, rain between the layers in a WebGL shader).
+Set to the opening verse of Cairokee's "Wahdy". Cinematic stills from Gemini image,
+turned into 3D camera moves with a depth map (parallax occlusion, depth fog,
+depth-of-field, rain between the layers in a WebGL shader). Every word rises on
+the beat it is sung: word times come from an ElevenLabs Scribe transcript and
+live in `LYRICS[].at` (song seconds). The stills, depth maps and song clip are
+committed, so `npm run render:lyrics` works as-is.
 
 ```bash
 export GEMINI_API_KEY=...        # Vertex AI express key or Gemini API key
@@ -45,6 +49,5 @@ curl -L -o models/midas-small.onnx \
   https://github.com/isl-org/MiDaS/releases/download/v2_1/model-small.onnx
 pip install onnxruntime pillow numpy
 npm run lyrics:depth             # shot-XX-depth.png next to each still
-node scripts/gen-lyrics-track.mjs
 npm run render:lyrics
 ```
