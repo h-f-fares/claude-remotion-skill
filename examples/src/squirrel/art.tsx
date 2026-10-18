@@ -46,11 +46,19 @@ export const Squirrel: React.FC<
 
 // ---------------------------------------------------------------- burger
 export const Burger: React.FC<
-  Placed & { lift?: number; tilt?: number; patty?: boolean; middle?: React.ReactNode }
-> = ({ x = 0, y = 0, size = 320, lift = 0, tilt = 0, patty = true, middle }) => (
+  Placed & { lift?: number; tilt?: number; patty?: boolean; middle?: React.ReactNode; clipId?: string }
+> = ({ x = 0, y = 0, size = 320, lift = 0, tilt = 0, patty = true, middle, clipId }) => (
   <svg x={x} y={y} width={size} height={size * (300 / 320)} viewBox="0 -40 320 300" overflow="visible">
+    {clipId && (
+      <defs>
+        <clipPath id={clipId}>
+          <rect x={-200} y={-600} width={720} height={800} />
+        </clipPath>
+      </defs>
+    )}
     <rect x={30} y={196} width={260} height={50} rx={24} fill={C.bun} {...line} />
-    {middle}
+    {/* with clipId, the filling stays hidden below the bottom bun until it rises */}
+    <g clipPath={clipId ? `url(#${clipId})` : undefined}>{middle}</g>
     {patty && (
       <>
         <rect x={24} y={158} width={272} height={42} rx={20} fill={C.patty} {...line} />

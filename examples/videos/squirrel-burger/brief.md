@@ -41,3 +41,16 @@ See script.md
 - Source: src/squirrel/ (separate entry src/squirrel/index.ts), comp id SquirrelBurger, 1080 frames
 
 ## Stage 4 — keyframes rendered (awaiting approval): videos/squirrel-burger/keyframes/
+- Keyframes approved.
+
+## Stage 5/6 — rendered + reviewed
+- videos/squirrel-burger/squirrel-burger.mp4 (1080x1920, 30fps, 36s, H.264+AAC, -15.8 LUFS)
+- Cover: videos/squirrel-burger/squirrel-burger-cover.png (frame 85)
+- Review fixes: squirrel hidden until the reveal (clip + patty swap), caption word spacing, ✓/✗ as SVG
+- Loop: last frame = empty diner counter = frame 0
+- Re-render: npm run render:squirrel (add --browser-executable in sandboxes)
+
+## Post copy
+Title: He Ordered a Burger. He Got a Squirrel. 🐿️🍔
+Description: The weirdest lesson in Agile, in 36 seconds. When the deadline is impossible, cut scope, never quality. Story via Ken Schwaber's Scrum legend. Full story: hfares.com/blog/the-squirrel-burger-story/
+Hashtags: #agile #scrum #softwareengineering #productmanagement #techdebt #shorts

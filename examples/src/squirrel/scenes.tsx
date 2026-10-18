@@ -47,8 +47,9 @@ export const S1: React.FC = () => {
             size={600}
             lift={lift}
             tilt={-12 * reveal}
-            patty={false}
-            middle={<Squirrel x={72} y={128 - reveal * 128} size={176} tail={wag} />}
+            patty={reveal < 0.02}
+            clipId="s1-filling"
+            middle={<Squirrel x={72} y={210 - reveal * 210} size={176} tail={wag} />}
           />
         </g>
       </Stage>

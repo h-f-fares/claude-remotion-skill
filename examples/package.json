@@ -12,7 +12,9 @@
     "render:lyrics": "remotion render src/lyrics/index.ts SolitudeLyrics out/solitude-lyrics.mp4 --codec h264 --crf 16 --gl=angle",
     "render:codeedit": "remotion render src/index.ts CodeEdit out/code-edit.mp4 --codec h264 --crf 16",
     "lyrics:images": "node scripts/gen-lyrics-images.mjs",
-    "lyrics:depth": "python3 scripts/gen-depth.py"
+    "lyrics:depth": "python3 scripts/gen-depth.py",
+    "audio:squirrel": "node scripts/gen-squirrel-audio.mjs",
+    "render:squirrel": "remotion render src/squirrel/index.ts SquirrelBurger out/squirrel-burger.mp4 --codec h264 --crf 17"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",
