@@ -3,12 +3,12 @@
 | # | Beat | Narration |
 |---|------|-----------|
 | 1 | Hook / open loop | This man ordered a burger. What he got... was a squirrel. And somehow, this story is now taught to software teams all over the world. |
-| 2 | Setup | Here's how it happened. Meet Ray. Ray flips burgers at a busy joint downtown. It's Friday. It's almost midnight. And the line is wrapped around the block. |
-| 3 | Pressure | Ray's boss walks in and says one thing: "Nobody leaves without a burger. Nobody." |
-| 4 | Problem | Ray turns to the fridge... and the beef is gone. Not low. Gone. |
-| 5 | Dilemma | Now Ray has two choices. Option one: walk out there and tell a hungry crowd, "Sorry, we're out." Option two... |
-| 6 | Temptation | He looks out the back window. And there, sitting on the trash can, is a squirrel. |
-| 7 | The act | Ray doesn't say no. He grills it. Buns it. Serves it. To a sweet old man in the corner booth, who takes the biggest bite of his life. |
+| 2 | Setup | Here's how it happened. Meet Ray. It's late at night, and Ray is alone at the burger joint, wiping the counter, about to close. |
+| 3 | Last customer | Then the door creaks open. One last customer. A sweet old man who just wants a hot burger. |
+| 4 | Problem | Ray opens the fridge... no ground beef. Not low. Gone. |
+| 5 | The rule | And Ray remembers his manager's one rule: "Never turn a customer away. Never." So Ray gets... creative. |
+| 6 | Temptation | Earlier that day, he saw something out back. A dead squirrel, lying next to the trash can. |
+| 7 | The act | So he skins it. Grinds it. Grills it. And serves it to the old man, who takes the biggest bite of his life. |
 | 8 | Consequence | Three hours later? The old man is in the hospital. |
 | 9 | Fallout | And the next morning, the headline doesn't say "Ray." It says the name on the sign. The whole brand takes the hit. |
 | 10 | Reset / origin | Now, did this really happen? The story comes from Ken Schwaber, one of the creators of Scrum. In 2015, someone asked him if it was real. His answer? "It's a legend." But it keeps getting told... because every team has served a squirrel. |

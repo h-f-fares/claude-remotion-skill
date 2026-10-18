@@ -10,8 +10,8 @@ type Placed = { x?: number; y?: number; size?: number };
 
 // ---------------------------------------------------------------- squirrel
 export const Squirrel: React.FC<
-  Placed & { wink?: number; tail?: number; flip?: boolean; blink?: boolean }
-> = ({ x = 0, y = 0, size = 200, wink = 0, tail = 0, flip = false, blink = false }) => (
+  Placed & { wink?: number; tail?: number; flip?: boolean; blink?: boolean; dead?: boolean }
+> = ({ x = 0, y = 0, size = 200, wink = 0, tail = 0, flip = false, blink = false, dead = false }) => (
   <svg x={x} y={y} width={size} height={size} viewBox="0 0 220 220" overflow="visible">
     <g transform={flip ? "translate(220 0) scale(-1 1)" : undefined}>
       <g transform={`rotate(${tail} 120 160)`}>
@@ -27,7 +27,9 @@ export const Squirrel: React.FC<
       <path d="M62 54 L 74 26 L 88 58 Z" fill={C.brown} {...line} />
       <circle cx={74} cy={98} r={38} fill={C.brown} {...line} />
       <ellipse cx={58} cy={112} rx={10} ry={7} fill={C.neon} opacity={0.55} />
-      {wink > 0.5 || blink ? (
+      {dead ? (
+        <path d="M56 84 L 72 100 M72 84 L 56 100" fill="none" {...line} strokeWidth={5} />
+      ) : wink > 0.5 || blink ? (
         <path d="M54 92 Q 64 100 74 92" fill="none" {...line} />
       ) : (
         <>

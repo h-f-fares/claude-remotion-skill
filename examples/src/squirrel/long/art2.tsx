@@ -119,3 +119,37 @@ export const Scissors: React.FC<Placed & { open?: number }> = ({ x = 0, y = 0, s
     <circle cx={100} cy={100} r={8} fill={C.ink} />
   </svg>
 );
+
+export const Grinder: React.FC<Placed & { crank?: number }> = ({ x = 0, y = 0, size = 420, crank = 0 }) => (
+  <svg x={x} y={y} width={size} height={size} viewBox="0 0 200 200" overflow="visible">
+    <path d="M60 20 L 140 20 L 120 70 L 80 70 Z" fill="#B8C2CC" {...line} strokeWidth={5} />
+    <rect x={50} y={70} width={100} height={60} rx={16} fill="#D9D9D9" {...line} strokeWidth={5} />
+    <rect x={150} y={84} width={34} height={32} rx={6} fill="#B8C2CC" {...line} strokeWidth={5} />
+    <circle cx={184} cy={100} r={10} fill="#B8C2CC" stroke={C.ink} strokeWidth={4} />
+    <g transform={`rotate(${crank} 100 100)`}>
+      <path d="M100 100 L 100 40" stroke={C.ink} strokeWidth={8} strokeLinecap="round" />
+      <circle cx={100} cy={40} r={9} fill={C.cherry} stroke={C.ink} strokeWidth={4} />
+    </g>
+    <rect x={70} y={130} width={60} height={50} rx={6} fill="#9AA5B1" {...line} strokeWidth={5} />
+    <rect x={40} y={180} width={120} height={14} rx={6} fill="#7C8A99" {...line} strokeWidth={5} />
+  </svg>
+);
+
+export const Door: React.FC<Placed & { open?: number; label?: string }> = ({ x = 0, y = 0, size = 360, open = 0, label }) => (
+  <svg x={x} y={y} width={size} height={size * 2} viewBox="0 0 180 360" overflow="visible">
+    <rect x={0} y={0} width={180} height={360} rx={8} fill="#2A2F45" {...line} />
+    <g transform={`translate(${open * 120} 0) scale(${1 - open * 0.65} 1)`}>
+      <rect x={10} y={10} width={160} height={340} rx={6} fill={C.brown} {...line} />
+      <rect x={30} y={40} width={120} height={120} rx={6} fill="#8FD3FF" {...line} strokeWidth={5} />
+      <circle cx={146} cy={200} r={10} fill={C.mustard} stroke={C.ink} strokeWidth={4} />
+      {label && (
+        <g transform="translate(90 230) rotate(-4)">
+          <rect x={-60} y={-22} width={120} height={44} rx={8} fill={C.cream} stroke={C.ink} strokeWidth={4} />
+          <text x={0} y={10} textAnchor="middle" fontFamily={theme.fonts.display} fontSize={28} fill={C.cherry}>
+            {label}
+          </text>
+        </g>
+      )}
+    </g>
+  </svg>
+);

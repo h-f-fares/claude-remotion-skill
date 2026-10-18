@@ -2,7 +2,7 @@
 // Music: quirky swing diner jazz at 120 BPM (one bar = 2s), drops to a dark
 // drone for the hospital/headline beat, sparse for the lesson, swings back
 // for the punchline and ends on a button chord. No external assets.
-import { writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -161,36 +161,43 @@ function kick(t, amp = 0.5) {
 function tickHat(t, amp = 0.03) {
   for (let i = 0; i < secs(0.04); i++) add(t, i, amp * noise() * Math.exp(-(i / SR) * 90));
 }
-const DUR2 = 124;
+// beat start times (s) from the v2 voiceover; T[n] = start of beat n
+const timing2 = JSON.parse(readFileSync(join(OUT, "timing2.json"), "utf8"));
+const T = [0, ...timing2.segments.map((g) => g.start)];
+const last = timing2.segments.at(-1);
+const END = last.start + last.dur;
+const DUR2 = Math.ceil(END + 2.5);
 const music2 = new Float32Array(secs(DUR2));
 tgt = music2;
-// 0–24: hook + setup, swing from the first frame
-swingSection(0, 24);
-// 24–28.9: the beef is gone — music cuts out, one low hit
-bass(24.05, 29, 1.4, 0.7);
-// 28.9–40.6: dilemma — suspense pulse, ticking clock
-drone(28.9, 40.7, [40, 47], 0.06);
-for (let t = 28.9; t < 40.6; t += 0.5) tickHat(t, 0.05);
-for (let t = 28.9; t < 40.6; t += 1) kick(t, 0.35);
-// 40.6–49.9: the act — swing at full tilt with a kick under it
-swingSection(40.6, 49.9, 1.1);
-for (let t = 40.6; t < 49.9; t += 0.5) kick(t, 0.3);
-// 49.9–60.1: hospital + fallout — dark drone
-drone(49.9, 60.2, [38, 45, 53], 0.07);
-for (const t of [49.95, 52, 54, 56]) bass(t, 26, 1.6, 0.6);
-// 60.1–75.6: origin — sparse, curious keys
-for (let t = 60.1, i = 0; t < 75.4; t += 2, i++) keys(t, [[57, 60, 64], [55, 59, 62], [53, 57, 60], [52, 55, 59]][i % 4], 1.8, 0.08);
-drone(60.1, 75.7, [45], 0.04);
-// 75.6–93.5: tie-in + stakes — building pulse, kick density rises
-for (let t = 75.6, i = 0; t < 93.4; t += 0.5, i++) {
-  bass(t, [33, 33, 36, 38][Math.floor(i / 8) % 4], 0.4, 0.4 + 0.2 * ((t - 75.6) / 18));
-  if (i % 2 === 0 || t > 84) kick(t, 0.3 + 0.2 * ((t - 75.6) / 18));
+// hook + night + last customer: swing from the first frame
+swingSection(0, T[4]);
+// the beef is gone: music cuts out, one low hit
+bass(T[4] + 0.05, 29, 1.4, 0.7);
+// the rule + the squirrel: suspense pulse, ticking clock
+drone(T[5], T[7] + 0.1, [40, 47], 0.06);
+for (let t = T[5]; t < T[7]; t += 0.5) tickHat(t, 0.05);
+for (let t = T[5]; t < T[7]; t += 1) kick(t, 0.35);
+// the act: swing at full tilt with a kick under it
+swingSection(T[7], T[8], 1.1);
+for (let t = T[7]; t < T[8]; t += 0.5) kick(t, 0.3);
+// hospital + fallout: dark drone
+drone(T[8], T[10] + 0.1, [38, 45, 53], 0.07);
+for (let t = T[8] + 0.05; t < T[10] - 1; t += 2) bass(t, 26, 1.6, 0.6);
+// the legend: sparse, curious keys
+for (let t = T[10], i = 0; t < T[11] - 0.2; t += 2, i++) keys(t, [[57, 60, 64], [55, 59, 62], [53, 57, 60], [52, 55, 59]][i % 4], 1.8, 0.08);
+drone(T[10], T[11] + 0.1, [45], 0.04);
+// tie-in + stakes: building pulse, kick density rises
+const span = T[13] - T[11];
+for (let t = T[11], i = 0; t < T[13] - 0.1; t += 0.5, i++) {
+  const k = (t - T[11]) / span;
+  bass(t, [33, 33, 36, 38][Math.floor(i / 8) % 4], 0.4, 0.4 + 0.2 * k);
+  if (i % 2 === 0 || k > 0.5) kick(t, 0.3 + 0.2 * k);
   tickHat(t + 0.25, 0.04);
 }
-// 93.5–124: takeaways + close — bright swing, then a button chord
-swingSection(93.5, 122, 1.05);
-bass(122, 41, 1.6, 0.6);
-keys(122, [60, 64, 69, 74], 1.8, 0.12);
+// takeaways + close: bright swing, then a button chord
+swingSection(T[13], END, 1.05);
+bass(END, 41, 1.6, 0.6);
+keys(END, [60, 64, 69, 74], 1.8, 0.12);
 save("music2.wav", music2, 0.8);
 tgt = music;
 

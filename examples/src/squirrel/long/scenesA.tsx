@@ -1,12 +1,12 @@
-// Beats 1–6: hook → the night → pressure → no beef → the choice → the squirrel.
+// Beats 1–6: hook → closing time → last customer → no beef → the manager's rule → the squirrel out back.
 import React from "react";
 import { AbsoluteFill, interpolate, spring, useCurrentFrame } from "remotion";
 import { theme } from "../theme";
 import { Display, ease, useBob, useSp } from "../motion";
-import { DarkBg, DinerBg, NightBg } from "../bg";
-import { Burger, Person, Ray, Squirrel } from "../art";
+import { DarkBg, DinerBg, NightBg, SunburstBg } from "../bg";
+import { Burger, OldMan, Ray, Squirrel } from "../art";
 import { Clock } from "../scenes";
-import { Boss, Calendar, Globe, Laptop, TrashCan } from "./art2";
+import { Boss, Door, Globe, Laptop, TrashCan } from "./art2";
 import { Card, Flash, Shot, Slam, SpeedLines } from "./kit";
 import { bLen, cuts, s, w } from "./timing";
 
@@ -93,11 +93,30 @@ export const B1: React.FC = () => {
   );
 };
 
-// ================================================================ 2. the night
+// ================================================================ 2. closing time
 const RewindIcon: React.FC = () => (
   <svg width={200} height={120} viewBox="0 0 200 120">
     <path d="M100 10 L 10 60 L 100 110 Z M190 10 L 100 60 L 190 110 Z" fill={C.cream} stroke={C.ink} strokeWidth={8} strokeLinejoin="round" />
   </svg>
+);
+
+// the diner after hours: lights dimmed, night in the window, clock on the wall
+const ClosingDiner: React.FC<{ t: number; closed?: number }> = ({ t, closed = 0 }) => (
+  <>
+    <DinerBg />
+    <div style={{ position: "absolute", left: 600, top: 380, width: 380, height: 360, background: `linear-gradient(180deg, ${C.navyDeep}, ${C.navy})`, border: ink(10), borderRadius: 20, overflow: "hidden" }}>
+      <div style={{ position: "absolute", right: 40, top: 40, width: 80, height: 80, borderRadius: "50%", background: C.cream, border: ink(5) }} />
+      <div style={{ position: "absolute", left: 40, top: 150, transformOrigin: "50% 0%", transform: `rotateY(${closed * 180}deg)`, perspective: 600 }}>
+        <div style={{ background: closed > 0.5 ? C.cherry : C.mint, border: ink(6), borderRadius: 12, padding: "10px 22px", transform: closed > 0.5 ? "scaleX(-1)" : undefined }}>
+          <Display size={56} color={C.cream} stroke={6}>{closed > 0.5 ? "CLOSED" : "OPEN"}</Display>
+        </div>
+      </div>
+    </div>
+    <div style={{ position: "absolute", left: 90, top: 400 }}>
+      <Clock t={t} />
+    </div>
+    <AbsoluteFill style={{ background: "rgba(16,25,53,0.28)" }} />
+  </>
 );
 
 export const B2: React.FC = () => {
@@ -105,16 +124,16 @@ export const B2: React.FC = () => {
   const seg = useSeg(2);
   const c = cuts(2);
   const bob = useBob(14, 6);
-  const flip = (frame - c[2]) / 30;
-  const pattyY = -Math.abs(Math.sin(flip * Math.PI * 1.6)) * 260;
-  const colors = [C.mustard, C.mint, C.cherry, C.cream, C.mustard, C.mint, C.cream, C.cherry, C.mint];
+  const alone = w(2, "alone");
+  const close = w(2, "close");
+  const wipe = Math.sin(frame / 4) * 120;
   return (
-    <Shot cuts={c} enter="zoom" hits={[c[3], c[4]]}>
+    <Shot cuts={[...c, alone, close]} enter="zoom" hits={[alone]}>
       {seg === 0 && (
         <>
           <DinerBg />
           <AbsoluteFill style={{ background: `repeating-linear-gradient(0deg, rgba(0,0,0,0.12) 0 6px, transparent 6px 14px)`, transform: `translateY(${(frame * 9) % 14}px)` }} />
-          <AbsoluteFill style={{ filter: "grayscale(0.6)", background: "rgba(29,43,79,0.35)" }} />
+          <AbsoluteFill style={{ background: "rgba(29,43,79,0.35)" }} />
           <div style={{ position: "absolute", left: 0, right: 0, top: 640, display: "flex", flexDirection: "column", alignItems: "center", gap: 30 }}>
             <div style={{ transform: `translateX(${Math.sin(frame / 2) * 10}px)` }}>
               <RewindIcon />
@@ -123,111 +142,98 @@ export const B2: React.FC = () => {
           </div>
         </>
       )}
-      {(seg === 1 || seg === 2) && (
+      {seg === 1 && (
         <>
           <DinerBg />
           <Stage>
-            <Ray x={250} y={560 + bob} size={580} worry={0} look={0} grin={seg === 2 ? 1 : 0} />
-            {seg === 2 && (
-              <g transform={`translate(${760} ${700 + pattyY}) rotate(${flip * 720})`}>
-                <ellipse cx={0} cy={0} rx={70} ry={26} fill={C.patty} stroke={C.ink} strokeWidth={6} />
+            <Ray x={250} y={600 + bob} size={580} grin={1} />
+          </Stage>
+          <Slam at={c[1]} words={["MEET", "RAY"]} colors={[C.cream, C.mustard]} top={380} size={150} />
+        </>
+      )}
+      {seg >= 2 && (
+        <>
+          <ClosingDiner t={frame * 0.3} closed={ease(frame, [close - 4, close + 8], [0, 1])} />
+          <Stage>
+            <Ray x={290} y={560 + bob * 0.5} size={500} worry={0.3} look={-1} />
+          </Stage>
+          <div style={{ position: "absolute", left: 40, right: 40, top: 1150, height: 70, background: C.cherry, border: ink(), borderRadius: 18 }} />
+          <div style={{ position: "absolute", left: 70, right: 70, top: 1220, height: 220, background: "#D9D9D9", border: ink(), borderTop: "none" }} />
+          <div style={{ position: "absolute", left: 470 + wipe, top: 1110, width: 150, height: 60, background: C.mint, border: ink(6), borderRadius: 14 }} />
+          {frame >= alone && frame < close && <Slam at={alone} words={["ALONE."]} colors={[C.mustard]} top={330} size={140} rotate={-4} />}
+        </>
+      )}
+    </Shot>
+  );
+};
+
+// ================================================================ 3. last customer
+export const B3: React.FC = () => {
+  const frame = useCurrentFrame();
+  const seg = useSeg(3);
+  const c = cuts(3);
+  const open = ease(frame, [4, 20], [0, 1], theme.ease.inOut);
+  const walk = ease(frame, [c[1], c[1] + 24], [0, 1], theme.ease.out);
+  const think = useSp(w(3, "hot"), theme.spring.bouncy);
+  const bob = useBob(12, 5);
+  return (
+    <Shot cuts={c} hits={[c[1]]}>
+      {seg < 2 ? (
+        <>
+          <ClosingDiner t={frame * 0.3} closed={1} />
+          <Stage>
+            <Door x={330} y={560} size={420} open={open} label="CLOSED" />
+            {seg === 1 && (
+              <g transform={`translate(${interpolate(walk, [0, 1], [0, -40])} ${interpolate(walk, [0, 1], [60, 0])}) translate(540 980) scale(${interpolate(walk, [0, 1], [0.7, 1])}) translate(-540 -980)`}>
+                <OldMan x={360} y={700 + Math.abs(Math.sin(frame / 4)) * -10} size={360} />
               </g>
             )}
           </Stage>
-          {seg === 1 && <Slam at={c[1]} words={["MEET", "RAY"]} colors={[C.cream, C.mustard]} top={380} size={150} />}
-          {seg === 2 && <Slam at={c[2] + 4} words={["BURGER", "FLIPPER"]} colors={[C.cream, C.cream]} top={380} size={110} rotate={3} />}
+          {/* door frame light spill */}
+          <AbsoluteFill style={{ background: `radial-gradient(ellipse 260px 500px at 540px 980px, rgba(255,236,170,${0.35 * open}), transparent 70%)` }} />
+          {seg === 1 && <Slam at={c[1] + 6} words={["1", "LAST", "CUSTOMER"]} colors={[C.mustard, C.cream, C.cream]} top={380} size={120} />}
         </>
-      )}
-      {seg === 3 && (
+      ) : (
         <>
           <DinerBg />
           <Stage>
-            <g transform={`translate(540 860) scale(${spring({ frame: frame - c[3], fps: 30, config: theme.spring.bouncy })}) translate(-540 -860)`}>
-              <Calendar x={240} y={560} size={600} label="FRIDAY" />
-            </g>
+            <OldMan x={240} y={520 + bob} size={600} open={0.25} />
           </Stage>
-        </>
-      )}
-      {seg === 4 && (
-        <>
-          <DarkBg tint={C.navy} />
-          <div style={{ position: "absolute", left: 0, right: 0, top: 520, display: "flex", justifyContent: "center", transform: `scale(${2.6 * spring({ frame: frame - c[4], fps: 30, config: theme.spring.bouncy })})` }}>
-            <Clock t={(frame - c[4]) * 4} />
+          <div style={{ position: "absolute", left: 600, top: 330, transform: `scale(${think})`, transformOrigin: "0% 100%" }}>
+            <div style={{ width: 330, height: 260, background: C.white, border: ink(), borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <svg width={220} height={200} viewBox="0 -40 320 300">
+                <Burger size={320} />
+              </svg>
+            </div>
+            <div style={{ position: "absolute", left: 10, top: 260, width: 50, height: 50, borderRadius: "50%", background: C.white, border: ink(6) }} />
+            <div style={{ position: "absolute", left: -20, top: 320, width: 28, height: 28, borderRadius: "50%", background: C.white, border: ink(5) }} />
           </div>
-          <Slam at={c[4] + 6} words={["11:58", "PM"]} colors={[C.mustard, C.cream]} top={1000} size={130} rotate={0} />
-        </>
-      )}
-      {seg === 5 && (
-        <>
-          <NightBg />
-          <div style={{ position: "absolute", left: 140, right: 140, top: 380, height: 300, background: C.navyDeep, border: ink(10), borderRadius: 40, boxShadow: `0 0 0 10px ${C.neon}55` }}>
-            <div style={{ position: "absolute", left: 0, right: 0, top: 26, textAlign: "center", fontFamily: theme.fonts.display, fontSize: 160, color: "#FFE3F0", textShadow: `0 0 18px ${C.neon}, 0 0 50px ${C.neon}` }}>RAY'S</div>
-            <div style={{ position: "absolute", left: 0, right: 0, top: 200, textAlign: "center", fontFamily: theme.fonts.body, fontWeight: 700, fontSize: 48, letterSpacing: 8, color: "#D9FFF4", textShadow: `0 0 14px ${C.mint}` }}>BURGERS · OPEN LATE</div>
-          </div>
-          <div style={{ position: "absolute", left: 60, right: 60, top: 760, height: 700, background: C.cream, border: ink(), borderRadius: "40px 40px 0 0" }}>
-            <div style={{ position: "absolute", left: 0, right: 0, top: 0, height: 70, background: `repeating-linear-gradient(90deg, ${C.cherry} 0 80px, ${C.cream} 80px 160px)`, borderBottom: ink(), borderRadius: "34px 34px 0 0" }} />
-          </div>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 1460, bottom: 0, background: "#2A2F45", borderTop: ink() }} />
-          <Stage>
-            {colors.map((col, i) => {
-              const p = spring({ frame: frame - c[5] - i * 3, fps: 30, config: theme.spring.snappy });
-              const row = i < 5 ? 0 : 1;
-              const x = interpolate(p, [0, 1], [1300 + i * 120, (row ? 120 : 40) + (i % 5) * 190]);
-              return <Person key={i} x={x} y={(row ? 1240 : 1080) + Math.sin(frame / 6 + i) * 6} size={row ? 130 : 110} color={col} hat={i % 3 === 1} />;
-            })}
-          </Stage>
         </>
       )}
     </Shot>
   );
 };
 
-// ================================================================ 3. pressure
-export const B3: React.FC = () => {
-  const frame = useCurrentFrame();
-  const say = w(3, "nobody", 0);
-  const big = w(3, "nobody", 1);
-  const enter = useSp(0, theme.spring.snappy);
-  const shout = frame >= big ? 1 : frame >= say ? 0.5 + 0.3 * Math.abs(Math.sin(frame / 3)) : 0.1;
-  const bubble = useSp(say, theme.spring.bouncy);
-  return (
-    <Shot cuts={[0, say, big]} hits={[big]}>
-      <DinerBg />
-      <Stage>
-        <Boss x={interpolate(enter, [0, 1], [1100, 300])} y={560} size={520} shout={shout} />
-        <Ray x={-60} y={980} size={300} worry={1} sweat={1} t={frame} look={1} />
-      </Stage>
-      {frame < big && (
-        <div style={{ position: "absolute", left: 90, right: 130, top: 380, transform: `scale(${bubble})`, transformOrigin: "70% 100%" }}>
-          <Card bg={C.white}>
-            <Display size={84} color={C.ink} stroke={0} style={{ textShadow: "none" }}>
-              "NOBODY LEAVES WITHOUT A BURGER."
-            </Display>
-          </Card>
-        </div>
-      )}
-      {frame >= big && <Slam at={big} words={["NOBODY."]} colors={[C.cherry]} top={380} size={220} rotate={-6} />}
-      <SpeedLines at={big} />
-      <Flash at={big} color={C.cherry} peak={0.4} />
-    </Shot>
-  );
-};
-
-// ================================================================ 4. no beef
+// ================================================================ 4. no ground beef
 export const B4: React.FC = () => {
   const frame = useCurrentFrame();
-  const c = cuts(4);
   const open = ease(frame, [w(4, "fridge") - 2, w(4, "fridge") + 10], [0, 1]);
-  const gone = w(4, "gone", 1);
+  const no = w(4, "no");
+  const gone = w(4, "gone");
   const stamp = useSp(gone, theme.spring.bouncy);
+  const tag = useSp(no, theme.spring.bouncy);
   return (
-    <Shot cuts={[0, w(4, "beef"), w(4, "not"), gone]} hits={[gone]}>
+    <Shot cuts={[0, no, w(4, "not"), gone]} hits={[gone]}>
       <DinerBg floorY={1480} />
       <div style={{ position: "absolute", left: 250, top: 330, width: 580, height: 1080 }}>
         <div style={{ position: "absolute", inset: 0, background: "#EAF6FF", border: ink(10), borderRadius: 30, overflow: "hidden" }}>
           {[260, 520, 780].map((y) => (
             <div key={y} style={{ position: "absolute", left: 30, right: 30, top: y, height: 16, background: "#B9D8EA", border: ink(5), borderRadius: 8 }} />
           ))}
+          {/* the empty ground-beef tray */}
+          <div style={{ position: "absolute", left: 110, top: 400, width: 360, height: 110, background: C.white, border: ink(6), borderRadius: 16, transform: `scale(${tag})` }}>
+            <div style={{ position: "absolute", left: 0, right: 0, top: 26, textAlign: "center", fontFamily: theme.fonts.display, fontSize: 46, color: C.ink }}>GROUND BEEF</div>
+          </div>
         </div>
         <div style={{ position: "absolute", inset: 0, perspective: 1600 }}>
           <div style={{ position: "absolute", inset: 0, background: `linear-gradient(90deg, ${C.mint}, #A7E8D5)`, border: ink(10), borderRadius: 30, transformOrigin: "0% 50%", transform: `rotateY(${-open * 105}deg)`, backfaceVisibility: "hidden" }} />
@@ -246,106 +252,116 @@ export const B4: React.FC = () => {
   );
 };
 
-// ================================================================ 5. the choice
-const AngryFace: React.FC<{ x: number; y: number; col: string; t: number }> = ({ x, y, col, t }) => (
-  <g transform={`translate(${x} ${y + Math.sin(t / 2 + x) * 6})`}>
-    <rect x={-60} y={60} width={120} height={160} rx={50} fill={col} stroke={C.ink} strokeWidth={6} />
-    <circle cx={0} cy={20} r={56} fill={C.skin} stroke={C.ink} strokeWidth={6} />
-    <path d="M-34 0 L -10 12 M34 0 L 10 12" stroke={C.ink} strokeWidth={8} strokeLinecap="round" />
-    <circle cx={-20} cy={22} r={6} fill={C.ink} />
-    <circle cx={20} cy={22} r={6} fill={C.ink} />
-    <path d="M-20 52 Q 0 36 20 52" fill="none" stroke={C.ink} strokeWidth={7} strokeLinecap="round" />
-  </g>
-);
-
+// ================================================================ 5. the manager's rule
 export const B5: React.FC = () => {
   const frame = useCurrentFrame();
-  const o1 = w(5, "option", 0);
-  const o2 = w(5, "option", 1);
-  const sorry = w(5, "sorry");
-  const seg = frame < o1 ? 0 : frame < o2 ? 1 : 3;
-  const q = useSp(o2, theme.spring.bouncy);
+  const rule = w(5, "rule");
+  const never = w(5, "never", 1);
+  const creative = w(5, "creative");
+  const gets = w(5, "gets");
+  const shout = frame >= never ? 1 : frame >= rule ? 0.5 + 0.3 * Math.abs(Math.sin(frame / 3)) : 0.15;
+  const poster = useSp(rule, theme.spring.bouncy);
+  const bob = useBob(12, 5);
+  const flashback = frame < gets;
   return (
-    <Shot cuts={[0, o1, sorry, o2]} enter="zoom">
-      {seg === 0 && (
+    <Shot cuts={[0, rule, never, gets, creative]} enter="zoom" hits={[never, creative]}>
+      {flashback ? (
         <>
           <DinerBg />
           <Stage>
-            <Ray x={250} y={700} size={560} worry={1} sweat={1} t={frame} look={Math.sin(frame / 6) > 0 ? 1 : -1} />
+            <Boss x={360} y={640 + bob} size={500} shout={shout} />
           </Stage>
-          <Slam at={4} words={["2", "CHOICES"]} colors={[C.mustard, C.cream]} top={380} size={170} />
+          <div style={{ position: "absolute", left: 60, top: 380, width: 420, transform: `scale(${poster}) rotate(-5deg)` }}>
+            <Card bg={C.cream} style={{ padding: "24px 26px" }}>
+              <div style={{ fontFamily: theme.fonts.display, fontSize: 52, color: C.cherry, textAlign: "center" }}>RULE #1</div>
+              <div style={{ fontFamily: theme.fonts.display, fontSize: 58, lineHeight: 1.05, color: C.ink, textAlign: "center", marginTop: 8 }}>NEVER TURN A CUSTOMER AWAY</div>
+            </Card>
+          </div>
+          {frame >= never && <Slam at={never} words={["NEVER."]} colors={[C.cherry]} top={1000} size={200} rotate={-6} />}
+          {/* flashback treatment: sepia wash + wobbling vignette */}
+          <AbsoluteFill style={{ background: "rgba(140,90,30,0.22)", mixBlendMode: "multiply" }} />
+          <AbsoluteFill style={{ background: `radial-gradient(ellipse at center, transparent ${52 + Math.sin(frame / 6) * 3}%, rgba(60,35,10,0.55) 100%)` }} />
+          <div style={{ position: "absolute", left: 0, right: 0, top: 300, display: "flex", justifyContent: "center" }}>
+            <Card bg={C.ink} style={{ padding: "8px 24px" }}>
+              <div style={{ fontFamily: theme.fonts.body, fontWeight: 700, fontSize: 40, color: C.cream, letterSpacing: 4 }}>THE MANAGER</div>
+            </Card>
+          </div>
         </>
-      )}
-      {(seg === 1 || seg === 2) && (
+      ) : (
         <>
-          <DarkBg tint={C.cherry} />
+          <SunburstBg color={C.navy} ray="#26386A" />
           <Stage>
-            {[160, 400, 640, 880].map((x, i) => (
-              <AngryFace key={x} x={x} y={560} col={[C.mustard, C.mint, C.cherry, C.cream][i]} t={frame} />
-            ))}
-            {[280, 520, 760].map((x, i) => (
-              <AngryFace key={x} x={x} y={760} col={[C.mint, C.cream, C.mustard][i]} t={frame + 9} />
-            ))}
-            <Ray x={330} y={1000} size={360} worry={1} sweat={1} t={frame} />
+            <Ray x={250} y={680 + bob} size={580} grin={frame >= creative ? 1 : 0} look={frame >= creative ? 1 : 0} worry={frame >= creative ? 0 : 0.7} />
+            {frame >= creative && (
+              <g transform={`translate(800 560) scale(${spring({ frame: frame - creative, fps: 30, config: theme.spring.bouncy })})`}>
+                <circle cx={0} cy={0} r={70} fill={C.mustard} stroke={C.ink} strokeWidth={8} />
+                <rect x={-28} y={60} width={56} height={40} rx={8} fill="#9AA5B1" stroke={C.ink} strokeWidth={6} />
+                {Array.from({ length: 8 }).map((_, i) => (
+                  <line key={i} x1={0} y1={-100} x2={0} y2={-130} stroke={C.mustard} strokeWidth={10} strokeLinecap="round" transform={`rotate(${i * 45})`} />
+                ))}
+              </g>
+            )}
           </Stage>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 380, display: "flex", justifyContent: "center" }}>
-            <Card bg={C.mustard}>
-              <Display size={90} color={C.ink} stroke={0} style={{ textShadow: "none" }}>OPTION 1</Display>
-            </Card>
-          </div>
-          {frame >= sorry && (
-            <div style={{ position: "absolute", left: 90, right: 130, top: 470, display: "flex", justifyContent: "center", transform: `scale(${spring({ frame: frame - sorry, fps: 30, config: theme.spring.bouncy })})` }}>
-              <Card bg={C.white}>
-                <Display size={78} color={C.ink} stroke={0} style={{ textShadow: "none" }}>"SORRY, WE'RE OUT."</Display>
-              </Card>
-            </div>
-          )}
-        </>
-      )}
-      {seg >= 3 && (
-        <>
-          <DarkBg tint={C.navy} />
-          <div style={{ position: "absolute", left: 0, right: 0, top: 380, display: "flex", justifyContent: "center" }}>
-            <Card bg={C.mint}>
-              <Display size={90} color={C.ink} stroke={0} style={{ textShadow: "none" }}>OPTION 2</Display>
-            </Card>
-          </div>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 560, display: "flex", justifyContent: "center", transform: `scale(${q * (1 + Math.sin(frame / 5) * 0.05)})` }}>
-            <Display size={520} color={C.mustard} stroke={18}>?</Display>
-          </div>
+          {frame >= creative && <Slam at={creative} words={["CREATIVE"]} colors={[C.mustard]} top={380} size={170} rotate={-4} />}
         </>
       )}
     </Shot>
   );
 };
 
-// ================================================================ 6. the squirrel on the trash can
+// ================================================================ 6. earlier that day: the squirrel out back
+const Fly: React.FC<{ cx: number; cy: number; t: number; k: number }> = ({ cx, cy, t, k }) => (
+  <g transform={`translate(${cx + Math.cos(t / 6 + k * 2) * 60} ${cy + Math.sin(t / 4 + k) * 30})`}>
+    <circle r={7} fill={C.ink} />
+    <ellipse cx={-6} cy={-8} rx={7} ry={4} fill={C.white} opacity={0.8} />
+    <ellipse cx={6} cy={-8} rx={7} ry={4} fill={C.white} opacity={0.8} />
+  </g>
+);
+
 export const B6: React.FC = () => {
   const frame = useCurrentFrame();
   const c = cuts(6);
-  const sq = w(6, "squirrel");
-  const light = ease(frame, [sq - 6, sq + 4], [0.25, 1]);
-  const push = ease(frame, [0, bLen(6)], [1, 1.12], theme.ease.inOut);
-  const pop = useSp(sq - 2, theme.spring.bouncy);
+  const dead = w(6, "dead");
+  const card = useSp(0, theme.spring.bouncy);
+  const pop = useSp(dead - 2, theme.spring.bouncy);
+  const bob = useBob(14, 5);
   return (
-    <Shot cuts={[0, c[1], sq]} hits={[sq]} focusY={1000}>
-      <AbsoluteFill style={{ background: `linear-gradient(180deg, ${C.navyDeep}, #26304F)`, transform: `scale(${push})` }}>
-        <div style={{ position: "absolute", left: 0, right: 0, top: 1300, bottom: 0, background: "#3A3F55", borderTop: ink() }} />
-        <div style={{ position: "absolute", left: 80, top: 260, width: 300, height: 1040, background: "#4A3B5C", border: ink(), }} />
-        <div style={{ position: "absolute", right: 60, top: 400, width: 260, height: 900, background: "#4A3B5C", border: ink() }} />
-        <AbsoluteFill style={{ background: `radial-gradient(ellipse 380px 620px at 540px 1100px, rgba(255,236,170,${0.55 * light}), transparent 70%)` }} />
-        <Stage>
-          <TrashCan x={390} y={1000} size={300} />
-          <g transform={`translate(540 1000) scale(${pop}) translate(-540 -1000)`}>
-            <Squirrel x={420} y={790} size={240} tail={Math.sin(frame / 5) * 8} blink={Math.floor(frame / 40) % 4 === 3} />
-          </g>
-        </Stage>
-        <AbsoluteFill style={{ background: `rgba(0,0,0,${0.45 * (1 - light)})` }} />
+    <Shot cuts={[0, c[1], dead, w(6, "trash")]} hits={[dead]} focusY={900}>
+      <AbsoluteFill style={{ background: "linear-gradient(180deg, #8FD3FF, #CDEFFF)" }}>
+        <div style={{ position: "absolute", right: 110, top: 300, width: 160, height: 160, borderRadius: "50%", background: C.mustard, border: ink(6), boxShadow: `0 0 80px ${C.mustard}` }} />
+        {/* fence + yard */}
+        <div style={{ position: "absolute", left: 0, right: 0, top: 820, height: 380, background: `repeating-linear-gradient(90deg, ${C.creamDeep} 0 90px, ${C.ink} 90px 98px)`, borderTop: ink(), borderBottom: ink() }} />
+        <div style={{ position: "absolute", left: 0, right: 0, top: 1200, bottom: 0, background: C.lettuce, borderTop: ink() }} />
+        <div style={{ position: "absolute", left: 0, top: 560, width: 300, height: 640, background: C.cream, border: ink(), borderLeft: "none" }}>
+          <div style={{ position: "absolute", left: 120, top: 240, width: 140, height: 400, background: C.brown, border: ink(6) }} />
+        </div>
       </AbsoluteFill>
-      {/* window frame: we're looking out from the kitchen */}
-      <AbsoluteFill style={{ border: `60px solid ${C.cream}`, boxShadow: `inset 0 0 0 10px ${C.ink}` }} />
-      <div style={{ position: "absolute", top: 560, left: 0, right: 0, height: 30, background: C.cream, borderTop: ink(), borderBottom: ink() }} />
-      <Flash at={sq} peak={0.35} />
+      <Stage>
+        <TrashCan x={620} y={960} size={260} />
+        {frame < c[1] ? (
+          <Ray x={130} y={760 + bob} size={380} look={1} />
+        ) : (
+          <>
+            <Ray x={-40} y={780 + bob} size={340} look={1} worry={0.5} />
+            <g transform={`translate(560 1240) scale(${pop}) translate(-560 -1240)`}>
+              <g transform="rotate(90 470 1150)">
+                <Squirrel x={330} y={1010} size={300} dead />
+              </g>
+            </g>
+            {frame >= dead && [0, 1, 2].map((k) => <Fly key={k} cx={450} cy={1020} t={frame} k={k} />)}
+          </>
+        )}
+      </Stage>
+      {frame < c[1] && (
+        <div style={{ position: "absolute", left: 0, right: 0, top: 380, display: "flex", justifyContent: "center", transform: `scale(${card}) rotate(-3deg)` }}>
+          <Card bg={C.mustard}>
+            <Display size={90} color={C.ink} stroke={0} style={{ textShadow: "none" }}>EARLIER THAT DAY…</Display>
+          </Card>
+        </div>
+      )}
+      {/* flashback tint */}
+      <AbsoluteFill style={{ background: "rgba(140,90,30,0.14)", mixBlendMode: "multiply" }} />
+      <Flash at={dead} peak={0.35} />
     </Shot>
   );
 };

@@ -6,7 +6,7 @@ import { Display, ease, useBob, useSp } from "../motion";
 import { DarkBg, DinerBg, SunburstBg } from "../bg";
 import { Burger, IconCustomer, IconStore, IconTeam, OldMan, Person, Ray, Squirrel } from "../art";
 import { Clock } from "../scenes";
-import { Bug, Calendar, Laptop, Scissors } from "./art2";
+import { Bug, Calendar, Grinder, Laptop, Scissors } from "./art2";
 import { Card, Flash, Shot, Slam, SpeedLines } from "./kit";
 import { cuts, w } from "./timing";
 
@@ -52,64 +52,78 @@ export const B7: React.FC = () => {
   const c = cuts(7);
   const seg = segOf(frame, c);
   const bite = w(7, "bite");
-  const slam = sp(frame, c[2]);
   const slide = sp(frame, c[3], theme.spring.snappy);
   const chomp = sp(frame, bite);
   const mouth = frame < bite - 10 ? 0.1 : frame < bite ? ease(frame, [bite - 10, bite], [0.1, 1]) : ease(frame, [bite, bite + 5], [1, 0.1]);
   const bob = useBob(14, 6);
+  const chop = frame - c[0];
   return (
-    <Shot cuts={[...c, bite]} enter="cut" hits={[c[2] + 3, bite]}>
+    <Shot cuts={[...c, bite]} enter="cut" hits={[c[0] + 8, c[0] + 16, c[1], bite]}>
       <DinerBg />
       {seg === 0 && (
         <>
-          <Stage>
-            <Ray x={210} y={620 + bob} size={660} grin={1} look={1} worry={0} />
-          </Stage>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 380, display: "flex", justifyContent: "center" }}>
-            <div style={{ position: "relative" }}>
-              <Display size={220} color={C.cream}>NO</Display>
-              <svg style={{ position: "absolute", left: -30, top: -20 }} width={340} height={260} viewBox="0 0 340 260">
-                <path d="M20 20 L 320 240 M320 20 L 20 240" stroke={C.cherry} strokeWidth={30} strokeLinecap="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - ease(frame, [10, 20], [0, 1])} />
+          {/* kept off-screen: just Ray's shadow behind the frosted kitchen door */}
+          <div style={{ position: "absolute", left: 240, top: 400, width: 600, height: 1000, background: C.brown, border: ink(10), borderRadius: 16 }}>
+            <div style={{ position: "absolute", left: 60, top: 70, width: 480, height: 520, background: "#E9F4F8", border: ink(8), borderRadius: 12, overflow: "hidden" }}>
+              <svg width={480} height={520} viewBox="0 0 480 520">
+                <g opacity={0.55} transform={`translate(0 ${Math.abs(Math.sin(chop / 3)) * 8})`}>
+                  <circle cx={240} cy={210} r={80} fill={C.ink} />
+                  <circle cx={240} cy={100} r={60} fill={C.ink} />
+                  <rect x={140} y={280} width={200} height={260} rx={60} fill={C.ink} />
+                  <g transform={`rotate(${-30 + Math.abs(Math.sin(chop / 3)) * 60} 330 300)`}>
+                    <rect x={320} y={180} width={26} height={130} rx={12} fill={C.ink} />
+                    <path d="M325 180 L 345 180 L 336 90 Z" fill={C.ink} />
+                  </g>
+                </g>
               </svg>
             </div>
+            <div style={{ position: "absolute", left: 230, top: 640, width: 140, height: 50, background: C.cream, border: ink(5), borderRadius: 8, textAlign: "center", fontFamily: theme.fonts.display, fontSize: 32, lineHeight: "50px", color: C.ink }}>KITCHEN</div>
           </div>
+          {[8, 16].map((d, i) => (
+            <div key={d} style={{ position: "absolute", left: i ? 640 : 110, top: i ? 520 : 760, transform: `scale(${sp(frame, c[0] + d)}) rotate(${i ? 10 : -10}deg)` }}>
+              <Display size={130} color={C.mustard}>{i ? "SHHK!" : "CHOP!"}</Display>
+            </div>
+          ))}
         </>
       )}
       {seg === 1 && (
+        <>
+          <Stage>
+            <Grinder x={240} y={460} size={600} crank={frame * 24} />
+            {Array.from({ length: 6 }).map((_, i) => {
+              const t = (frame * 3 + i * 18) % 108;
+              return <rect key={i} x={500 + Math.sin(i * 2) * 20} y={1000 + t * 1.6} width={70} height={26} rx={13} fill={C.patty} stroke={C.ink} strokeWidth={5} opacity={t < 90 ? 1 : 0} />;
+            })}
+            <ellipse cx={540} cy={1300} rx={240} ry={30} fill={C.white} stroke={C.ink} strokeWidth={6} />
+            <ellipse cx={540} cy={1280} rx={130} ry={34} fill={C.patty} stroke={C.ink} strokeWidth={6} />
+          </Stage>
+          <div style={{ position: "absolute", left: 0, right: 0, top: 380, display: "flex", justifyContent: "center", transform: `scale(${sp(frame, c[1] + 2)}) rotate(-4deg)` }}>
+            <Display size={130} color={C.mustard}>GRRRIND</Display>
+          </div>
+        </>
+      )}
+      {seg === 2 && (
         <Stage>
           <rect x={160} y={1100} width={760} height={90} rx={20} fill="#3B3B45" stroke={C.ink} strokeWidth={8} />
           <Flames frame={frame} />
           <rect x={140} y={960} width={800} height={60} rx={14} fill="#55555F" stroke={C.ink} strokeWidth={8} />
-          <Squirrel x={360} y={740 + Math.sin(frame / 2) * 3} size={300} blink />
+          <ellipse cx={540} cy={930 + Math.sin(frame / 2) * 3} rx={170} ry={44} fill={C.patty} stroke={C.ink} strokeWidth={8} />
+          {[0, 1, 2].map((i) => (
+            <path key={i} d={`M${440 + i * 100} ${860 - ((frame * 4 + i * 30) % 120)} q 20 -30 0 -60 q -20 -30 0 -60`} fill="none" stroke={C.white} strokeWidth={10} strokeLinecap="round" opacity={0.8} />
+          ))}
         </Stage>
       )}
-      {seg === 2 && (
-        <Stage>
-          <ellipse cx={540} cy={1140} rx={330} ry={34} fill={C.white} stroke={C.ink} strokeWidth={6} />
-          <Burger x={240} y={604} size={600} lift={interpolate(slam, [0, 1], [600, 0])} patty={false} middle={<Squirrel x={150} y={10} size={220} flip tail={Math.sin(frame / 3) * 6} />} />
-        </Stage>
-      )}
-      {seg === 3 && (
+      {seg >= 3 && (
         <>
-          <Stage>
-            <g transform={`translate(${interpolate(slide, [0, 1], [-1100, 0])} 0)`}>
-              <ellipse cx={540} cy={1140} rx={330} ry={34} fill={C.white} stroke={C.ink} strokeWidth={6} />
-              <Burger x={240} y={604} size={600} patty={false} middle={<Squirrel x={150} y={10} size={220} flip />} />
-            </g>
-          </Stage>
-          <SpeedLines at={c[3]} len={10} />
-        </>
-      )}
-      {seg >= 4 && (
-        <>
-          <div style={{ position: "absolute", left: 120, right: 120, top: 380, height: 900, background: C.cherry, border: ink(10), borderRadius: "120px 120px 30px 30px" }} />
+          <ClosingTint />
           <Stage>
             <OldMan x={240} y={420 + bob} size={600} open={mouth} />
-            <g transform={`translate(0 ${ease(frame, [bite - 12, bite], [0, -190], theme.ease.inOut)})`}>
+            <g transform={`translate(${interpolate(slide, [0, 1], [-1100, 0])} ${ease(frame, [bite - 12, bite], [0, -190], theme.ease.inOut)})`}>
               <ellipse cx={540} cy={1250} rx={300} ry={32} fill={C.white} stroke={C.ink} strokeWidth={6} />
-              <Burger x={300} y={780} size={480} patty={false} middle={<Squirrel x={150} y={10} size={220} flip />} />
+              <Burger x={300} y={780} size={480} />
             </g>
           </Stage>
+          <div style={{ position: "absolute", left: 40, right: 40, top: 1290, height: 70, background: C.cherry, border: ink(), borderRadius: 18 }} />
           {frame >= bite && (
             <div style={{ position: "absolute", left: 0, right: 0, top: 380, display: "flex", justifyContent: "center", transform: `scale(${chomp}) rotate(-6deg)` }}>
               <Display size={190} color={C.mustard}>CHOMP!</Display>
@@ -122,6 +136,9 @@ export const B7: React.FC = () => {
     </Shot>
   );
 };
+
+// after-hours dimming for the diner
+const ClosingTint: React.FC = () => <AbsoluteFill style={{ background: "rgba(16,25,53,0.22)" }} />;
 
 // ================================================================ 8. three hours later
 const Ambulance: React.FC<{ frame: number }> = ({ frame }) => (

@@ -8,81 +8,81 @@
   {
    "scene": 2,
    "start": 8.451,
-   "dur": 9.881
+   "dur": 8.36
   },
   {
    "scene": 3,
-   "start": 18.332,
-   "dur": 5.712
+   "start": 16.811,
+   "dur": 6.166
   },
   {
    "scene": 4,
-   "start": 24.044,
-   "dur": 4.878
+   "start": 22.978,
+   "dur": 4.597
   },
   {
    "scene": 5,
-   "start": 28.922,
-   "dur": 7.098
+   "start": 27.574,
+   "dur": 7.147
   },
   {
    "scene": 6,
-   "start": 36.019,
-   "dur": 4.573
+   "start": 34.721,
+   "dur": 5.559
   },
   {
    "scene": 7,
-   "start": 40.593,
-   "dur": 9.301
+   "start": 40.28,
+   "dur": 7.24
   },
   {
    "scene": 8,
-   "start": 49.894,
+   "start": 47.519,
    "dur": 3.625
   },
   {
    "scene": 9,
-   "start": 53.518,
+   "start": 51.144,
    "dur": 6.626
   },
   {
    "scene": 10,
-   "start": 60.144,
+   "start": 57.77,
    "dur": 15.478
   },
   {
    "scene": 11,
-   "start": 75.622,
+   "start": 73.248,
    "dur": 12.757
   },
   {
    "scene": 12,
-   "start": 88.379,
+   "start": 86.005,
    "dur": 5.097
   },
   {
    "scene": 13,
-   "start": 93.477,
+   "start": 91.102,
    "dur": 2.887
   },
   {
    "scene": 14,
-   "start": 96.363,
+   "start": 93.989,
    "dur": 6.408
   },
   {
    "scene": 15,
-   "start": 102.771,
+   "start": 100.397,
    "dur": 7.291
   },
   {
    "scene": 16,
-   "start": 110.062,
+   "start": 107.688,
    "dur": 6.796
   },
   {
    "scene": 17,
-   "start": 116.858,
+   "start": 114.484,
    "dur": 5.078
   }
  ],
@@ -119,327 +119,309 @@
   },
   {
    "beat": 2,
-   "text": "Ray flips burgers at a busy joint downtown.",
+   "text": "It's late at night, and Ray is alone at the burger joint, wiping the counter, about to close.",
    "start": 10.804,
-   "end": 13.382
-  },
-  {
-   "beat": 2,
-   "text": "It's Friday.",
-   "start": 13.602,
-   "end": 14.412
-  },
-  {
-   "beat": 2,
-   "text": "It's almost midnight.",
-   "start": 14.632,
-   "end": 15.723
-  },
-  {
-   "beat": 2,
-   "text": "And the line is wrapped around the block.",
-   "start": 15.943,
-   "end": 17.882
+   "end": 16.361
   },
   {
    "beat": 3,
-   "text": "Ray's boss walks in and says one thing: \"Nobody leaves without a burger.",
-   "start": 18.332,
-   "end": 22.651
+   "text": "Then the door creaks open.",
+   "start": 16.811,
+   "end": 18.225
   },
   {
    "beat": 3,
-   "text": "Nobody.\"",
-   "start": 22.871,
-   "end": 23.594
+   "text": "One last customer.",
+   "start": 18.445,
+   "end": 19.593
+  },
+  {
+   "beat": 3,
+   "text": "A sweet old man who just wants a hot burger.",
+   "start": 19.813,
+   "end": 22.528
   },
   {
    "beat": 4,
-   "text": "Ray turns to the fridge... and the beef is gone.",
-   "start": 24.044,
-   "end": 26.803
+   "text": "Ray opens the fridge... no ground beef.",
+   "start": 22.978,
+   "end": 25.456
   },
   {
    "beat": 4,
    "text": "Not low.",
-   "start": 27.023,
-   "end": 27.752
+   "start": 25.676,
+   "end": 26.404
   },
   {
    "beat": 4,
    "text": "Gone.",
-   "start": 27.971,
-   "end": 28.472
+   "start": 26.624,
+   "end": 27.124
   },
   {
    "beat": 5,
-   "text": "Now Ray has two choices.",
-   "start": 28.922,
-   "end": 30.451
+   "text": "And Ray remembers his manager's one rule: \"Never turn a customer away.",
+   "start": 27.574,
+   "end": 32.015
   },
   {
    "beat": 5,
-   "text": "Option one: walk out there and tell a hungry crowd, \"Sorry, we're out.\" Option two...",
-   "start": 30.671,
-   "end": 35.569
+   "text": "Never.\" So Ray gets... creative.",
+   "start": 32.235,
+   "end": 34.271
   },
   {
    "beat": 6,
-   "text": "He looks out the back window.",
-   "start": 36.019,
-   "end": 37.438
+   "text": "Earlier that day, he saw something out back.",
+   "start": 34.721,
+   "end": 37.115
   },
   {
    "beat": 6,
-   "text": "And there, sitting on the trash can, is a squirrel.",
-   "start": 37.658,
-   "end": 40.143
+   "text": "A dead squirrel, lying next to the trash can.",
+   "start": 37.335,
+   "end": 39.83
   },
   {
    "beat": 7,
-   "text": "Ray doesn't say no.",
-   "start": 40.593,
-   "end": 41.767
+   "text": "So he skins it.",
+   "start": 40.28,
+   "end": 41.161
   },
   {
    "beat": 7,
-   "text": "He grills it.",
-   "start": 41.987,
-   "end": 42.746
+   "text": "Grinds it.",
+   "start": 41.381,
+   "end": 42.059
   },
   {
    "beat": 7,
-   "text": "Buns it.",
-   "start": 42.966,
-   "end": 43.604
+   "text": "Grills it.",
+   "start": 42.279,
+   "end": 42.933
   },
   {
    "beat": 7,
-   "text": "Serves it.",
-   "start": 43.824,
-   "end": 44.496
-  },
-  {
-   "beat": 7,
-   "text": "To a sweet old man in the corner booth, who takes the biggest bite of his life.",
-   "start": 44.716,
-   "end": 49.444
+   "text": "And serves it to the old man, who takes the biggest bite of his life.",
+   "start": 43.153,
+   "end": 47.069
   },
   {
    "beat": 8,
    "text": "Three hours later?",
-   "start": 49.894,
-   "end": 51.051
+   "start": 47.519,
+   "end": 48.676
   },
   {
    "beat": 8,
    "text": "The old man is in the hospital.",
-   "start": 51.271,
-   "end": 53.068
+   "start": 48.896,
+   "end": 50.694
   },
   {
    "beat": 9,
    "text": "And the next morning, the headline doesn't say \"Ray.\" It says the name on the sign.",
-   "start": 53.518,
-   "end": 58.052
+   "start": 51.144,
+   "end": 55.678
   },
   {
    "beat": 9,
    "text": "The whole brand takes the hit.",
-   "start": 58.272,
-   "end": 59.694
+   "start": 55.898,
+   "end": 57.32
   },
   {
    "beat": 10,
    "text": "Now, did this really happen?",
-   "start": 60.144,
-   "end": 61.573
+   "start": 57.77,
+   "end": 59.199
   },
   {
    "beat": 10,
    "text": "The story comes from Ken Schwaber, one of the creators of Scrum.",
-   "start": 61.793,
-   "end": 65.434
+   "start": 59.419,
+   "end": 63.06
   },
   {
    "beat": 10,
    "text": "In 2015, someone asked him if it was real.",
-   "start": 65.654,
-   "end": 69.072
+   "start": 63.28,
+   "end": 66.698
   },
   {
    "beat": 10,
    "text": "His answer?",
-   "start": 69.292,
-   "end": 70.061
+   "start": 66.918,
+   "end": 67.687
   },
   {
    "beat": 10,
    "text": "\"It's a legend.\" But it keeps getting told... because every team has served a squirrel.",
-   "start": 70.281,
-   "end": 75.172
+   "start": 67.907,
+   "end": 72.798
   },
   {
    "beat": 11,
    "text": "Think about it.",
-   "start": 75.622,
-   "end": 76.448
+   "start": 73.248,
+   "end": 74.073
   },
   {
    "beat": 11,
    "text": "A deadline that can't move.",
-   "start": 76.668,
-   "end": 78.178
+   "start": 74.293,
+   "end": 75.804
   },
   {
    "beat": 11,
    "text": "Work that doesn't fit.",
-   "start": 78.398,
-   "end": 79.589
+   "start": 76.024,
+   "end": 77.215
   },
   {
    "beat": 11,
    "text": "And nobody willing to say no.",
-   "start": 79.809,
-   "end": 81.428
+   "start": 77.435,
+   "end": 79.054
   },
   {
    "beat": 11,
    "text": "So someone quietly cuts quality.",
-   "start": 81.648,
-   "end": 83.674
+   "start": 79.274,
+   "end": 81.299
   },
   {
    "beat": 11,
    "text": "Skips the tests.",
-   "start": 83.894,
-   "end": 84.937
+   "start": 81.519,
+   "end": 82.562
   },
   {
    "beat": 11,
    "text": "Ships the bug.",
-   "start": 85.157,
-   "end": 86.042
+   "start": 82.782,
+   "end": 83.668
   },
   {
    "beat": 11,
    "text": "And hopes nobody notices.",
-   "start": 86.262,
-   "end": 87.929
+   "start": 83.888,
+   "end": 85.555
   },
   {
    "beat": 12,
    "text": "But someone always notices.",
-   "start": 88.379,
-   "end": 90.136
+   "start": 86.005,
+   "end": 87.761
   },
   {
    "beat": 12,
    "text": "The customer.",
-   "start": 90.356,
-   "end": 91.165
+   "start": 87.981,
+   "end": 88.791
   },
   {
    "beat": 12,
    "text": "The team.",
-   "start": 91.385,
-   "end": 92.061
+   "start": 89.011,
+   "end": 89.686
   },
   {
    "beat": 12,
    "text": "The business.",
-   "start": 92.281,
-   "end": 93.027
+   "start": 89.906,
+   "end": 90.652
   },
   {
    "beat": 13,
    "text": "So what should Ray have done?",
-   "start": 93.477,
-   "end": 94.872
+   "start": 91.102,
+   "end": 92.498
   },
   {
    "beat": 13,
    "text": "Three things.",
-   "start": 95.092,
-   "end": 95.913
+   "start": 92.718,
+   "end": 93.539
   },
   {
    "beat": 14,
    "text": "One.",
-   "start": 96.363,
-   "end": 96.834
+   "start": 93.989,
+   "end": 94.459
   },
   {
    "beat": 14,
    "text": "Negotiate scope, not quality.",
-   "start": 97.054,
-   "end": 98.947
+   "start": 94.679,
+   "end": 96.572
   },
   {
    "beat": 14,
    "text": "Fewer items on the menu.",
-   "start": 99.167,
-   "end": 100.695
+   "start": 96.792,
+   "end": 98.321
   },
   {
    "beat": 14,
    "text": "Never a squirrel in the bun.",
-   "start": 100.915,
-   "end": 102.321
+   "start": 98.541,
+   "end": 99.947
   },
   {
    "beat": 15,
    "text": "Two.",
-   "start": 102.771,
-   "end": 103.223
+   "start": 100.397,
+   "end": 100.849
   },
   {
    "beat": 15,
    "text": "Serve the most valuable thing first.",
-   "start": 103.443,
-   "end": 105.482
+   "start": 101.069,
+   "end": 103.108
   },
   {
    "beat": 15,
    "text": "A smaller order of real food beats a full tray of disaster.",
-   "start": 105.702,
-   "end": 109.612
+   "start": 103.328,
+   "end": 107.238
   },
   {
    "beat": 16,
    "text": "Three.",
-   "start": 110.062,
-   "end": 110.596
+   "start": 107.688,
+   "end": 108.222
   },
   {
    "beat": 16,
    "text": "Say it early.",
-   "start": 110.816,
-   "end": 111.648
+   "start": 108.442,
+   "end": 109.274
   },
   {
    "beat": 16,
    "text": "The moment the beef looked low, that was the time to speak up.",
-   "start": 111.868,
-   "end": 115.214
+   "start": 109.494,
+   "end": 112.84
   },
   {
    "beat": 16,
    "text": "Not at midnight.",
-   "start": 115.434,
-   "end": 116.408
+   "start": 113.06,
+   "end": 114.034
   },
   {
    "beat": 17,
    "text": "Because when time runs out, you can cut the menu.",
-   "start": 116.858,
-   "end": 119.726
+   "start": 114.484,
+   "end": 117.351
   },
   {
    "beat": 17,
    "text": "But never... serve the squirrel.",
-   "start": 119.946,
-   "end": 121.487
+   "start": 117.571,
+   "end": 119.112
   }
  ],
  "words": [
@@ -630,1851 +612,1797 @@
    "scene": 2
   },
   {
-   "text": "Ray",
+   "text": "It's",
    "start": 10.804,
-   "end": 11.057,
+   "end": 11.064,
    "scene": 2
   },
   {
-   "text": "flips",
-   "start": 11.057,
-   "end": 11.411,
-   "scene": 2
-  },
-  {
-   "text": "burgers",
-   "start": 11.411,
-   "end": 11.866,
+   "text": "late",
+   "start": 11.064,
+   "end": 11.375,
    "scene": 2
   },
   {
    "text": "at",
-   "start": 11.866,
-   "end": 12.068,
+   "start": 11.375,
+   "end": 11.583,
    "scene": 2
   },
   {
-   "text": "a",
-   "start": 12.068,
-   "end": 12.219,
+   "text": "night,",
+   "start": 11.583,
+   "end": 11.947,
    "scene": 2
   },
   {
-   "text": "busy",
-   "start": 12.219,
-   "end": 12.523,
+   "text": "and",
+   "start": 11.947,
+   "end": 12.206,
    "scene": 2
   },
   {
-   "text": "joint",
-   "start": 12.523,
-   "end": 12.877,
-   "scene": 2
-  },
-  {
-   "text": "downtown.",
-   "start": 12.877,
-   "end": 13.382,
-   "scene": 2
-  },
-  {
-   "text": "It's",
-   "start": 13.602,
-   "end": 13.914,
-   "scene": 2
-  },
-  {
-   "text": "Friday.",
-   "start": 13.914,
-   "end": 14.412,
-   "scene": 2
-  },
-  {
-   "text": "It's",
-   "start": 14.632,
-   "end": 14.869,
-   "scene": 2
-  },
-  {
-   "text": "almost",
-   "start": 14.869,
-   "end": 15.249,
-   "scene": 2
-  },
-  {
-   "text": "midnight.",
-   "start": 15.249,
-   "end": 15.723,
-   "scene": 2
-  },
-  {
-   "text": "And",
-   "start": 15.943,
-   "end": 16.121,
-   "scene": 2
-  },
-  {
-   "text": "the",
-   "start": 16.121,
-   "end": 16.299,
-   "scene": 2
-  },
-  {
-   "text": "line",
-   "start": 16.299,
-   "end": 16.512,
+   "text": "Ray",
+   "start": 12.206,
+   "end": 12.466,
    "scene": 2
   },
   {
    "text": "is",
-   "start": 16.512,
-   "end": 16.654,
+   "start": 12.466,
+   "end": 12.674,
    "scene": 2
   },
   {
-   "text": "wrapped",
-   "start": 16.654,
-   "end": 16.974,
+   "text": "alone",
+   "start": 12.674,
+   "end": 13.037,
    "scene": 2
   },
   {
-   "text": "around",
-   "start": 16.974,
-   "end": 17.259,
+   "text": "at",
+   "start": 13.037,
+   "end": 13.245,
    "scene": 2
   },
   {
    "text": "the",
-   "start": 17.259,
-   "end": 17.437,
+   "start": 13.245,
+   "end": 13.505,
    "scene": 2
   },
   {
-   "text": "block.",
-   "start": 17.437,
-   "end": 17.686,
+   "text": "burger",
+   "start": 13.505,
+   "end": 13.92,
    "scene": 2
   },
   {
-   "text": "Ray's",
-   "start": 18.332,
-   "end": 18.603,
+   "text": "joint,",
+   "start": 13.92,
+   "end": 14.284,
+   "scene": 2
+  },
+  {
+   "text": "wiping",
+   "start": 14.284,
+   "end": 14.699,
+   "scene": 2
+  },
+  {
+   "text": "the",
+   "start": 14.699,
+   "end": 14.959,
+   "scene": 2
+  },
+  {
+   "text": "counter,",
+   "start": 14.959,
+   "end": 15.426,
+   "scene": 2
+  },
+  {
+   "text": "about",
+   "start": 15.426,
+   "end": 15.79,
+   "scene": 2
+  },
+  {
+   "text": "to",
+   "start": 15.79,
+   "end": 15.997,
+   "scene": 2
+  },
+  {
+   "text": "close.",
+   "start": 15.997,
+   "end": 16.361,
+   "scene": 2
+  },
+  {
+   "text": "Then",
+   "start": 16.811,
+   "end": 17.085,
    "scene": 3
   },
   {
-   "text": "boss",
-   "start": 18.603,
-   "end": 18.874,
+   "text": "the",
+   "start": 17.085,
+   "end": 17.313,
    "scene": 3
   },
   {
-   "text": "walks",
-   "start": 18.874,
-   "end": 19.19,
+   "text": "door",
+   "start": 17.313,
+   "end": 17.586,
    "scene": 3
   },
   {
-   "text": "in",
-   "start": 19.19,
-   "end": 19.371,
+   "text": "creaks",
+   "start": 17.586,
+   "end": 17.951,
    "scene": 3
   },
   {
-   "text": "and",
-   "start": 19.371,
-   "end": 19.597,
+   "text": "open.",
+   "start": 17.951,
+   "end": 18.225,
    "scene": 3
   },
   {
-   "text": "says",
-   "start": 19.597,
-   "end": 19.868,
+   "text": "One",
+   "start": 18.445,
+   "end": 18.718,
    "scene": 3
   },
   {
-   "text": "one",
-   "start": 19.868,
-   "end": 20.094,
+   "text": "last",
+   "start": 18.718,
+   "end": 19.046,
    "scene": 3
   },
   {
-   "text": "thing:",
-   "start": 20.094,
-   "end": 20.41,
+   "text": "customer.",
+   "start": 19.046,
+   "end": 19.593,
    "scene": 3
   },
   {
-   "text": "\"Nobody",
-   "start": 20.942,
-   "end": 21.322,
+   "text": "A",
+   "start": 19.813,
+   "end": 19.964,
    "scene": 3
   },
   {
-   "text": "leaves",
-   "start": 21.322,
-   "end": 21.702,
+   "text": "sweet",
+   "start": 19.964,
+   "end": 20.316,
    "scene": 3
   },
   {
-   "text": "without",
-   "start": 21.702,
-   "end": 22.129,
+   "text": "old",
+   "start": 20.316,
+   "end": 20.567,
+   "scene": 3
+  },
+  {
+   "text": "man",
+   "start": 20.567,
+   "end": 20.819,
+   "scene": 3
+  },
+  {
+   "text": "who",
+   "start": 20.819,
+   "end": 21.07,
+   "scene": 3
+  },
+  {
+   "text": "just",
+   "start": 21.07,
+   "end": 21.372,
+   "scene": 3
+  },
+  {
+   "text": "wants",
+   "start": 21.372,
+   "end": 21.724,
    "scene": 3
   },
   {
    "text": "a",
-   "start": 22.129,
-   "end": 22.271,
+   "start": 21.724,
+   "end": 21.874,
+   "scene": 3
+  },
+  {
+   "text": "hot",
+   "start": 21.874,
+   "end": 22.126,
    "scene": 3
   },
   {
    "text": "burger.",
-   "start": 22.271,
-   "end": 22.651,
-   "scene": 3
-  },
-  {
-   "text": "Nobody.\"",
-   "start": 22.871,
-   "end": 23.594,
+   "start": 22.126,
+   "end": 22.528,
    "scene": 3
   },
   {
    "text": "Ray",
-   "start": 24.044,
-   "end": 24.267,
+   "start": 22.978,
+   "end": 23.223,
    "scene": 4
   },
   {
-   "text": "turns",
-   "start": 24.267,
-   "end": 24.58,
-   "scene": 4
-  },
-  {
-   "text": "to",
-   "start": 24.58,
-   "end": 24.759,
+   "text": "opens",
+   "start": 23.223,
+   "end": 23.565,
    "scene": 4
   },
   {
    "text": "the",
-   "start": 24.759,
-   "end": 24.982,
+   "start": 23.565,
+   "end": 23.809,
    "scene": 4
   },
   {
    "text": "fridge...",
-   "start": 24.982,
-   "end": 25.339,
+   "start": 23.809,
+   "end": 24.201,
    "scene": 4
   },
   {
-   "text": "and",
-   "start": 25.65,
-   "end": 25.872,
+   "text": "no",
+   "start": 24.431,
+   "end": 24.659,
    "scene": 4
   },
   {
-   "text": "the",
-   "start": 25.872,
-   "end": 26.093,
+   "text": "ground",
+   "start": 24.659,
+   "end": 25.114,
    "scene": 4
   },
   {
-   "text": "beef",
-   "start": 26.093,
-   "end": 26.359,
-   "scene": 4
-  },
-  {
-   "text": "is",
-   "start": 26.359,
-   "end": 26.537,
-   "scene": 4
-  },
-  {
-   "text": "gone.",
-   "start": 26.537,
-   "end": 26.803,
+   "text": "beef.",
+   "start": 25.114,
+   "end": 25.456,
    "scene": 4
   },
   {
    "text": "Not",
-   "start": 27.023,
-   "end": 27.387,
+   "start": 25.676,
+   "end": 26.04,
    "scene": 4
   },
   {
    "text": "low.",
-   "start": 27.387,
-   "end": 27.752,
+   "start": 26.04,
+   "end": 26.404,
    "scene": 4
   },
   {
    "text": "Gone.",
-   "start": 27.971,
-   "end": 28.472,
+   "start": 26.624,
+   "end": 27.124,
    "scene": 4
   },
   {
-   "text": "Now",
-   "start": 28.922,
-   "end": 29.186,
+   "text": "And",
+   "start": 27.574,
+   "end": 27.832,
    "scene": 5
   },
   {
    "text": "Ray",
-   "start": 29.186,
-   "end": 29.449,
+   "start": 27.832,
+   "end": 28.09,
    "scene": 5
   },
   {
-   "text": "has",
-   "start": 29.449,
-   "end": 29.713,
+   "text": "remembers",
+   "start": 28.09,
+   "end": 28.658,
    "scene": 5
   },
   {
-   "text": "two",
-   "start": 29.713,
-   "end": 29.976,
+   "text": "his",
+   "start": 28.658,
+   "end": 28.917,
    "scene": 5
   },
   {
-   "text": "choices.",
-   "start": 29.976,
-   "end": 30.451,
+   "text": "manager's",
+   "start": 28.917,
+   "end": 29.433,
    "scene": 5
   },
   {
-   "text": "Option",
-   "start": 30.671,
-   "end": 31.102,
+   "text": "one",
+   "start": 29.433,
+   "end": 29.691,
    "scene": 5
   },
   {
-   "text": "one:",
-   "start": 31.102,
-   "end": 31.371,
+   "text": "rule:",
+   "start": 29.691,
+   "end": 30.001,
    "scene": 5
   },
   {
-   "text": "walk",
-   "start": 31.371,
-   "end": 31.694,
+   "text": "\"Never",
+   "start": 30.492,
+   "end": 30.825,
    "scene": 5
   },
   {
-   "text": "out",
-   "start": 31.694,
-   "end": 31.963,
-   "scene": 5
-  },
-  {
-   "text": "there",
-   "start": 31.963,
-   "end": 32.34,
-   "scene": 5
-  },
-  {
-   "text": "and",
-   "start": 32.34,
-   "end": 32.609,
-   "scene": 5
-  },
-  {
-   "text": "tell",
-   "start": 32.609,
-   "end": 32.932,
+   "text": "turn",
+   "start": 30.825,
+   "end": 31.111,
    "scene": 5
   },
   {
    "text": "a",
-   "start": 32.932,
-   "end": 33.093,
+   "start": 31.111,
+   "end": 31.253,
    "scene": 5
   },
   {
-   "text": "hungry",
-   "start": 33.093,
-   "end": 33.524,
+   "text": "customer",
+   "start": 31.253,
+   "end": 31.729,
    "scene": 5
   },
   {
-   "text": "crowd,",
-   "start": 33.524,
-   "end": 33.9,
+   "text": "away.",
+   "start": 31.729,
+   "end": 32.015,
    "scene": 5
   },
   {
-   "text": "\"Sorry,",
-   "start": 33.9,
-   "end": 34.277,
+   "text": "Never.\"",
+   "start": 32.235,
+   "end": 32.624,
    "scene": 5
   },
   {
-   "text": "we're",
-   "start": 34.277,
-   "end": 34.6,
+   "text": "So",
+   "start": 32.624,
+   "end": 32.847,
    "scene": 5
   },
   {
-   "text": "out.\"",
-   "start": 34.6,
-   "end": 34.869,
+   "text": "Ray",
+   "start": 32.847,
+   "end": 33.125,
    "scene": 5
   },
   {
-   "text": "Option",
-   "start": 34.869,
-   "end": 35.3,
+   "text": "gets...",
+   "start": 33.125,
+   "end": 33.458,
    "scene": 5
   },
   {
-   "text": "two...",
-   "start": 35.3,
-   "end": 35.569,
+   "text": "creative.",
+   "start": 33.657,
+   "end": 34.271,
    "scene": 5
   },
   {
-   "text": "He",
-   "start": 36.019,
-   "end": 36.181,
+   "text": "Earlier",
+   "start": 34.721,
+   "end": 35.096,
    "scene": 6
   },
   {
-   "text": "looks",
-   "start": 36.181,
-   "end": 36.465,
+   "text": "that",
+   "start": 35.096,
+   "end": 35.345,
+   "scene": 6
+  },
+  {
+   "text": "day,",
+   "start": 35.345,
+   "end": 35.554,
+   "scene": 6
+  },
+  {
+   "text": "he",
+   "start": 35.84,
+   "end": 35.985,
+   "scene": 6
+  },
+  {
+   "text": "saw",
+   "start": 35.985,
+   "end": 36.167,
+   "scene": 6
+  },
+  {
+   "text": "something",
+   "start": 36.167,
+   "end": 36.566,
    "scene": 6
   },
   {
    "text": "out",
-   "start": 36.465,
-   "end": 36.668,
+   "start": 36.566,
+   "end": 36.747,
+   "scene": 6
+  },
+  {
+   "text": "back.",
+   "start": 36.747,
+   "end": 36.965,
+   "scene": 6
+  },
+  {
+   "text": "A",
+   "start": 37.335,
+   "end": 37.472,
+   "scene": 6
+  },
+  {
+   "text": "dead",
+   "start": 37.472,
+   "end": 37.747,
+   "scene": 6
+  },
+  {
+   "text": "squirrel,",
+   "start": 37.747,
+   "end": 38.204,
+   "scene": 6
+  },
+  {
+   "text": "lying",
+   "start": 38.378,
+   "end": 38.677,
+   "scene": 6
+  },
+  {
+   "text": "next",
+   "start": 38.677,
+   "end": 38.933,
+   "scene": 6
+  },
+  {
+   "text": "to",
+   "start": 38.933,
+   "end": 39.104,
    "scene": 6
   },
   {
    "text": "the",
-   "start": 36.668,
-   "end": 36.87,
-   "scene": 6
-  },
-  {
-   "text": "back",
-   "start": 36.87,
-   "end": 37.114,
-   "scene": 6
-  },
-  {
-   "text": "window.",
-   "start": 37.114,
-   "end": 37.438,
-   "scene": 6
-  },
-  {
-   "text": "And",
-   "start": 37.658,
-   "end": 37.869,
-   "scene": 6
-  },
-  {
-   "text": "there,",
-   "start": 37.869,
-   "end": 38.163,
-   "scene": 6
-  },
-  {
-   "text": "sitting",
-   "start": 38.163,
-   "end": 38.542,
-   "scene": 6
-  },
-  {
-   "text": "on",
-   "start": 38.542,
-   "end": 38.711,
-   "scene": 6
-  },
-  {
-   "text": "the",
-   "start": 38.711,
-   "end": 38.922,
+   "start": 39.104,
+   "end": 39.317,
    "scene": 6
   },
   {
    "text": "trash",
-   "start": 38.922,
-   "end": 39.216,
+   "start": 39.317,
+   "end": 39.616,
    "scene": 6
   },
   {
-   "text": "can,",
-   "start": 39.216,
-   "end": 39.427,
+   "text": "can.",
+   "start": 39.616,
+   "end": 39.83,
    "scene": 6
   },
   {
-   "text": "is",
-   "start": 39.427,
-   "end": 39.595,
-   "scene": 6
-  },
-  {
-   "text": "a",
-   "start": 39.595,
-   "end": 39.722,
-   "scene": 6
-  },
-  {
-   "text": "squirrel.",
-   "start": 39.722,
-   "end": 40.143,
-   "scene": 6
-  },
-  {
-   "text": "Ray",
-   "start": 40.593,
-   "end": 40.86,
+   "text": "So",
+   "start": 40.28,
+   "end": 40.465,
    "scene": 7
   },
   {
-   "text": "doesn't",
-   "start": 40.86,
-   "end": 41.287,
+   "text": "he",
+   "start": 40.465,
+   "end": 40.651,
    "scene": 7
   },
   {
-   "text": "say",
-   "start": 41.287,
-   "end": 41.554,
-   "scene": 7
-  },
-  {
-   "text": "no.",
-   "start": 41.554,
-   "end": 41.767,
-   "scene": 7
-  },
-  {
-   "text": "He",
-   "start": 41.987,
-   "end": 42.177,
-   "scene": 7
-  },
-  {
-   "text": "grills",
-   "start": 42.177,
-   "end": 42.556,
+   "text": "skins",
+   "start": 40.651,
+   "end": 40.976,
    "scene": 7
   },
   {
    "text": "it.",
-   "start": 42.556,
-   "end": 42.746,
+   "start": 40.976,
+   "end": 41.161,
    "scene": 7
   },
   {
-   "text": "Buns",
-   "start": 42.966,
-   "end": 43.349,
-   "scene": 7
-  },
-  {
-   "text": "it.",
-   "start": 43.349,
-   "end": 43.604,
-   "scene": 7
-  },
-  {
-   "text": "Serves",
-   "start": 43.824,
-   "end": 44.272,
+   "text": "Grinds",
+   "start": 41.381,
+   "end": 41.833,
    "scene": 7
   },
   {
    "text": "it.",
-   "start": 44.272,
-   "end": 44.496,
+   "start": 41.833,
+   "end": 42.059,
    "scene": 7
   },
   {
-   "text": "To",
-   "start": 44.716,
-   "end": 44.915,
+   "text": "Grills",
+   "start": 42.279,
+   "end": 42.715,
    "scene": 7
   },
   {
-   "text": "a",
-   "start": 44.915,
-   "end": 45.064,
+   "text": "it.",
+   "start": 42.715,
+   "end": 42.933,
    "scene": 7
   },
   {
-   "text": "sweet",
-   "start": 45.064,
-   "end": 45.413,
+   "text": "And",
+   "start": 43.153,
+   "end": 43.367,
    "scene": 7
   },
   {
-   "text": "old",
-   "start": 45.413,
-   "end": 45.662,
+   "text": "serves",
+   "start": 43.367,
+   "end": 43.709,
    "scene": 7
   },
   {
-   "text": "man",
-   "start": 45.662,
-   "end": 45.91,
+   "text": "it",
+   "start": 43.709,
+   "end": 43.88,
    "scene": 7
   },
   {
-   "text": "in",
-   "start": 45.91,
-   "end": 46.11,
+   "text": "to",
+   "start": 43.88,
+   "end": 44.051,
    "scene": 7
   },
   {
    "text": "the",
-   "start": 46.11,
-   "end": 46.358,
+   "start": 44.051,
+   "end": 44.265,
    "scene": 7
   },
   {
-   "text": "corner",
-   "start": 46.358,
-   "end": 46.757,
+   "text": "old",
+   "start": 44.265,
+   "end": 44.479,
    "scene": 7
   },
   {
-   "text": "booth,",
-   "start": 46.757,
-   "end": 47.105,
+   "text": "man,",
+   "start": 44.479,
+   "end": 44.693,
    "scene": 7
   },
   {
    "text": "who",
-   "start": 47.105,
-   "end": 47.354,
+   "start": 45.105,
+   "end": 45.314,
    "scene": 7
   },
   {
    "text": "takes",
-   "start": 47.354,
-   "end": 47.702,
+   "start": 45.314,
+   "end": 45.606,
    "scene": 7
   },
   {
    "text": "the",
-   "start": 47.702,
-   "end": 47.951,
+   "start": 45.606,
+   "end": 45.815,
    "scene": 7
   },
   {
    "text": "biggest",
-   "start": 47.951,
-   "end": 48.399,
+   "start": 45.815,
+   "end": 46.191,
    "scene": 7
   },
   {
    "text": "bite",
-   "start": 48.399,
-   "end": 48.697,
+   "start": 46.191,
+   "end": 46.442,
    "scene": 7
   },
   {
    "text": "of",
-   "start": 48.697,
-   "end": 48.897,
+   "start": 46.442,
+   "end": 46.609,
    "scene": 7
   },
   {
    "text": "his",
-   "start": 48.897,
-   "end": 49.145,
+   "start": 46.609,
+   "end": 46.818,
    "scene": 7
   },
   {
    "text": "life.",
-   "start": 49.145,
-   "end": 49.444,
+   "start": 46.818,
+   "end": 47.069,
    "scene": 7
   },
   {
    "text": "Three",
-   "start": 49.894,
-   "end": 50.28,
+   "start": 47.519,
+   "end": 47.905,
    "scene": 8
   },
   {
    "text": "hours",
-   "start": 50.28,
-   "end": 50.665,
+   "start": 47.905,
+   "end": 48.29,
    "scene": 8
   },
   {
    "text": "later?",
-   "start": 50.665,
-   "end": 51.051,
+   "start": 48.29,
+   "end": 48.676,
    "scene": 8
   },
   {
    "text": "The",
-   "start": 51.271,
-   "end": 51.507,
+   "start": 48.896,
+   "end": 49.133,
    "scene": 8
   },
   {
    "text": "old",
-   "start": 51.507,
-   "end": 51.744,
+   "start": 49.133,
+   "end": 49.369,
    "scene": 8
   },
   {
    "text": "man",
-   "start": 51.744,
-   "end": 51.98,
+   "start": 49.369,
+   "end": 49.606,
    "scene": 8
   },
   {
    "text": "is",
-   "start": 51.98,
-   "end": 52.17,
+   "start": 49.606,
+   "end": 49.795,
    "scene": 8
   },
   {
    "text": "in",
-   "start": 52.17,
-   "end": 52.359,
+   "start": 49.795,
+   "end": 49.984,
    "scene": 8
   },
   {
    "text": "the",
-   "start": 52.359,
-   "end": 52.595,
+   "start": 49.984,
+   "end": 50.221,
    "scene": 8
   },
   {
    "text": "hospital.",
-   "start": 52.595,
-   "end": 53.068,
+   "start": 50.221,
+   "end": 50.694,
    "scene": 8
   },
   {
    "text": "And",
-   "start": 53.518,
-   "end": 54.022,
+   "start": 51.144,
+   "end": 51.648,
    "scene": 9
   },
   {
    "text": "the",
-   "start": 54.022,
-   "end": 54.526,
+   "start": 51.648,
+   "end": 52.152,
    "scene": 9
   },
   {
    "text": "next",
-   "start": 54.526,
-   "end": 55.13,
+   "start": 52.152,
+   "end": 52.756,
    "scene": 9
   },
   {
    "text": "morning,",
-   "start": 55.13,
-   "end": 56.037,
+   "start": 52.756,
+   "end": 53.663,
    "scene": 9
   },
   {
    "text": "the",
-   "start": 56.616,
-   "end": 56.72,
+   "start": 54.242,
+   "end": 54.346,
    "scene": 9
   },
   {
    "text": "headline",
-   "start": 56.72,
-   "end": 56.928,
+   "start": 54.346,
+   "end": 54.554,
    "scene": 9
   },
   {
    "text": "doesn't",
-   "start": 56.928,
-   "end": 57.095,
+   "start": 54.554,
+   "end": 54.72,
    "scene": 9
   },
   {
    "text": "say",
-   "start": 57.095,
-   "end": 57.199,
+   "start": 54.72,
+   "end": 54.824,
    "scene": 9
   },
   {
    "text": "\"Ray.\"",
-   "start": 57.199,
-   "end": 57.303,
+   "start": 54.824,
+   "end": 54.929,
    "scene": 9
   },
   {
    "text": "It",
-   "start": 57.303,
-   "end": 57.386,
+   "start": 54.929,
+   "end": 55.012,
    "scene": 9
   },
   {
    "text": "says",
-   "start": 57.386,
-   "end": 57.511,
+   "start": 55.012,
+   "end": 55.137,
    "scene": 9
   },
   {
    "text": "the",
-   "start": 57.511,
-   "end": 57.615,
+   "start": 55.137,
+   "end": 55.241,
    "scene": 9
   },
   {
    "text": "name",
-   "start": 57.615,
-   "end": 57.74,
+   "start": 55.241,
+   "end": 55.366,
    "scene": 9
   },
   {
    "text": "on",
-   "start": 57.74,
-   "end": 57.823,
+   "start": 55.366,
+   "end": 55.449,
    "scene": 9
   },
   {
    "text": "the",
-   "start": 57.823,
-   "end": 57.927,
+   "start": 55.449,
+   "end": 55.553,
    "scene": 9
   },
   {
    "text": "sign.",
-   "start": 57.927,
-   "end": 58.052,
+   "start": 55.553,
+   "end": 55.678,
    "scene": 9
   },
   {
    "text": "The",
-   "start": 58.272,
-   "end": 58.469,
+   "start": 55.898,
+   "end": 56.096,
    "scene": 9
   },
   {
    "text": "whole",
-   "start": 58.469,
-   "end": 58.746,
+   "start": 56.096,
+   "end": 56.372,
    "scene": 9
   },
   {
    "text": "brand",
-   "start": 58.746,
-   "end": 59.022,
+   "start": 56.372,
+   "end": 56.648,
    "scene": 9
   },
   {
    "text": "takes",
-   "start": 59.022,
-   "end": 59.299,
+   "start": 56.648,
+   "end": 56.925,
    "scene": 9
   },
   {
    "text": "the",
-   "start": 59.299,
-   "end": 59.496,
+   "start": 56.925,
+   "end": 57.122,
    "scene": 9
   },
   {
    "text": "hit.",
-   "start": 59.496,
-   "end": 59.694,
+   "start": 57.122,
+   "end": 57.32,
    "scene": 9
   },
   {
    "text": "Now,",
-   "start": 60.144,
-   "end": 60.367,
+   "start": 57.77,
+   "end": 57.993,
    "scene": 10
   },
   {
    "text": "did",
-   "start": 60.367,
-   "end": 60.591,
+   "start": 57.993,
+   "end": 58.217,
    "scene": 10
   },
   {
    "text": "this",
-   "start": 60.591,
-   "end": 60.858,
+   "start": 58.217,
+   "end": 58.485,
    "scene": 10
   },
   {
    "text": "really",
-   "start": 60.858,
-   "end": 61.216,
+   "start": 58.485,
+   "end": 58.842,
    "scene": 10
   },
   {
    "text": "happen?",
-   "start": 61.216,
-   "end": 61.573,
+   "start": 58.842,
+   "end": 59.199,
    "scene": 10
   },
   {
    "text": "The",
-   "start": 61.793,
-   "end": 62.012,
+   "start": 59.419,
+   "end": 59.638,
    "scene": 10
   },
   {
    "text": "story",
-   "start": 62.012,
-   "end": 62.319,
+   "start": 59.638,
+   "end": 59.945,
    "scene": 10
   },
   {
    "text": "comes",
-   "start": 62.319,
-   "end": 62.626,
+   "start": 59.945,
+   "end": 60.252,
    "scene": 10
   },
   {
    "text": "from",
-   "start": 62.626,
-   "end": 62.889,
+   "start": 60.252,
+   "end": 60.515,
    "scene": 10
   },
   {
    "text": "Ken",
-   "start": 62.889,
-   "end": 63.108,
+   "start": 60.515,
+   "end": 60.734,
    "scene": 10
   },
   {
    "text": "Schwaber,",
-   "start": 63.108,
-   "end": 63.547,
+   "start": 60.734,
+   "end": 61.173,
    "scene": 10
   },
   {
    "text": "one",
-   "start": 63.915,
-   "end": 64.132,
+   "start": 61.541,
+   "end": 61.758,
    "scene": 10
   },
   {
    "text": "of",
-   "start": 64.132,
-   "end": 64.306,
+   "start": 61.758,
+   "end": 61.932,
    "scene": 10
   },
   {
    "text": "the",
-   "start": 64.306,
-   "end": 64.523,
+   "start": 61.932,
+   "end": 62.149,
    "scene": 10
   },
   {
    "text": "creators",
-   "start": 64.523,
-   "end": 64.957,
+   "start": 62.149,
+   "end": 62.583,
    "scene": 10
   },
   {
    "text": "of",
-   "start": 64.957,
-   "end": 65.13,
+   "start": 62.583,
+   "end": 62.756,
    "scene": 10
   },
   {
    "text": "Scrum.",
-   "start": 65.13,
-   "end": 65.434,
+   "start": 62.756,
+   "end": 63.06,
    "scene": 10
   },
   {
    "text": "In",
-   "start": 65.654,
-   "end": 66.154,
+   "start": 63.28,
+   "end": 63.78,
    "scene": 10
   },
   {
    "text": "2015,",
-   "start": 66.154,
-   "end": 66.905,
+   "start": 63.78,
+   "end": 64.531,
    "scene": 10
   },
   {
    "text": "someone",
-   "start": 67.256,
-   "end": 67.665,
+   "start": 64.882,
+   "end": 65.291,
    "scene": 10
   },
   {
    "text": "asked",
-   "start": 67.665,
-   "end": 67.983,
+   "start": 65.291,
+   "end": 65.608,
    "scene": 10
   },
   {
    "text": "him",
-   "start": 67.983,
-   "end": 68.209,
+   "start": 65.608,
+   "end": 65.835,
    "scene": 10
   },
   {
    "text": "if",
-   "start": 68.209,
-   "end": 68.391,
+   "start": 65.835,
+   "end": 66.017,
    "scene": 10
   },
   {
    "text": "it",
-   "start": 68.391,
-   "end": 68.573,
+   "start": 66.017,
+   "end": 66.199,
    "scene": 10
   },
   {
    "text": "was",
-   "start": 68.573,
-   "end": 68.8,
+   "start": 66.199,
+   "end": 66.426,
    "scene": 10
   },
   {
    "text": "real.",
-   "start": 68.8,
-   "end": 69.072,
+   "start": 66.426,
+   "end": 66.698,
    "scene": 10
   },
   {
    "text": "His",
-   "start": 69.292,
-   "end": 69.588,
+   "start": 66.918,
+   "end": 67.214,
    "scene": 10
   },
   {
    "text": "answer?",
-   "start": 69.588,
-   "end": 70.061,
+   "start": 67.214,
+   "end": 67.687,
    "scene": 10
   },
   {
    "text": "\"It's",
-   "start": 70.281,
-   "end": 70.538,
+   "start": 67.907,
+   "end": 68.164,
    "scene": 10
   },
   {
    "text": "a",
-   "start": 70.538,
-   "end": 70.693,
+   "start": 68.164,
+   "end": 68.319,
    "scene": 10
   },
   {
    "text": "legend.\"",
-   "start": 70.693,
-   "end": 71.105,
+   "start": 68.319,
+   "end": 68.731,
    "scene": 10
   },
   {
    "text": "But",
-   "start": 71.105,
-   "end": 71.362,
+   "start": 68.731,
+   "end": 68.988,
    "scene": 10
   },
   {
    "text": "it",
-   "start": 71.362,
-   "end": 71.568,
+   "start": 68.988,
+   "end": 69.194,
    "scene": 10
   },
   {
    "text": "keeps",
-   "start": 71.568,
-   "end": 71.928,
+   "start": 69.194,
+   "end": 69.554,
    "scene": 10
   },
   {
    "text": "getting",
-   "start": 71.928,
-   "end": 72.392,
+   "start": 69.554,
+   "end": 70.018,
    "scene": 10
   },
   {
    "text": "told...",
-   "start": 72.392,
-   "end": 72.701,
+   "start": 70.018,
+   "end": 70.327,
    "scene": 10
   },
   {
    "text": "because",
-   "start": 72.701,
-   "end": 73.164,
+   "start": 70.327,
+   "end": 70.79,
    "scene": 10
   },
   {
    "text": "every",
-   "start": 73.164,
-   "end": 73.525,
+   "start": 70.79,
+   "end": 71.151,
    "scene": 10
   },
   {
    "text": "team",
-   "start": 73.525,
-   "end": 73.833,
+   "start": 71.151,
+   "end": 71.459,
    "scene": 10
   },
   {
    "text": "has",
-   "start": 73.833,
-   "end": 74.091,
+   "start": 71.459,
+   "end": 71.717,
    "scene": 10
   },
   {
    "text": "served",
-   "start": 74.091,
-   "end": 74.503,
+   "start": 71.717,
+   "end": 72.129,
    "scene": 10
   },
   {
    "text": "a",
-   "start": 74.503,
-   "end": 74.657,
+   "start": 72.129,
+   "end": 72.283,
    "scene": 10
   },
   {
    "text": "squirrel.",
-   "start": 74.657,
-   "end": 75.172,
+   "start": 72.283,
+   "end": 72.798,
    "scene": 10
   },
   {
    "text": "Think",
-   "start": 75.622,
-   "end": 75.943,
+   "start": 73.248,
+   "end": 73.569,
    "scene": 11
   },
   {
    "text": "about",
-   "start": 75.943,
-   "end": 76.264,
+   "start": 73.569,
+   "end": 73.89,
    "scene": 11
   },
   {
    "text": "it.",
-   "start": 76.264,
-   "end": 76.448,
+   "start": 73.89,
+   "end": 74.073,
    "scene": 11
   },
   {
    "text": "A",
-   "start": 76.668,
-   "end": 76.814,
+   "start": 74.293,
+   "end": 74.439,
    "scene": 11
   },
   {
    "text": "deadline",
-   "start": 76.814,
-   "end": 77.301,
+   "start": 74.439,
+   "end": 74.927,
    "scene": 11
   },
   {
    "text": "that",
-   "start": 77.301,
-   "end": 77.593,
+   "start": 74.927,
+   "end": 75.219,
    "scene": 11
   },
   {
    "text": "can't",
-   "start": 77.593,
-   "end": 77.886,
+   "start": 75.219,
+   "end": 75.512,
    "scene": 11
   },
   {
    "text": "move.",
-   "start": 77.886,
-   "end": 78.178,
+   "start": 75.512,
+   "end": 75.804,
    "scene": 11
   },
   {
    "text": "Work",
-   "start": 78.398,
-   "end": 78.684,
+   "start": 76.024,
+   "end": 76.31,
    "scene": 11
   },
   {
    "text": "that",
-   "start": 78.684,
-   "end": 78.97,
+   "start": 76.31,
+   "end": 76.596,
    "scene": 11
   },
   {
    "text": "doesn't",
-   "start": 78.97,
-   "end": 79.351,
+   "start": 76.596,
+   "end": 76.977,
    "scene": 11
   },
   {
    "text": "fit.",
-   "start": 79.351,
-   "end": 79.589,
+   "start": 76.977,
+   "end": 77.215,
    "scene": 11
   },
   {
    "text": "And",
-   "start": 79.809,
-   "end": 80.04,
+   "start": 77.435,
+   "end": 77.666,
    "scene": 11
   },
   {
    "text": "nobody",
-   "start": 80.04,
-   "end": 80.41,
+   "start": 77.666,
+   "end": 78.036,
    "scene": 11
   },
   {
    "text": "willing",
-   "start": 80.41,
-   "end": 80.827,
+   "start": 78.036,
+   "end": 78.453,
    "scene": 11
   },
   {
    "text": "to",
-   "start": 80.827,
-   "end": 81.012,
+   "start": 78.453,
+   "end": 78.638,
    "scene": 11
   },
   {
    "text": "say",
-   "start": 81.012,
-   "end": 81.243,
+   "start": 78.638,
+   "end": 78.869,
    "scene": 11
   },
   {
    "text": "no.",
-   "start": 81.243,
-   "end": 81.428,
+   "start": 78.869,
+   "end": 79.054,
    "scene": 11
   },
   {
    "text": "So",
-   "start": 81.648,
-   "end": 81.867,
+   "start": 79.274,
+   "end": 79.493,
    "scene": 11
   },
   {
    "text": "someone",
-   "start": 81.867,
-   "end": 82.36,
+   "start": 79.493,
+   "end": 79.985,
    "scene": 11
   },
   {
    "text": "quietly",
-   "start": 82.36,
-   "end": 82.853,
+   "start": 79.985,
+   "end": 80.478,
    "scene": 11
   },
   {
    "text": "cuts",
-   "start": 82.853,
-   "end": 83.181,
+   "start": 80.478,
+   "end": 80.806,
    "scene": 11
   },
   {
    "text": "quality.",
-   "start": 83.181,
-   "end": 83.674,
+   "start": 80.806,
+   "end": 81.299,
    "scene": 11
   },
   {
    "text": "Skips",
-   "start": 83.894,
-   "end": 84.278,
+   "start": 81.519,
+   "end": 81.903,
    "scene": 11
   },
   {
    "text": "the",
-   "start": 84.278,
-   "end": 84.553,
+   "start": 81.903,
+   "end": 82.178,
    "scene": 11
   },
   {
    "text": "tests.",
-   "start": 84.553,
-   "end": 84.937,
+   "start": 82.178,
+   "end": 82.562,
    "scene": 11
   },
   {
    "text": "Ships",
-   "start": 85.157,
-   "end": 85.521,
+   "start": 82.782,
+   "end": 83.147,
    "scene": 11
   },
   {
    "text": "the",
-   "start": 85.521,
-   "end": 85.782,
+   "start": 83.147,
+   "end": 83.407,
    "scene": 11
   },
   {
    "text": "bug.",
-   "start": 85.782,
-   "end": 86.042,
+   "start": 83.407,
+   "end": 83.668,
    "scene": 11
   },
   {
    "text": "And",
-   "start": 86.262,
-   "end": 86.549,
+   "start": 83.888,
+   "end": 84.175,
    "scene": 11
   },
   {
    "text": "hopes",
-   "start": 86.549,
-   "end": 86.952,
+   "start": 84.175,
+   "end": 84.578,
    "scene": 11
   },
   {
    "text": "nobody",
-   "start": 86.952,
-   "end": 87.412,
+   "start": 84.578,
+   "end": 85.038,
    "scene": 11
   },
   {
    "text": "notices.",
-   "start": 87.412,
-   "end": 87.929,
+   "start": 85.038,
+   "end": 85.555,
    "scene": 11
   },
   {
    "text": "But",
-   "start": 88.379,
-   "end": 88.662,
+   "start": 86.005,
+   "end": 86.288,
    "scene": 12
   },
   {
    "text": "someone",
-   "start": 88.662,
-   "end": 89.172,
+   "start": 86.288,
+   "end": 86.798,
    "scene": 12
   },
   {
    "text": "always",
-   "start": 89.172,
-   "end": 89.626,
+   "start": 86.798,
+   "end": 87.251,
    "scene": 12
   },
   {
    "text": "notices.",
-   "start": 89.626,
-   "end": 90.136,
+   "start": 87.251,
+   "end": 87.761,
    "scene": 12
   },
   {
    "text": "The",
-   "start": 90.356,
-   "end": 90.626,
+   "start": 87.981,
+   "end": 88.251,
    "scene": 12
   },
   {
    "text": "customer.",
-   "start": 90.626,
-   "end": 91.165,
+   "start": 88.251,
+   "end": 88.791,
    "scene": 12
   },
   {
    "text": "The",
-   "start": 91.385,
-   "end": 91.692,
+   "start": 89.011,
+   "end": 89.318,
    "scene": 12
   },
   {
    "text": "team.",
-   "start": 91.692,
-   "end": 92.061,
+   "start": 89.318,
+   "end": 89.686,
    "scene": 12
   },
   {
    "text": "The",
-   "start": 92.281,
-   "end": 92.53,
+   "start": 89.906,
+   "end": 90.155,
    "scene": 12
   },
   {
    "text": "business.",
-   "start": 92.53,
-   "end": 93.027,
+   "start": 90.155,
+   "end": 90.652,
    "scene": 12
   },
   {
    "text": "So",
-   "start": 93.477,
-   "end": 93.636,
+   "start": 91.102,
+   "end": 91.262,
    "scene": 13
   },
   {
    "text": "what",
-   "start": 93.636,
-   "end": 93.876,
+   "start": 91.262,
+   "end": 91.501,
    "scene": 13
   },
   {
    "text": "should",
-   "start": 93.876,
-   "end": 94.194,
+   "start": 91.501,
+   "end": 91.82,
    "scene": 13
   },
   {
    "text": "Ray",
-   "start": 94.194,
-   "end": 94.394,
+   "start": 91.82,
+   "end": 92.019,
    "scene": 13
   },
   {
    "text": "have",
-   "start": 94.394,
-   "end": 94.633,
+   "start": 92.019,
+   "end": 92.259,
    "scene": 13
   },
   {
    "text": "done?",
-   "start": 94.633,
-   "end": 94.872,
+   "start": 92.259,
+   "end": 92.498,
    "scene": 13
   },
   {
    "text": "Three",
-   "start": 95.092,
-   "end": 95.475,
+   "start": 92.718,
+   "end": 93.101,
    "scene": 13
   },
   {
    "text": "things.",
-   "start": 95.475,
-   "end": 95.913,
+   "start": 93.101,
+   "end": 93.539,
    "scene": 13
   },
   {
    "text": "One.",
-   "start": 96.363,
-   "end": 96.834,
+   "start": 93.989,
+   "end": 94.459,
    "scene": 14
   },
   {
    "text": "Negotiate",
-   "start": 97.054,
-   "end": 97.675,
+   "start": 94.679,
+   "end": 95.3,
    "scene": 14
   },
   {
    "text": "scope,",
-   "start": 97.675,
-   "end": 98.07,
+   "start": 95.3,
+   "end": 95.695,
    "scene": 14
   },
   {
    "text": "not",
-   "start": 98.216,
-   "end": 98.477,
+   "start": 95.841,
+   "end": 96.102,
    "scene": 14
   },
   {
    "text": "quality.",
-   "start": 98.477,
-   "end": 98.947,
+   "start": 96.102,
+   "end": 96.572,
    "scene": 14
   },
   {
    "text": "Fewer",
-   "start": 99.167,
-   "end": 99.536,
+   "start": 96.792,
+   "end": 97.161,
    "scene": 14
   },
   {
    "text": "items",
-   "start": 99.536,
-   "end": 99.905,
+   "start": 97.161,
+   "end": 97.53,
    "scene": 14
   },
   {
    "text": "on",
-   "start": 99.905,
-   "end": 100.115,
+   "start": 97.53,
+   "end": 97.741,
    "scene": 14
   },
   {
    "text": "the",
-   "start": 100.115,
-   "end": 100.379,
+   "start": 97.741,
+   "end": 98.005,
    "scene": 14
   },
   {
    "text": "menu.",
-   "start": 100.379,
-   "end": 100.695,
+   "start": 98.005,
+   "end": 98.321,
    "scene": 14
   },
   {
    "text": "Never",
-   "start": 100.915,
-   "end": 101.204,
+   "start": 98.541,
+   "end": 98.83,
    "scene": 14
   },
   {
    "text": "a",
-   "start": 101.204,
-   "end": 101.329,
+   "start": 98.83,
+   "end": 98.955,
    "scene": 14
   },
   {
    "text": "squirrel",
-   "start": 101.329,
-   "end": 101.742,
+   "start": 98.955,
+   "end": 99.368,
    "scene": 14
   },
   {
    "text": "in",
-   "start": 101.742,
-   "end": 101.907,
+   "start": 99.368,
+   "end": 99.533,
    "scene": 14
   },
   {
    "text": "the",
-   "start": 101.907,
-   "end": 102.114,
+   "start": 99.533,
+   "end": 99.74,
    "scene": 14
   },
   {
    "text": "bun.",
-   "start": 102.114,
-   "end": 102.321,
+   "start": 99.74,
+   "end": 99.947,
    "scene": 14
   },
   {
    "text": "Two.",
-   "start": 102.771,
-   "end": 103.223,
+   "start": 100.397,
+   "end": 100.849,
    "scene": 15
   },
   {
    "text": "Serve",
-   "start": 103.443,
-   "end": 103.783,
+   "start": 101.069,
+   "end": 101.409,
    "scene": 15
   },
   {
    "text": "the",
-   "start": 103.783,
-   "end": 104.026,
+   "start": 101.409,
+   "end": 101.652,
    "scene": 15
   },
   {
    "text": "most",
-   "start": 104.026,
-   "end": 104.317,
+   "start": 101.652,
+   "end": 101.943,
    "scene": 15
   },
   {
    "text": "valuable",
-   "start": 104.317,
-   "end": 104.802,
+   "start": 101.943,
+   "end": 102.428,
    "scene": 15
   },
   {
    "text": "thing",
-   "start": 104.802,
-   "end": 105.142,
+   "start": 102.428,
+   "end": 102.768,
    "scene": 15
   },
   {
    "text": "first.",
-   "start": 105.142,
-   "end": 105.482,
+   "start": 102.768,
+   "end": 103.108,
    "scene": 15
   },
   {
    "text": "A",
-   "start": 105.702,
-   "end": 105.867,
+   "start": 103.328,
+   "end": 103.493,
    "scene": 15
   },
   {
    "text": "smaller",
-   "start": 105.867,
-   "end": 106.363,
+   "start": 103.493,
+   "end": 103.989,
    "scene": 15
   },
   {
    "text": "order",
-   "start": 106.363,
-   "end": 106.748,
+   "start": 103.989,
+   "end": 104.374,
    "scene": 15
   },
   {
    "text": "of",
-   "start": 106.748,
-   "end": 106.969,
+   "start": 104.374,
+   "end": 104.595,
    "scene": 15
   },
   {
    "text": "real",
-   "start": 106.969,
-   "end": 107.299,
+   "start": 104.595,
+   "end": 104.925,
    "scene": 15
   },
   {
    "text": "food",
-   "start": 107.299,
-   "end": 107.629,
+   "start": 104.925,
+   "end": 105.255,
    "scene": 15
   },
   {
    "text": "beats",
-   "start": 107.629,
-   "end": 108.015,
+   "start": 105.255,
+   "end": 105.641,
    "scene": 15
   },
   {
    "text": "a",
-   "start": 108.015,
-   "end": 108.18,
+   "start": 105.641,
+   "end": 105.806,
    "scene": 15
   },
   {
    "text": "full",
-   "start": 108.18,
-   "end": 108.511,
+   "start": 105.806,
+   "end": 106.137,
    "scene": 15
   },
   {
    "text": "tray",
-   "start": 108.511,
-   "end": 108.841,
+   "start": 106.137,
+   "end": 106.467,
    "scene": 15
   },
   {
    "text": "of",
-   "start": 108.841,
-   "end": 109.061,
+   "start": 106.467,
+   "end": 106.687,
    "scene": 15
   },
   {
    "text": "disaster.",
-   "start": 109.061,
-   "end": 109.612,
+   "start": 106.687,
+   "end": 107.238,
    "scene": 15
   },
   {
    "text": "Three.",
-   "start": 110.062,
-   "end": 110.596,
+   "start": 107.688,
+   "end": 108.222,
    "scene": 16
   },
   {
    "text": "Say",
-   "start": 110.816,
-   "end": 111.076,
+   "start": 108.442,
+   "end": 108.702,
    "scene": 16
   },
   {
    "text": "it",
-   "start": 111.076,
-   "end": 111.284,
+   "start": 108.702,
+   "end": 108.91,
    "scene": 16
   },
   {
    "text": "early.",
-   "start": 111.284,
-   "end": 111.648,
+   "start": 108.91,
+   "end": 109.274,
    "scene": 16
   },
   {
    "text": "The",
-   "start": 111.868,
-   "end": 112.085,
+   "start": 109.494,
+   "end": 109.711,
    "scene": 16
   },
   {
    "text": "moment",
-   "start": 112.085,
-   "end": 112.431,
+   "start": 109.711,
+   "end": 110.057,
    "scene": 16
   },
   {
    "text": "the",
-   "start": 112.431,
-   "end": 112.648,
+   "start": 110.057,
+   "end": 110.273,
    "scene": 16
   },
   {
    "text": "beef",
-   "start": 112.648,
-   "end": 112.908,
+   "start": 110.273,
+   "end": 110.533,
    "scene": 16
   },
   {
    "text": "looked",
-   "start": 112.908,
-   "end": 113.254,
+   "start": 110.533,
+   "end": 110.88,
    "scene": 16
   },
   {
    "text": "low,",
-   "start": 113.254,
-   "end": 113.471,
+   "start": 110.88,
+   "end": 111.096,
    "scene": 16
   },
   {
    "text": "that",
-   "start": 113.837,
-   "end": 114.061,
+   "start": 111.463,
+   "end": 111.686,
    "scene": 16
   },
   {
    "text": "was",
-   "start": 114.061,
-   "end": 114.247,
+   "start": 111.686,
+   "end": 111.872,
    "scene": 16
   },
   {
    "text": "the",
-   "start": 114.247,
-   "end": 114.433,
+   "start": 111.872,
+   "end": 112.059,
    "scene": 16
   },
   {
    "text": "time",
-   "start": 114.433,
-   "end": 114.656,
+   "start": 112.059,
+   "end": 112.282,
    "scene": 16
   },
   {
    "text": "to",
-   "start": 114.656,
-   "end": 114.805,
+   "start": 112.282,
+   "end": 112.431,
    "scene": 16
   },
   {
    "text": "speak",
-   "start": 114.805,
-   "end": 115.065,
+   "start": 112.431,
+   "end": 112.691,
    "scene": 16
   },
   {
    "text": "up.",
-   "start": 115.065,
-   "end": 115.214,
+   "start": 112.691,
+   "end": 112.84,
    "scene": 16
   },
   {
    "text": "Not",
-   "start": 115.434,
-   "end": 115.69,
+   "start": 113.06,
+   "end": 113.316,
    "scene": 16
   },
   {
    "text": "at",
-   "start": 115.69,
-   "end": 115.895,
+   "start": 113.316,
+   "end": 113.521,
    "scene": 16
   },
   {
    "text": "midnight.",
-   "start": 115.895,
-   "end": 116.408,
+   "start": 113.521,
+   "end": 114.034,
    "scene": 16
   },
   {
    "text": "Because",
-   "start": 116.858,
-   "end": 117.285,
+   "start": 114.484,
+   "end": 114.911,
    "scene": 17
   },
   {
    "text": "when",
-   "start": 117.285,
-   "end": 117.57,
+   "start": 114.911,
+   "end": 115.195,
    "scene": 17
   },
   {
    "text": "time",
-   "start": 117.57,
-   "end": 117.854,
+   "start": 115.195,
+   "end": 115.48,
    "scene": 17
   },
   {
    "text": "runs",
-   "start": 117.854,
-   "end": 118.139,
+   "start": 115.48,
+   "end": 115.764,
    "scene": 17
   },
   {
    "text": "out,",
-   "start": 118.139,
-   "end": 118.376,
+   "start": 115.764,
+   "end": 116.002,
    "scene": 17
   },
   {
    "text": "you",
-   "start": 118.717,
-   "end": 118.911,
+   "start": 116.343,
+   "end": 116.537,
    "scene": 17
   },
   {
    "text": "can",
-   "start": 118.911,
-   "end": 119.105,
+   "start": 116.537,
+   "end": 116.731,
    "scene": 17
   },
   {
    "text": "cut",
-   "start": 119.105,
-   "end": 119.299,
+   "start": 116.731,
+   "end": 116.925,
    "scene": 17
   },
   {
    "text": "the",
-   "start": 119.299,
-   "end": 119.493,
+   "start": 116.925,
+   "end": 117.118,
    "scene": 17
   },
   {
    "text": "menu.",
-   "start": 119.493,
-   "end": 119.726,
+   "start": 117.118,
+   "end": 117.351,
    "scene": 17
   },
   {
    "text": "But",
-   "start": 119.946,
-   "end": 120.173,
+   "start": 117.571,
+   "end": 117.798,
    "scene": 17
   },
   {
    "text": "never...",
-   "start": 120.173,
-   "end": 120.49,
+   "start": 117.798,
+   "end": 118.115,
    "scene": 17
   },
   {
    "text": "serve",
-   "start": 120.49,
-   "end": 120.807,
+   "start": 118.115,
+   "end": 118.432,
    "scene": 17
   },
   {
    "text": "the",
-   "start": 120.807,
-   "end": 121.034,
+   "start": 118.432,
+   "end": 118.659,
    "scene": 17
   },
   {
    "text": "squirrel.",
-   "start": 121.034,
-   "end": 121.487,
+   "start": 118.659,
+   "end": 119.112,
    "scene": 17
   }
  ]

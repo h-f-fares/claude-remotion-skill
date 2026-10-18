@@ -2,7 +2,9 @@
 import timing from "../../../public/videos/squirrel-burger/audio/timing2.json";
 
 export const FPS = 30;
-export const TOTAL_F = 124 * FPS;
+const LAST = timing.segments[timing.segments.length - 1];
+// voiceover end + room for the button chord and loop wipe
+export const TOTAL_F = Math.ceil(LAST.start + LAST.dur + 2.5) * FPS;
 export const OVERLAP = 8;
 
 type Word = { text: string; start: number; end: number; scene: number };
