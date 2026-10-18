@@ -16,11 +16,10 @@ const speakerX = (t: number) => {
   return x0 + (x1 - x0) * f;
 };
 
-// per-camera correction so the two phones match before the global grade
-const CAM_FILTER: Record<"A" | "B", string> = {
-  A: "contrast(1.12) saturate(1.18) brightness(1.06) sepia(0.05)",
-  B: "contrast(1.08) saturate(1.05) brightness(0.98) sepia(0.08)",
-};
+// Both clips carry a baked per-camera LUT (scripts/match-cameras.py) that brings
+// the two phones to one base look; the warm grade is applied on top in Finish.tsx.
+const SRC = { A: "camA_matched.mp4", B: "camB_matched.mp4" } as const;
+const DISSOLVE = 12; // frames: incoming shot fades in over the outgoing one, ending on the cut
 
 const CloseUp: React.FC<{ shotStart: number; len: number; push: boolean; startFrom: number }> = ({ shotStart, len, push, startFrom }) => {
   const frame = useCurrentFrame();
@@ -34,25 +33,31 @@ const CloseUp: React.FC<{ shotStart: number; len: number; push: boolean; startFr
   const y = Math.max(-maxY, Math.min(maxY, (0.5 - FOCUS_Y) * H * s));
   return (
     <AbsoluteFill style={{ transform: `translate(${x}px, ${y}px) scale(${s})` }}>
-      <OffthreadVideo muted startFrom={startFrom} src={staticFile("camA.mp4")} style={{ width: W, height: H, filter: CAM_FILTER.A }} />
+      <OffthreadVideo muted startFrom={startFrom} src={staticFile(SRC.A)} style={{ width: W, height: H }} />
     </AbsoluteFill>
   );
 };
 
-const Shot: React.FC<{ cam: Cam; start: number; len: number; startFrom: number }> = ({ cam, start, len, startFrom }) => {
+const Shot: React.FC<{ cam: Cam; start: number; len: number; startFrom: number; push: boolean }> = ({ cam, start, len, startFrom, push }) => {
   const frame = useCurrentFrame();
   // subtle drift on the wides so a held shot never feels frozen
   const drift = interpolate(frame, [0, len], [1.02, 1.05], { easing: theme.ease.inOut, extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  if (cam === "C") return <CloseUp shotStart={start} len={len} push={PUSH_SHOTS.includes(start)} startFrom={startFrom} />;
-  const file = cam === "B" ? "camB.mp4" : "camA.mp4";
+  if (cam === "C") return <CloseUp shotStart={start} len={len} push={push} startFrom={startFrom} />;
+  const file = cam === "B" ? SRC.B : SRC.A;
   // camera B: gentle punch toward the stage (less ceiling)
   const s = cam === "B" ? drift * 1.16 : drift;
   const y = cam === "B" ? Math.min(((s - 1) * H) / 2, (0.5 - 0.4) * H * s) : 0;
   return (
     <AbsoluteFill style={{ transform: `translateY(${y}px) scale(${s})` }}>
-      <OffthreadVideo muted startFrom={startFrom} src={staticFile(file)} style={{ width: W, height: H, filter: CAM_FILTER[cam === "B" ? "B" : "A"] }} />
+      <OffthreadVideo muted startFrom={startFrom} src={staticFile(file)} style={{ width: W, height: H }} />
     </AbsoluteFill>
   );
+};
+
+const Dissolve: React.FC<{ frames: number; children: React.ReactNode }> = ({ frames, children }) => {
+  const frame = useCurrentFrame();
+  const o = frames ? interpolate(frame, [0, frames], [0, 1], { easing: theme.ease.inOut, extrapolateLeft: "clamp", extrapolateRight: "clamp" }) : 1;
+  return <AbsoluteFill style={{ opacity: o }}>{children}</AbsoluteFill>;
 };
 
 export const Footage: React.FC = () => {
@@ -61,16 +66,18 @@ export const Footage: React.FC = () => {
     <AbsoluteFill style={{ background: theme.colors.bg }}>
       {SHOTS.map(([t, cam], i) => {
         const end = i + 1 < SHOTS.length ? SHOTS[i + 1][0] : T_END;
-        const from = sec(t);
+        const pre = i === 0 ? 0 : DISSOLVE;
+        const from = sec(t) - pre;
         const len = sec(end) - from;
         const srcT = cam === "B" ? t - B_OFFSET : t;
         return (
           <Sequence key={t} from={from} durationInFrames={len} name={`${cam} @${t}`}>
-            <Shot cam={cam} start={t} len={len} startFrom={Math.round(srcT * fps)} />
+            <Dissolve frames={pre}>
+              <Shot cam={cam} start={t - pre / fps} len={len} startFrom={Math.round(srcT * fps) - pre} push={PUSH_SHOTS.includes(t)} />
+            </Dissolve>
           </Sequence>
         );
       })}
     </AbsoluteFill>
   );
 };
-
