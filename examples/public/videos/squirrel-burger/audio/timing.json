@@ -1,0 +1,578 @@
+{
+ "segments": [
+  {
+   "scene": 1,
+   "start": 0.5,
+   "dur": 2.545
+  },
+  {
+   "scene": 2,
+   "start": 3.045,
+   "dur": 4.358
+  },
+  {
+   "scene": 3,
+   "start": 7.403,
+   "dur": 1.716
+  },
+  {
+   "scene": 4,
+   "start": 9.119,
+   "dur": 3.984
+  },
+  {
+   "scene": 5,
+   "start": 13.103,
+   "dur": 4.038
+  },
+  {
+   "scene": 6,
+   "start": 17.141,
+   "dur": 1.876
+  },
+  {
+   "scene": 7,
+   "start": 19.018,
+   "dur": 3.759
+  },
+  {
+   "scene": 8,
+   "start": 22.776,
+   "dur": 5.673
+  },
+  {
+   "scene": 9,
+   "start": 28.45,
+   "dur": 3.751
+  },
+  {
+   "scene": 10,
+   "start": 32.2,
+   "dur": 1.383
+  }
+ ],
+ "words": [
+  {
+   "text": "He",
+   "start": 0.5,
+   "end": 0.677,
+   "scene": 1
+  },
+  {
+   "text": "ordered",
+   "start": 0.677,
+   "end": 1.074,
+   "scene": 1
+  },
+  {
+   "text": "a",
+   "start": 1.074,
+   "end": 1.207,
+   "scene": 1
+  },
+  {
+   "text": "burger.",
+   "start": 1.207,
+   "end": 1.56,
+   "scene": 1
+  },
+  {
+   "text": "He",
+   "start": 1.864,
+   "end": 2.015,
+   "scene": 1
+  },
+  {
+   "text": "got",
+   "start": 2.015,
+   "end": 2.204,
+   "scene": 1
+  },
+  {
+   "text": "a",
+   "start": 2.204,
+   "end": 2.317,
+   "scene": 1
+  },
+  {
+   "text": "squirrel.",
+   "start": 2.317,
+   "end": 2.695,
+   "scene": 1
+  },
+  {
+   "text": "Ray",
+   "start": 3.045,
+   "end": 3.276,
+   "scene": 2
+  },
+  {
+   "text": "runs",
+   "start": 3.276,
+   "end": 3.554,
+   "scene": 2
+  },
+  {
+   "text": "a",
+   "start": 3.554,
+   "end": 3.692,
+   "scene": 2
+  },
+  {
+   "text": "burger",
+   "start": 3.692,
+   "end": 4.062,
+   "scene": 2
+  },
+  {
+   "text": "joint.",
+   "start": 4.062,
+   "end": 4.386,
+   "scene": 2
+  },
+  {
+   "text": "Late",
+   "start": 4.69,
+   "end": 4.967,
+   "scene": 2
+  },
+  {
+   "text": "night.",
+   "start": 4.967,
+   "end": 5.29,
+   "scene": 2
+  },
+  {
+   "text": "The",
+   "start": 5.599,
+   "end": 5.833,
+   "scene": 2
+  },
+  {
+   "text": "line",
+   "start": 5.833,
+   "end": 6.115,
+   "scene": 2
+  },
+  {
+   "text": "is",
+   "start": 6.115,
+   "end": 6.302,
+   "scene": 2
+  },
+  {
+   "text": "out",
+   "start": 6.302,
+   "end": 6.537,
+   "scene": 2
+  },
+  {
+   "text": "the",
+   "start": 6.537,
+   "end": 6.771,
+   "scene": 2
+  },
+  {
+   "text": "door.",
+   "start": 6.771,
+   "end": 7.053,
+   "scene": 2
+  },
+  {
+   "text": "Then...",
+   "start": 7.403,
+   "end": 7.696,
+   "scene": 3
+  },
+  {
+   "text": "the",
+   "start": 7.696,
+   "end": 7.94,
+   "scene": 3
+  },
+  {
+   "text": "beef",
+   "start": 7.94,
+   "end": 8.232,
+   "scene": 3
+  },
+  {
+   "text": "runs",
+   "start": 8.232,
+   "end": 8.525,
+   "scene": 3
+  },
+  {
+   "text": "out.",
+   "start": 8.525,
+   "end": 8.769,
+   "scene": 3
+  },
+  {
+   "text": "Saying",
+   "start": 9.119,
+   "end": 9.48,
+   "scene": 4
+  },
+  {
+   "text": "\"no\"",
+   "start": 9.48,
+   "end": 9.66,
+   "scene": 4
+  },
+  {
+   "text": "feels",
+   "start": 9.66,
+   "end": 9.976,
+   "scene": 4
+  },
+  {
+   "text": "worse",
+   "start": 9.976,
+   "end": 10.292,
+   "scene": 4
+  },
+  {
+   "text": "than",
+   "start": 10.292,
+   "end": 10.563,
+   "scene": 4
+  },
+  {
+   "text": "anything.",
+   "start": 10.563,
+   "end": 11.014,
+   "scene": 4
+  },
+  {
+   "text": "So",
+   "start": 11.318,
+   "end": 11.556,
+   "scene": 4
+  },
+  {
+   "text": "Ray",
+   "start": 11.556,
+   "end": 11.854,
+   "scene": 4
+  },
+  {
+   "text": "looks",
+   "start": 11.854,
+   "end": 12.271,
+   "scene": 4
+  },
+  {
+   "text": "around...",
+   "start": 12.271,
+   "end": 12.748,
+   "scene": 4
+  },
+  {
+   "text": "Grill.",
+   "start": 13.103,
+   "end": 13.427,
+   "scene": 5
+  },
+  {
+   "text": "Bun.",
+   "start": 13.731,
+   "end": 13.983,
+   "scene": 5
+  },
+  {
+   "text": "Served.",
+   "start": 14.289,
+   "end": 14.715,
+   "scene": 5
+  },
+  {
+   "text": "An",
+   "start": 15.026,
+   "end": 15.227,
+   "scene": 5
+  },
+  {
+   "text": "old",
+   "start": 15.227,
+   "end": 15.48,
+   "scene": 5
+  },
+  {
+   "text": "man",
+   "start": 15.48,
+   "end": 15.732,
+   "scene": 5
+  },
+  {
+   "text": "takes",
+   "start": 15.732,
+   "end": 16.085,
+   "scene": 5
+  },
+  {
+   "text": "a",
+   "start": 16.085,
+   "end": 16.236,
+   "scene": 5
+  },
+  {
+   "text": "big",
+   "start": 16.236,
+   "end": 16.488,
+   "scene": 5
+  },
+  {
+   "text": "bite.",
+   "start": 16.488,
+   "end": 16.791,
+   "scene": 5
+  },
+  {
+   "text": "That",
+   "start": 17.141,
+   "end": 17.396,
+   "scene": 6
+  },
+  {
+   "text": "night?",
+   "start": 17.396,
+   "end": 17.694,
+   "scene": 6
+  },
+  {
+   "text": "Hospital.",
+   "start": 18.006,
+   "end": 18.666,
+   "scene": 6
+  },
+  {
+   "text": "Next",
+   "start": 19.018,
+   "end": 19.302,
+   "scene": 7
+  },
+  {
+   "text": "morning,",
+   "start": 19.302,
+   "end": 19.727,
+   "scene": 7
+  },
+  {
+   "text": "the",
+   "start": 19.727,
+   "end": 19.964,
+   "scene": 7
+  },
+  {
+   "text": "headline",
+   "start": 19.964,
+   "end": 20.437,
+   "scene": 7
+  },
+  {
+   "text": "isn't",
+   "start": 20.437,
+   "end": 20.721,
+   "scene": 7
+  },
+  {
+   "text": "about",
+   "start": 20.721,
+   "end": 21.052,
+   "scene": 7
+  },
+  {
+   "text": "Ray.",
+   "start": 21.052,
+   "end": 21.288,
+   "scene": 7
+  },
+  {
+   "text": "It's",
+   "start": 21.288,
+   "end": 21.524,
+   "scene": 7
+  },
+  {
+   "text": "about",
+   "start": 21.524,
+   "end": 21.856,
+   "scene": 7
+  },
+  {
+   "text": "the",
+   "start": 21.856,
+   "end": 22.092,
+   "scene": 7
+  },
+  {
+   "text": "brand.",
+   "start": 22.092,
+   "end": 22.423,
+   "scene": 7
+  },
+  {
+   "text": "Cut",
+   "start": 22.776,
+   "end": 22.996,
+   "scene": 8
+  },
+  {
+   "text": "quality",
+   "start": 22.996,
+   "end": 23.392,
+   "scene": 8
+  },
+  {
+   "text": "under",
+   "start": 23.392,
+   "end": 23.7,
+   "scene": 8
+  },
+  {
+   "text": "a",
+   "start": 23.7,
+   "end": 23.832,
+   "scene": 8
+  },
+  {
+   "text": "deadline,",
+   "start": 23.832,
+   "end": 24.272,
+   "scene": 8
+  },
+  {
+   "text": "and",
+   "start": 24.44,
+   "end": 24.637,
+   "scene": 8
+  },
+  {
+   "text": "it",
+   "start": 24.637,
+   "end": 24.795,
+   "scene": 8
+  },
+  {
+   "text": "never",
+   "start": 24.795,
+   "end": 25.072,
+   "scene": 8
+  },
+  {
+   "text": "hurts",
+   "start": 25.072,
+   "end": 25.348,
+   "scene": 8
+  },
+  {
+   "text": "just",
+   "start": 25.348,
+   "end": 25.585,
+   "scene": 8
+  },
+  {
+   "text": "you.",
+   "start": 25.585,
+   "end": 25.783,
+   "scene": 8
+  },
+  {
+   "text": "Customer.",
+   "start": 26.091,
+   "end": 26.675,
+   "scene": 8
+  },
+  {
+   "text": "Team.",
+   "start": 26.983,
+   "end": 27.254,
+   "scene": 8
+  },
+  {
+   "text": "Business.",
+   "start": 27.554,
+   "end": 28.099,
+   "scene": 8
+  },
+  {
+   "text": "So",
+   "start": 28.45,
+   "end": 28.644,
+   "scene": 9
+  },
+  {
+   "text": "when",
+   "start": 28.644,
+   "end": 28.935,
+   "scene": 9
+  },
+  {
+   "text": "time",
+   "start": 28.935,
+   "end": 29.226,
+   "scene": 9
+  },
+  {
+   "text": "runs",
+   "start": 29.226,
+   "end": 29.517,
+   "scene": 9
+  },
+  {
+   "text": "short:",
+   "start": 29.517,
+   "end": 29.857,
+   "scene": 9
+  },
+  {
+   "text": "cut",
+   "start": 30.129,
+   "end": 30.349,
+   "scene": 9
+  },
+  {
+   "text": "scope.",
+   "start": 30.349,
+   "end": 30.657,
+   "scene": 9
+  },
+  {
+   "text": "Never",
+   "start": 31.019,
+   "end": 31.383,
+   "scene": 9
+  },
+  {
+   "text": "quality.",
+   "start": 31.383,
+   "end": 31.851,
+   "scene": 9
+  },
+  {
+   "text": "Don't",
+   "start": 32.2,
+   "end": 32.421,
+   "scene": 10
+  },
+  {
+   "text": "serve",
+   "start": 32.421,
+   "end": 32.679,
+   "scene": 10
+  },
+  {
+   "text": "the",
+   "start": 32.679,
+   "end": 32.863,
+   "scene": 10
+  },
+  {
+   "text": "squirrel.",
+   "start": 32.863,
+   "end": 33.232,
+   "scene": 10
+  }
+ ]
+}
