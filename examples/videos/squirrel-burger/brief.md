@@ -54,3 +54,12 @@ See script.md
 Title: He Ordered a Burger. He Got a Squirrel. 🐿️🍔
 Description: The weirdest lesson in Agile, in 36 seconds. When the deadline is impossible, cut scope, never quality. Story via Ken Schwaber's Scrum legend. Full story: hfares.com/blog/the-squirrel-burger-story/
 Hashtags: #agile #scrum #softwareengineering #productmanagement #techdebt #shorts
+
+## v2 — long cut (2:04), "viral grade" pass
+- Feedback on v1: edit not standing out; story too fast → expand to ~2 min
+- Voice: Kokoro-82M (Apache-2.0, commercial OK), voice am_michael, speed 1.05; model from github.com/thewh1teagle/kokoro-onnx releases
+- Script: script-v2.md (17 beats: night build-up, Schwaber legend origin, 3 takeaways)
+- Audio: vo2.wav, timing2.json (sentence-level synthesis + silence-based word alignment), music2.wav (sections follow beats), new SFX riser/scratch/boom/tick
+- Edit: camera punch-in on every sentence, whip/zoom/flash transitions, impact shakes + speed lines, kinetic slam titles, 1–2 word captions (Lilita, key words cherry)
+- Source: src/squirrel/long/, comp SquirrelBurgerLong (3720 frames); npm run render:squirrel-long
+- Output: videos/squirrel-burger/squirrel-burger-long.mp4 (-16.6 LUFS), cover squirrel-burger-long-cover.png

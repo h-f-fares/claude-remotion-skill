@@ -14,7 +14,8 @@
     "lyrics:images": "node scripts/gen-lyrics-images.mjs",
     "lyrics:depth": "python3 scripts/gen-depth.py",
     "audio:squirrel": "node scripts/gen-squirrel-audio.mjs",
-    "render:squirrel": "remotion render src/squirrel/index.ts SquirrelBurger out/squirrel-burger.mp4 --codec h264 --crf 17"
+    "render:squirrel": "remotion render src/squirrel/index.ts SquirrelBurger out/squirrel-burger.mp4 --codec h264 --crf 17",
+    "render:squirrel-long": "remotion render src/squirrel/index.ts SquirrelBurgerLong out/squirrel-burger-long.mp4 --codec h264 --crf 18"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",
