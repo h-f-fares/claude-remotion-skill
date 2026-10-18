@@ -1,0 +1,23 @@
+{
+  "name": "fathers-day-montage",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Two-camera montage of the Toastmasters speech 'The Day I Became a Father'",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts FathersDay out/fathers-day.mp4 --codec h264 --crf 16 --browser-executable=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell"
+  },
+  "dependencies": {
+    "@fontsource/montserrat": "^5.3.0",
+    "@fontsource/playfair-display": "^5.3.0",
+    "@remotion/cli": "4.0.290",
+    "@remotion/google-fonts": "4.0.290",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "remotion": "4.0.290"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "typescript": "^5.6.3"
+  }
+}
