@@ -1,19 +1,28 @@
-import { continueRender, delayRender, staticFile } from "remotion";
+import { continueRender, delayRender } from "remotion";
+// Fonts are bundled as data URLs (webpack asset/inline) so every render tab has them
+// instantly, without competing with the video streams for the static server.
+import pf600 from "../../public/fonts/playfair-display-latin-600-normal.woff2";
+import pf700 from "../../public/fonts/playfair-display-latin-700-normal.woff2";
+import pf600i from "../../public/fonts/playfair-display-latin-600-italic.woff2";
+import pf700i from "../../public/fonts/playfair-display-latin-700-italic.woff2";
+import ms500 from "../../public/fonts/montserrat-latin-500-normal.woff2";
+import ms700 from "../../public/fonts/montserrat-latin-700-normal.woff2";
+import ms800 from "../../public/fonts/montserrat-latin-800-normal.woff2";
 
 const FACES: [string, string, string, string][] = [
-  ["Playfair Display", "playfair-display-latin-600-normal.woff2", "600", "normal"],
-  ["Playfair Display", "playfair-display-latin-700-normal.woff2", "700", "normal"],
-  ["Playfair Display", "playfair-display-latin-600-italic.woff2", "600", "italic"],
-  ["Playfair Display", "playfair-display-latin-700-italic.woff2", "700", "italic"],
-  ["Montserrat", "montserrat-latin-500-normal.woff2", "500", "normal"],
-  ["Montserrat", "montserrat-latin-700-normal.woff2", "700", "normal"],
-  ["Montserrat", "montserrat-latin-800-normal.woff2", "800", "normal"],
+  ["Playfair Display", pf600, "600", "normal"],
+  ["Playfair Display", pf700, "700", "normal"],
+  ["Playfair Display", pf600i, "600", "italic"],
+  ["Playfair Display", pf700i, "700", "italic"],
+  ["Montserrat", ms500, "500", "normal"],
+  ["Montserrat", ms700, "700", "normal"],
+  ["Montserrat", ms800, "800", "normal"],
 ];
 
-const handle = delayRender("fonts", { timeoutInMilliseconds: 120000 });
+const handle = delayRender("fonts");
 Promise.all(
-  FACES.map(([family, file, weight, style]) => {
-    const f = new FontFace(family, `url(${staticFile(`fonts/${file}`)}) format("woff2")`, { weight, style });
+  FACES.map(([family, url, weight, style]) => {
+    const f = new FontFace(family, `url(${url}) format("woff2")`, { weight, style });
     return f.load().then(() => document.fonts.add(f));
   }),
 ).then(
