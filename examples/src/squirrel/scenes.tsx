@@ -63,7 +63,7 @@ export const S1: React.FC = () => {
 };
 
 // ================================================================ 2. Ray's at night
-const Clock: React.FC<{ t: number }> = ({ t }) => (
+export const Clock: React.FC<{ t: number }> = ({ t }) => (
   <svg width={190} height={190} viewBox="0 0 100 100">
     <circle cx={50} cy={50} r={44} fill={C.cream} stroke={C.ink} strokeWidth={6} />
     {Array.from({ length: 12 }).map((_, i) => (

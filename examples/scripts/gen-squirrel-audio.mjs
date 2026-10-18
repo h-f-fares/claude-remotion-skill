@@ -56,9 +56,10 @@ const save = (name, buf, peak = 0.9) => writeFileSync(join(OUT, name), wav(norma
 // ---------------------------------------------------------------- music
 const DUR = 36;
 const music = new Float32Array(secs(DUR));
+let tgt = music; // buffer the instruments write into
 const add = (t, i, v) => {
   const k = secs(t) + i;
-  if (k >= 0 && k < music.length) music[k] += v;
+  if (k >= 0 && k < tgt.length) tgt[k] += v;
 };
 const BEAT = 0.5;
 const swing = (eighth) => Math.floor(eighth / 2) * BEAT + (eighth % 2 ? BEAT * 0.66 : 0);
@@ -149,6 +150,50 @@ keys(34, [60, 64, 69, 74], 1.8, 0.12);
 
 save("music.wav", music, 0.8);
 
+// ---------------------------------------------------------------- music v2 (2-minute cut)
+// Sections follow the v2 voiceover beats (timing2.json scene starts).
+function kick(t, amp = 0.5) {
+  for (let i = 0; i < secs(0.3); i++) {
+    const x = i / SR;
+    add(t, i, amp * Math.sin(TAU * (110 * Math.exp(-x * 22) + 45) * x) * Math.exp(-x * 9));
+  }
+}
+function tickHat(t, amp = 0.03) {
+  for (let i = 0; i < secs(0.04); i++) add(t, i, amp * noise() * Math.exp(-(i / SR) * 90));
+}
+const DUR2 = 124;
+const music2 = new Float32Array(secs(DUR2));
+tgt = music2;
+// 0–24: hook + setup, swing from the first frame
+swingSection(0, 24);
+// 24–28.9: the beef is gone — music cuts out, one low hit
+bass(24.05, 29, 1.4, 0.7);
+// 28.9–40.6: dilemma — suspense pulse, ticking clock
+drone(28.9, 40.7, [40, 47], 0.06);
+for (let t = 28.9; t < 40.6; t += 0.5) tickHat(t, 0.05);
+for (let t = 28.9; t < 40.6; t += 1) kick(t, 0.35);
+// 40.6–49.9: the act — swing at full tilt with a kick under it
+swingSection(40.6, 49.9, 1.1);
+for (let t = 40.6; t < 49.9; t += 0.5) kick(t, 0.3);
+// 49.9–60.1: hospital + fallout — dark drone
+drone(49.9, 60.2, [38, 45, 53], 0.07);
+for (const t of [49.95, 52, 54, 56]) bass(t, 26, 1.6, 0.6);
+// 60.1–75.6: origin — sparse, curious keys
+for (let t = 60.1, i = 0; t < 75.4; t += 2, i++) keys(t, [[57, 60, 64], [55, 59, 62], [53, 57, 60], [52, 55, 59]][i % 4], 1.8, 0.08);
+drone(60.1, 75.7, [45], 0.04);
+// 75.6–93.5: tie-in + stakes — building pulse, kick density rises
+for (let t = 75.6, i = 0; t < 93.4; t += 0.5, i++) {
+  bass(t, [33, 33, 36, 38][Math.floor(i / 8) % 4], 0.4, 0.4 + 0.2 * ((t - 75.6) / 18));
+  if (i % 2 === 0 || t > 84) kick(t, 0.3 + 0.2 * ((t - 75.6) / 18));
+  tickHat(t + 0.25, 0.04);
+}
+// 93.5–124: takeaways + close — bright swing, then a button chord
+swingSection(93.5, 122, 1.05);
+bass(122, 41, 1.6, 0.6);
+keys(122, [60, 64, 69, 74], 1.8, 0.12);
+save("music2.wav", music2, 0.8);
+tgt = music;
+
 // ---------------------------------------------------------------- sfx
 function make(len, fn) {
   const N = secs(len);
@@ -238,5 +283,37 @@ save("thud.wav", make(0.4, (b, N) => {
     b[i] = Math.sin(TAU * (90 * Math.exp(-x * 6) + 40) * x) * Math.exp(-x * 10);
   }
 }));
+
+save("riser.wav", make(1.5, (b, N) => {
+  let lp = 0;
+  for (let i = 0; i < N; i++) {
+    const p = i / N;
+    lp += (0.02 + 0.5 * p * p) * (noise() - lp);
+    b[i] = lp * p * p + 0.3 * Math.sin(TAU * (200 + 900 * p * p) * (i / SR)) * p;
+  }
+}), 0.7);
+
+save("scratch.wav", make(0.5, (b, N) => {
+  let ph = 0, lp = 0;
+  for (let i = 0; i < N; i++) {
+    const p = i / N;
+    ph += TAU * (300 + 1200 * Math.abs(Math.sin(p * Math.PI * 3))) / SR;
+    lp += 0.3 * (noise() - lp);
+    b[i] = (Math.sin(ph) * 0.6 + lp * 0.6) * Math.min(1, p * 20, (1 - p) * 6);
+  }
+}), 0.6);
+
+save("boom.wav", make(1.6, (b, N) => {
+  let lp = 0;
+  for (let i = 0; i < N; i++) {
+    const x = i / SR;
+    lp += 0.05 * (noise() - lp);
+    b[i] = Math.sin(TAU * (60 * Math.exp(-x * 2) + 30) * x) * Math.exp(-x * 2.5) + lp * 2 * Math.exp(-x * 4);
+  }
+}));
+
+save("tick.wav", make(0.08, (b, N) => {
+  for (let i = 0; i < N; i++) b[i] = Math.sin(TAU * 2400 * (i / SR)) * Math.exp(-(i / SR) * 80);
+}), 0.5);
 
 console.log("wrote music + sfx to", OUT);

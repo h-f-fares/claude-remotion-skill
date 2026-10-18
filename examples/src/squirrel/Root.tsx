@@ -1,6 +1,8 @@
 import React from "react";
 import { Composition, cancelRender, continueRender, delayRender, staticFile } from "remotion";
 import { SquirrelBurger } from "./SquirrelBurger";
+import { SquirrelLong } from "./long/SquirrelLong";
+import { TOTAL_F as LONG_F } from "./long/timing";
 import { theme } from "./theme";
 import { FPS, TOTAL_F } from "./timing";
 
@@ -18,5 +20,8 @@ Promise.all(faces.map((f) => f.load()))
   .catch((err) => cancelRender(err));
 
 export const SquirrelRoot: React.FC = () => (
-  <Composition id="SquirrelBurger" component={SquirrelBurger} durationInFrames={TOTAL_F} fps={FPS} width={1080} height={1920} />
+  <>
+    <Composition id="SquirrelBurger" component={SquirrelBurger} durationInFrames={TOTAL_F} fps={FPS} width={1080} height={1920} />
+    <Composition id="SquirrelBurgerLong" component={SquirrelLong} durationInFrames={LONG_F} fps={FPS} width={1080} height={1920} />
+  </>
 );

@@ -1,0 +1,2481 @@
+{
+ "segments": [
+  {
+   "scene": 1,
+   "start": 0.3,
+   "dur": 8.151
+  },
+  {
+   "scene": 2,
+   "start": 8.451,
+   "dur": 9.881
+  },
+  {
+   "scene": 3,
+   "start": 18.332,
+   "dur": 5.712
+  },
+  {
+   "scene": 4,
+   "start": 24.044,
+   "dur": 4.878
+  },
+  {
+   "scene": 5,
+   "start": 28.922,
+   "dur": 7.098
+  },
+  {
+   "scene": 6,
+   "start": 36.019,
+   "dur": 4.573
+  },
+  {
+   "scene": 7,
+   "start": 40.593,
+   "dur": 9.301
+  },
+  {
+   "scene": 8,
+   "start": 49.894,
+   "dur": 3.625
+  },
+  {
+   "scene": 9,
+   "start": 53.518,
+   "dur": 6.626
+  },
+  {
+   "scene": 10,
+   "start": 60.144,
+   "dur": 15.478
+  },
+  {
+   "scene": 11,
+   "start": 75.622,
+   "dur": 12.757
+  },
+  {
+   "scene": 12,
+   "start": 88.379,
+   "dur": 5.097
+  },
+  {
+   "scene": 13,
+   "start": 93.477,
+   "dur": 2.887
+  },
+  {
+   "scene": 14,
+   "start": 96.363,
+   "dur": 6.408
+  },
+  {
+   "scene": 15,
+   "start": 102.771,
+   "dur": 7.291
+  },
+  {
+   "scene": 16,
+   "start": 110.062,
+   "dur": 6.796
+  },
+  {
+   "scene": 17,
+   "start": 116.858,
+   "dur": 5.078
+  }
+ ],
+ "sentences": [
+  {
+   "beat": 1,
+   "text": "This man ordered a burger.",
+   "start": 0.3,
+   "end": 1.774
+  },
+  {
+   "beat": 1,
+   "text": "What he got... was a squirrel.",
+   "start": 1.994,
+   "end": 3.369
+  },
+  {
+   "beat": 1,
+   "text": "And somehow, this story is now taught to software teams all over the world.",
+   "start": 3.589,
+   "end": 8.001
+  },
+  {
+   "beat": 2,
+   "text": "Here's how it happened.",
+   "start": 8.451,
+   "end": 9.606
+  },
+  {
+   "beat": 2,
+   "text": "Meet Ray.",
+   "start": 9.826,
+   "end": 10.584
+  },
+  {
+   "beat": 2,
+   "text": "Ray flips burgers at a busy joint downtown.",
+   "start": 10.804,
+   "end": 13.382
+  },
+  {
+   "beat": 2,
+   "text": "It's Friday.",
+   "start": 13.602,
+   "end": 14.412
+  },
+  {
+   "beat": 2,
+   "text": "It's almost midnight.",
+   "start": 14.632,
+   "end": 15.723
+  },
+  {
+   "beat": 2,
+   "text": "And the line is wrapped around the block.",
+   "start": 15.943,
+   "end": 17.882
+  },
+  {
+   "beat": 3,
+   "text": "Ray's boss walks in and says one thing: \"Nobody leaves without a burger.",
+   "start": 18.332,
+   "end": 22.651
+  },
+  {
+   "beat": 3,
+   "text": "Nobody.\"",
+   "start": 22.871,
+   "end": 23.594
+  },
+  {
+   "beat": 4,
+   "text": "Ray turns to the fridge... and the beef is gone.",
+   "start": 24.044,
+   "end": 26.803
+  },
+  {
+   "beat": 4,
+   "text": "Not low.",
+   "start": 27.023,
+   "end": 27.752
+  },
+  {
+   "beat": 4,
+   "text": "Gone.",
+   "start": 27.971,
+   "end": 28.472
+  },
+  {
+   "beat": 5,
+   "text": "Now Ray has two choices.",
+   "start": 28.922,
+   "end": 30.451
+  },
+  {
+   "beat": 5,
+   "text": "Option one: walk out there and tell a hungry crowd, \"Sorry, we're out.\" Option two...",
+   "start": 30.671,
+   "end": 35.569
+  },
+  {
+   "beat": 6,
+   "text": "He looks out the back window.",
+   "start": 36.019,
+   "end": 37.438
+  },
+  {
+   "beat": 6,
+   "text": "And there, sitting on the trash can, is a squirrel.",
+   "start": 37.658,
+   "end": 40.143
+  },
+  {
+   "beat": 7,
+   "text": "Ray doesn't say no.",
+   "start": 40.593,
+   "end": 41.767
+  },
+  {
+   "beat": 7,
+   "text": "He grills it.",
+   "start": 41.987,
+   "end": 42.746
+  },
+  {
+   "beat": 7,
+   "text": "Buns it.",
+   "start": 42.966,
+   "end": 43.604
+  },
+  {
+   "beat": 7,
+   "text": "Serves it.",
+   "start": 43.824,
+   "end": 44.496
+  },
+  {
+   "beat": 7,
+   "text": "To a sweet old man in the corner booth, who takes the biggest bite of his life.",
+   "start": 44.716,
+   "end": 49.444
+  },
+  {
+   "beat": 8,
+   "text": "Three hours later?",
+   "start": 49.894,
+   "end": 51.051
+  },
+  {
+   "beat": 8,
+   "text": "The old man is in the hospital.",
+   "start": 51.271,
+   "end": 53.068
+  },
+  {
+   "beat": 9,
+   "text": "And the next morning, the headline doesn't say \"Ray.\" It says the name on the sign.",
+   "start": 53.518,
+   "end": 58.052
+  },
+  {
+   "beat": 9,
+   "text": "The whole brand takes the hit.",
+   "start": 58.272,
+   "end": 59.694
+  },
+  {
+   "beat": 10,
+   "text": "Now, did this really happen?",
+   "start": 60.144,
+   "end": 61.573
+  },
+  {
+   "beat": 10,
+   "text": "The story comes from Ken Schwaber, one of the creators of Scrum.",
+   "start": 61.793,
+   "end": 65.434
+  },
+  {
+   "beat": 10,
+   "text": "In 2015, someone asked him if it was real.",
+   "start": 65.654,
+   "end": 69.072
+  },
+  {
+   "beat": 10,
+   "text": "His answer?",
+   "start": 69.292,
+   "end": 70.061
+  },
+  {
+   "beat": 10,
+   "text": "\"It's a legend.\" But it keeps getting told... because every team has served a squirrel.",
+   "start": 70.281,
+   "end": 75.172
+  },
+  {
+   "beat": 11,
+   "text": "Think about it.",
+   "start": 75.622,
+   "end": 76.448
+  },
+  {
+   "beat": 11,
+   "text": "A deadline that can't move.",
+   "start": 76.668,
+   "end": 78.178
+  },
+  {
+   "beat": 11,
+   "text": "Work that doesn't fit.",
+   "start": 78.398,
+   "end": 79.589
+  },
+  {
+   "beat": 11,
+   "text": "And nobody willing to say no.",
+   "start": 79.809,
+   "end": 81.428
+  },
+  {
+   "beat": 11,
+   "text": "So someone quietly cuts quality.",
+   "start": 81.648,
+   "end": 83.674
+  },
+  {
+   "beat": 11,
+   "text": "Skips the tests.",
+   "start": 83.894,
+   "end": 84.937
+  },
+  {
+   "beat": 11,
+   "text": "Ships the bug.",
+   "start": 85.157,
+   "end": 86.042
+  },
+  {
+   "beat": 11,
+   "text": "And hopes nobody notices.",
+   "start": 86.262,
+   "end": 87.929
+  },
+  {
+   "beat": 12,
+   "text": "But someone always notices.",
+   "start": 88.379,
+   "end": 90.136
+  },
+  {
+   "beat": 12,
+   "text": "The customer.",
+   "start": 90.356,
+   "end": 91.165
+  },
+  {
+   "beat": 12,
+   "text": "The team.",
+   "start": 91.385,
+   "end": 92.061
+  },
+  {
+   "beat": 12,
+   "text": "The business.",
+   "start": 92.281,
+   "end": 93.027
+  },
+  {
+   "beat": 13,
+   "text": "So what should Ray have done?",
+   "start": 93.477,
+   "end": 94.872
+  },
+  {
+   "beat": 13,
+   "text": "Three things.",
+   "start": 95.092,
+   "end": 95.913
+  },
+  {
+   "beat": 14,
+   "text": "One.",
+   "start": 96.363,
+   "end": 96.834
+  },
+  {
+   "beat": 14,
+   "text": "Negotiate scope, not quality.",
+   "start": 97.054,
+   "end": 98.947
+  },
+  {
+   "beat": 14,
+   "text": "Fewer items on the menu.",
+   "start": 99.167,
+   "end": 100.695
+  },
+  {
+   "beat": 14,
+   "text": "Never a squirrel in the bun.",
+   "start": 100.915,
+   "end": 102.321
+  },
+  {
+   "beat": 15,
+   "text": "Two.",
+   "start": 102.771,
+   "end": 103.223
+  },
+  {
+   "beat": 15,
+   "text": "Serve the most valuable thing first.",
+   "start": 103.443,
+   "end": 105.482
+  },
+  {
+   "beat": 15,
+   "text": "A smaller order of real food beats a full tray of disaster.",
+   "start": 105.702,
+   "end": 109.612
+  },
+  {
+   "beat": 16,
+   "text": "Three.",
+   "start": 110.062,
+   "end": 110.596
+  },
+  {
+   "beat": 16,
+   "text": "Say it early.",
+   "start": 110.816,
+   "end": 111.648
+  },
+  {
+   "beat": 16,
+   "text": "The moment the beef looked low, that was the time to speak up.",
+   "start": 111.868,
+   "end": 115.214
+  },
+  {
+   "beat": 16,
+   "text": "Not at midnight.",
+   "start": 115.434,
+   "end": 116.408
+  },
+  {
+   "beat": 17,
+   "text": "Because when time runs out, you can cut the menu.",
+   "start": 116.858,
+   "end": 119.726
+  },
+  {
+   "beat": 17,
+   "text": "But never... serve the squirrel.",
+   "start": 119.946,
+   "end": 121.487
+  }
+ ],
+ "words": [
+  {
+   "text": "This",
+   "start": 0.3,
+   "end": 0.585,
+   "scene": 1
+  },
+  {
+   "text": "man",
+   "start": 0.585,
+   "end": 0.823,
+   "scene": 1
+  },
+  {
+   "text": "ordered",
+   "start": 0.823,
+   "end": 1.251,
+   "scene": 1
+  },
+  {
+   "text": "a",
+   "start": 1.251,
+   "end": 1.394,
+   "scene": 1
+  },
+  {
+   "text": "burger.",
+   "start": 1.394,
+   "end": 1.774,
+   "scene": 1
+  },
+  {
+   "text": "What",
+   "start": 1.994,
+   "end": 2.244,
+   "scene": 1
+  },
+  {
+   "text": "he",
+   "start": 2.244,
+   "end": 2.411,
+   "scene": 1
+  },
+  {
+   "text": "got...",
+   "start": 2.411,
+   "end": 2.619,
+   "scene": 1
+  },
+  {
+   "text": "was",
+   "start": 2.619,
+   "end": 2.827,
+   "scene": 1
+  },
+  {
+   "text": "a",
+   "start": 2.827,
+   "end": 2.952,
+   "scene": 1
+  },
+  {
+   "text": "squirrel.",
+   "start": 2.952,
+   "end": 3.369,
+   "scene": 1
+  },
+  {
+   "text": "And",
+   "start": 3.589,
+   "end": 3.816,
+   "scene": 1
+  },
+  {
+   "text": "somehow,",
+   "start": 3.816,
+   "end": 4.225,
+   "scene": 1
+  },
+  {
+   "text": "this",
+   "start": 4.588,
+   "end": 4.851,
+   "scene": 1
+  },
+  {
+   "text": "story",
+   "start": 4.851,
+   "end": 5.158,
+   "scene": 1
+  },
+  {
+   "text": "is",
+   "start": 5.158,
+   "end": 5.333,
+   "scene": 1
+  },
+  {
+   "text": "now",
+   "start": 5.333,
+   "end": 5.552,
+   "scene": 1
+  },
+  {
+   "text": "taught",
+   "start": 5.552,
+   "end": 5.903,
+   "scene": 1
+  },
+  {
+   "text": "to",
+   "start": 5.903,
+   "end": 6.078,
+   "scene": 1
+  },
+  {
+   "text": "software",
+   "start": 6.078,
+   "end": 6.517,
+   "scene": 1
+  },
+  {
+   "text": "teams",
+   "start": 6.517,
+   "end": 6.824,
+   "scene": 1
+  },
+  {
+   "text": "all",
+   "start": 6.824,
+   "end": 7.043,
+   "scene": 1
+  },
+  {
+   "text": "over",
+   "start": 7.043,
+   "end": 7.306,
+   "scene": 1
+  },
+  {
+   "text": "the",
+   "start": 7.306,
+   "end": 7.525,
+   "scene": 1
+  },
+  {
+   "text": "world.",
+   "start": 7.525,
+   "end": 7.832,
+   "scene": 1
+  },
+  {
+   "text": "Here's",
+   "start": 8.451,
+   "end": 8.762,
+   "scene": 2
+  },
+  {
+   "text": "how",
+   "start": 8.762,
+   "end": 8.984,
+   "scene": 2
+  },
+  {
+   "text": "it",
+   "start": 8.984,
+   "end": 9.162,
+   "scene": 2
+  },
+  {
+   "text": "happened.",
+   "start": 9.162,
+   "end": 9.606,
+   "scene": 2
+  },
+  {
+   "text": "Meet",
+   "start": 9.826,
+   "end": 10.239,
+   "scene": 2
+  },
+  {
+   "text": "Ray.",
+   "start": 10.239,
+   "end": 10.584,
+   "scene": 2
+  },
+  {
+   "text": "Ray",
+   "start": 10.804,
+   "end": 11.057,
+   "scene": 2
+  },
+  {
+   "text": "flips",
+   "start": 11.057,
+   "end": 11.411,
+   "scene": 2
+  },
+  {
+   "text": "burgers",
+   "start": 11.411,
+   "end": 11.866,
+   "scene": 2
+  },
+  {
+   "text": "at",
+   "start": 11.866,
+   "end": 12.068,
+   "scene": 2
+  },
+  {
+   "text": "a",
+   "start": 12.068,
+   "end": 12.219,
+   "scene": 2
+  },
+  {
+   "text": "busy",
+   "start": 12.219,
+   "end": 12.523,
+   "scene": 2
+  },
+  {
+   "text": "joint",
+   "start": 12.523,
+   "end": 12.877,
+   "scene": 2
+  },
+  {
+   "text": "downtown.",
+   "start": 12.877,
+   "end": 13.382,
+   "scene": 2
+  },
+  {
+   "text": "It's",
+   "start": 13.602,
+   "end": 13.914,
+   "scene": 2
+  },
+  {
+   "text": "Friday.",
+   "start": 13.914,
+   "end": 14.412,
+   "scene": 2
+  },
+  {
+   "text": "It's",
+   "start": 14.632,
+   "end": 14.869,
+   "scene": 2
+  },
+  {
+   "text": "almost",
+   "start": 14.869,
+   "end": 15.249,
+   "scene": 2
+  },
+  {
+   "text": "midnight.",
+   "start": 15.249,
+   "end": 15.723,
+   "scene": 2
+  },
+  {
+   "text": "And",
+   "start": 15.943,
+   "end": 16.121,
+   "scene": 2
+  },
+  {
+   "text": "the",
+   "start": 16.121,
+   "end": 16.299,
+   "scene": 2
+  },
+  {
+   "text": "line",
+   "start": 16.299,
+   "end": 16.512,
+   "scene": 2
+  },
+  {
+   "text": "is",
+   "start": 16.512,
+   "end": 16.654,
+   "scene": 2
+  },
+  {
+   "text": "wrapped",
+   "start": 16.654,
+   "end": 16.974,
+   "scene": 2
+  },
+  {
+   "text": "around",
+   "start": 16.974,
+   "end": 17.259,
+   "scene": 2
+  },
+  {
+   "text": "the",
+   "start": 17.259,
+   "end": 17.437,
+   "scene": 2
+  },
+  {
+   "text": "block.",
+   "start": 17.437,
+   "end": 17.686,
+   "scene": 2
+  },
+  {
+   "text": "Ray's",
+   "start": 18.332,
+   "end": 18.603,
+   "scene": 3
+  },
+  {
+   "text": "boss",
+   "start": 18.603,
+   "end": 18.874,
+   "scene": 3
+  },
+  {
+   "text": "walks",
+   "start": 18.874,
+   "end": 19.19,
+   "scene": 3
+  },
+  {
+   "text": "in",
+   "start": 19.19,
+   "end": 19.371,
+   "scene": 3
+  },
+  {
+   "text": "and",
+   "start": 19.371,
+   "end": 19.597,
+   "scene": 3
+  },
+  {
+   "text": "says",
+   "start": 19.597,
+   "end": 19.868,
+   "scene": 3
+  },
+  {
+   "text": "one",
+   "start": 19.868,
+   "end": 20.094,
+   "scene": 3
+  },
+  {
+   "text": "thing:",
+   "start": 20.094,
+   "end": 20.41,
+   "scene": 3
+  },
+  {
+   "text": "\"Nobody",
+   "start": 20.942,
+   "end": 21.322,
+   "scene": 3
+  },
+  {
+   "text": "leaves",
+   "start": 21.322,
+   "end": 21.702,
+   "scene": 3
+  },
+  {
+   "text": "without",
+   "start": 21.702,
+   "end": 22.129,
+   "scene": 3
+  },
+  {
+   "text": "a",
+   "start": 22.129,
+   "end": 22.271,
+   "scene": 3
+  },
+  {
+   "text": "burger.",
+   "start": 22.271,
+   "end": 22.651,
+   "scene": 3
+  },
+  {
+   "text": "Nobody.\"",
+   "start": 22.871,
+   "end": 23.594,
+   "scene": 3
+  },
+  {
+   "text": "Ray",
+   "start": 24.044,
+   "end": 24.267,
+   "scene": 4
+  },
+  {
+   "text": "turns",
+   "start": 24.267,
+   "end": 24.58,
+   "scene": 4
+  },
+  {
+   "text": "to",
+   "start": 24.58,
+   "end": 24.759,
+   "scene": 4
+  },
+  {
+   "text": "the",
+   "start": 24.759,
+   "end": 24.982,
+   "scene": 4
+  },
+  {
+   "text": "fridge...",
+   "start": 24.982,
+   "end": 25.339,
+   "scene": 4
+  },
+  {
+   "text": "and",
+   "start": 25.65,
+   "end": 25.872,
+   "scene": 4
+  },
+  {
+   "text": "the",
+   "start": 25.872,
+   "end": 26.093,
+   "scene": 4
+  },
+  {
+   "text": "beef",
+   "start": 26.093,
+   "end": 26.359,
+   "scene": 4
+  },
+  {
+   "text": "is",
+   "start": 26.359,
+   "end": 26.537,
+   "scene": 4
+  },
+  {
+   "text": "gone.",
+   "start": 26.537,
+   "end": 26.803,
+   "scene": 4
+  },
+  {
+   "text": "Not",
+   "start": 27.023,
+   "end": 27.387,
+   "scene": 4
+  },
+  {
+   "text": "low.",
+   "start": 27.387,
+   "end": 27.752,
+   "scene": 4
+  },
+  {
+   "text": "Gone.",
+   "start": 27.971,
+   "end": 28.472,
+   "scene": 4
+  },
+  {
+   "text": "Now",
+   "start": 28.922,
+   "end": 29.186,
+   "scene": 5
+  },
+  {
+   "text": "Ray",
+   "start": 29.186,
+   "end": 29.449,
+   "scene": 5
+  },
+  {
+   "text": "has",
+   "start": 29.449,
+   "end": 29.713,
+   "scene": 5
+  },
+  {
+   "text": "two",
+   "start": 29.713,
+   "end": 29.976,
+   "scene": 5
+  },
+  {
+   "text": "choices.",
+   "start": 29.976,
+   "end": 30.451,
+   "scene": 5
+  },
+  {
+   "text": "Option",
+   "start": 30.671,
+   "end": 31.102,
+   "scene": 5
+  },
+  {
+   "text": "one:",
+   "start": 31.102,
+   "end": 31.371,
+   "scene": 5
+  },
+  {
+   "text": "walk",
+   "start": 31.371,
+   "end": 31.694,
+   "scene": 5
+  },
+  {
+   "text": "out",
+   "start": 31.694,
+   "end": 31.963,
+   "scene": 5
+  },
+  {
+   "text": "there",
+   "start": 31.963,
+   "end": 32.34,
+   "scene": 5
+  },
+  {
+   "text": "and",
+   "start": 32.34,
+   "end": 32.609,
+   "scene": 5
+  },
+  {
+   "text": "tell",
+   "start": 32.609,
+   "end": 32.932,
+   "scene": 5
+  },
+  {
+   "text": "a",
+   "start": 32.932,
+   "end": 33.093,
+   "scene": 5
+  },
+  {
+   "text": "hungry",
+   "start": 33.093,
+   "end": 33.524,
+   "scene": 5
+  },
+  {
+   "text": "crowd,",
+   "start": 33.524,
+   "end": 33.9,
+   "scene": 5
+  },
+  {
+   "text": "\"Sorry,",
+   "start": 33.9,
+   "end": 34.277,
+   "scene": 5
+  },
+  {
+   "text": "we're",
+   "start": 34.277,
+   "end": 34.6,
+   "scene": 5
+  },
+  {
+   "text": "out.\"",
+   "start": 34.6,
+   "end": 34.869,
+   "scene": 5
+  },
+  {
+   "text": "Option",
+   "start": 34.869,
+   "end": 35.3,
+   "scene": 5
+  },
+  {
+   "text": "two...",
+   "start": 35.3,
+   "end": 35.569,
+   "scene": 5
+  },
+  {
+   "text": "He",
+   "start": 36.019,
+   "end": 36.181,
+   "scene": 6
+  },
+  {
+   "text": "looks",
+   "start": 36.181,
+   "end": 36.465,
+   "scene": 6
+  },
+  {
+   "text": "out",
+   "start": 36.465,
+   "end": 36.668,
+   "scene": 6
+  },
+  {
+   "text": "the",
+   "start": 36.668,
+   "end": 36.87,
+   "scene": 6
+  },
+  {
+   "text": "back",
+   "start": 36.87,
+   "end": 37.114,
+   "scene": 6
+  },
+  {
+   "text": "window.",
+   "start": 37.114,
+   "end": 37.438,
+   "scene": 6
+  },
+  {
+   "text": "And",
+   "start": 37.658,
+   "end": 37.869,
+   "scene": 6
+  },
+  {
+   "text": "there,",
+   "start": 37.869,
+   "end": 38.163,
+   "scene": 6
+  },
+  {
+   "text": "sitting",
+   "start": 38.163,
+   "end": 38.542,
+   "scene": 6
+  },
+  {
+   "text": "on",
+   "start": 38.542,
+   "end": 38.711,
+   "scene": 6
+  },
+  {
+   "text": "the",
+   "start": 38.711,
+   "end": 38.922,
+   "scene": 6
+  },
+  {
+   "text": "trash",
+   "start": 38.922,
+   "end": 39.216,
+   "scene": 6
+  },
+  {
+   "text": "can,",
+   "start": 39.216,
+   "end": 39.427,
+   "scene": 6
+  },
+  {
+   "text": "is",
+   "start": 39.427,
+   "end": 39.595,
+   "scene": 6
+  },
+  {
+   "text": "a",
+   "start": 39.595,
+   "end": 39.722,
+   "scene": 6
+  },
+  {
+   "text": "squirrel.",
+   "start": 39.722,
+   "end": 40.143,
+   "scene": 6
+  },
+  {
+   "text": "Ray",
+   "start": 40.593,
+   "end": 40.86,
+   "scene": 7
+  },
+  {
+   "text": "doesn't",
+   "start": 40.86,
+   "end": 41.287,
+   "scene": 7
+  },
+  {
+   "text": "say",
+   "start": 41.287,
+   "end": 41.554,
+   "scene": 7
+  },
+  {
+   "text": "no.",
+   "start": 41.554,
+   "end": 41.767,
+   "scene": 7
+  },
+  {
+   "text": "He",
+   "start": 41.987,
+   "end": 42.177,
+   "scene": 7
+  },
+  {
+   "text": "grills",
+   "start": 42.177,
+   "end": 42.556,
+   "scene": 7
+  },
+  {
+   "text": "it.",
+   "start": 42.556,
+   "end": 42.746,
+   "scene": 7
+  },
+  {
+   "text": "Buns",
+   "start": 42.966,
+   "end": 43.349,
+   "scene": 7
+  },
+  {
+   "text": "it.",
+   "start": 43.349,
+   "end": 43.604,
+   "scene": 7
+  },
+  {
+   "text": "Serves",
+   "start": 43.824,
+   "end": 44.272,
+   "scene": 7
+  },
+  {
+   "text": "it.",
+   "start": 44.272,
+   "end": 44.496,
+   "scene": 7
+  },
+  {
+   "text": "To",
+   "start": 44.716,
+   "end": 44.915,
+   "scene": 7
+  },
+  {
+   "text": "a",
+   "start": 44.915,
+   "end": 45.064,
+   "scene": 7
+  },
+  {
+   "text": "sweet",
+   "start": 45.064,
+   "end": 45.413,
+   "scene": 7
+  },
+  {
+   "text": "old",
+   "start": 45.413,
+   "end": 45.662,
+   "scene": 7
+  },
+  {
+   "text": "man",
+   "start": 45.662,
+   "end": 45.91,
+   "scene": 7
+  },
+  {
+   "text": "in",
+   "start": 45.91,
+   "end": 46.11,
+   "scene": 7
+  },
+  {
+   "text": "the",
+   "start": 46.11,
+   "end": 46.358,
+   "scene": 7
+  },
+  {
+   "text": "corner",
+   "start": 46.358,
+   "end": 46.757,
+   "scene": 7
+  },
+  {
+   "text": "booth,",
+   "start": 46.757,
+   "end": 47.105,
+   "scene": 7
+  },
+  {
+   "text": "who",
+   "start": 47.105,
+   "end": 47.354,
+   "scene": 7
+  },
+  {
+   "text": "takes",
+   "start": 47.354,
+   "end": 47.702,
+   "scene": 7
+  },
+  {
+   "text": "the",
+   "start": 47.702,
+   "end": 47.951,
+   "scene": 7
+  },
+  {
+   "text": "biggest",
+   "start": 47.951,
+   "end": 48.399,
+   "scene": 7
+  },
+  {
+   "text": "bite",
+   "start": 48.399,
+   "end": 48.697,
+   "scene": 7
+  },
+  {
+   "text": "of",
+   "start": 48.697,
+   "end": 48.897,
+   "scene": 7
+  },
+  {
+   "text": "his",
+   "start": 48.897,
+   "end": 49.145,
+   "scene": 7
+  },
+  {
+   "text": "life.",
+   "start": 49.145,
+   "end": 49.444,
+   "scene": 7
+  },
+  {
+   "text": "Three",
+   "start": 49.894,
+   "end": 50.28,
+   "scene": 8
+  },
+  {
+   "text": "hours",
+   "start": 50.28,
+   "end": 50.665,
+   "scene": 8
+  },
+  {
+   "text": "later?",
+   "start": 50.665,
+   "end": 51.051,
+   "scene": 8
+  },
+  {
+   "text": "The",
+   "start": 51.271,
+   "end": 51.507,
+   "scene": 8
+  },
+  {
+   "text": "old",
+   "start": 51.507,
+   "end": 51.744,
+   "scene": 8
+  },
+  {
+   "text": "man",
+   "start": 51.744,
+   "end": 51.98,
+   "scene": 8
+  },
+  {
+   "text": "is",
+   "start": 51.98,
+   "end": 52.17,
+   "scene": 8
+  },
+  {
+   "text": "in",
+   "start": 52.17,
+   "end": 52.359,
+   "scene": 8
+  },
+  {
+   "text": "the",
+   "start": 52.359,
+   "end": 52.595,
+   "scene": 8
+  },
+  {
+   "text": "hospital.",
+   "start": 52.595,
+   "end": 53.068,
+   "scene": 8
+  },
+  {
+   "text": "And",
+   "start": 53.518,
+   "end": 54.022,
+   "scene": 9
+  },
+  {
+   "text": "the",
+   "start": 54.022,
+   "end": 54.526,
+   "scene": 9
+  },
+  {
+   "text": "next",
+   "start": 54.526,
+   "end": 55.13,
+   "scene": 9
+  },
+  {
+   "text": "morning,",
+   "start": 55.13,
+   "end": 56.037,
+   "scene": 9
+  },
+  {
+   "text": "the",
+   "start": 56.616,
+   "end": 56.72,
+   "scene": 9
+  },
+  {
+   "text": "headline",
+   "start": 56.72,
+   "end": 56.928,
+   "scene": 9
+  },
+  {
+   "text": "doesn't",
+   "start": 56.928,
+   "end": 57.095,
+   "scene": 9
+  },
+  {
+   "text": "say",
+   "start": 57.095,
+   "end": 57.199,
+   "scene": 9
+  },
+  {
+   "text": "\"Ray.\"",
+   "start": 57.199,
+   "end": 57.303,
+   "scene": 9
+  },
+  {
+   "text": "It",
+   "start": 57.303,
+   "end": 57.386,
+   "scene": 9
+  },
+  {
+   "text": "says",
+   "start": 57.386,
+   "end": 57.511,
+   "scene": 9
+  },
+  {
+   "text": "the",
+   "start": 57.511,
+   "end": 57.615,
+   "scene": 9
+  },
+  {
+   "text": "name",
+   "start": 57.615,
+   "end": 57.74,
+   "scene": 9
+  },
+  {
+   "text": "on",
+   "start": 57.74,
+   "end": 57.823,
+   "scene": 9
+  },
+  {
+   "text": "the",
+   "start": 57.823,
+   "end": 57.927,
+   "scene": 9
+  },
+  {
+   "text": "sign.",
+   "start": 57.927,
+   "end": 58.052,
+   "scene": 9
+  },
+  {
+   "text": "The",
+   "start": 58.272,
+   "end": 58.469,
+   "scene": 9
+  },
+  {
+   "text": "whole",
+   "start": 58.469,
+   "end": 58.746,
+   "scene": 9
+  },
+  {
+   "text": "brand",
+   "start": 58.746,
+   "end": 59.022,
+   "scene": 9
+  },
+  {
+   "text": "takes",
+   "start": 59.022,
+   "end": 59.299,
+   "scene": 9
+  },
+  {
+   "text": "the",
+   "start": 59.299,
+   "end": 59.496,
+   "scene": 9
+  },
+  {
+   "text": "hit.",
+   "start": 59.496,
+   "end": 59.694,
+   "scene": 9
+  },
+  {
+   "text": "Now,",
+   "start": 60.144,
+   "end": 60.367,
+   "scene": 10
+  },
+  {
+   "text": "did",
+   "start": 60.367,
+   "end": 60.591,
+   "scene": 10
+  },
+  {
+   "text": "this",
+   "start": 60.591,
+   "end": 60.858,
+   "scene": 10
+  },
+  {
+   "text": "really",
+   "start": 60.858,
+   "end": 61.216,
+   "scene": 10
+  },
+  {
+   "text": "happen?",
+   "start": 61.216,
+   "end": 61.573,
+   "scene": 10
+  },
+  {
+   "text": "The",
+   "start": 61.793,
+   "end": 62.012,
+   "scene": 10
+  },
+  {
+   "text": "story",
+   "start": 62.012,
+   "end": 62.319,
+   "scene": 10
+  },
+  {
+   "text": "comes",
+   "start": 62.319,
+   "end": 62.626,
+   "scene": 10
+  },
+  {
+   "text": "from",
+   "start": 62.626,
+   "end": 62.889,
+   "scene": 10
+  },
+  {
+   "text": "Ken",
+   "start": 62.889,
+   "end": 63.108,
+   "scene": 10
+  },
+  {
+   "text": "Schwaber,",
+   "start": 63.108,
+   "end": 63.547,
+   "scene": 10
+  },
+  {
+   "text": "one",
+   "start": 63.915,
+   "end": 64.132,
+   "scene": 10
+  },
+  {
+   "text": "of",
+   "start": 64.132,
+   "end": 64.306,
+   "scene": 10
+  },
+  {
+   "text": "the",
+   "start": 64.306,
+   "end": 64.523,
+   "scene": 10
+  },
+  {
+   "text": "creators",
+   "start": 64.523,
+   "end": 64.957,
+   "scene": 10
+  },
+  {
+   "text": "of",
+   "start": 64.957,
+   "end": 65.13,
+   "scene": 10
+  },
+  {
+   "text": "Scrum.",
+   "start": 65.13,
+   "end": 65.434,
+   "scene": 10
+  },
+  {
+   "text": "In",
+   "start": 65.654,
+   "end": 66.154,
+   "scene": 10
+  },
+  {
+   "text": "2015,",
+   "start": 66.154,
+   "end": 66.905,
+   "scene": 10
+  },
+  {
+   "text": "someone",
+   "start": 67.256,
+   "end": 67.665,
+   "scene": 10
+  },
+  {
+   "text": "asked",
+   "start": 67.665,
+   "end": 67.983,
+   "scene": 10
+  },
+  {
+   "text": "him",
+   "start": 67.983,
+   "end": 68.209,
+   "scene": 10
+  },
+  {
+   "text": "if",
+   "start": 68.209,
+   "end": 68.391,
+   "scene": 10
+  },
+  {
+   "text": "it",
+   "start": 68.391,
+   "end": 68.573,
+   "scene": 10
+  },
+  {
+   "text": "was",
+   "start": 68.573,
+   "end": 68.8,
+   "scene": 10
+  },
+  {
+   "text": "real.",
+   "start": 68.8,
+   "end": 69.072,
+   "scene": 10
+  },
+  {
+   "text": "His",
+   "start": 69.292,
+   "end": 69.588,
+   "scene": 10
+  },
+  {
+   "text": "answer?",
+   "start": 69.588,
+   "end": 70.061,
+   "scene": 10
+  },
+  {
+   "text": "\"It's",
+   "start": 70.281,
+   "end": 70.538,
+   "scene": 10
+  },
+  {
+   "text": "a",
+   "start": 70.538,
+   "end": 70.693,
+   "scene": 10
+  },
+  {
+   "text": "legend.\"",
+   "start": 70.693,
+   "end": 71.105,
+   "scene": 10
+  },
+  {
+   "text": "But",
+   "start": 71.105,
+   "end": 71.362,
+   "scene": 10
+  },
+  {
+   "text": "it",
+   "start": 71.362,
+   "end": 71.568,
+   "scene": 10
+  },
+  {
+   "text": "keeps",
+   "start": 71.568,
+   "end": 71.928,
+   "scene": 10
+  },
+  {
+   "text": "getting",
+   "start": 71.928,
+   "end": 72.392,
+   "scene": 10
+  },
+  {
+   "text": "told...",
+   "start": 72.392,
+   "end": 72.701,
+   "scene": 10
+  },
+  {
+   "text": "because",
+   "start": 72.701,
+   "end": 73.164,
+   "scene": 10
+  },
+  {
+   "text": "every",
+   "start": 73.164,
+   "end": 73.525,
+   "scene": 10
+  },
+  {
+   "text": "team",
+   "start": 73.525,
+   "end": 73.833,
+   "scene": 10
+  },
+  {
+   "text": "has",
+   "start": 73.833,
+   "end": 74.091,
+   "scene": 10
+  },
+  {
+   "text": "served",
+   "start": 74.091,
+   "end": 74.503,
+   "scene": 10
+  },
+  {
+   "text": "a",
+   "start": 74.503,
+   "end": 74.657,
+   "scene": 10
+  },
+  {
+   "text": "squirrel.",
+   "start": 74.657,
+   "end": 75.172,
+   "scene": 10
+  },
+  {
+   "text": "Think",
+   "start": 75.622,
+   "end": 75.943,
+   "scene": 11
+  },
+  {
+   "text": "about",
+   "start": 75.943,
+   "end": 76.264,
+   "scene": 11
+  },
+  {
+   "text": "it.",
+   "start": 76.264,
+   "end": 76.448,
+   "scene": 11
+  },
+  {
+   "text": "A",
+   "start": 76.668,
+   "end": 76.814,
+   "scene": 11
+  },
+  {
+   "text": "deadline",
+   "start": 76.814,
+   "end": 77.301,
+   "scene": 11
+  },
+  {
+   "text": "that",
+   "start": 77.301,
+   "end": 77.593,
+   "scene": 11
+  },
+  {
+   "text": "can't",
+   "start": 77.593,
+   "end": 77.886,
+   "scene": 11
+  },
+  {
+   "text": "move.",
+   "start": 77.886,
+   "end": 78.178,
+   "scene": 11
+  },
+  {
+   "text": "Work",
+   "start": 78.398,
+   "end": 78.684,
+   "scene": 11
+  },
+  {
+   "text": "that",
+   "start": 78.684,
+   "end": 78.97,
+   "scene": 11
+  },
+  {
+   "text": "doesn't",
+   "start": 78.97,
+   "end": 79.351,
+   "scene": 11
+  },
+  {
+   "text": "fit.",
+   "start": 79.351,
+   "end": 79.589,
+   "scene": 11
+  },
+  {
+   "text": "And",
+   "start": 79.809,
+   "end": 80.04,
+   "scene": 11
+  },
+  {
+   "text": "nobody",
+   "start": 80.04,
+   "end": 80.41,
+   "scene": 11
+  },
+  {
+   "text": "willing",
+   "start": 80.41,
+   "end": 80.827,
+   "scene": 11
+  },
+  {
+   "text": "to",
+   "start": 80.827,
+   "end": 81.012,
+   "scene": 11
+  },
+  {
+   "text": "say",
+   "start": 81.012,
+   "end": 81.243,
+   "scene": 11
+  },
+  {
+   "text": "no.",
+   "start": 81.243,
+   "end": 81.428,
+   "scene": 11
+  },
+  {
+   "text": "So",
+   "start": 81.648,
+   "end": 81.867,
+   "scene": 11
+  },
+  {
+   "text": "someone",
+   "start": 81.867,
+   "end": 82.36,
+   "scene": 11
+  },
+  {
+   "text": "quietly",
+   "start": 82.36,
+   "end": 82.853,
+   "scene": 11
+  },
+  {
+   "text": "cuts",
+   "start": 82.853,
+   "end": 83.181,
+   "scene": 11
+  },
+  {
+   "text": "quality.",
+   "start": 83.181,
+   "end": 83.674,
+   "scene": 11
+  },
+  {
+   "text": "Skips",
+   "start": 83.894,
+   "end": 84.278,
+   "scene": 11
+  },
+  {
+   "text": "the",
+   "start": 84.278,
+   "end": 84.553,
+   "scene": 11
+  },
+  {
+   "text": "tests.",
+   "start": 84.553,
+   "end": 84.937,
+   "scene": 11
+  },
+  {
+   "text": "Ships",
+   "start": 85.157,
+   "end": 85.521,
+   "scene": 11
+  },
+  {
+   "text": "the",
+   "start": 85.521,
+   "end": 85.782,
+   "scene": 11
+  },
+  {
+   "text": "bug.",
+   "start": 85.782,
+   "end": 86.042,
+   "scene": 11
+  },
+  {
+   "text": "And",
+   "start": 86.262,
+   "end": 86.549,
+   "scene": 11
+  },
+  {
+   "text": "hopes",
+   "start": 86.549,
+   "end": 86.952,
+   "scene": 11
+  },
+  {
+   "text": "nobody",
+   "start": 86.952,
+   "end": 87.412,
+   "scene": 11
+  },
+  {
+   "text": "notices.",
+   "start": 87.412,
+   "end": 87.929,
+   "scene": 11
+  },
+  {
+   "text": "But",
+   "start": 88.379,
+   "end": 88.662,
+   "scene": 12
+  },
+  {
+   "text": "someone",
+   "start": 88.662,
+   "end": 89.172,
+   "scene": 12
+  },
+  {
+   "text": "always",
+   "start": 89.172,
+   "end": 89.626,
+   "scene": 12
+  },
+  {
+   "text": "notices.",
+   "start": 89.626,
+   "end": 90.136,
+   "scene": 12
+  },
+  {
+   "text": "The",
+   "start": 90.356,
+   "end": 90.626,
+   "scene": 12
+  },
+  {
+   "text": "customer.",
+   "start": 90.626,
+   "end": 91.165,
+   "scene": 12
+  },
+  {
+   "text": "The",
+   "start": 91.385,
+   "end": 91.692,
+   "scene": 12
+  },
+  {
+   "text": "team.",
+   "start": 91.692,
+   "end": 92.061,
+   "scene": 12
+  },
+  {
+   "text": "The",
+   "start": 92.281,
+   "end": 92.53,
+   "scene": 12
+  },
+  {
+   "text": "business.",
+   "start": 92.53,
+   "end": 93.027,
+   "scene": 12
+  },
+  {
+   "text": "So",
+   "start": 93.477,
+   "end": 93.636,
+   "scene": 13
+  },
+  {
+   "text": "what",
+   "start": 93.636,
+   "end": 93.876,
+   "scene": 13
+  },
+  {
+   "text": "should",
+   "start": 93.876,
+   "end": 94.194,
+   "scene": 13
+  },
+  {
+   "text": "Ray",
+   "start": 94.194,
+   "end": 94.394,
+   "scene": 13
+  },
+  {
+   "text": "have",
+   "start": 94.394,
+   "end": 94.633,
+   "scene": 13
+  },
+  {
+   "text": "done?",
+   "start": 94.633,
+   "end": 94.872,
+   "scene": 13
+  },
+  {
+   "text": "Three",
+   "start": 95.092,
+   "end": 95.475,
+   "scene": 13
+  },
+  {
+   "text": "things.",
+   "start": 95.475,
+   "end": 95.913,
+   "scene": 13
+  },
+  {
+   "text": "One.",
+   "start": 96.363,
+   "end": 96.834,
+   "scene": 14
+  },
+  {
+   "text": "Negotiate",
+   "start": 97.054,
+   "end": 97.675,
+   "scene": 14
+  },
+  {
+   "text": "scope,",
+   "start": 97.675,
+   "end": 98.07,
+   "scene": 14
+  },
+  {
+   "text": "not",
+   "start": 98.216,
+   "end": 98.477,
+   "scene": 14
+  },
+  {
+   "text": "quality.",
+   "start": 98.477,
+   "end": 98.947,
+   "scene": 14
+  },
+  {
+   "text": "Fewer",
+   "start": 99.167,
+   "end": 99.536,
+   "scene": 14
+  },
+  {
+   "text": "items",
+   "start": 99.536,
+   "end": 99.905,
+   "scene": 14
+  },
+  {
+   "text": "on",
+   "start": 99.905,
+   "end": 100.115,
+   "scene": 14
+  },
+  {
+   "text": "the",
+   "start": 100.115,
+   "end": 100.379,
+   "scene": 14
+  },
+  {
+   "text": "menu.",
+   "start": 100.379,
+   "end": 100.695,
+   "scene": 14
+  },
+  {
+   "text": "Never",
+   "start": 100.915,
+   "end": 101.204,
+   "scene": 14
+  },
+  {
+   "text": "a",
+   "start": 101.204,
+   "end": 101.329,
+   "scene": 14
+  },
+  {
+   "text": "squirrel",
+   "start": 101.329,
+   "end": 101.742,
+   "scene": 14
+  },
+  {
+   "text": "in",
+   "start": 101.742,
+   "end": 101.907,
+   "scene": 14
+  },
+  {
+   "text": "the",
+   "start": 101.907,
+   "end": 102.114,
+   "scene": 14
+  },
+  {
+   "text": "bun.",
+   "start": 102.114,
+   "end": 102.321,
+   "scene": 14
+  },
+  {
+   "text": "Two.",
+   "start": 102.771,
+   "end": 103.223,
+   "scene": 15
+  },
+  {
+   "text": "Serve",
+   "start": 103.443,
+   "end": 103.783,
+   "scene": 15
+  },
+  {
+   "text": "the",
+   "start": 103.783,
+   "end": 104.026,
+   "scene": 15
+  },
+  {
+   "text": "most",
+   "start": 104.026,
+   "end": 104.317,
+   "scene": 15
+  },
+  {
+   "text": "valuable",
+   "start": 104.317,
+   "end": 104.802,
+   "scene": 15
+  },
+  {
+   "text": "thing",
+   "start": 104.802,
+   "end": 105.142,
+   "scene": 15
+  },
+  {
+   "text": "first.",
+   "start": 105.142,
+   "end": 105.482,
+   "scene": 15
+  },
+  {
+   "text": "A",
+   "start": 105.702,
+   "end": 105.867,
+   "scene": 15
+  },
+  {
+   "text": "smaller",
+   "start": 105.867,
+   "end": 106.363,
+   "scene": 15
+  },
+  {
+   "text": "order",
+   "start": 106.363,
+   "end": 106.748,
+   "scene": 15
+  },
+  {
+   "text": "of",
+   "start": 106.748,
+   "end": 106.969,
+   "scene": 15
+  },
+  {
+   "text": "real",
+   "start": 106.969,
+   "end": 107.299,
+   "scene": 15
+  },
+  {
+   "text": "food",
+   "start": 107.299,
+   "end": 107.629,
+   "scene": 15
+  },
+  {
+   "text": "beats",
+   "start": 107.629,
+   "end": 108.015,
+   "scene": 15
+  },
+  {
+   "text": "a",
+   "start": 108.015,
+   "end": 108.18,
+   "scene": 15
+  },
+  {
+   "text": "full",
+   "start": 108.18,
+   "end": 108.511,
+   "scene": 15
+  },
+  {
+   "text": "tray",
+   "start": 108.511,
+   "end": 108.841,
+   "scene": 15
+  },
+  {
+   "text": "of",
+   "start": 108.841,
+   "end": 109.061,
+   "scene": 15
+  },
+  {
+   "text": "disaster.",
+   "start": 109.061,
+   "end": 109.612,
+   "scene": 15
+  },
+  {
+   "text": "Three.",
+   "start": 110.062,
+   "end": 110.596,
+   "scene": 16
+  },
+  {
+   "text": "Say",
+   "start": 110.816,
+   "end": 111.076,
+   "scene": 16
+  },
+  {
+   "text": "it",
+   "start": 111.076,
+   "end": 111.284,
+   "scene": 16
+  },
+  {
+   "text": "early.",
+   "start": 111.284,
+   "end": 111.648,
+   "scene": 16
+  },
+  {
+   "text": "The",
+   "start": 111.868,
+   "end": 112.085,
+   "scene": 16
+  },
+  {
+   "text": "moment",
+   "start": 112.085,
+   "end": 112.431,
+   "scene": 16
+  },
+  {
+   "text": "the",
+   "start": 112.431,
+   "end": 112.648,
+   "scene": 16
+  },
+  {
+   "text": "beef",
+   "start": 112.648,
+   "end": 112.908,
+   "scene": 16
+  },
+  {
+   "text": "looked",
+   "start": 112.908,
+   "end": 113.254,
+   "scene": 16
+  },
+  {
+   "text": "low,",
+   "start": 113.254,
+   "end": 113.471,
+   "scene": 16
+  },
+  {
+   "text": "that",
+   "start": 113.837,
+   "end": 114.061,
+   "scene": 16
+  },
+  {
+   "text": "was",
+   "start": 114.061,
+   "end": 114.247,
+   "scene": 16
+  },
+  {
+   "text": "the",
+   "start": 114.247,
+   "end": 114.433,
+   "scene": 16
+  },
+  {
+   "text": "time",
+   "start": 114.433,
+   "end": 114.656,
+   "scene": 16
+  },
+  {
+   "text": "to",
+   "start": 114.656,
+   "end": 114.805,
+   "scene": 16
+  },
+  {
+   "text": "speak",
+   "start": 114.805,
+   "end": 115.065,
+   "scene": 16
+  },
+  {
+   "text": "up.",
+   "start": 115.065,
+   "end": 115.214,
+   "scene": 16
+  },
+  {
+   "text": "Not",
+   "start": 115.434,
+   "end": 115.69,
+   "scene": 16
+  },
+  {
+   "text": "at",
+   "start": 115.69,
+   "end": 115.895,
+   "scene": 16
+  },
+  {
+   "text": "midnight.",
+   "start": 115.895,
+   "end": 116.408,
+   "scene": 16
+  },
+  {
+   "text": "Because",
+   "start": 116.858,
+   "end": 117.285,
+   "scene": 17
+  },
+  {
+   "text": "when",
+   "start": 117.285,
+   "end": 117.57,
+   "scene": 17
+  },
+  {
+   "text": "time",
+   "start": 117.57,
+   "end": 117.854,
+   "scene": 17
+  },
+  {
+   "text": "runs",
+   "start": 117.854,
+   "end": 118.139,
+   "scene": 17
+  },
+  {
+   "text": "out,",
+   "start": 118.139,
+   "end": 118.376,
+   "scene": 17
+  },
+  {
+   "text": "you",
+   "start": 118.717,
+   "end": 118.911,
+   "scene": 17
+  },
+  {
+   "text": "can",
+   "start": 118.911,
+   "end": 119.105,
+   "scene": 17
+  },
+  {
+   "text": "cut",
+   "start": 119.105,
+   "end": 119.299,
+   "scene": 17
+  },
+  {
+   "text": "the",
+   "start": 119.299,
+   "end": 119.493,
+   "scene": 17
+  },
+  {
+   "text": "menu.",
+   "start": 119.493,
+   "end": 119.726,
+   "scene": 17
+  },
+  {
+   "text": "But",
+   "start": 119.946,
+   "end": 120.173,
+   "scene": 17
+  },
+  {
+   "text": "never...",
+   "start": 120.173,
+   "end": 120.49,
+   "scene": 17
+  },
+  {
+   "text": "serve",
+   "start": 120.49,
+   "end": 120.807,
+   "scene": 17
+  },
+  {
+   "text": "the",
+   "start": 120.807,
+   "end": 121.034,
+   "scene": 17
+  },
+  {
+   "text": "squirrel.",
+   "start": 121.034,
+   "end": 121.487,
+   "scene": 17
+  }
+ ]
+}
