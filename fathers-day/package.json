@@ -5,7 +5,7 @@
   "description": "Two-camera montage of the Toastmasters speech 'The Day I Became a Father'",
   "scripts": {
     "studio": "remotion studio src/index.ts",
-    "render": "remotion render src/index.ts FathersDay out/fathers-day.mp4 --codec h264 --crf 16 --browser-executable=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell"
+    "render": "remotion render src/index.ts FathersDay out/fathers-day.mp4 --codec h264 --crf 18 --concurrency 3 --timeout 120000 --browser-executable=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell"
   },
   "dependencies": {
     "@fontsource/montserrat": "^5.3.0",

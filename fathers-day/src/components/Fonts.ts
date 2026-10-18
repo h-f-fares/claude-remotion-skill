@@ -10,10 +10,13 @@ const FACES: [string, string, string, string][] = [
   ["Montserrat", "montserrat-latin-800-normal.woff2", "800", "normal"],
 ];
 
-const handle = delayRender("fonts");
+const handle = delayRender("fonts", { timeoutInMilliseconds: 120000 });
 Promise.all(
   FACES.map(([family, file, weight, style]) => {
     const f = new FontFace(family, `url(${staticFile(`fonts/${file}`)}) format("woff2")`, { weight, style });
     return f.load().then(() => document.fonts.add(f));
   }),
-).then(() => continueRender(handle));
+).then(
+  () => continueRender(handle),
+  (err) => { console.error("font load failed", err); continueRender(handle); },
+);
