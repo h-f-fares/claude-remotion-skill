@@ -1,14 +1,15 @@
 import { AbsoluteFill, Audio, Sequence, staticFile, useVideoConfig } from "remotion";
-import "./components/Fonts";
 import { Captions } from "./components/Captions";
 import { Chapter, CHAPTER_SECONDS } from "./components/Chapter";
 import { EndCard } from "./components/EndCard";
+import { useFonts } from "./components/Fonts";
 import { Footage } from "./components/Footage";
 import { Grade, Grain, Vignette } from "./components/Finish";
 import { Title } from "./components/Title";
 import { CHAPTERS, FINAL_LINE_T, sec } from "./edit";
 
 export const FathersDay: React.FC = () => {
+  useFonts();
   const { fps, durationInFrames } = useVideoConfig();
   const endFrom = sec(FINAL_LINE_T) - 6;
   return (

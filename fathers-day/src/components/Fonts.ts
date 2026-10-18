@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { continueRender, delayRender } from "remotion";
 // Fonts are bundled as data URLs (webpack asset/inline) so every render tab has them
 // instantly, without competing with the video streams for the static server.
@@ -19,13 +20,23 @@ const FACES: [string, string, string, string][] = [
   ["Montserrat", ms800, "800", "normal"],
 ];
 
-const handle = delayRender("fonts");
-Promise.all(
-  FACES.map(([family, url, weight, style]) => {
-    const f = new FontFace(family, `url(${url}) format("woff2")`, { weight, style });
-    return f.load().then(() => document.fonts.add(f));
-  }),
-).then(
-  () => continueRender(handle),
-  (err) => { console.error("font load failed", err); continueRender(handle); },
-);
+// Inject @font-face rules (data URLs) once, from inside the rendered component, so
+// idle pages that only import the bundle never hold an open delayRender.
+let injected: Promise<unknown> | null = null;
+const loadFonts = () => {
+  if (!injected) {
+    const tag = document.createElement("style");
+    tag.textContent = FACES.map(([family, url, weight, style]) =>
+      `@font-face{font-family:"${family}";src:url(${url}) format("woff2");font-weight:${weight};font-style:${style};font-display:block}`).join("\n");
+    document.head.appendChild(tag);
+    injected = Promise.all(FACES.map(([family, , weight, style]) => document.fonts.load(`${style} ${weight} 40px "${family}"`)));
+  }
+  return injected;
+};
+
+export const useFonts = () => {
+  const [handle] = useState(() => delayRender("fonts"));
+  useEffect(() => {
+    loadFonts().then(() => continueRender(handle), () => continueRender(handle));
+  }, [handle]);
+};
