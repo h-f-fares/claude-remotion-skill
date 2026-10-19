@@ -28,9 +28,10 @@ export const theme = {
     siren: "#2F6BFF",
   },
   stroke: 6,
+  // stacks: Latin glyphs come from the first font, Arabic falls back to Lalezar
   fonts: {
-    display: "Lilita One",
-    body: "Fredoka",
+    display: "'Lilita One', Lalezar",
+    body: "Fredoka, Lalezar",
   },
   ease: {
     out: Easing.bezier(0.16, 1, 0.3, 1),

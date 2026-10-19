@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { theme } from "../theme";
-import { BEATS, OVERLAP, TOTAL_F, bEnd, bStart, cuts, w } from "./timing";
+import { BEATS, Lang, OVERLAP, bEnd, bStart, cuts, setLang, totalF, w } from "./timing";
 import { B1, B2, B3, B4, B5, B6 } from "./scenesA";
 import { B7, B8, B9, B10, B11, B12 } from "./scenesB";
 import { B13, B14, B15, B16, B17 } from "./scenesC";
@@ -16,7 +16,8 @@ const S = (b: number, n: number) => bStart(b) + cuts(b)[n];
 const B = (b: number, off = 0) => bStart(b) + off;
 
 // SFX land 2–3 frames before the visual they belong to
-const CUES: [string, number, number][] = [
+// built per render, after setLang(), since every frame is looked up by spoken word
+const buildCues = (): [string, number, number][] => [
   ["pop", 8, 0.5],
   ["whoosh", W(1, "got") - 3, 0.5],
   ["boom", W(1, "squirrel") - 2, 0.6],
@@ -86,7 +87,7 @@ const CUES: [string, number, number][] = [
   ["riser", W(17, "serve") - 45, 0.45],
   ["boom", W(17, "serve") - 2, 0.8],
   ["pop", W(17, "serve") + 30, 0.5],
-  ["whoosh", TOTAL_F - 42, 0.5],
+  ["whoosh", totalF() - 42, 0.5],
 ];
 
 const Grade: React.FC = () => (
@@ -117,26 +118,33 @@ const Vignette: React.FC = () => (
   <AbsoluteFill style={{ pointerEvents: "none", background: "radial-gradient(ellipse at center, transparent 58%, rgba(0,0,0,0.28) 100%)" }} />
 );
 
-export const SquirrelLong: React.FC = () => (
-  <AbsoluteFill style={{ background: theme.colors.cream }}>
-    {SCENES.map((Scene, i) => {
-      const b = i + 1;
-      return (
-        <Sequence key={b} from={bStart(b)} durationInFrames={Math.min(TOTAL_F, bEnd(b) + (b < BEATS ? OVERLAP : 0)) - bStart(b)}>
-          <Scene />
+export const SquirrelLong: React.FC<{ lang?: Lang }> = ({ lang = "en" }) => {
+  setLang(lang);
+  const TOTAL = totalF();
+  const cues = buildCues();
+  const vo = lang === "ar" ? "vo-ar.wav" : "vo2.wav";
+  const music = lang === "ar" ? "music-ar.wav" : "music2.wav";
+  return (
+    <AbsoluteFill style={{ background: theme.colors.cream }}>
+      {SCENES.map((Scene, i) => {
+        const b = i + 1;
+        return (
+          <Sequence key={b} from={bStart(b)} durationInFrames={Math.min(TOTAL, bEnd(b) + (b < BEATS ? OVERLAP : 0)) - bStart(b)}>
+            <Scene />
+          </Sequence>
+        );
+      })}
+      <Grade />
+      <Captions hideFrom={W(17, "never")} />
+      <Grain />
+      <Vignette />
+      <Audio src={A(vo)} />
+      <Audio src={A(music)} volume={0.2} />
+      {cues.map(([name, from, vol], i) => (
+        <Sequence key={i} from={Math.max(0, from)} layout="none">
+          <Audio src={A(`${name}.wav`)} volume={vol} />
         </Sequence>
-      );
-    })}
-    <Grade />
-    <Captions hideFrom={W(17, "never")} />
-    <Grain />
-    <Vignette />
-    <Audio src={A("vo2.wav")} />
-    <Audio src={A("music2.wav")} volume={0.2} />
-    {CUES.map(([name, from, vol], i) => (
-      <Sequence key={i} from={Math.max(0, from)} layout="none">
-        <Audio src={A(`${name}.wav`)} volume={vol} />
-      </Sequence>
-    ))}
-  </AbsoluteFill>
-);
+      ))}
+    </AbsoluteFill>
+  );
+};

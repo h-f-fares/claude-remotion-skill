@@ -8,7 +8,7 @@ import { Burger, IconCustomer, IconStore, IconTeam, OldMan, Person, Ray, Squirre
 import { Clock } from "../scenes";
 import { Bug, Calendar, Grinder, Laptop, Scissors } from "./art2";
 import { Card, Flash, Shot, Slam, SpeedLines } from "./kit";
-import { cuts, w } from "./timing";
+import { cuts, isAr, tr, w } from "./timing";
 
 const C = theme.colors;
 const ink = (n = 8) => `${n}px solid ${C.ink}`;
@@ -77,11 +77,11 @@ export const B7: React.FC = () => {
                 </g>
               </svg>
             </div>
-            <div style={{ position: "absolute", left: 230, top: 640, width: 140, height: 50, background: C.cream, border: ink(5), borderRadius: 8, textAlign: "center", fontFamily: theme.fonts.display, fontSize: 32, lineHeight: "50px", color: C.ink }}>KITCHEN</div>
+            <div style={{ position: "absolute", left: 230, top: 640, width: 140, height: 50, background: C.cream, border: ink(5), borderRadius: 8, textAlign: "center", fontFamily: theme.fonts.display, fontSize: 32, lineHeight: "50px", color: C.ink }}>{tr("KITCHEN", "المطبخ")}</div>
           </div>
           {[8, 16].map((d, i) => (
             <div key={d} style={{ position: "absolute", left: i ? 640 : 110, top: i ? 520 : 760, transform: `scale(${sp(frame, c[0] + d)}) rotate(${i ? 10 : -10}deg)` }}>
-              <Display size={130} color={C.mustard}>{i ? "SHHK!" : "CHOP!"}</Display>
+              <Display size={130} color={C.mustard}>{i ? tr("SHHK!", "شَق!") : tr("CHOP!", "طاخ!")}</Display>
             </div>
           ))}
         </>
@@ -98,7 +98,7 @@ export const B7: React.FC = () => {
             <ellipse cx={540} cy={1280} rx={130} ry={34} fill={C.patty} stroke={C.ink} strokeWidth={6} />
           </Stage>
           <div style={{ position: "absolute", left: 0, right: 0, top: 380, display: "flex", justifyContent: "center", transform: `scale(${sp(frame, c[1] + 2)}) rotate(-4deg)` }}>
-            <Display size={130} color={C.mustard}>GRRRIND</Display>
+            <Display size={130} color={C.mustard}>{tr("GRRRIND", "فررررم")}</Display>
           </div>
         </>
       )}
@@ -126,7 +126,7 @@ export const B7: React.FC = () => {
           <div style={{ position: "absolute", left: 40, right: 40, top: 1290, height: 70, background: C.cherry, border: ink(), borderRadius: 18 }} />
           {frame >= bite && (
             <div style={{ position: "absolute", left: 0, right: 0, top: 380, display: "flex", justifyContent: "center", transform: `scale(${chomp}) rotate(-6deg)` }}>
-              <Display size={190} color={C.mustard}>CHOMP!</Display>
+              <Display size={190} color={C.mustard}>{tr("CHOMP!", "هَمّ!")}</Display>
             </div>
           )}
           <SpeedLines at={bite} />
@@ -172,7 +172,7 @@ export const B8: React.FC = () => {
           <div style={{ position: "absolute", left: 0, right: 0, top: 360, display: "flex", justifyContent: "center", transform: `scale(1.8) rotate(${frame * 12}deg)` }}>
             <Clock t={frame * 30} />
           </div>
-          <Slam at={4} words={["3", "HOURS", "LATER"]} colors={[C.mustard, C.cream, C.cream]} top={820} size={150} />
+          <Slam at={4} words={tr("3 HOURS LATER", "بعد ٣ ساعات").split(" ")} colors={isAr() ? [C.cream, C.mustard, C.cream] : [C.mustard, C.cream, C.cream]} top={820} size={150} />
         </>
       ) : (
         <>
@@ -230,13 +230,13 @@ export const B9: React.FC = () => {
           boxSizing: "border-box",
         }}
       >
-        <div style={{ fontFamily: theme.fonts.display, fontSize: 70, textAlign: "center", color: C.ink, borderBottom: ink(6), paddingBottom: 14 }}>THE DAILY GRILL</div>
+        <div style={{ fontFamily: theme.fonts.display, fontSize: 70, textAlign: "center", color: C.ink, borderBottom: ink(6), paddingBottom: 14 }}>{tr("THE DAILY GRILL", "جريدة الشوّاية")}</div>
         <div style={{ fontFamily: theme.fonts.display, fontSize: 104, lineHeight: 0.98, textAlign: "center", color: C.ink, marginTop: 24 }}>
-          BURGER JOINT SERVES <span style={{ color: C.cherry }}>SQUIRREL!</span>
+          {tr("BURGER JOINT SERVES ", "مطعم برغر يقدّم ")}<span style={{ color: C.cherry }}>{tr("SQUIRREL!", "سنجابًا!")}</span>
         </div>
         <div style={{ position: "relative", marginTop: 30, height: 380, background: C.navy, border: ink(6), borderRadius: 8, overflow: "visible" }}>
           <div style={{ position: "absolute", left: 130, top: 110, right: 130, height: 170, background: C.navyDeep, border: ink(8), borderRadius: 24, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
-            <span style={{ fontFamily: theme.fonts.display, fontSize: 120, color: "#FFE3F0", textShadow: `0 0 18px ${C.neon}` }}>RAY'S</span>
+            <span style={{ fontFamily: theme.fonts.display, fontSize: 120, color: "#FFE3F0", textShadow: `0 0 18px ${C.neon}` }}>{tr("RAY'S", "راي")}</span>
             <svg style={{ position: "absolute", inset: 0 }} width={512} height={170} viewBox="0 0 512 170">
               <path d="M256 0 L 236 60 L 280 90 L 244 170" fill="none" stroke={C.cream} strokeWidth={10} strokeLinejoin="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - crack} />
             </svg>
@@ -274,15 +274,15 @@ export const B10: React.FC = () => {
         <>
           <SunburstBg color={C.navy} ray="#26386A" />
           <AbsoluteFill style={{ filter: "grayscale(1)", background: "rgba(0,0,0,0.25)" }} />
-          <Slam at={0} words={["WAIT."]} colors={[C.mustard]} top={560} size={260} rotate={-4} />
-          <Slam at={10} words={["IS", "THIS", "REAL?"]} colors={[C.cream, C.cream, C.cream]} top={900} size={120} rotate={2} />
+          <Slam at={0} words={[tr("WAIT.", "انتظر.")]} colors={[C.mustard]} top={560} size={260} rotate={-4} />
+          <Slam at={10} words={tr("IS THIS REAL?", "هل هي حقيقية؟").split(" ")} colors={[C.cream, C.cream, C.cream]} top={900} size={120} rotate={2} />
         </>
       )}
       {seg === 1 && (
         <>
           <DinerBg />
           <div style={{ position: "absolute", left: 80, right: 120, top: 360, height: 760, background: C.white, border: ink(10), borderRadius: 24, boxShadow: `0 14px 0 ${C.ink}`, display: "flex", padding: 20, gap: 16, boxSizing: "border-box" }}>
-            {["TO DO", "DOING", "DONE"].map((col, i) => (
+            {(isAr() ? ["للتنفيذ", "قيد العمل", "تم"] : ["TO DO", "DOING", "DONE"]).map((col, i) => (
               <div key={col} style={{ flex: 1, background: C.creamDeep, borderRadius: 14, border: ink(5), padding: 12, display: "flex", flexDirection: "column", gap: 14, alignItems: "center" }}>
                 <div style={{ fontFamily: theme.fonts.display, fontSize: 48, color: C.ink }}>{col}</div>
                 {Array.from({ length: 3 - i }).map((_, k) => {
@@ -295,7 +295,7 @@ export const B10: React.FC = () => {
           <div style={{ position: "absolute", left: 0, right: 0, top: 1150, display: "flex", justifyContent: "center", transform: `scale(${sp(frame, w(10, "ken"))})` }}>
             <Card bg={C.ink} style={{ padding: "14px 30px" }}>
               <div style={{ fontFamily: theme.fonts.body, fontWeight: 700, fontSize: 46, color: C.cream, textAlign: "center" }}>
-                KEN SCHWABER · <span style={{ color: C.mustard }}>CO-CREATOR OF SCRUM</span>
+                {tr("KEN SCHWABER · ", "كين شوابر · ")}<span style={{ color: C.mustard }}>{tr("CO-CREATOR OF SCRUM", "أحد مؤسسي سكرم")}</span>
               </div>
             </Card>
           </div>
@@ -308,8 +308,8 @@ export const B10: React.FC = () => {
             <Card bg={C.white} style={{ display: "flex", gap: 24, alignItems: "center" }}>
               <div style={{ width: 110, height: 110, borderRadius: "50%", background: C.mint, border: ink(6), flexShrink: 0 }} />
               <div>
-                <div style={{ fontFamily: theme.fonts.body, fontWeight: 700, fontSize: 36, color: "#7A7A7A" }}>a curious reader · 2015</div>
-                <div style={{ fontFamily: theme.fonts.display, fontSize: 72, color: C.ink }}>Is this story real??</div>
+                <div style={{ fontFamily: theme.fonts.body, fontWeight: 700, fontSize: 36, color: "#7A7A7A" }}>{tr("a curious reader · 2015", "قارئ فضولي · ٢٠١٥")}</div>
+                <div style={{ fontFamily: theme.fonts.display, fontSize: 72, color: C.ink }}>{tr("Is this story real??", "هل القصة حقيقية؟؟")}</div>
               </div>
             </Card>
           </div>
@@ -329,7 +329,7 @@ export const B10: React.FC = () => {
           <SunburstBg color={C.mustard} ray="#F7C964" />
           {frame < every ? (
             <>
-              <Slam at={legend} words={["“IT'S", "A", "LEGEND.”"]} colors={[C.cream, C.cream, C.cherry]} top={620} size={170} />
+              <Slam at={legend} words={isAr() ? ["«إنها", "أسطورة.»"] : ["“IT'S", "A", "LEGEND.”"]} colors={isAr() ? [C.cream, C.cherry] : [C.cream, C.cream, C.cherry]} top={620} size={170} />
               {[0, 1, 2, 3, 4].map((k) => {
                 const a = (k / 5) * Math.PI * 2 + frame / 20;
                 return <div key={k} style={{ position: "absolute", left: 520 + Math.cos(a) * 420, top: 760 + Math.sin(a) * 360, fontSize: 70, color: C.cream, transform: `scale(${0.6 + 0.4 * Math.sin(frame / 4 + k)})`, fontFamily: theme.fonts.display, WebkitTextStroke: `6px ${C.ink}`, paintOrder: "stroke fill" }}>✦</div>;
@@ -365,11 +365,11 @@ export const B11: React.FC = () => {
   return (
     <Shot cuts={c} enter="whip" hits={[c[4] + 8]}>
       <DinerBg />
-      {seg === 0 && <Slam at={2} words={["THINK", "ABOUT", "IT."]} colors={[C.cream, C.cream, C.mustard]} top={640} size={170} />}
+      {seg === 0 && <Slam at={2} words={tr("THINK ABOUT IT.", "فكّر في الأمر.").split(" ")} colors={[C.cream, C.cream, C.mustard]} top={640} size={170} />}
       {seg === 1 && (
         <Stage>
           <g transform={`translate(540 860) scale(${sp(frame, c[1])}) translate(-540 -860)`}>
-            <Calendar x={240} y={560} size={600} label="DEADLINE" circled={ease(frame, [c[1] + 8, c[1] + 22], [0, 1])} locked />
+            <Calendar x={240} y={560} size={600} label={tr("DEADLINE", "الموعد")} circled={ease(frame, [c[1] + 8, c[1] + 22], [0, 1])} locked />
           </g>
         </Stage>
       )}
@@ -385,7 +385,7 @@ export const B11: React.FC = () => {
             })}
             <rect x={270} y={880} width={540} height={60} rx={12} fill="#8A4F2C" stroke={C.ink} strokeWidth={8} />
           </Stage>
-          <Label top={380} bg={C.cream}>TOO MUCH WORK</Label>
+          <Label top={380} bg={C.cream}>{tr("TOO MUCH WORK", "عمل كثير")}</Label>
         </>
       )}
       {seg === 3 && (
@@ -408,12 +408,12 @@ export const B11: React.FC = () => {
         <>
           <div style={{ position: "absolute", left: 140, top: 760, transform: `translateX(${-ease(frame, [c[4] + 8, c[4] + 20], [0, 120])}px) rotate(${-ease(frame, [c[4] + 8, c[4] + 20], [0, 12])}deg)` }}>
             <Card bg={C.mustard} style={{ width: 280, textAlign: "right", borderRight: "none", borderRadius: "28px 0 0 28px" }}>
-              <Display size={110} color={C.ink} stroke={0} style={{ textShadow: "none" }}>QUAL</Display>
+              <Display size={110} color={C.ink} stroke={0} style={{ textShadow: "none" }}>{tr("QUAL", "دة")}</Display>
             </Card>
           </div>
           <div style={{ position: "absolute", left: 500, top: 760, transform: `translateX(${ease(frame, [c[4] + 8, c[4] + 20], [0, 120])}px) rotate(${ease(frame, [c[4] + 8, c[4] + 20], [0, 12])}deg)` }}>
             <Card bg={C.mustard} style={{ width: 280, textAlign: "left", borderLeft: "none", borderRadius: "0 28px 28px 0" }}>
-              <Display size={110} color={C.ink} stroke={0} style={{ textShadow: "none" }}>ITY</Display>
+              <Display size={110} color={C.ink} stroke={0} style={{ textShadow: "none" }}>{tr("ITY", "الجو")}</Display>
             </Card>
           </div>
           <Stage>
@@ -424,21 +424,21 @@ export const B11: React.FC = () => {
       {seg === 5 && (
         <div style={{ position: "absolute", left: 160, right: 200, top: 380, transform: `scale(${sp(frame, c[5])})` }}>
           <Card bg={C.white} style={{ padding: 40 }}>
-            <Display size={90} color={C.ink} stroke={0} style={{ textShadow: "none", textAlign: "left" }}>TESTS</Display>
-            {["login works", "payment works", "no squirrels"].map((t, i) => (
+            <Display size={90} color={C.ink} stroke={0} style={{ textShadow: "none", textAlign: isAr() ? "right" : "left" }}>{tr("TESTS", "الاختبارات")}</Display>
+            {(isAr() ? ["تسجيل الدخول يعمل", "الدفع يعمل", "لا سناجب"] : ["login works", "payment works", "no squirrels"]).map((t, i) => (
               <div key={t} style={{ display: "flex", alignItems: "center", gap: 20, marginTop: 26 }}>
                 <div style={{ width: 60, height: 60, border: ink(6), borderRadius: 10 }} />
                 <div style={{ fontFamily: theme.fonts.body, fontWeight: 700, fontSize: 52, color: C.ink, textDecoration: frame > c[5] + 6 + i * 4 ? "line-through" : "none", textDecorationColor: C.cherry, textDecorationThickness: 8 }}>{t}</div>
               </div>
             ))}
-            <div style={{ fontFamily: theme.fonts.display, fontSize: 80, color: C.cherry, marginTop: 20, transform: `scale(${sp(frame, c[5] + 18)})` }}>SKIPPED</div>
+            <div style={{ fontFamily: theme.fonts.display, fontSize: 80, color: C.cherry, marginTop: 20, transform: `scale(${sp(frame, c[5] + 18)})` }}>{tr("SKIPPED", "تم تخطيها")}</div>
           </Card>
         </div>
       )}
       {seg === 6 && (
         <Stage>
           <rect x={300} y={960} width={480} height={300} rx={14} fill={C.brown} stroke={C.ink} strokeWidth={8} />
-          <text x={540} y={1140} textAnchor="middle" fontFamily={theme.fonts.display} fontSize={78} fill={C.cream} stroke={C.ink} strokeWidth={4} paintOrder="stroke">RELEASE</text>
+          <text x={540} y={1140} textAnchor="middle" fontFamily={theme.fonts.display} fontSize={78} fill={C.cream} stroke={C.ink} strokeWidth={4} paintOrder="stroke">{tr("RELEASE", "الإصدار")}</text>
           <g transform={`translate(0 ${-sp(frame, c[6] + 4) * 300})`}>
             <Bug x={420} y={760} size={240} t={frame} />
           </g>
@@ -498,13 +498,13 @@ export const B12: React.FC = () => {
           <Eye x={720} open={open} look={Math.sin(frame / 10)} />
         </g>
       </Stage>
-      <PayCard at={c[1]} x={70} label="CUSTOMER">
+      <PayCard at={c[1]} x={70} label={tr("CUSTOMER", "الزبون")}>
         <IconCustomer />
       </PayCard>
-      <PayCard at={c[2]} x={400} label="TEAM">
+      <PayCard at={c[2]} x={400} label={tr("TEAM", "الفريق")}>
         <IconTeam />
       </PayCard>
-      <PayCard at={c[3]} x={730} label="BUSINESS">
+      <PayCard at={c[3]} x={730} label={tr("BUSINESS", "الشركة")}>
         <IconStore />
       </PayCard>
     </Shot>

@@ -63,3 +63,12 @@ Hashtags: #agile #scrum #softwareengineering #productmanagement #techdebt #short
 - Edit: camera punch-in on every sentence, whip/zoom/flash transitions, impact shakes + speed lines, kinetic slam titles, 1–2 word captions (Lilita, key words cherry)
 - Source: src/squirrel/long/, comp SquirrelBurgerLong (3720 frames); npm run render:squirrel-long
 - Output: videos/squirrel-burger/squirrel-burger-long.mp4 (-16.6 LUFS), cover squirrel-burger-long-cover.png
+
+## v4 — Arabic cut (SquirrelBurgerLongAR, ~2:18)
+- Voice: user asked for a free Arabic voice understood in Egypt, the Gulf and the Levant → simplified MSA script (vo-ar.txt, fully diacritized for TTS)
+- TTS: Piper ar_JO-SA_miro-high via sherpa-onnx (model from k2-fsa/sherpa-onnx GitHub releases; Edge TTS, Hugging Face and Gemini were unreachable or out of credits; ElevenLabs needs a paid plan)
+- Same 17 beats and sentence counts as English; scenes share code, language set via composition prop (setLang), English anchor words mapped to Arabic in long/timing.ts
+- Captions RTL, tashkeel stripped for display; all on-screen titles translated (tr()); Arabic digits in badges
+- Font: Lalezar (OFL, full TTF from google/fonts on GitHub) as fallback in the theme font stacks
+- Audio: vo-ar.wav, timing-ar.json, music-ar.wav (LANG_CUT=ar node scripts/gen-squirrel-audio.mjs)
+- Render: npm run render:squirrel-long-ar

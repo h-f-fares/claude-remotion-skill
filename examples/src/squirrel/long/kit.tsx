@@ -3,6 +3,7 @@ import React from "react";
 import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { theme } from "../theme";
 import { Display, ease, useSp } from "../motion";
+import { isAr, num } from "./timing";
 
 const C = theme.colors;
 
@@ -115,7 +116,7 @@ export const Slam: React.FC<{
   per?: number;
   rotate?: number;
 }> = ({ at, words, size = 140, colors = [], top, per = 4, rotate = -3 }) => (
-  <div style={{ position: "absolute", left: 50, right: 90, top, display: "flex", flexWrap: "wrap", justifyContent: "center", columnGap: size * 0.25, rowGap: 4, transform: `rotate(${rotate}deg)` }}>
+  <div style={{ position: "absolute", left: 50, right: 90, top, display: "flex", flexWrap: "wrap", justifyContent: "center", columnGap: size * 0.25, rowGap: 4, direction: isAr() ? "rtl" : "ltr", transform: `rotate(${rotate}deg)` }}>
     {words.map((wd, i) => (
       <SlamWord key={i} delay={at + i * per} size={size} color={colors[i] ?? C.cream}>
         {wd}
@@ -156,7 +157,7 @@ export const NumberBadge: React.FC<{ at: number; n: number; top?: number }> = ({
         }}
       >
         <Display size={150} color={C.cream} stroke={10}>
-          {n}
+          {num(n)}
         </Display>
       </div>
     </div>
@@ -165,5 +166,5 @@ export const NumberBadge: React.FC<{ at: number; n: number; top?: number }> = ({
 
 // chunky label card used for kinetic headlines
 export const Card: React.FC<{ bg?: string; children: React.ReactNode; style?: React.CSSProperties }> = ({ bg = C.cream, children, style }) => (
-  <div style={{ background: bg, border: `8px solid ${C.ink}`, borderRadius: 28, boxShadow: `0 12px 0 ${C.ink}`, padding: "18px 34px", ...style }}>{children}</div>
+  <div style={{ direction: isAr() ? "rtl" : "ltr", background: bg, border: `8px solid ${C.ink}`, borderRadius: 28, boxShadow: `0 12px 0 ${C.ink}`, padding: "18px 34px", ...style }}>{children}</div>
 );
