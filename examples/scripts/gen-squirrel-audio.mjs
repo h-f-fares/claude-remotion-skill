@@ -162,7 +162,9 @@ function tickHat(t, amp = 0.03) {
   for (let i = 0; i < secs(0.04); i++) add(t, i, amp * noise() * Math.exp(-(i / SR) * 90));
 }
 // beat start times (s) from the v2 voiceover; T[n] = start of beat n
-const timing2 = JSON.parse(readFileSync(join(OUT, "timing2.json"), "utf8"));
+// LANG=ar builds the Arabic cut's bed from timing-ar.json
+const LANG = process.env.LANG_CUT === "ar" ? "ar" : "en";
+const timing2 = JSON.parse(readFileSync(join(OUT, LANG === "ar" ? "timing-ar.json" : "timing2.json"), "utf8"));
 const T = [0, ...timing2.segments.map((g) => g.start)];
 const last = timing2.segments.at(-1);
 const END = last.start + last.dur;
@@ -198,7 +200,7 @@ for (let t = T[11], i = 0; t < T[13] - 0.1; t += 0.5, i++) {
 swingSection(T[13], END, 1.05);
 bass(END, 41, 1.6, 0.6);
 keys(END, [60, 64, 69, 74], 1.8, 0.12);
-save("music2.wav", music2, 0.8);
+save(LANG === "ar" ? "music-ar.wav" : "music2.wav", music2, 0.8);
 tgt = music;
 
 // ---------------------------------------------------------------- sfx

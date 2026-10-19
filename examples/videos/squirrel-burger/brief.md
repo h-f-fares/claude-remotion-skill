@@ -63,3 +63,30 @@ Hashtags: #agile #scrum #softwareengineering #productmanagement #techdebt #short
 - Edit: camera punch-in on every sentence, whip/zoom/flash transitions, impact shakes + speed lines, kinetic slam titles, 1–2 word captions (Lilita, key words cherry)
 - Source: src/squirrel/long/, comp SquirrelBurgerLong (3720 frames); npm run render:squirrel-long
 - Output: videos/squirrel-burger/squirrel-burger-long.mp4 (-16.6 LUFS), cover squirrel-burger-long-cover.png
+
+## v4 — Arabic cut (SquirrelBurgerLongAR, ~2:18)
+- Voice: user asked for a free Arabic voice understood in Egypt, the Gulf and the Levant → simplified MSA script (vo-ar.txt, fully diacritized for TTS)
+- TTS: Piper ar_JO-SA_miro-high via sherpa-onnx (model from k2-fsa/sherpa-onnx GitHub releases; Edge TTS, Hugging Face and Gemini were unreachable or out of credits; ElevenLabs needs a paid plan)
+- Same 17 beats and sentence counts as English; scenes share code, language set via composition prop (setLang), English anchor words mapped to Arabic in long/timing.ts
+- Captions RTL, tashkeel stripped for display; all on-screen titles translated (tr()); Arabic digits in badges
+- Font: Lalezar (OFL, full TTF from google/fonts on GitHub) as fallback in the theme font stacks
+- Audio: vo-ar.wav, timing-ar.json, music-ar.wav (LANG_CUT=ar node scripts/gen-squirrel-audio.mjs)
+- Render: npm run render:squirrel-long-ar
+
+## v5 — Arabic cut re-voiced in Egyptian (user's Gemini setup)
+- User feedback: Piper Arabic voice "very bad"; asked for a well-reviewed free voice. Edge TTS / Hugging Face blocked by the
+  environment network policy, Google Cloud TTS not enabled on the key; user then shared their own setup:
+  Gemini TTS, model gemini-2.5-flash-preview-tts, voice Charon, persona: warm Cairo man in his 30s sending a voice note,
+  conversational, Arabic → Egyptian dialect only
+- Script: Egyptian (vo-ar.txt, "||" marks sentence breaks; same 17 beats / sentence counts as English)
+- One Gemini call per beat for natural flow; sentence breaks = pauses that best match sentence length share (DP), then word timing by phrase pauses
+- On-screen titles + caption key words switched to Egyptian; anchor words remapped in long/timing.ts
+
+## v6 — two-part Shorts (Arabic), from the research pass
+- Research: completion rate drives Shorts distribution; entertainment does best under ~90s; first-second hook decides swipe-away
+- Part 1 (SquirrelPart1AR, ~65s): hook = burger on screen at frame 0 with the tail poking out + open question title
+  "ليه السنجاب ده بيتدرّس للمبرمجين؟"; story to the bite; ending per user: the old man loved it and ate it all ("يمّ!"), then cliffhanger
+- Part 2 (SquirrelPart2AR, ~97s): recap (he loved it… "بس…"), then per user it opens on the hospital → headline → legend → lessons, then a save-worthy
+  lessons card (٣ دروس) + comment question
+- Extra Gemini lines (Charon + persona): audio/seg-ar-{p1end,p2intro,p2cta}.wav, segments-ar.json
+- Source: src/squirrel/long/Parts.tsx (reuses the long cut via offset Sequences)

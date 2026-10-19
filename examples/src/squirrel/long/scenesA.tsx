@@ -8,7 +8,7 @@ import { Burger, OldMan, Ray, Squirrel } from "../art";
 import { Clock } from "../scenes";
 import { Boss, Door, Globe, Laptop, TrashCan } from "./art2";
 import { Card, Flash, Shot, Slam, SpeedLines } from "./kit";
-import { bLen, cuts, s, w } from "./timing";
+import { bLen, cuts, isAr, s, tr, w } from "./timing";
 
 const C = theme.colors;
 const ink = (n = 8) => `${n}px solid ${C.ink}`;
@@ -34,14 +34,16 @@ const Counter: React.FC = () => (
 );
 
 // ================================================================ 1. hook
+const reveal0 = (frame: number) => frame < w(1, "got") - 2;
 export const B1: React.FC = () => {
   const frame = useCurrentFrame();
   const seg = useSeg(1);
-  const drop = useSp(0, theme.spring.bouncy);
+  // hook: burger is already on screen at frame 0 with a tail poking out, under an open question
+  const punch = ease(frame, [0, 10], [1.12, 1]);
+  const jiggle = reveal0(frame) ? Math.sin(frame * 1.7) * 4 : 0;
   const reveal = useSp(w(1, "got") - 2, theme.spring.bouncy);
   const sq = w(1, "squirrel");
   const bang = useSp(sq, theme.spring.bouncy);
-  const squash = 1 - Math.max(0, drop - 1) * 0.6;
   const wag = Math.sin(frame / 4) * 10 * reveal;
   const globeIn = useSp(s(1, 2), theme.spring.bouncy);
   const soft = w(1, "software");
@@ -53,13 +55,31 @@ export const B1: React.FC = () => {
           <Counter />
           <Stage>
             <ellipse cx={540} cy={1162} rx={330} ry={34} fill={C.white} stroke={C.ink} strokeWidth={6} />
-            <g transform={`translate(0 ${interpolate(drop, [0, 1], [-900, 0])}) translate(540 1160) scale(${2 - squash} ${squash}) translate(-540 -1160)`}>
-              <Burger x={240} y={624} size={600} lift={reveal * 230} tilt={-12 * reveal} patty={reveal < 0.02} clipId="b1-fill" middle={<Squirrel x={72} y={210 - reveal * 210} size={176} tail={wag} />} />
+            <g transform={`translate(${jiggle} 0) translate(540 1160) scale(${punch}) translate(-540 -1160)`}>
+              <Burger
+                x={240}
+                y={624}
+                size={600}
+                lift={reveal * 230}
+                tilt={-12 * reveal}
+                patty={reveal < 0.02}
+                clipId="b1-fill"
+                middle={
+                  reveal < 0.02 ? (
+                    <Squirrel x={170} y={20} size={200} tail={Math.sin(frame / 3) * 14} />
+                  ) : (
+                    <Squirrel x={72} y={210 - reveal * 210} size={176} tail={wag} />
+                  )
+                }
+              />
             </g>
           </Stage>
           <div style={{ position: "absolute", left: 790, top: 560, transform: `scale(${bang}) rotate(${12 - bang * 12}deg)`, opacity: Math.min(1, bang * 2) }}>
             <Display size={210} color={C.mustard} stroke={14}>?!</Display>
           </div>
+          {frame < w(1, "got") && (
+            <Slam at={0} per={2} words={tr("WHY DO DEVS STUDY THIS SQUIRREL?", "ليه السنجاب ده بيتدرّس للمبرمجين؟").split(" ")} colors={[C.cream, C.cream, C.cream, C.mustard, C.mustard]} top={330} size={100} />
+          )}
           <SpeedLines at={sq} />
           <Flash at={sq} peak={0.5} />
         </>
@@ -86,7 +106,7 @@ export const B1: React.FC = () => {
               );
             })}
           </Stage>
-          <Slam at={soft} words={["SOFTWARE", "TEAMS"]} colors={[C.mustard, C.cream]} top={380} size={120} />
+          <Slam at={soft} words={tr("SOFTWARE TEAMS", "فرق البرمجة").split(" ")} colors={[C.mustard, C.cream]} top={380} size={120} />
         </>
       )}
     </Shot>
@@ -108,7 +128,7 @@ const ClosingDiner: React.FC<{ t: number; closed?: number }> = ({ t, closed = 0 
       <div style={{ position: "absolute", right: 40, top: 40, width: 80, height: 80, borderRadius: "50%", background: C.cream, border: ink(5) }} />
       <div style={{ position: "absolute", left: 40, top: 150, transformOrigin: "50% 0%", transform: `rotateY(${closed * 180}deg)`, perspective: 600 }}>
         <div style={{ background: closed > 0.5 ? C.cherry : C.mint, border: ink(6), borderRadius: 12, padding: "10px 22px", transform: closed > 0.5 ? "scaleX(-1)" : undefined }}>
-          <Display size={56} color={C.cream} stroke={6}>{closed > 0.5 ? "CLOSED" : "OPEN"}</Display>
+          <Display size={56} color={C.cream} stroke={6}>{closed > 0.5 ? tr("CLOSED", "مقفول") : tr("OPEN", "مفتوح")}</Display>
         </div>
       </div>
     </div>
@@ -138,7 +158,7 @@ export const B2: React.FC = () => {
             <div style={{ transform: `translateX(${Math.sin(frame / 2) * 10}px)` }}>
               <RewindIcon />
             </div>
-            <Display size={120} color={C.cream}>REWIND</Display>
+            <Display size={120} color={C.cream}>{tr("REWIND", "نرجع بالزمن")}</Display>
           </div>
         </>
       )}
@@ -148,7 +168,7 @@ export const B2: React.FC = () => {
           <Stage>
             <Ray x={250} y={600 + bob} size={580} grin={1} />
           </Stage>
-          <Slam at={c[1]} words={["MEET", "RAY"]} colors={[C.cream, C.mustard]} top={380} size={150} />
+          <Slam at={c[1]} words={tr("MEET RAY", "ده راي").split(" ")} colors={[C.cream, C.mustard]} top={380} size={150} />
         </>
       )}
       {seg >= 2 && (
@@ -160,7 +180,7 @@ export const B2: React.FC = () => {
           <div style={{ position: "absolute", left: 40, right: 40, top: 1150, height: 70, background: C.cherry, border: ink(), borderRadius: 18 }} />
           <div style={{ position: "absolute", left: 70, right: 70, top: 1220, height: 220, background: "#D9D9D9", border: ink(), borderTop: "none" }} />
           <div style={{ position: "absolute", left: 470 + wipe, top: 1110, width: 150, height: 60, background: C.mint, border: ink(6), borderRadius: 14 }} />
-          {frame >= alone && frame < close && <Slam at={alone} words={["ALONE."]} colors={[C.mustard]} top={330} size={140} rotate={-4} />}
+          {frame >= alone && frame < close && <Slam at={alone} words={[tr("ALONE.", "لوحده.")]} colors={[C.mustard]} top={330} size={140} rotate={-4} />}
         </>
       )}
     </Shot>
@@ -182,7 +202,7 @@ export const B3: React.FC = () => {
         <>
           <ClosingDiner t={frame * 0.3} closed={1} />
           <Stage>
-            <Door x={330} y={560} size={420} open={open} label="CLOSED" />
+            <Door x={330} y={560} size={420} open={open} label={tr("CLOSED", "مقفول")} />
             {seg === 1 && (
               <g transform={`translate(${interpolate(walk, [0, 1], [0, -40])} ${interpolate(walk, [0, 1], [60, 0])}) translate(540 980) scale(${interpolate(walk, [0, 1], [0.7, 1])}) translate(-540 -980)`}>
                 <OldMan x={360} y={700 + Math.abs(Math.sin(frame / 4)) * -10} size={360} />
@@ -191,7 +211,7 @@ export const B3: React.FC = () => {
           </Stage>
           {/* door frame light spill */}
           <AbsoluteFill style={{ background: `radial-gradient(ellipse 260px 500px at 540px 980px, rgba(255,236,170,${0.35 * open}), transparent 70%)` }} />
-          {seg === 1 && <Slam at={c[1] + 6} words={["1", "LAST", "CUSTOMER"]} colors={[C.mustard, C.cream, C.cream]} top={380} size={120} />}
+          {seg === 1 && <Slam at={c[1] + 6} words={tr("1 LAST CUSTOMER", "آخر زبون").split(" ")} colors={[C.mustard, C.cream, C.cream]} top={380} size={120} />}
         </>
       ) : (
         <>
@@ -232,18 +252,18 @@ export const B4: React.FC = () => {
           ))}
           {/* the empty ground-beef tray */}
           <div style={{ position: "absolute", left: 110, top: 400, width: 360, height: 110, background: C.white, border: ink(6), borderRadius: 16, transform: `scale(${tag})` }}>
-            <div style={{ position: "absolute", left: 0, right: 0, top: 26, textAlign: "center", fontFamily: theme.fonts.display, fontSize: 46, color: C.ink }}>GROUND BEEF</div>
+            <div style={{ position: "absolute", left: 0, right: 0, top: 26, textAlign: "center", fontFamily: theme.fonts.display, fontSize: 46, color: C.ink }}>{tr("GROUND BEEF", "لحمة مفرومة")}</div>
           </div>
         </div>
         <div style={{ position: "absolute", inset: 0, perspective: 1600 }}>
           <div style={{ position: "absolute", inset: 0, background: `linear-gradient(90deg, ${C.mint}, #A7E8D5)`, border: ink(10), borderRadius: 30, transformOrigin: "0% 50%", transform: `rotateY(${-open * 105}deg)`, backfaceVisibility: "hidden" }} />
         </div>
       </div>
-      {frame >= w(4, "not") && frame < gone && <Slam at={w(4, "not")} words={["NOT", "LOW."]} colors={[C.cream, C.cream]} top={620} size={170} />}
+      {frame >= w(4, "not") && frame < gone && <Slam at={w(4, "not")} words={tr("NOT LOW.", "مش قليلة.").split(" ")} colors={[C.cream, C.cream]} top={620} size={170} />}
       {frame >= gone && (
         <div style={{ position: "absolute", left: 0, right: 0, top: 600, display: "flex", justifyContent: "center", transform: `scale(${interpolate(stamp, [0, 1], [3, 1])}) rotate(-10deg)`, opacity: Math.min(1, stamp * 3) }}>
           <Card bg={C.cherry} style={{ padding: "20px 60px" }}>
-            <Display size={220} stroke={12}>GONE.</Display>
+            <Display size={220} stroke={12}>{tr("GONE.", "خلصانة.")}</Display>
           </Card>
         </div>
       )}
@@ -273,17 +293,17 @@ export const B5: React.FC = () => {
           </Stage>
           <div style={{ position: "absolute", left: 60, top: 380, width: 420, transform: `scale(${poster}) rotate(-5deg)` }}>
             <Card bg={C.cream} style={{ padding: "24px 26px" }}>
-              <div style={{ fontFamily: theme.fonts.display, fontSize: 52, color: C.cherry, textAlign: "center" }}>RULE #1</div>
-              <div style={{ fontFamily: theme.fonts.display, fontSize: 58, lineHeight: 1.05, color: C.ink, textAlign: "center", marginTop: 8 }}>NEVER TURN A CUSTOMER AWAY</div>
+              <div style={{ fontFamily: theme.fonts.display, fontSize: 52, color: C.cherry, textAlign: "center" }}>{tr("RULE #1", "القاعدة رقم ١")}</div>
+              <div style={{ fontFamily: theme.fonts.display, fontSize: 58, lineHeight: 1.05, color: C.ink, textAlign: "center", marginTop: 8 }}>{tr("NEVER TURN A CUSTOMER AWAY", "عمرك ما ترجّع زبون")}</div>
             </Card>
           </div>
-          {frame >= never && <Slam at={never} words={["NEVER."]} colors={[C.cherry]} top={1000} size={200} rotate={-6} />}
+          {frame >= never && <Slam at={never} words={[tr("NEVER.", "أبدًا.")]} colors={[C.cherry]} top={1000} size={200} rotate={-6} />}
           {/* flashback treatment: sepia wash + wobbling vignette */}
           <AbsoluteFill style={{ background: "rgba(140,90,30,0.22)", mixBlendMode: "multiply" }} />
           <AbsoluteFill style={{ background: `radial-gradient(ellipse at center, transparent ${52 + Math.sin(frame / 6) * 3}%, rgba(60,35,10,0.55) 100%)` }} />
           <div style={{ position: "absolute", left: 0, right: 0, top: 300, display: "flex", justifyContent: "center" }}>
             <Card bg={C.ink} style={{ padding: "8px 24px" }}>
-              <div style={{ fontFamily: theme.fonts.body, fontWeight: 700, fontSize: 40, color: C.cream, letterSpacing: 4 }}>THE MANAGER</div>
+              <div style={{ fontFamily: theme.fonts.body, fontWeight: 700, fontSize: 40, color: C.cream, letterSpacing: isAr() ? 0 : 4 }}>{tr("THE MANAGER", "المدير")}</div>
             </Card>
           </div>
         </>
@@ -302,7 +322,7 @@ export const B5: React.FC = () => {
               </g>
             )}
           </Stage>
-          {frame >= creative && <Slam at={creative} words={["CREATIVE"]} colors={[C.mustard]} top={380} size={170} rotate={-4} />}
+          {frame >= creative && <Slam at={creative} words={[tr("CREATIVE", "اتصرّف!")]} colors={[C.mustard]} top={380} size={170} rotate={-4} />}
         </>
       )}
     </Shot>
@@ -355,7 +375,7 @@ export const B6: React.FC = () => {
       {frame < c[1] && (
         <div style={{ position: "absolute", left: 0, right: 0, top: 380, display: "flex", justifyContent: "center", transform: `scale(${card}) rotate(-3deg)` }}>
           <Card bg={C.mustard}>
-            <Display size={90} color={C.ink} stroke={0} style={{ textShadow: "none" }}>EARLIER THAT DAY…</Display>
+            <Display size={90} color={C.ink} stroke={0} style={{ textShadow: "none" }}>{tr("EARLIER THAT DAY…", "الصبح بدري…")}</Display>
           </Card>
         </div>
       )}

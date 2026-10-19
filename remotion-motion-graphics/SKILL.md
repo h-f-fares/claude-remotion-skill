@@ -117,6 +117,10 @@ speech, see the captions section of `references/motion-patterns.md`.
   sound design, pre-delivery checklist. Read before designing scenes and before
   final delivery.
 - `assets/theme.ts` — the theme template to copy into every project.
+- `references/story-videos.md` — narrated story Shorts/Reels: one-round intake,
+  environment preflight (free Kokoro voice, local fonts, caption timing without
+  Whisper), ~2-min retention script structure, viral-grade edit checklist.
+  Read FIRST for any "animate this story/post" request.
 
 ## Common failure modes to actively avoid
 - **Emoji as icons.** Emoji render as full-color platform glyphs (green ✳️,
