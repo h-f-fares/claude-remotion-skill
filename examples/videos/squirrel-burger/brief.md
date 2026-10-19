@@ -84,9 +84,9 @@ Hashtags: #agile #scrum #softwareengineering #productmanagement #techdebt #short
 
 ## v6 — two-part Shorts (Arabic), from the research pass
 - Research: completion rate drives Shorts distribution; entertainment does best under ~90s; first-second hook decides swipe-away
-- Part 1 (SquirrelPart1AR, ~63s): hook = burger on screen at frame 0 with the tail poking out + open question title
-  "ليه السنجاب ده بيتدرّس للمبرمجين؟"; story to the hospital; cliffhanger (blurred newspaper, "الجزء ٢")
-- Part 2 (SquirrelPart2AR, ~94s): recap ("في الجزء اللي فات…"), headline → legend → lessons, then a save-worthy
+- Part 1 (SquirrelPart1AR, ~65s): hook = burger on screen at frame 0 with the tail poking out + open question title
+  "ليه السنجاب ده بيتدرّس للمبرمجين؟"; story to the bite; ending per user: the old man loved it and ate it all ("يمّ!"), then cliffhanger
+- Part 2 (SquirrelPart2AR, ~97s): recap (he loved it… "بس…"), then per user it opens on the hospital → headline → legend → lessons, then a save-worthy
   lessons card (٣ دروس) + comment question
 - Extra Gemini lines (Charon + persona): audio/seg-ar-{p1end,p2intro,p2cta}.wav, segments-ar.json
 - Source: src/squirrel/long/Parts.tsx (reuses the long cut via offset Sequences)

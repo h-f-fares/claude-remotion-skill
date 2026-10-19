@@ -1,6 +1,6 @@
 // Two-part Shorts cut of the long video (Arabic):
-// Part 1 = hook + story up to the hospital + cliffhanger.
-// Part 2 = recap + legend + lessons + a save-worthy lessons card with a comment question.
+// Part 1 = hook + story up to the old man enjoying the burger + cliffhanger.
+// Part 2 = recap + hospital → headline → legend → lessons + a save-worthy lessons card.
 import React from "react";
 import { AbsoluteFill, Audio, Sequence, interpolate, spring, staticFile, useCurrentFrame } from "remotion";
 import { theme } from "../theme";
@@ -33,43 +33,81 @@ const Layers: React.FC = () => (
 const Cliffhanger: React.FC = () => {
   const frame = useCurrentFrame();
   const seg = SEG.p1end;
+  const but = at(seg, "بس");
   const follow = at(seg, "تابعني");
-  const paper = sp(frame, 2);
+  const yum = sp(frame, at(seg, "عجبه"));
+  const plate = at(seg, "لقمة");
+  const paper = sp(frame, but);
   const badge = sp(frame, follow);
+  const bob = useBob(8, 8);
   return (
     <AbsoluteFill>
-      <DarkBg tint={C.navy} />
-      {/* tomorrow's newspaper, face down: the reveal is in part 2 */}
-      <div
-        style={{
-          position: "absolute",
-          left: 190,
-          top: 420,
-          width: 700,
-          height: 820,
-          background: "#F7F0E1",
-          border: `10px solid ${C.ink}`,
-          borderRadius: 12,
-          boxShadow: `18px 18px 0 ${C.ink}`,
-          transform: `rotate(${interpolate(paper, [0, 1], [400, -6])}deg) scale(${interpolate(paper, [0, 1], [0.1, 1])})`,
-          filter: "blur(10px)",
-        }}
-      />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 640, display: "flex", justifyContent: "center", transform: `scale(${1 + Math.sin(frame / 5) * 0.05})` }}>
-        <Display size={420} color={C.mustard} stroke={18}>
-          ؟
-        </Display>
-      </div>
-      {frame >= follow && (
-        <div style={{ position: "absolute", left: 0, right: 0, top: 340, display: "flex", justifyContent: "center", transform: `scale(${badge}) rotate(-4deg)` }}>
-          <Card bg={C.cherry} style={{ padding: "18px 44px" }}>
-            <Display size={110} color={C.cream} stroke={10}>
-              الجزء {num(2)} ←
+      {frame < but ? (
+        <>
+          {/* he loved it: happy old man, the burger disappears bite by bite */}
+          <DinerBg />
+          <svg width={1080} height={1920} viewBox="0 0 1080 1920" style={{ position: "absolute", inset: 0 }}>
+            <OldMan x={240} y={440 + bob} size={600} open={0.35 + 0.35 * Math.abs(Math.sin(frame / 3))} />
+            <ellipse cx={540} cy={1250} rx={300} ry={32} fill={C.white} stroke={C.ink} strokeWidth={6} />
+            {frame < plate && (
+              <g transform={`translate(540 1100) scale(${interpolate(frame, [0, plate], [1, 0.25], { extrapolateRight: "clamp" })}) translate(-540 -1100)`}>
+                <Burger x={300} y={780} size={480} />
+              </g>
+            )}
+            {[0, 1, 2].map((k) => (
+              <path
+                key={k}
+                transform={`translate(${300 + k * 240} ${560 - ((frame * 3 + k * 40) % 120)}) scale(${yum})`}
+                d="M0 10 C -20 -12, -40 10, 0 34 C 40 10, 20 -12, 0 10 Z"
+                fill={C.cherry}
+                stroke={C.ink}
+                strokeWidth={5}
+              />
+            ))}
+          </svg>
+          <div style={{ position: "absolute", left: 0, right: 0, top: 330, display: "flex", justifyContent: "center", transform: `scale(${yum}) rotate(-6deg)` }}>
+            <Display size={170} color={C.mustard}>
+              يمّ!
             </Display>
-          </Card>
-        </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <DarkBg tint={C.navy} />
+          {/* tomorrow's newspaper, blurred: the reveal is in part 2 */}
+          <div
+            style={{
+              position: "absolute",
+              left: 190,
+              top: 420,
+              width: 700,
+              height: 820,
+              background: "#F7F0E1",
+              border: `10px solid ${C.ink}`,
+              borderRadius: 12,
+              boxShadow: `18px 18px 0 ${C.ink}`,
+              transform: `rotate(${interpolate(paper, [0, 1], [400, -6])}deg) scale(${interpolate(paper, [0, 1], [0.1, 1])})`,
+              filter: "blur(10px)",
+            }}
+          />
+          <div style={{ position: "absolute", left: 0, right: 0, top: 640, display: "flex", justifyContent: "center", transform: `scale(${1 + Math.sin(frame / 5) * 0.05})` }}>
+            <Display size={420} color={C.mustard} stroke={18}>
+              ؟
+            </Display>
+          </div>
+          {frame >= follow && (
+            <div style={{ position: "absolute", left: 0, right: 0, top: 340, display: "flex", justifyContent: "center", transform: `scale(${badge}) rotate(-4deg)` }}>
+              <Card bg={C.cherry} style={{ padding: "18px 44px" }}>
+                <Display size={110} color={C.cream} stroke={10}>
+                  الجزء {num(2)} ←
+                </Display>
+              </Card>
+            </div>
+          )}
+          <Flash at={but} peak={0.4} />
+          <Flash at={follow} peak={0.35} />
+        </>
       )}
-      <Flash at={follow} peak={0.35} />
       <Layers />
       <Captions source={seg.words} />
     </AbsoluteFill>
@@ -78,7 +116,7 @@ const Cliffhanger: React.FC = () => {
 
 export const SquirrelPart1: React.FC<{ lang?: Lang }> = ({ lang = "ar" }) => {
   setLang(lang);
-  const story = bStart(9);
+  const story = bStart(8);
   const end = f(SEG.p1end.dur + 1.2);
   return (
     <AbsoluteFill style={{ background: C.cream }}>
@@ -88,7 +126,10 @@ export const SquirrelPart1: React.FC<{ lang?: Lang }> = ({ lang = "ar" }) => {
       <Sequence from={story} durationInFrames={end}>
         <Cliffhanger />
         <Audio src={A("seg-ar-p1end.wav")} />
-        <Audio src={A("music-ar.wav")} startFrom={bStart(8)} volume={0.18} />
+        <Audio src={A("music-ar.wav")} startFrom={bStart(7)} volume={0.18} />
+        <Sequence from={at(SEG.p1end, "بس") - 2} layout="none">
+          <Audio src={A("scratch.wav")} volume={0.5} />
+        </Sequence>
         <Sequence from={at(SEG.p1end, "تابعني") - 40} layout="none">
           <Audio src={A("riser.wav")} volume={0.45} />
         </Sequence>
@@ -101,7 +142,7 @@ export const SquirrelPart1: React.FC<{ lang?: Lang }> = ({ lang = "ar" }) => {
 };
 export const part1Frames = (lang: Lang) => {
   setLang(lang);
-  return bStart(9) + f(SEG.p1end.dur + 1.2);
+  return bStart(8) + f(SEG.p1end.dur + 1.2);
 };
 
 // ---------------------------------------------------------------- part 2 opening: recap
@@ -109,10 +150,10 @@ const Recap: React.FC = () => {
   const frame = useCurrentFrame();
   const seg = SEG.p2intro;
   const ray = at(seg, "راي");
-  const sick = at(seg, "والزبون");
-  const q = at(seg, "طب");
-  const shot = frame < ray ? 0 : frame < sick ? 1 : frame < q ? 2 : 3;
-  const bob = useBob(10, 6);
+  const liked = at(seg, "والراجل");
+  const but = at(seg, "بس");
+  const shot = frame < ray ? 0 : frame < liked ? 1 : frame < but ? 2 : 3;
+  const bob = useBob(8, 8);
   return (
     <AbsoluteFill>
       {shot <= 1 && (
@@ -128,19 +169,22 @@ const Recap: React.FC = () => {
       )}
       {shot === 2 && (
         <>
-          <DarkBg tint={C.sick} />
+          <DinerBg />
           <svg width={1080} height={1920} viewBox="0 0 1080 1920" style={{ position: "absolute", inset: 0 }}>
-            <OldMan x={240} y={480 + bob} size={600} sick={1} open={0.2} />
+            <OldMan x={240} y={440 + bob} size={600} open={0.35 + 0.35 * Math.abs(Math.sin(frame / 3))} />
+            <ellipse cx={540} cy={1250} rx={300} ry={32} fill={C.white} stroke={C.ink} strokeWidth={6} />
+            <g transform={`translate(540 1100) scale(${interpolate(frame, [liked, but], [1, 0.3], { extrapolateRight: "clamp" })}) translate(-540 -1100)`}>
+              <Burger x={300} y={780} size={480} />
+            </g>
           </svg>
-          <AbsoluteFill style={{ background: Math.floor(frame / 4) % 2 ? C.cherry : C.siren, opacity: 0.12, mixBlendMode: "screen" }} />
         </>
       )}
       {shot === 3 && (
         <>
           <SunburstBg color={C.navy} ray="#26386A" />
-          <div style={{ position: "absolute", left: 0, right: 0, top: 560, display: "flex", justifyContent: "center", transform: `scale(${sp(frame, q)})` }}>
-            <Display size={460} color={C.mustard} stroke={18}>
-              ؟
+          <div style={{ position: "absolute", left: 0, right: 0, top: 560, display: "flex", justifyContent: "center", transform: `scale(${sp(frame, but)})` }}>
+            <Display size={300} color={C.mustard} stroke={16}>
+              بس…
             </Display>
           </div>
         </>
@@ -154,8 +198,8 @@ const Recap: React.FC = () => {
         </Card>
       </div>
       <Flash at={ray} peak={0.3} />
-      <Flash at={sick} peak={0.3} />
-      <Flash at={q} peak={0.3} />
+      <Flash at={liked} peak={0.3} />
+      <Flash at={but} peak={0.3} />
       <Layers />
       <Captions source={seg.words} />
     </AbsoluteFill>
@@ -233,7 +277,7 @@ const LessonsCard: React.FC = () => {
 export const SquirrelPart2: React.FC<{ lang?: Lang }> = ({ lang = "ar" }) => {
   setLang(lang);
   const intro = f(SEG.p2intro.dur + 0.5);
-  const from = bStart(9);
+  const from = bStart(8);
   // stop before the long cut's loop wipe; hold the punchline a moment
   const storyLen = bStart(17) + w(17, "serve") + f(2.2) - from;
   const cta = f(SEG.p2cta.dur + 1.8);
@@ -266,5 +310,5 @@ export const SquirrelPart2: React.FC<{ lang?: Lang }> = ({ lang = "ar" }) => {
 };
 export const part2Frames = (lang: Lang) => {
   setLang(lang);
-  return f(SEG.p2intro.dur + 0.5) + (bStart(17) + w(17, "serve") + f(2.2) - bStart(9)) + f(SEG.p2cta.dur + 1.8);
+  return f(SEG.p2intro.dur + 0.5) + (bStart(17) + w(17, "serve") + f(2.2) - bStart(8)) + f(SEG.p2cta.dur + 1.8);
 };
