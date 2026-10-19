@@ -71,7 +71,7 @@ export const B13: React.FC = () => {
       ) : (
         <>
           <SunburstBg />
-          <Slam at={c[1]} words={tr("3 THINGS", "٣ أشياء").split(" ")} colors={[C.mustard, C.cream]} top={640} size={220} />
+          <Slam at={c[1]} words={tr("3 THINGS", "٣ حاجات").split(" ")} colors={[C.mustard, C.cream]} top={640} size={220} />
           <SpeedLines at={c[1]} color={C.cream} />
         </>
       )}
@@ -82,11 +82,11 @@ export const B13: React.FC = () => {
 // ================================================================ 14. negotiate scope, not quality
 const Menu: React.FC<{ at: number; strikeAt: number }> = ({ at, strikeAt }) => {
   const frame = useCurrentFrame();
-  const items = isAr() ? ["برغر", "بطاطس", "ميلك شيك", "حلقات بصل"] : ["BURGER", "FRIES", "SHAKE", "ONION RINGS"];
+  const items = isAr() ? ["برجر", "بطاطس", "شيك", "حلقات بصل"] : ["BURGER", "FRIES", "SHAKE", "ONION RINGS"];
   return (
     <div style={{ position: "absolute", left: 100, top: 520, width: 880, height: 700, transform: `scale(${sp(frame, at)})` }}>
       <div style={{ position: "absolute", inset: 0, background: "#24453B", border: `22px solid ${C.brown}`, outline: ink(), borderRadius: 24, boxShadow: `0 16px 0 ${C.ink}` }} />
-      <div style={{ position: "absolute", left: 0, right: 0, top: 46, textAlign: "center", fontFamily: theme.fonts.display, fontSize: 80, color: C.mustard }}>{tr("TONIGHT'S MENU", "قائمة الليلة")}</div>
+      <div style={{ position: "absolute", left: 0, right: 0, top: 46, textAlign: "center", fontFamily: theme.fonts.display, fontSize: 80, color: C.mustard }}>{tr("TONIGHT'S MENU", "منيو النهارده")}</div>
       {items.map((it, i) => {
         const strike = i === 0 ? 0 : ease(frame, [strikeAt + i * 4, strikeAt + i * 4 + 10], [0, 1]);
         return (
@@ -127,7 +127,7 @@ export const B14: React.FC = () => {
       <NumberBadge at={0} n={1} top={seg === 0 ? 640 : 280} />
       {seg === 1 && (
         <div style={{ position: "absolute", left: 60, right: 100, top: 620, display: "flex", flexDirection: "column", alignItems: "center", gap: 40 }}>
-          <Tag bg={C.mint} ok at={c[1]} frame={frame} rot={-3}>{tr("CUT SCOPE", "قلّل العمل")}</Tag>
+          <Tag bg={C.mint} ok at={c[1]} frame={frame} rot={-3}>{tr("CUT SCOPE", "قلّل الشغل")}</Tag>
           <Tag bg={C.cream} ok={false} at={w(14, "not")} frame={frame} rot={3}>{tr("CUT QUALITY", "قلّل الجودة")}</Tag>
         </div>
       )}
@@ -230,7 +230,7 @@ export const B16: React.FC = () => {
     <Shot cuts={[...c, speak]} enter="whip" hits={[c[3]]}>
       <DinerBg />
       <NumberBadge at={0} n={3} top={seg === 0 ? 640 : 280} />
-      {seg === 1 && <Slam at={c[1]} words={tr("SAY IT EARLY.", "تكلّم مبكرًا.").split(" ")} colors={isAr() ? [C.cream, C.mustard] : [C.cream, C.cream, C.mustard]} top={680} size={180} />}
+      {seg === 1 && <Slam at={c[1]} words={tr("SAY IT EARLY.", "اتكلم بدري.").split(" ")} colors={isAr() ? [C.cream, C.mustard] : [C.cream, C.cream, C.mustard]} top={680} size={180} />}
       {seg === 2 && (
         <>
           <div style={{ position: "absolute", left: 120, top: 620, width: 300, height: 460 }}>
@@ -238,7 +238,7 @@ export const B16: React.FC = () => {
               <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: `${level * 100}%`, background: level < 0.3 ? C.cherry : C.patty }} />
             </div>
             <div style={{ position: "absolute", left: 0, right: 0, top: 480, textAlign: "center" }}>
-              <Display size={70} color={alarm ? C.cherry : C.cream}>{tr("BEEF", "اللحم")}</Display>
+              <Display size={70} color={alarm ? C.cherry : C.cream}>{tr("BEEF", "اللحمة")}</Display>
             </div>
           </div>
           <Stage>
@@ -247,7 +247,7 @@ export const B16: React.FC = () => {
           {frame >= speak && (
             <div style={{ position: "absolute", left: 470, right: 100, top: 470, transform: `scale(${sp(frame, speak)})`, transformOrigin: "30% 100%" }}>
               <Card bg={C.white}>
-                <Display size={64} color={C.ink} stroke={0} style={{ textShadow: "none" }}>{tr("\"HEADS UP, WE'RE LOW!\"", "«انتبه، اللحم يقل!»")}</Display>
+                <Display size={64} color={C.ink} stroke={0} style={{ textShadow: "none" }}>{tr("\"HEADS UP, WE'RE LOW!\"", "«خلّي بالك، اللحمة بتخلص!»")}</Display>
               </Card>
             </div>
           )}
@@ -304,7 +304,7 @@ export const B17: React.FC = () => {
                 }}
               >
                 <div style={{ position: "absolute", left: half ? -400 : 0, width: 800, height: 640, background: "#24453B", border: `22px solid ${C.brown}`, boxSizing: "border-box", borderRadius: 24 }}>
-                  <div style={{ textAlign: "center", fontFamily: theme.fonts.display, fontSize: 110, color: C.mustard, marginTop: 200 }}>{tr("THE MENU", "القائمة")}</div>
+                  <div style={{ textAlign: "center", fontFamily: theme.fonts.display, fontSize: 110, color: C.mustard, marginTop: 200 }}>{tr("THE MENU", "المنيو")}</div>
                 </div>
               </div>
             ))}
@@ -321,8 +321,8 @@ export const B17: React.FC = () => {
               <Squirrel x={300} y={330} size={480} wink={wink} tail={Math.sin(frame / 4) * 10} />
             </g>
           </Stage>
-          <Slam at={never} words={[tr("NEVER", "إياك")]} colors={[C.cream]} top={900} size={170} rotate={-4} />
-          <Slam at={serve} words={tr("SERVE THE SQUIRREL.", "أن تقدم السنجاب.").split(" ")} colors={[C.cream, C.cream, C.mustard]} top={1080} size={130} rotate={-4} />
+          <Slam at={never} words={[tr("NEVER", "عمرك")]} colors={[C.cream]} top={900} size={170} rotate={-4} />
+          <Slam at={serve} words={tr("SERVE THE SQUIRREL.", "ما تقدّم السنجاب.").split(" ")} colors={[C.cream, C.cream, C.mustard]} top={1080} size={130} rotate={-4} />
           <SpeedLines at={serve} color={C.cream} />
         </>
       )}

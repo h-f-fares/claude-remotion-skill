@@ -6,7 +6,7 @@ import { theme } from "../theme";
 import { isAr, lang, words } from "./timing";
 
 const KEY_EN = new Set(["squirrel", "burger", "nobody", "gone", "hospital", "legend", "quality", "scope", "early", "midnight", "bug", "tests", "never", "brand", "valuable", "disaster", "no"]);
-const KEY_AR = ["سنجاب", "برغر", "نفد", "المستشفى", "أسطورة", "الجودة", "مبكرا", "الليل", "الخطأ", "الاختبارات", "أبدا", "إياك", "الكوارث", "الأهم", "قضمة", "ميتا"];
+const KEY_AR = ["سنجاب", "برجر", "خلصانة", "المستشفى", "أسطورة", "الجودة", "بدري", "بالليل", "البج", "التيستات", "أبدا", "عمرك", "الكوارث", "الأهم", "قضمة", "ميت"];
 const TASHKEEL = /[ً-ْٰ]/g;
 const clean = (s: string) => s.replace(TASHKEEL, "");
 const isKey = (t: string) => {

@@ -72,3 +72,12 @@ Hashtags: #agile #scrum #softwareengineering #productmanagement #techdebt #short
 - Font: Lalezar (OFL, full TTF from google/fonts on GitHub) as fallback in the theme font stacks
 - Audio: vo-ar.wav, timing-ar.json, music-ar.wav (LANG_CUT=ar node scripts/gen-squirrel-audio.mjs)
 - Render: npm run render:squirrel-long-ar
+
+## v5 — Arabic cut re-voiced in Egyptian (user's Gemini setup)
+- User feedback: Piper Arabic voice "very bad"; asked for a well-reviewed free voice. Edge TTS / Hugging Face blocked by the
+  environment network policy, Google Cloud TTS not enabled on the key; user then shared their own setup:
+  Gemini TTS, model gemini-2.5-flash-preview-tts, voice Charon, persona: warm Cairo man in his 30s sending a voice note,
+  conversational, Arabic → Egyptian dialect only
+- Script: Egyptian (vo-ar.txt, "||" marks sentence breaks; same 17 beats / sentence counts as English)
+- One Gemini call per beat for natural flow; sentence breaks = pauses that best match sentence length share (DP), then word timing by phrase pauses
+- On-screen titles + caption key words switched to Egyptian; anchor words remapped in long/timing.ts
