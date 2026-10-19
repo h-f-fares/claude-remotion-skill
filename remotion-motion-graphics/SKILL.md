@@ -117,6 +117,11 @@ speech, see the captions section of `references/motion-patterns.md`.
   sound design, pre-delivery checklist. Read before designing scenes and before
   final delivery.
 - `assets/theme.ts` — the theme template to copy into every project.
+- `references/footage-edits.md` — editing real camera footage (speeches,
+  talks, multicam): footage-first intake, multicam audio sync, voice
+  enhancement + putting audience reactions back, forced-aligned captions,
+  pause trimming, camera colour matching, master-editor checklist.
+  Read FIRST for any "edit / montage my video" request.
 - `references/story-videos.md` — narrated story Shorts/Reels: one-round intake,
   environment preflight (free Kokoro voice, local fonts, caption timing without
   Whisper), ~2-min retention script structure, viral-grade edit checklist.
