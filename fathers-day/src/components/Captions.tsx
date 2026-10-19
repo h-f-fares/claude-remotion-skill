@@ -13,7 +13,7 @@ const buildPages = (): Page[] => {
   let cur: W[] = [];
   const flush = () => { if (cur.length) pages.push({ words: cur, start: cur[0].s, end: cur[cur.length - 1].e }); cur = []; };
   (words as W[]).forEach((w, i) => {
-    if (cur.length && cur[0].l !== w.l) flush();
+    if (cur.length && (cur[0].l !== w.l || cur[0].seg !== w.seg)) flush();
     cur.push(w);
     const next = (words as W[])[i + 1];
     const pause = next ? next.s - w.e > 0.45 : true;
@@ -28,7 +28,7 @@ const buildPages = (): Page[] => {
   });
 };
 
-const PAGES = buildPages().filter((p) => p.start < toOut(FINAL_LINE_T) - 0.05);
+const PAGES = buildPages().filter((p) => p.start < toOut(FINAL_LINE_T) - 0.05); // the end card shows the last line
 
 const CaptionPage: React.FC<{ page: Page; len: number }> = ({ page, len }) => {
   const frame = useCurrentFrame();

@@ -5,3 +5,5 @@ public/*.wav
 public/*.m4a
 public/*.mp3
 __pycache__/
+public/*.jpg
+!public/son-cartoon.jpg

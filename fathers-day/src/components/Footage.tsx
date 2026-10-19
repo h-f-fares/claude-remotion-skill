@@ -1,15 +1,16 @@
 import { AbsoluteFill, interpolate, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { B_OFFSET, Cam, FPS, PUSH_SHOTS, SEGMENTS, SHOTS, T_END, toOut } from "../edit";
+import { B_OFFSET, Cam, FPS, OUT_STARTS, PUSH_SHOTS, REACTIONS, SEGMENTS, SHOTS, T_END } from "../edit";
 import { theme } from "../theme";
 import track from "../track.json";
 
 const W = 1080, H = 1920;
-const CLOSE_SCALE = 1.38;
+const CLOSE_SCALE = 1.25;
 const FOCUS_Y = 0.43;
 
 // Both clips carry a baked per-camera LUT (scripts/grade.py): each phone is corrected
-// to match the other, then the same clean cool look is applied to both.
-const SRC = { A: "camA_graded.mp4", B: "camB_graded.mp4" } as const;
+// to match the other, then the same clean cool look is applied to both. Camera A is
+// stabilised (vidstab); camera B is AI-upscaled where it is used (scripts/upscale.py).
+const SRC = { A: "camA_final.mp4", B: "camB_final.mp4" } as const;
 const DISSOLVE = 12; // frames: incoming shot fades in over the outgoing one, ending on the cut
 const JUMP_DISSOLVE = 6; // shorter blend where a pause was removed
 const MIN_PIECE = 0.8; // seconds; shorter pieces take the next shot's camera
@@ -24,7 +25,7 @@ const speakerX = (t: number) => {
 };
 
 // A piece = a stretch of one camera between two cuts on the output timeline.
-type Piece = { cam: Cam; s0: number; s1: number; shot: [number, number]; push: boolean; jump: boolean };
+type Piece = { cam: Cam; s0: number; s1: number; shot: [number, number]; push: boolean; jump: boolean; seg: number };
 
 // Hide each removed pause behind a camera change, rotating through all three angles
 const pickAlt = (prev: Cam, before?: Cam): Cam =>
@@ -40,8 +41,20 @@ const snap = (t: number) => {
   return t;
 };
 
+// Cut to the audience for each reaction, then back to whichever camera was planned
+const camAt = (t: number) => [...SHOTS].reverse().find(([st]) => st <= t)?.[1] ?? "A";
+const withReactions = (): { t: number; cam: Cam; fixed?: boolean }[] => {
+  const out: { t: number; cam: Cam; fixed?: boolean }[] = SHOTS.map(([t, cam]) => ({ t, cam }));
+  REACTIONS.forEach(({ start, end }) => {
+    const a = start - 0.3, b = end + 0.6;
+    for (let i = out.length - 1; i >= 0; i--) if (out[i].t > a && out[i].t < b && !out[i].fixed) out.splice(i, 1);
+    out.push({ t: a, cam: "B", fixed: true }, { t: b, cam: camAt(b) === "B" ? "C" : camAt(b), fixed: true });
+  });
+  return out.sort((x, y) => x.t - y.t);
+};
+
 const buildPieces = (): Piece[] => {
-  const shots = SHOTS.map(([t, cam], i) => ({ t: i ? snap(t) : t, orig: t, cam }))
+  const shots = withReactions().map(({ t, cam, fixed }, i) => ({ t: i && !fixed ? snap(t) : t, orig: t, cam }))
     .filter((s, i, all) => !all[i + 1] || all[i + 1].t > s.t); // a later shot snapped onto the same cut wins
   const shotEnd = (i: number) => (i + 1 < shots.length ? shots[i + 1].t : T_END);
   const raw: Piece[] = [];
@@ -49,7 +62,8 @@ const buildPieces = (): Piece[] => {
     shots.forEach(({ t, orig, cam }, i) => {
       const s0 = Math.max(a, t), s1 = Math.min(b, shotEnd(i));
       if (s1 - s0 <= 1 / FPS) return;
-      raw.push({ cam, s0, s1, shot: [t, shotEnd(i)], push: PUSH_SHOTS.includes(orig), jump: si > 0 && s0 === a });
+      // the cold open stays on the slow push-in close-up
+      raw.push({ cam: si === 0 ? "C" : cam, s0, s1, shot: si === 0 ? [a, b] : [t, shotEnd(i)], push: si === 0 || PUSH_SHOTS.includes(orig), jump: si > 0 && s0 === a, seg: si });
     });
   });
   // at every removed pause, make sure the camera changes
@@ -62,16 +76,22 @@ const buildPieces = (): Piece[] => {
     const prev = raw[i - 1], next = raw[i + 1];
     if (next && p.s1 - p.s0 < MIN_PIECE && (!prev || next.cam !== prev.cam)) p.cam = next.cam;
   });
+  // a sliver that is a whole (very short) segment keeps the previous camera: a soft jump
+  // cut on the same angle reads better than a camera flash
+  raw.forEach((p, i) => {
+    if (i && p.seg === 0 === (raw[i - 1].seg === 0) && p.s1 - p.s0 < MIN_PIECE) p.cam = raw[i - 1].cam;
+  });
   // merge neighbours that ended up on the same camera
   return raw.reduce<Piece[]>((acc, p) => {
     const last = acc[acc.length - 1];
-    if (last && last.cam === p.cam && (!p.jump || p.s1 - p.s0 < MIN_PIECE)) { last.s1 = p.s1; return acc; }
+    if (last && last.cam === p.cam && last.seg === p.seg && (!p.jump || p.s1 - p.s0 < MIN_PIECE)) { last.s1 = p.s1; return acc; }
     acc.push({ ...p });
     return acc;
   }, []);
 };
 
 export const PIECES = buildPieces();
+const outT = (p: Piece, t: number) => OUT_STARTS[p.seg] + (t - SEGMENTS[p.seg][0]); // pieces never span segments
 
 const progress = (t: number, [a, b]: [number, number]) => Math.min(1, Math.max(0, (t - a) / (b - a)));
 
@@ -116,10 +136,11 @@ export const Footage: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: theme.colors.bg }}>
       {PIECES.map((p, i) => {
-        const pre = i === 0 ? 0 : p.jump ? JUMP_DISSOLVE : DISSOLVE;
-        const outStart = Math.round(toOut(p.s0) * fps);
+        // hard cut out of the cold open (the title dip covers it)
+        const pre = i === 0 || p.seg !== PIECES[i - 1].seg && p.seg === 1 ? 0 : p.jump ? JUMP_DISSOLVE : DISSOLVE;
+        const outStart = Math.round(outT(p, p.s0) * fps);
         const from = outStart - pre;
-        const len = Math.round(toOut(p.s1) * fps) - from;
+        const len = Math.round(outT(p, p.s1) * fps) - from;
         return (
           <Sequence key={i} from={from} durationInFrames={len} name={`${p.cam} @${p.s0.toFixed(1)}`}>
             <Shot piece={p} srcStart={p.s0 - pre / fps} pre={pre} />

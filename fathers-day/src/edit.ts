@@ -1,4 +1,5 @@
 // Edit decisions. All times are seconds on camera A's clock (the master).
+import reactions from "./reactions.json";
 import segments from "./segments.json";
 export const FPS = 30;
 export const T_START = 1.5; // trim pre-roll
@@ -31,16 +32,25 @@ export const CHAPTERS: { t: number; label?: string; title: string }[] = [
 ];
 
 export const FINAL_LINE_T = 380.9; // "That was the night I became a father."
+export const CRY_T = 288.2; // "...he cried."
+export const CARTOON = [290.4, 295.7]; // illustrated moment shown over "My wife cried. I cried."
+export const END_CARD_SECONDS = 3.5;
 
-// Kept source ranges after shortening long pauses (scripts/cut-pauses.py).
-// The output timeline plays these back to back.
+// Audience reactions (laughs, applause) found by scripts/find-reactions.py. The edit cuts
+// to the audience (camera B) for each one, except inside the birth moment.
+export const REACTIONS = (reactions as { start: number; end: number }[]).filter((r) => !(r.start > 268 && r.start < CARTOON[1]));
+
+// Kept source ranges after shortening long pauses (scripts/cut-pauses.py), played back to
+// back. Segment 0 is the cold open (the birth moment), so its source range appears twice.
 export const SEGMENTS = segments as [number, number][];
-const OUT_STARTS = SEGMENTS.reduce<number[]>((acc, [a, b], i) => [...acc, i ? acc[i - 1] + (SEGMENTS[i - 1][1] - SEGMENTS[i - 1][0]) : 0], []);
+export const OUT_STARTS = SEGMENTS.reduce<number[]>((acc, [a, b], i) => [...acc, i ? acc[i - 1] + (SEGMENTS[i - 1][1] - SEGMENTS[i - 1][0]) : 0], []);
 export const OUT_DURATION = OUT_STARTS[OUT_STARTS.length - 1] + SEGMENTS[SEGMENTS.length - 1][1] - SEGMENTS[SEGMENTS.length - 1][0];
+export const HOOK_SECONDS = SEGMENTS[0][1] - SEGMENTS[0][0];
 
-// source time (A clock) -> output seconds; times inside a removed pause snap to the next kept frame
+// source time (A clock) -> output seconds in the main body (after the cold open);
+// times inside a removed pause snap to the next kept frame
 export const toOut = (t: number) => {
-  for (let i = 0; i < SEGMENTS.length; i++) {
+  for (let i = 1; i < SEGMENTS.length; i++) {
     const [a, b] = SEGMENTS[i];
     if (t < a) return OUT_STARTS[i];
     if (t <= b) return OUT_STARTS[i] + (t - a);

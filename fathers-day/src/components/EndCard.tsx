@@ -5,7 +5,7 @@ import { Word, WORDS as words } from "../words";
 
 type W = Word;
 const lastLine = Math.max(...(words as W[]).map((w) => w.l));
-const FINAL = (words as W[]).filter((w) => w.l === lastLine);
+const FINAL = (words as W[]).filter((w) => w.l === lastLine && w.seg > 0);
 const START = toOut(FINAL_LINE_T);
 
 // "That was the night I became a father." — word-synced, big, then hold + fade out
@@ -14,7 +14,7 @@ export const EndCard: React.FC = () => {
   const { fps, durationInFrames } = useVideoConfig();
   const t = START + frame / fps;
   const veil = interpolate(frame, [0, 24], [0, 0.6], { easing: theme.ease.out, extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const out = interpolate(frame, [durationInFrames - 45, durationInFrames], [0, 1], { easing: theme.ease.inOut, extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const out = interpolate(frame, [durationInFrames - 30, durationInFrames], [0, 1], { easing: theme.ease.inOut, extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const breathe = 1 + Math.sin(frame / 22) * 0.008;
   return (
     <AbsoluteFill>
