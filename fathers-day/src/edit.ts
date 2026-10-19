@@ -1,4 +1,5 @@
 // Edit decisions. All times are seconds on camera A's clock (the master).
+import segments from "./segments.json";
 export const FPS = 30;
 export const T_START = 1.5; // trim pre-roll
 export const T_END = 387.3; // last frame both cameras share
@@ -31,4 +32,20 @@ export const CHAPTERS: { t: number; label?: string; title: string }[] = [
 
 export const FINAL_LINE_T = 380.9; // "That was the night I became a father."
 
-export const sec = (t: number) => Math.round((t - T_START) * FPS);
+// Kept source ranges after shortening long pauses (scripts/cut-pauses.py).
+// The output timeline plays these back to back.
+export const SEGMENTS = segments as [number, number][];
+const OUT_STARTS = SEGMENTS.reduce<number[]>((acc, [a, b], i) => [...acc, i ? acc[i - 1] + (SEGMENTS[i - 1][1] - SEGMENTS[i - 1][0]) : 0], []);
+export const OUT_DURATION = OUT_STARTS[OUT_STARTS.length - 1] + SEGMENTS[SEGMENTS.length - 1][1] - SEGMENTS[SEGMENTS.length - 1][0];
+
+// source time (A clock) -> output seconds; times inside a removed pause snap to the next kept frame
+export const toOut = (t: number) => {
+  for (let i = 0; i < SEGMENTS.length; i++) {
+    const [a, b] = SEGMENTS[i];
+    if (t < a) return OUT_STARTS[i];
+    if (t <= b) return OUT_STARTS[i] + (t - a);
+  }
+  return OUT_DURATION;
+};
+
+export const sec = (t: number) => Math.round(toOut(t) * FPS);

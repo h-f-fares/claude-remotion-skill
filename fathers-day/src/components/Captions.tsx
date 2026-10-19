@@ -1,9 +1,9 @@
 import { AbsoluteFill, interpolate, Sequence, spring, useCurrentFrame, useVideoConfig } from "remotion";
-import { FINAL_LINE_T, T_START } from "../edit";
+import { FINAL_LINE_T, toOut } from "../edit";
 import { theme } from "../theme";
-import words from "../words.json";
+import { Word, WORDS as words } from "../words";
 
-type W = { t: string; s: number; e: number; l: number };
+type W = Word;
 type Page = { words: W[]; start: number; end: number };
 
 const MAX_WORDS = 4;
@@ -28,7 +28,7 @@ const buildPages = (): Page[] => {
   });
 };
 
-const PAGES = buildPages().filter((p) => p.start < FINAL_LINE_T - T_START - 0.05);
+const PAGES = buildPages().filter((p) => p.start < toOut(FINAL_LINE_T) - 0.05);
 
 const CaptionPage: React.FC<{ page: Page; len: number }> = ({ page, len }) => {
   const frame = useCurrentFrame();

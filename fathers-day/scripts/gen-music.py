@@ -1,11 +1,22 @@
 # Synthesizes an original, gentle piano + pad bed for the speech (no samples, deterministic).
-# Timeline matches the edit (seconds on camera A's clock). Writes public/music.wav.
-import sys, wave
+# Cue times below are on camera A's clock; with a segments file they are mapped onto
+# the pause-cut output timeline. Usage: gen-music.py <out.wav> <dur s> [segments.json T_START]
+import json, sys, wave
 import numpy as np
 
 SR = 44100
 DUR = float(sys.argv[2]) if len(sys.argv) > 2 else 390.0
 OUT = sys.argv[1]
+if len(sys.argv) > 4:
+    SEGS, T0 = json.load(open(sys.argv[3])), float(sys.argv[4])
+    starts = np.cumsum([0] + [b - a for a, b in SEGS[:-1]])
+    def M(t):
+        for (a, b), o in zip(SEGS, starts):
+            if t < a: return float(o)
+            if t <= b: return float(o + t - a)
+        return float(starts[-1] + SEGS[-1][1] - SEGS[-1][0])
+else:
+    M = lambda t: t
 N = int(SR * DUR)
 L = np.zeros(N); R = np.zeros(N)
 rng = np.random.default_rng(7)
@@ -16,12 +27,12 @@ def hz(m): return 440.0 * 2 ** ((m - 69) / 12)
 WARM = [[48, 55, 64, 67], [43, 55, 62, 67], [45, 52, 60, 64], [41, 53, 60, 65]]   # C  G  Am F
 TENSE = [[45, 52, 60, 64], [41, 53, 60, 65], [38, 50, 57, 62], [40, 52, 59, 64]]  # Am F  Dm E
 LIFT = [[41, 53, 60, 65], [43, 55, 62, 67], [48, 55, 64, 67], [48, 55, 64, 72]]   # F  G  C  C
-SECTIONS = [(0, 248, WARM), (248, 280, TENSE), (280, 390, LIFT + WARM)]
+SECTIONS = [(0, M(248), WARM), (M(248), M(280), TENSE), (M(280), DUR, LIFT + WARM)]
 
 def intensity(t):
     pts = [(0, .55), (30, .5), (120, .5), (197, .6), (250, .75), (271, .8), (273, .15),
            (277, .2), (284, 1.0), (300, .9), (313, .6), (360, .6), (378, .85), (384, 1.0), (390, .9)]
-    xs, ys = zip(*pts)
+    xs, ys = zip(*[(M(x), y) for x, y in pts])
     return np.interp(t, xs, ys)
 
 def pad(start, dur, notes, amp):

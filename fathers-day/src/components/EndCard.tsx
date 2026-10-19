@@ -1,12 +1,12 @@
 import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
-import { FINAL_LINE_T, T_START } from "../edit";
+import { FINAL_LINE_T, toOut } from "../edit";
 import { theme } from "../theme";
-import words from "../words.json";
+import { Word, WORDS as words } from "../words";
 
-type W = { t: string; s: number; e: number; l: number };
+type W = Word;
 const lastLine = Math.max(...(words as W[]).map((w) => w.l));
 const FINAL = (words as W[]).filter((w) => w.l === lastLine);
-const START = FINAL_LINE_T - T_START;
+const START = toOut(FINAL_LINE_T);
 
 // "That was the night I became a father." — word-synced, big, then hold + fade out
 export const EndCard: React.FC = () => {
