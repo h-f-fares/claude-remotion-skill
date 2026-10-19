@@ -19,7 +19,7 @@ export const EndTitle: React.FC = () => {
           color: theme.colors.text, textAlign: "center", maxWidth: 900, opacity: t,
           transform: `translateY(${interpolate(t, [0, 1], [40, 0])}px)`,
         }}>
-          The Day I Became <span style={{ fontStyle: "italic", color: theme.colors.primary }}>a Father</span>
+          The Day I Became<br />a <span style={{ fontStyle: "italic", color: theme.colors.primary, fontSize: 150 }}>Father</span>
         </div>
         <div style={{ marginTop: 34, height: 3, width: 260 * rule, background: theme.colors.accent, borderRadius: 2, opacity: 0.8 }} />
         <div style={{
