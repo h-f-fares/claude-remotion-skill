@@ -1,11 +1,12 @@
 # Assembles the voice for the output timeline: the kept ranges of the isolated
 # speech, butt-joined with 8 ms fades so the pause cuts are click-free.
-# Usage: python3 scripts/cut-voice.py <speech_isolated.mp3> <T_START> <out.wav>
+# Usage: python3 scripts/cut-voice.py <voice file starting at T_START> <T_START> <out.wav> [lag s]
 import json, subprocess, sys, wave
 import numpy as np
 
 src, T0, out = sys.argv[1], float(sys.argv[2]), sys.argv[3]
-SR, LAG = 44100, 0.011  # isolated file runs 11 ms late vs camera A (encoder delay)
+LAG = float(sys.argv[4]) if len(sys.argv) > 4 else 0.0  # e.g. 0.011 for the mp3 isolator output (encoder delay)
+SR = 44100
 r = subprocess.run(["ffmpeg", "-v", "error", "-i", src, "-ac", "1", "-ar", str(SR), "-f", "s16le", "-"],
                    capture_output=True, check=True).stdout
 x = np.frombuffer(r, np.int16).astype(np.float32)
