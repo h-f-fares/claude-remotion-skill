@@ -17,7 +17,7 @@ const isKey = (t: string) => {
   return KEY_EN.has(t.toLowerCase().replace(/[^a-z']/g, ""));
 };
 
-type W = ReturnType<typeof words>[number];
+type W = { text: string; start: number; end: number; scene?: number };
 type Page = { words: W[]; start: number; end: number };
 const buildPages = (ws: W[]): Page[] => {
   const pages: Page[] = [];
@@ -33,11 +33,12 @@ const buildPages = (ws: W[]): Page[] => {
   return pages;
 };
 
-export const Captions: React.FC<{ hideFrom?: number }> = ({ hideFrom = Infinity }) => {
+// `source` overrides the voiceover words (times relative to the enclosing Sequence)
+export const Captions: React.FC<{ hideFrom?: number; source?: W[] }> = ({ hideFrom = Infinity, source }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const l = lang();
-  const pages = useMemo(() => buildPages(words()), [l]);
+  const pages = useMemo(() => buildPages(source ?? words()), [l, source]);
   if (frame >= hideFrom) return null;
   const t = frame / fps;
   const idx = pages.findIndex((p) => t >= p.start && t < p.end);

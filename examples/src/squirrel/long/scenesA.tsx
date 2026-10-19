@@ -34,14 +34,16 @@ const Counter: React.FC = () => (
 );
 
 // ================================================================ 1. hook
+const reveal0 = (frame: number) => frame < w(1, "got") - 2;
 export const B1: React.FC = () => {
   const frame = useCurrentFrame();
   const seg = useSeg(1);
-  const drop = useSp(0, theme.spring.bouncy);
+  // hook: burger is already on screen at frame 0 with a tail poking out, under an open question
+  const punch = ease(frame, [0, 10], [1.12, 1]);
+  const jiggle = reveal0(frame) ? Math.sin(frame * 1.7) * 4 : 0;
   const reveal = useSp(w(1, "got") - 2, theme.spring.bouncy);
   const sq = w(1, "squirrel");
   const bang = useSp(sq, theme.spring.bouncy);
-  const squash = 1 - Math.max(0, drop - 1) * 0.6;
   const wag = Math.sin(frame / 4) * 10 * reveal;
   const globeIn = useSp(s(1, 2), theme.spring.bouncy);
   const soft = w(1, "software");
@@ -53,13 +55,31 @@ export const B1: React.FC = () => {
           <Counter />
           <Stage>
             <ellipse cx={540} cy={1162} rx={330} ry={34} fill={C.white} stroke={C.ink} strokeWidth={6} />
-            <g transform={`translate(0 ${interpolate(drop, [0, 1], [-900, 0])}) translate(540 1160) scale(${2 - squash} ${squash}) translate(-540 -1160)`}>
-              <Burger x={240} y={624} size={600} lift={reveal * 230} tilt={-12 * reveal} patty={reveal < 0.02} clipId="b1-fill" middle={<Squirrel x={72} y={210 - reveal * 210} size={176} tail={wag} />} />
+            <g transform={`translate(${jiggle} 0) translate(540 1160) scale(${punch}) translate(-540 -1160)`}>
+              <Burger
+                x={240}
+                y={624}
+                size={600}
+                lift={reveal * 230}
+                tilt={-12 * reveal}
+                patty={reveal < 0.02}
+                clipId="b1-fill"
+                middle={
+                  reveal < 0.02 ? (
+                    <Squirrel x={170} y={20} size={200} tail={Math.sin(frame / 3) * 14} />
+                  ) : (
+                    <Squirrel x={72} y={210 - reveal * 210} size={176} tail={wag} />
+                  )
+                }
+              />
             </g>
           </Stage>
           <div style={{ position: "absolute", left: 790, top: 560, transform: `scale(${bang}) rotate(${12 - bang * 12}deg)`, opacity: Math.min(1, bang * 2) }}>
             <Display size={210} color={C.mustard} stroke={14}>?!</Display>
           </div>
+          {frame < w(1, "got") && (
+            <Slam at={0} per={2} words={tr("WHY DO DEVS STUDY THIS SQUIRREL?", "ليه السنجاب ده بيتدرّس للمبرمجين؟").split(" ")} colors={[C.cream, C.cream, C.cream, C.mustard, C.mustard]} top={330} size={100} />
+          )}
           <SpeedLines at={sq} />
           <Flash at={sq} peak={0.5} />
         </>

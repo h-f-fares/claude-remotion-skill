@@ -3,6 +3,7 @@ import { Composition, cancelRender, continueRender, delayRender, staticFile } fr
 import { SquirrelBurger } from "./SquirrelBurger";
 import { SquirrelLong } from "./long/SquirrelLong";
 import { totalFor } from "./long/timing";
+import { SquirrelPart1, SquirrelPart2, part1Frames, part2Frames } from "./long/Parts";
 import { FPS, TOTAL_F } from "./timing";
 
 // fonts bundled in public/fonts (OFL) so renders work offline
@@ -24,6 +25,8 @@ export const SquirrelRoot: React.FC = () => (
   <>
     <Composition id="SquirrelBurger" component={SquirrelBurger} durationInFrames={TOTAL_F} fps={FPS} width={1080} height={1920} />
     <Composition id="SquirrelBurgerLong" component={SquirrelLong} defaultProps={{ lang: "en" as const }} durationInFrames={totalFor("en")} fps={FPS} width={1080} height={1920} />
+    <Composition id="SquirrelPart1AR" component={SquirrelPart1} defaultProps={{ lang: "ar" as const }} durationInFrames={part1Frames("ar")} fps={FPS} width={1080} height={1920} />
+    <Composition id="SquirrelPart2AR" component={SquirrelPart2} defaultProps={{ lang: "ar" as const }} durationInFrames={part2Frames("ar")} fps={FPS} width={1080} height={1920} />
     <Composition id="SquirrelBurgerLongAR" component={SquirrelLong} defaultProps={{ lang: "ar" as const }} durationInFrames={totalFor("ar")} fps={FPS} width={1080} height={1920} />
   </>
 );
