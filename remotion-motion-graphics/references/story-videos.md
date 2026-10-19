@@ -68,7 +68,33 @@ something that fails:
   give camera transforms a high `transformOrigin` so punch-ins don't push
   top text out of frame.
 
-## 5. Delivery
+## 5. Arabic versions
+- **Ask first whether the user already has a TTS setup** and reuse it. Known-good Egyptian setup:
+  Gemini TTS, model `gemini-2.5-flash-preview-tts`, voice `Charon`, persona prompt: warm Cairo man in
+  his 30s sending a voice note to a close friend, conversational, "Arabic → Egyptian only, never MSA or
+  Gulf". Prepend the persona to the transcript; one call per beat keeps the delivery natural.
+- **Lock the dialect from the audience, not from what a free voice can pronounce.** Free Arabic voices
+  (Piper ar_JO etc.) read MSA only and sound robotic; users reject them.
+- **Sentence breaks in per-beat audio:** pick the pauses whose midpoints best match each sentence's share
+  of characters (DP), not simply the longest pauses — comma pauses are often longer than sentence ends.
+- **Fonts:** use a FULL Arabic display font file (e.g. Lalezar TTF from google/fonts on GitHub) placed in
+  the theme's font stack (`'Lilita One', Lalezar`). Subset files miss `؟`, `،` and Arabic digits and
+  Chrome then shapes the whole run in a thin fallback font. `unicode-range` faces under the Latin family
+  name did not fall back reliably. Test a line with `؟` and ٠١٢ before rendering.
+- RTL: `direction: rtl` on caption and title rows, word-level animation only, Arabic digits via a helper,
+  strip tashkeel for display (keep it in the TTS text).
+- Map every word-anchored cue to the Arabic word spoken at the same moment, and keep the same sentence
+  count per beat as the source language so sentence-indexed cuts still line up.
+
+## 6. Multi-part Shorts
+- Split long stories into ~60–90s parts: Part 1 = hook → story → cliffhanger, Part 2 = 5–8s recap →
+  rest → save-worthy summary card + comment question.
+- **Confirm the split point in one line before rendering** (where Part 1 ends / Part 2 begins). It is a
+  story decision and a wrong guess costs a full re-render.
+- Build parts as offset `<Sequence from={-start}>` windows over the long composition plus new
+  recap/cliffhanger segments; no scene code is duplicated.
+
+## 7. Delivery
 - Render, extract a 1-frame-per-4s contact sheet, fix, re-render.
 - GitHub rejects files >100 MB: commit a CRF ~24 re-encode, send the
   full-quality file to the user directly.
