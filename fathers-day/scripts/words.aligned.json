@@ -2,80 +2,80 @@
 {
 "text": "How",
 "line": 0,
-"start": 3.96,
-"end": 4.268
+"start": 6.014,
+"end": 6.332
 },
 {
 "text": "many",
 "line": 0,
-"start": 4.268,
-"end": 4.637
+"start": 6.332,
+"end": 6.714
 },
 {
 "text": "parents",
 "line": 0,
-"start": 4.637,
-"end": 5.191
+"start": 6.714,
+"end": 7.26
 },
 {
 "text": "are",
 "line": 0,
-"start": 5.191,
-"end": 5.498
+"start": 7.38,
+"end": 7.496
 },
 {
 "text": "here?",
 "line": 0,
-"start": 5.498,
-"end": 5.929
+"start": 7.92,
+"end": 8.22
 },
 {
 "text": "Raise",
 "line": 0,
-"start": 5.929,
-"end": 6.36
+"start": 8.46,
+"end": 8.7
 },
 {
 "text": "your",
 "line": 0,
-"start": 6.36,
-"end": 6.6
+"start": 11.61,
+"end": 12.0
 },
 {
 "text": "hands.",
 "line": 0,
-"start": 12.035,
-"end": 12.335
+"start": 12.06,
+"end": 12.36
 },
 {
 "text": "Nice!",
 "line": 1,
-"start": 12.335,
-"end": 12.234
+"start": 11.096,
+"end": 11.483
 },
 {
 "text": "Keep",
 "line": 1,
-"start": 12.234,
-"end": 12.147
+"start": 11.483,
+"end": 11.815
 },
 {
 "text": "your",
 "line": 1,
-"start": 12.147,
-"end": 12.06
+"start": 11.815,
+"end": 12.146
 },
 {
 "text": "hands",
 "line": 1,
-"start": 12.06,
-"end": 12.33
+"start": 12.146,
+"end": 12.36
 },
 {
 "text": "up",
 "line": 1,
-"start": 12.335,
-"end": 12.575
+"start": 12.36,
+"end": 12.72
 },
 {
 "text": "if",
@@ -87,7 +87,7 @@
 "text": "you",
 "line": 1,
 "start": 14.22,
-"end": 14.73
+"end": 14.76
 },
 {
 "text": "came",
@@ -98,8 +98,8 @@
 {
 "text": "with",
 "line": 1,
-"start": 15.365,
-"end": 15.605
+"start": 15.36,
+"end": 15.6
 },
 {
 "text": "your",
@@ -110,188 +110,188 @@
 {
 "text": "partner",
 "line": 1,
-"start": 15.78,
-"end": 16.53
+"start": 15.81,
+"end": 16.56
 },
 {
 "text": "to",
 "line": 1,
-"start": 16.53,
-"end": 17.19
+"start": 16.56,
+"end": 17.22
 },
 {
 "text": "the",
 "line": 1,
-"start": 17.19,
+"start": 17.22,
 "end": 17.34
 },
 {
 "text": "delivery",
 "line": 1,
-"start": 17.359,
-"end": 18.004
+"start": 17.34,
+"end": 17.94
 },
 {
 "text": "room.",
 "line": 1,
-"start": 18.004,
-"end": 21.065
+"start": 18.15,
+"end": 18.48
 },
 {
 "text": "I",
 "line": 2,
-"start": 21.065,
-"end": 21.155
+"start": 21.775,
+"end": 22.008
 },
 {
 "text": "love",
 "line": 2,
-"start": 21.155,
-"end": 21.605
+"start": 22.008,
+"end": 22.475
 },
 {
 "text": "it.",
 "line": 2,
-"start": 21.605,
-"end": 21.744
+"start": 22.475,
+"end": 22.625
 },
 {
 "text": "Okay.",
 "line": 2,
-"start": 23.49,
-"end": 24.0
+"start": 23.465,
+"end": 24.005
 },
 {
 "text": "Today",
 "line": 3,
-"start": 24.51,
-"end": 24.851
+"start": 24.425,
+"end": 24.845
 },
 {
 "text": "I'm",
 "line": 3,
-"start": 24.851,
-"end": 25.318
+"start": 24.845,
+"end": 25.295
 },
 {
 "text": "telling",
 "line": 3,
-"start": 25.318,
+"start": 25.295,
 "end": 25.655
 },
 {
 "text": "my",
 "line": 3,
-"start": 25.65,
-"end": 25.86
+"start": 25.655,
+"end": 25.835
 },
 {
 "text": "story",
 "line": 3,
-"start": 25.86,
-"end": 26.46
+"start": 25.835,
+"end": 26.585
 },
 {
 "text": "about",
 "line": 3,
-"start": 26.82,
-"end": 27.18
+"start": 26.825,
+"end": 27.185
 },
 {
 "text": "what",
 "line": 3,
-"start": 27.18,
-"end": 27.42
+"start": 27.185,
+"end": 27.425
 },
 {
 "text": "happened",
 "line": 3,
-"start": 27.42,
-"end": 27.78
+"start": 27.425,
+"end": 27.785
 },
 {
 "text": "to",
 "line": 3,
-"start": 27.81,
-"end": 27.93
+"start": 27.815,
+"end": 27.935
 },
 {
 "text": "me",
 "line": 3,
 "start": 27.935,
-"end": 28.355
+"end": 28.385
 },
 {
 "text": "that",
 "line": 3,
 "start": 28.505,
-"end": 28.775
+"end": 28.745
 },
 {
 "text": "day.",
 "line": 3,
 "start": 28.775,
-"end": 30.12
+"end": 29.195
 },
 {
 "text": "So,",
 "line": 4,
-"start": 30.12,
-"end": 30.69
+"start": 30.125,
+"end": 30.725
 },
 {
 "text": "the",
 "line": 4,
-"start": 31.02,
-"end": 31.346
+"start": 31.025,
+"end": 31.242
 },
 {
 "text": "year",
 "line": 4,
-"start": 31.346,
-"end": 31.374
+"start": 31.242,
+"end": 31.445
 },
 {
 "text": "was",
 "line": 4,
-"start": 31.374,
-"end": 31.398
+"start": 31.565,
+"end": 32.105
 },
 {
 "text": "2021.",
 "line": 4,
-"start": 31.398,
-"end": 31.431
+"start": 32.225,
+"end": 32.765
 },
 {
 "text": "It",
 "line": 4,
-"start": 31.431,
-"end": 31.539
+"start": 32.765,
+"end": 33.09
 },
 {
 "text": "was",
 "line": 4,
-"start": 31.56,
-"end": 32.1
+"start": 33.09,
+"end": 33.496
 },
 {
 "text": "during",
 "line": 4,
-"start": 32.1,
-"end": 34.14
+"start": 33.496,
+"end": 34.145
 },
 {
 "text": "the",
 "line": 4,
-"start": 34.14,
-"end": 34.274
+"start": 34.145,
+"end": 34.265
 },
 {
 "text": "pandemic.",
 "line": 4,
-"start": 34.274,
-"end": 36.57
+"start": 34.265,
+"end": 34.865
 },
 {
 "text": "My",
@@ -303,30 +303,30 @@
 "text": "wife",
 "line": 5,
 "start": 36.81,
-"end": 37.44
+"end": 37.32
 },
 {
 "text": "was",
 "line": 5,
-"start": 37.595,
-"end": 37.775
+"start": 37.65,
+"end": 37.74
 },
 {
 "text": "pregnant,",
 "line": 5,
-"start": 37.77,
-"end": 38.28
+"start": 37.83,
+"end": 38.33
 },
 {
 "text": "and",
 "line": 5,
-"start": 39.48,
-"end": 40.17
+"start": 39.662,
+"end": 40.302
 },
 {
 "text": "she",
 "line": 5,
-"start": 40.806,
+"start": 40.8,
 "end": 41.04
 },
 {
@@ -339,49 +339,49 @@
 "text": "an",
 "line": 5,
 "start": 41.46,
-"end": 41.91
+"end": 41.67
 },
 {
 "text": "unstable",
 "line": 5,
-"start": 41.91,
-"end": 42.57
+"start": 41.67,
+"end": 42.6
 },
 {
 "text": "pregnancy.",
 "line": 5,
-"start": 42.57,
-"end": 44.46
+"start": 42.72,
+"end": 43.38
 },
 {
 "text": "We",
 "line": 6,
-"start": 44.46,
-"end": 44.64
+"start": 44.43,
+"end": 44.67
 },
 {
 "text": "had",
 "line": 6,
-"start": 44.64,
-"end": 45.12
+"start": 44.67,
+"end": 44.94
 },
 {
 "text": "a",
 "line": 6,
-"start": 45.12,
-"end": 45.15
+"start": 44.94,
+"end": 45.03
 },
 {
 "text": "lot",
 "line": 6,
-"start": 45.33,
-"end": 45.84
+"start": 45.36,
+"end": 45.87
 },
 {
 "text": "of",
 "line": 6,
 "start": 45.96,
-"end": 46.35
+"end": 46.38
 },
 {
 "text": "checkups,",
@@ -392,20 +392,20 @@
 {
 "text": "and",
 "line": 6,
-"start": 49.11,
-"end": 49.62
+"start": 49.08,
+"end": 49.65
 },
 {
 "text": "that",
 "line": 6,
-"start": 50.64,
+"start": 50.58,
 "end": 50.88
 },
 {
 "text": "was",
 "line": 6,
-"start": 50.88,
-"end": 51.51
+"start": 51.03,
+"end": 51.48
 },
 {
 "text": "the",
@@ -423,18 +423,18 @@
 "text": "checkup.",
 "line": 6,
 "start": 52.62,
-"end": 52.95
+"end": 53.16
 },
 {
 "text": "We",
 "line": 7,
-"start": 53.85,
-"end": 54.0
+"start": 53.561,
+"end": 53.911
 },
 {
 "text": "went",
 "line": 7,
-"start": 54.0,
+"start": 53.911,
 "end": 54.27
 },
 {
@@ -458,19 +458,19 @@
 {
 "text": "at",
 "line": 7,
-"start": 55.11,
-"end": 55.405
+"start": 55.26,
+"end": 55.5
 },
 {
 "text": "Erasmus",
 "line": 7,
-"start": 55.405,
-"end": 56.07
+"start": 55.53,
+"end": 56.04
 },
 {
 "text": "Hospital",
 "line": 7,
-"start": 56.07,
+"start": 56.04,
 "end": 56.58
 },
 {
@@ -482,25 +482,25 @@
 {
 "text": "in",
 "line": 7,
-"start": 57.12,
+"start": 57.15,
 "end": 57.27
 },
 {
 "text": "Rotterdam,",
 "line": 7,
 "start": 57.27,
-"end": 57.99
+"end": 57.93
 },
 {
 "text": "and",
 "line": 7,
-"start": 59.1,
-"end": 59.46
+"start": 59.13,
+"end": 59.43
 },
 {
 "text": "he",
 "line": 7,
-"start": 59.49,
+"start": 59.52,
 "end": 59.64
 },
 {
@@ -513,49 +513,49 @@
 "text": "us",
 "line": 7,
 "start": 59.94,
-"end": 60.45
+"end": 60.42
 },
 {
 "text": "two",
 "line": 7,
 "start": 60.6,
-"end": 61.08
+"end": 61.05
 },
 {
 "text": "things.",
 "line": 7,
-"start": 61.14,
-"end": 61.8
+"start": 61.17,
+"end": 61.74
 },
 {
 "text": "First:",
 "line": 8,
-"start": 62.49,
+"start": 62.46,
 "end": 63.06
 },
 {
 "text": "she",
 "line": 8,
-"start": 64.05,
+"start": 64.08,
 "end": 64.32
 },
 {
 "text": "needs",
 "line": 8,
 "start": 64.32,
-"end": 64.95
+"end": 64.914
 },
 {
 "text": "a",
 "line": 8,
-"start": 64.95,
-"end": 65.43
+"start": 64.914,
+"end": 65.19
 },
 {
 "text": "C-section",
 "line": 8,
-"start": 65.43,
-"end": 66.037
+"start": 65.19,
+"end": 65.43
 },
 {
 "text": "operation.",
@@ -579,13 +579,13 @@
 "text": "that.",
 "line": 8,
 "start": 68.13,
-"end": 68.52
+"end": 68.55
 },
 {
 "text": "Second,",
 "line": 9,
 "start": 69.45,
-"end": 69.853
+"end": 69.84
 },
 {
 "text": "he",
@@ -608,25 +608,25 @@
 {
 "text": "I",
 "line": 9,
-"start": 72.42,
-"end": 72.6
+"start": 72.45,
+"end": 72.63
 },
 {
 "text": "can",
 "line": 9,
-"start": 72.6,
-"end": 72.9
+"start": 72.66,
+"end": 72.93
 },
 {
 "text": "be",
 "line": 9,
-"start": 72.916,
+"start": 72.93,
 "end": 73.44
 },
 {
 "text": "in",
 "line": 9,
-"start": 73.53,
+"start": 73.56,
 "end": 73.74
 },
 {
@@ -639,19 +639,19 @@
 "text": "room.",
 "line": 9,
 "start": 73.83,
-"end": 74.4
+"end": 74.34
 },
 {
 "text": "I",
 "line": 9,
-"start": 74.4,
-"end": 75.672
+"start": 74.34,
+"end": 75.6
 },
 {
 "text": "didn't",
 "line": 9,
-"start": 75.672,
-"end": 76.05
+"start": 75.6,
+"end": 76.02
 },
 {
 "text": "expect",
@@ -663,276 +663,276 @@
 "text": "that.",
 "line": 9,
 "start": 80.28,
-"end": 80.536
+"end": 80.505
 },
 {
 "text": "Because",
 "line": 10,
-"start": 80.536,
-"end": 81.51
+"start": 81.175,
+"end": 81.525
 },
 {
 "text": "I'm",
 "line": 10,
-"start": 81.51,
-"end": 81.763
+"start": 81.525,
+"end": 81.802
 },
 {
 "text": "from",
 "line": 10,
-"start": 81.763,
-"end": 81.93
+"start": 81.802,
+"end": 81.915
 },
 {
 "text": "Egypt,",
 "line": 10,
-"start": 81.935,
-"end": 82.385
+"start": 81.945,
+"end": 82.485
 },
 {
 "text": "and",
 "line": 10,
-"start": 82.59,
-"end": 82.8
+"start": 82.605,
+"end": 82.785
 },
 {
 "text": "back",
 "line": 10,
-"start": 82.775,
-"end": 83.015
+"start": 82.785,
+"end": 83.055
 },
 {
 "text": "there,",
 "line": 10,
-"start": 83.04,
-"end": 83.61
+"start": 83.055,
+"end": 83.535
 },
 {
 "text": "usually",
 "line": 10,
-"start": 84.39,
-"end": 84.87
+"start": 84.375,
+"end": 84.855
 },
 {
 "text": "men",
 "line": 10,
-"start": 84.87,
-"end": 85.23
+"start": 84.855,
+"end": 85.245
 },
 {
 "text": "stay",
 "line": 10,
-"start": 85.23,
-"end": 85.895
+"start": 85.275,
+"end": 85.795
 },
 {
 "text": "in",
 "line": 10,
-"start": 85.895,
-"end": 86.045
+"start": 85.865,
+"end": 86.015
 },
 {
 "text": "the",
 "line": 10,
-"start": 86.045,
-"end": 86.165
+"start": 86.055,
+"end": 86.145
 },
 {
 "text": "hallways",
 "line": 10,
-"start": 86.115,
-"end": 87.06
+"start": 86.145,
+"end": 87.075
 },
 {
 "text": "of",
 "line": 10,
-"start": 87.155,
-"end": 87.335
+"start": 87.165,
+"end": 87.383
 },
 {
 "text": "the",
 "line": 10,
-"start": 87.316,
-"end": 87.403
+"start": 87.383,
+"end": 87.416
 },
 {
 "text": "hospital.",
 "line": 10,
-"start": 87.42,
-"end": 88.17
+"start": 87.416,
+"end": 88.215
 },
 {
 "text": "And",
 "line": 11,
-"start": 89.01,
-"end": 89.672
+"start": 89.025,
+"end": 89.715
 },
 {
 "text": "just",
 "line": 11,
-"start": 89.97,
-"end": 90.306
+"start": 89.955,
+"end": 90.285
 },
 {
 "text": "like",
 "line": 11,
-"start": 90.306,
+"start": 90.285,
 "end": 90.495
 },
 {
 "text": "you,",
 "line": 11,
-"start": 90.486,
-"end": 90.815
+"start": 90.495,
+"end": 90.855
 },
 {
 "text": "I'd",
 "line": 11,
-"start": 90.495,
-"end": 90.81
+"start": 91.215,
+"end": 91.575
 },
 {
 "text": "be",
 "line": 11,
-"start": 91.655,
-"end": 91.805
+"start": 91.665,
+"end": 91.965
 },
 {
 "text": "walking",
 "line": 11,
-"start": 92.37,
-"end": 92.79
+"start": 92.385,
+"end": 92.805
 },
 {
 "text": "around",
 "line": 11,
-"start": 92.79,
-"end": 93.51
+"start": 92.805,
+"end": 93.525
 },
 {
 "text": "like",
 "line": 11,
-"start": 94.11,
-"end": 94.56
+"start": 94.095,
+"end": 94.545
 },
 {
 "text": "this,",
 "line": 11,
-"start": 94.56,
-"end": 94.59
+"start": 94.545,
+"end": 94.605
 },
 {
 "text": "and",
 "line": 11,
-"start": 94.59,
-"end": 94.77
+"start": 94.605,
+"end": 94.755
 },
 {
 "text": "then",
 "line": 11,
-"start": 94.77,
-"end": 95.28
+"start": 94.755,
+"end": 95.265
 },
 {
 "text": "someone",
 "line": 11,
-"start": 95.64,
-"end": 96.15
+"start": 95.625,
+"end": 96.165
 },
 {
 "text": "comes",
 "line": 11,
-"start": 96.15,
-"end": 96.63
+"start": 96.165,
+"end": 96.645
 },
 {
 "text": "and",
 "line": 11,
-"start": 96.63,
-"end": 96.78
+"start": 96.645,
+"end": 96.787
 },
 {
 "text": "gives",
 "line": 11,
-"start": 96.78,
-"end": 97.154
+"start": 96.787,
+"end": 97.147
 },
 {
 "text": "you",
 "line": 11,
-"start": 97.154,
-"end": 97.421
+"start": 97.147,
+"end": 97.404
 },
 {
 "text": "the",
 "line": 11,
-"start": 97.421,
-"end": 97.529
+"start": 97.404,
+"end": 97.534
 },
 {
 "text": "news.",
 "line": 11,
-"start": 97.536,
-"end": 98.28
+"start": 97.655,
+"end": 98.295
 },
 {
 "text": "I",
 "line": 12,
-"start": 99.15,
-"end": 99.27
+"start": 99.135,
+"end": 99.285
 },
 {
 "text": "wasn't",
 "line": 12,
-"start": 99.27,
-"end": 100.05
+"start": 99.285,
+"end": 100.035
 },
 {
 "text": "ready",
 "line": 12,
-"start": 100.05,
-"end": 101.16
+"start": 100.185,
+"end": 100.725
 },
 {
 "text": "for",
 "line": 12,
-"start": 101.16,
-"end": 101.37
+"start": 101.175,
+"end": 101.385
 },
 {
 "text": "this,",
 "line": 12,
-"start": 101.37,
-"end": 101.91
+"start": 101.385,
+"end": 101.955
 },
 {
 "text": "so",
 "line": 12,
-"start": 106.35,
-"end": 106.98
+"start": 106.365,
+"end": 106.965
 },
 {
 "text": "my",
 "line": 12,
-"start": 108.12,
-"end": 108.33
+"start": 108.105,
+"end": 108.345
 },
 {
 "text": "stomach",
 "line": 12,
-"start": 108.305,
-"end": 108.695
+"start": 108.345,
+"end": 108.645
 },
 {
 "text": "ached.",
 "line": 12,
-"start": 108.695,
-"end": 111.51
+"start": 108.825,
+"end": 109.155
 },
 {
 "text": "But",
 "line": 13,
-"start": 111.51,
+"start": 111.54,
 "end": 111.75
 },
 {
@@ -951,60 +951,60 @@
 "text": "want",
 "line": 13,
 "start": 112.47,
-"end": 113.01
+"end": 113.483
 },
 {
 "text": "to",
 "line": 13,
-"start": 113.01,
-"end": 113.28
+"start": 113.483,
+"end": 114.157
 },
 {
 "text": "show",
 "line": 13,
-"start": 113.28,
+"start": 114.157,
 "end": 115.17
 },
 {
 "text": "a",
 "line": 13,
 "start": 115.17,
-"end": 115.44
+"end": 115.47
 },
 {
 "text": "thing",
 "line": 13,
-"start": 115.44,
-"end": 115.95
+"start": 115.47,
+"end": 115.92
 },
 {
 "text": "to",
 "line": 13,
-"start": 115.95,
-"end": 116.407
+"start": 116.34,
+"end": 116.447
 },
 {
 "text": "my",
 "line": 13,
-"start": 116.407,
-"end": 116.594
+"start": 116.447,
+"end": 116.61
 },
 {
 "text": "wife",
 "line": 13,
-"start": 116.594,
-"end": 116.927
+"start": 116.64,
+"end": 117.09
 },
 {
 "text": "at",
 "line": 13,
-"start": 116.927,
-"end": 117.15
+"start": 117.09,
+"end": 117.18
 },
 {
 "text": "this",
 "line": 13,
-"start": 117.15,
+"start": 117.18,
 "end": 117.36
 },
 {
@@ -1035,43 +1035,43 @@
 "text": "to",
 "line": 13,
 "start": 119.67,
-"end": 119.73
+"end": 119.76
 },
 {
 "text": "share",
 "line": 13,
-"start": 119.73,
-"end": 120.24
+"start": 119.76,
+"end": 120.15
 },
 {
 "text": "the",
 "line": 13,
-"start": 120.57,
-"end": 120.75
+"start": 120.6,
+"end": 120.78
 },
 {
 "text": "tension",
 "line": 13,
-"start": 120.75,
-"end": 122.25
+"start": 120.96,
+"end": 121.56
 },
 {
 "text": "inside",
 "line": 13,
-"start": 122.25,
-"end": 122.701
+"start": 122.22,
+"end": 122.7
 },
 {
 "text": "me.",
 "line": 13,
-"start": 122.701,
-"end": 122.94
+"start": 122.7,
+"end": 122.91
 },
 {
 "text": "Moving",
 "line": 14,
 "start": 124.71,
-"end": 125.07
+"end": 125.04
 },
 {
 "text": "forward",
@@ -1082,7 +1082,7 @@
 {
 "text": "to",
 "line": 14,
-"start": 125.76,
+"start": 125.79,
 "end": 125.85
 },
 {
@@ -1095,79 +1095,79 @@
 "text": "day",
 "line": 14,
 "start": 126.0,
-"end": 126.51
+"end": 126.54
 },
 {
 "text": "of",
 "line": 14,
 "start": 126.66,
-"end": 126.87
+"end": 126.896
 },
 {
 "text": "the",
 "line": 14,
-"start": 128.254,
-"end": 128.335
+"start": 126.9,
+"end": 127.02
 },
 {
 "text": "delivery,",
 "line": 14,
-"start": 128.335,
-"end": 128.442
+"start": 127.02,
+"end": 128.25
 },
 {
 "text": "the",
 "line": 14,
-"start": 128.442,
-"end": 128.49
+"start": 128.25,
+"end": 128.34
 },
 {
 "text": "C-section.",
 "line": 14,
-"start": 128.49,
-"end": 128.88
+"start": 128.34,
+"end": 128.49
 },
 {
 "text": "We",
 "line": 15,
-"start": 128.937,
-"end": 129.065
+"start": 128.91,
+"end": 129.082
 },
 {
 "text": "went",
 "line": 15,
-"start": 129.065,
-"end": 129.922
+"start": 129.082,
+"end": 130.23
 },
 {
 "text": "to",
 "line": 15,
-"start": 129.922,
-"end": 130.493
+"start": 130.23,
+"end": 130.38
 },
 {
 "text": "Erasmus,",
 "line": 15,
-"start": 130.493,
-"end": 131.04
+"start": 130.38,
+"end": 131.07
 },
 {
 "text": "the",
 "line": 15,
-"start": 131.04,
+"start": 131.07,
 "end": 131.25
 },
 {
 "text": "hospital",
 "line": 15,
 "start": 131.25,
-"end": 131.82
+"end": 131.85
 },
 {
 "text": "here,",
 "line": 15,
-"start": 132.27,
-"end": 132.66
+"start": 131.85,
+"end": 134.13
 },
 {
 "text": "and",
@@ -1178,7 +1178,7 @@
 {
 "text": "we",
 "line": 15,
-"start": 135.0,
+"start": 135.03,
 "end": 135.21
 },
 {
@@ -1191,42 +1191,42 @@
 "text": "to",
 "line": 15,
 "start": 135.66,
-"end": 136.14
+"end": 136.05
 },
 {
 "text": "something",
 "line": 15,
 "start": 136.29,
-"end": 136.74
+"end": 136.77
 },
 {
 "text": "called",
 "line": 15,
-"start": 136.74,
-"end": 137.06
+"start": 136.77,
+"end": 137.04
 },
 {
 "text": "the",
 "line": 15,
-"start": 137.06,
-"end": 137.454
+"start": 137.04,
+"end": 137.1
 },
 {
 "text": "maternity",
 "line": 15,
-"start": 137.454,
-"end": 138.319
+"start": 137.13,
+"end": 138.12
 },
 {
 "text": "hotel,",
 "line": 15,
-"start": 138.319,
-"end": 138.949
+"start": 138.42,
+"end": 139.05
 },
 {
 "text": "where",
 "line": 16,
-"start": 138.949,
+"start": 139.15,
 "end": 139.5
 },
 {
@@ -1239,7 +1239,7 @@
 "text": "get",
 "line": 16,
 "start": 139.62,
-"end": 139.849
+"end": 139.86
 },
 {
 "text": "a",
@@ -1251,25 +1251,25 @@
 "text": "room",
 "line": 16,
 "start": 139.92,
-"end": 140.25
+"end": 140.4
 },
 {
 "text": "and",
 "line": 16,
-"start": 140.25,
+"start": 140.4,
 "end": 141.69
 },
 {
 "text": "you",
 "line": 16,
 "start": 141.69,
-"end": 141.839
+"end": 141.84
 },
 {
 "text": "wait",
 "line": 16,
-"start": 141.839,
-"end": 142.2
+"start": 141.84,
+"end": 142.14
 },
 {
 "text": "for",
@@ -1281,37 +1281,37 @@
 "text": "your",
 "line": 16,
 "start": 142.38,
-"end": 142.547
+"end": 142.56
 },
 {
 "text": "time",
 "line": 16,
-"start": 142.56,
-"end": 143.04
+"start": 142.59,
+"end": 143.07
 },
 {
 "text": "for",
 "line": 16,
 "start": 143.31,
-"end": 143.49
+"end": 143.52
 },
 {
 "text": "the",
 "line": 16,
-"start": 143.49,
+"start": 143.52,
 "end": 143.64
 },
 {
 "text": "delivery.",
 "line": 16,
 "start": 143.64,
-"end": 144.45
+"end": 144.39
 },
 {
 "text": "We",
 "line": 17,
-"start": 145.41,
-"end": 145.59
+"start": 147.475,
+"end": 147.6
 },
 {
 "text": "were",
@@ -1323,7 +1323,7 @@
 "text": "supposed",
 "line": 17,
 "start": 148.89,
-"end": 149.37
+"end": 149.4
 },
 {
 "text": "to",
@@ -1334,14 +1334,14 @@
 {
 "text": "have",
 "line": 17,
-"start": 149.76,
-"end": 150.185
+"start": 149.79,
+"end": 150.18
 },
 {
 "text": "our",
 "line": 17,
 "start": 151.11,
-"end": 151.56
+"end": 151.59
 },
 {
 "text": "operation",
@@ -1352,212 +1352,212 @@
 {
 "text": "at",
 "line": 17,
-"start": 152.555,
-"end": 152.705
+"start": 152.55,
+"end": 152.76
 },
 {
 "text": "eleven",
 "line": 17,
 "start": 152.85,
-"end": 153.57
+"end": 153.54
 },
 {
 "text": "AM,",
 "line": 17,
-"start": 153.57,
-"end": 156.245
+"start": 154.35,
+"end": 154.86
 },
 {
 "text": "but",
 "line": 18,
-"start": 156.245,
-"end": 156.695
+"start": 156.27,
+"end": 156.72
 },
 {
 "text": "we",
 "line": 18,
-"start": 156.747,
+"start": 156.75,
 "end": 156.87
 },
 {
 "text": "got",
 "line": 18,
 "start": 156.87,
-"end": 157.081
+"end": 157.08
 },
 {
 "text": "delayed,",
 "line": 18,
-"start": 157.081,
-"end": 157.081
+"start": 157.08,
+"end": 157.8
 },
 {
 "text": "because",
 "line": 18,
-"start": 157.081,
-"end": 157.081
+"start": 157.8,
+"end": 160.65
 },
 {
 "text": "there",
 "line": 18,
-"start": 157.081,
-"end": 157.17
+"start": 160.65,
+"end": 160.83
 },
 {
 "text": "was",
 "line": 18,
 "start": 160.83,
-"end": 161.07
+"end": 161.113
 },
 {
 "text": "another",
 "line": 18,
-"start": 161.07,
-"end": 162.095
+"start": 161.113,
+"end": 162.24
 },
 {
 "text": "operation",
 "line": 18,
-"start": 162.095,
-"end": 162.635
+"start": 162.24,
+"end": 162.66
 },
 {
 "text": "before",
 "line": 18,
-"start": 162.645,
-"end": 163.055
+"start": 162.66,
+"end": 163.08
 },
 {
 "text": "us,",
 "line": 18,
 "start": 163.08,
-"end": 163.65
+"end": 163.62
 },
 {
 "text": "and",
 "line": 18,
-"start": 164.34,
-"end": 164.7
+"start": 164.31,
+"end": 164.73
 },
 {
 "text": "she",
 "line": 18,
-"start": 164.7,
-"end": 164.88
+"start": 164.73,
+"end": 164.91
 },
 {
 "text": "had",
 "line": 18,
-"start": 164.88,
-"end": 165.36
+"start": 164.91,
+"end": 165.39
 },
 {
 "text": "COVID.",
 "line": 18,
-"start": 165.36,
-"end": 166.8
+"start": 165.39,
+"end": 165.74
 },
 {
 "text": "That",
 "line": 19,
-"start": 166.8,
-"end": 167.1
+"start": 166.85,
+"end": 167.09
 },
 {
 "text": "means",
 "line": 19,
-"start": 167.1,
-"end": 167.43
+"start": 167.09,
+"end": 167.42
 },
 {
 "text": "we",
 "line": 19,
-"start": 168.99,
-"end": 169.14
+"start": 168.98,
+"end": 169.13
 },
 {
 "text": "need",
 "line": 19,
-"start": 169.14,
-"end": 169.32
+"start": 169.13,
+"end": 169.31
 },
 {
 "text": "to",
 "line": 19,
-"start": 169.32,
-"end": 169.38
+"start": 169.31,
+"end": 169.37
 },
 {
 "text": "stay",
 "line": 19,
-"start": 169.38,
-"end": 169.68
+"start": 169.37,
+"end": 169.7
 },
 {
 "text": "longer,",
 "line": 19,
-"start": 169.68,
-"end": 170.43
+"start": 169.7,
+"end": 170.39
 },
 {
 "text": "because",
 "line": 19,
-"start": 170.76,
-"end": 171.056
+"start": 170.75,
+"end": 171.02
 },
 {
 "text": "they",
 "line": 19,
-"start": 171.056,
-"end": 171.161
+"start": 171.02,
+"end": 171.17
 },
 {
 "text": "need",
 "line": 19,
-"start": 171.161,
-"end": 171.39
+"start": 171.17,
+"end": 171.41
 },
 {
 "text": "extra",
 "line": 19,
-"start": 171.641,
-"end": 172.2
+"start": 171.628,
+"end": 172.19
 },
 {
 "text": "sanitization,",
 "line": 19,
-"start": 172.2,
-"end": 172.261
+"start": 172.19,
+"end": 172.989
 },
 {
 "text": "extra",
 "line": 19,
-"start": 172.261,
-"end": 172.29
+"start": 172.989,
+"end": 173.361
 },
 {
 "text": "precautions,",
 "line": 19,
-"start": 172.29,
-"end": 172.683
+"start": 173.361,
+"end": 174.107
 },
 {
 "text": "et",
 "line": 19,
-"start": 172.683,
-"end": 174.335
+"start": 174.107,
+"end": 174.32
 },
 {
 "text": "cetera.",
 "line": 19,
-"start": 174.335,
-"end": 174.785
+"start": 174.32,
+"end": 174.86
 },
 {
 "text": "And",
 "line": 20,
 "start": 176.55,
-"end": 177.33
+"end": 177.36
 },
 {
 "text": "so",
@@ -1569,13 +1569,13 @@
 "text": "we",
 "line": 20,
 "start": 178.14,
-"end": 178.23
+"end": 178.26
 },
 {
 "text": "waited.",
 "line": 20,
-"start": 178.23,
-"end": 178.95
+"start": 178.41,
+"end": 178.83
 },
 {
 "text": "And",
@@ -1593,43 +1593,43 @@
 "text": "didn't",
 "line": 20,
 "start": 179.34,
-"end": 179.73
+"end": 179.61
 },
 {
 "text": "get",
 "line": 20,
-"start": 180.12,
-"end": 180.3
+"start": 179.61,
+"end": 180.36
 },
 {
 "text": "bored.",
 "line": 20,
-"start": 180.3,
-"end": 180.84
+"start": 180.36,
+"end": 180.87
 },
 {
 "text": "Why?",
 "line": 20,
-"start": 181.68,
-"end": 182.49
+"start": 181.77,
+"end": 182.55
 },
 {
 "text": "The",
 "line": 20,
 "start": 183.42,
-"end": 183.749
+"end": 183.78
 },
 {
 "text": "night",
 "line": 20,
-"start": 183.995,
-"end": 184.265
+"start": 184.02,
+"end": 184.29
 },
 {
 "text": "before,",
 "line": 20,
-"start": 184.292,
-"end": 184.68
+"start": 184.32,
+"end": 184.71
 },
 {
 "text": "I",
@@ -1640,7 +1640,7 @@
 {
 "text": "wasn't",
 "line": 21,
-"start": 186.6,
+"start": 186.653,
 "end": 186.93
 },
 {
@@ -1658,26 +1658,26 @@
 {
 "text": "so",
 "line": 21,
-"start": 187.865,
-"end": 188.075
+"start": 187.86,
+"end": 188.07
 },
 {
 "text": "I",
 "line": 21,
-"start": 188.075,
-"end": 188.135
+"start": 188.07,
+"end": 188.16
 },
 {
 "text": "was",
 "line": 21,
-"start": 188.135,
-"end": 188.285
+"start": 188.16,
+"end": 188.31
 },
 {
 "text": "sitting",
 "line": 21,
-"start": 188.285,
-"end": 188.795
+"start": 188.31,
+"end": 188.82
 },
 {
 "text": "in",
@@ -1688,8 +1688,8 @@
 {
 "text": "that",
 "line": 21,
-"start": 189.455,
-"end": 189.785
+"start": 189.45,
+"end": 189.84
 },
 {
 "text": "seat,",
@@ -1701,7 +1701,7 @@
 "text": "and",
 "line": 21,
 "start": 192.63,
-"end": 193.013
+"end": 193.02
 },
 {
 "text": "I",
@@ -1713,67 +1713,67 @@
 "text": "just",
 "line": 21,
 "start": 193.23,
-"end": 193.515
+"end": 193.5
 },
 {
 "text": "slept",
 "line": 21,
-"start": 193.515,
-"end": 194.893
+"start": 193.53,
+"end": 194.13
 },
 {
 "text": "till",
 "line": 21,
-"start": 194.893,
-"end": 196.073
+"start": 195.72,
+"end": 195.99
 },
 {
 "text": "three",
 "line": 21,
-"start": 196.073,
+"start": 195.99,
 "end": 196.68
 },
 {
 "text": "PM.",
 "line": 21,
-"start": 196.74,
+"start": 196.83,
 "end": 197.37
 },
 {
 "text": "Then",
 "line": 22,
-"start": 197.37,
-"end": 197.845
+"start": 198.01,
+"end": 198.36
 },
 {
 "text": "two",
 "line": 22,
-"start": 197.845,
-"end": 198.241
+"start": 198.36,
+"end": 198.54
 },
 {
 "text": "nurses",
 "line": 22,
-"start": 198.241,
-"end": 198.875
+"start": 198.54,
+"end": 198.93
 },
 {
 "text": "came",
 "line": 22,
-"start": 198.875,
-"end": 199.35
+"start": 198.93,
+"end": 199.41
 },
 {
 "text": "inside",
 "line": 22,
-"start": 199.35,
+"start": 199.41,
 "end": 199.89
 },
 {
 "text": "our",
 "line": 22,
 "start": 199.95,
-"end": 200.37
+"end": 200.4
 },
 {
 "text": "room.",
@@ -1784,25 +1784,25 @@
 {
 "text": "One",
 "line": 23,
-"start": 201.27,
-"end": 204.603
+"start": 208.74,
+"end": 209.031
 },
 {
 "text": "of",
 "line": 23,
-"start": 204.603,
-"end": 207.27
+"start": 209.031,
+"end": 209.311
 },
 {
 "text": "them",
 "line": 23,
-"start": 207.27,
-"end": 207.87
+"start": 209.311,
+"end": 209.73
 },
 {
 "text": "took",
 "line": 23,
-"start": 209.7,
+"start": 209.73,
 "end": 210.21
 },
 {
@@ -1821,30 +1821,30 @@
 "text": "on",
 "line": 23,
 "start": 211.17,
-"end": 211.322
+"end": 211.32
 },
 {
 "text": "the",
 "line": 23,
-"start": 211.322,
+"start": 211.32,
 "end": 211.41
 },
 {
 "text": "stroller,",
 "line": 23,
 "start": 211.41,
-"end": 211.98
+"end": 212.04
 },
 {
 "text": "and",
 "line": 23,
 "start": 213.33,
-"end": 213.541
+"end": 213.54
 },
 {
 "text": "the",
 "line": 23,
-"start": 213.837,
+"start": 213.84,
 "end": 213.96
 },
 {
@@ -1857,18 +1857,18 @@
 "text": "one",
 "line": 23,
 "start": 214.23,
-"end": 214.62
+"end": 214.65
 },
 {
 "text": "took",
 "line": 23,
-"start": 214.62,
-"end": 215.272
+"start": 214.98,
+"end": 215.28
 },
 {
 "text": "me",
 "line": 23,
-"start": 215.272,
+"start": 215.28,
 "end": 215.7
 },
 {
@@ -1886,13 +1886,13 @@
 {
 "text": "direction.",
 "line": 23,
-"start": 217.097,
-"end": 217.71
+"start": 216.96,
+"end": 217.68
 },
 {
 "text": "I",
 "line": 24,
-"start": 218.67,
+"start": 218.64,
 "end": 218.82
 },
 {
@@ -1904,32 +1904,32 @@
 {
 "text": "up",
 "line": 24,
-"start": 219.21,
-"end": 219.438
+"start": 219.24,
+"end": 219.42
 },
 {
 "text": "in",
 "line": 24,
-"start": 219.438,
-"end": 219.702
+"start": 219.42,
+"end": 219.763
 },
 {
 "text": "a",
 "line": 24,
-"start": 219.702,
-"end": 219.9
+"start": 219.763,
+"end": 220.02
 },
 {
 "text": "blue",
 "line": 24,
-"start": 219.9,
-"end": 220.47
+"start": 220.02,
+"end": 220.44
 },
 {
 "text": "coat",
 "line": 24,
-"start": 220.62,
-"end": 221.19
+"start": 220.65,
+"end": 221.22
 },
 {
 "text": "with",
@@ -1953,109 +1953,109 @@
 "text": "cap,",
 "line": 24,
 "start": 222.6,
-"end": 224.625
+"end": 223.11
 },
 {
 "text": "and",
 "line": 25,
-"start": 224.625,
-"end": 226.312
+"start": 228.3,
+"end": 228.675
 },
 {
 "text": "then",
 "line": 25,
-"start": 226.312,
-"end": 228.338
+"start": 228.675,
+"end": 229.125
 },
 {
 "text": "I",
 "line": 25,
-"start": 228.338,
+"start": 229.125,
 "end": 229.35
 },
 {
 "text": "found",
 "line": 25,
 "start": 229.35,
-"end": 229.74
+"end": 229.823
 },
 {
 "text": "myself",
 "line": 25,
-"start": 229.74,
-"end": 229.74
+"start": 229.823,
+"end": 229.828
 },
 {
 "text": "in",
 "line": 25,
-"start": 229.74,
+"start": 229.828,
 "end": 229.83
 },
 {
 "text": "the",
 "line": 25,
 "start": 229.83,
-"end": 229.89
+"end": 229.919
 },
 {
 "text": "middle",
 "line": 25,
-"start": 229.89,
-"end": 230.518
+"start": 229.919,
+"end": 230.49
 },
 {
 "text": "of",
 "line": 25,
-"start": 230.518,
-"end": 230.572
+"start": 230.49,
+"end": 230.548
 },
 {
 "text": "the",
 "line": 25,
-"start": 230.572,
-"end": 230.639
+"start": 230.548,
+"end": 230.62
 },
 {
 "text": "operating",
 "line": 25,
-"start": 230.639,
-"end": 230.786
+"start": 230.62,
+"end": 230.779
 },
 {
 "text": "room.",
 "line": 25,
-"start": 230.786,
+"start": 230.779,
 "end": 230.88
 },
 {
 "text": "My",
 "line": 25,
 "start": 230.88,
-"end": 231.069
+"end": 231.09
 },
 {
 "text": "wife",
 "line": 25,
-"start": 231.069,
-"end": 231.57
+"start": 231.09,
+"end": 231.6
 },
 {
 "text": "lying",
 "line": 25,
-"start": 231.57,
-"end": 231.987
+"start": 231.69,
+"end": 231.99
 },
 {
 "text": "down,",
 "line": 25,
-"start": 231.987,
+"start": 231.99,
 "end": 232.53
 },
 {
 "text": "and",
 "line": 25,
 "start": 233.46,
-"end": 233.79
+"end": 233.76
 },
 {
 "text": "these",
@@ -2066,8 +2066,8 @@
 {
 "text": "big",
 "line": 25,
-"start": 234.3,
-"end": 234.93
+"start": 234.36,
+"end": 234.96
 },
 {
 "text": "surgical",
@@ -2079,60 +2079,60 @@
 "text": "lights",
 "line": 25,
 "start": 236.16,
-"end": 236.908
+"end": 236.94
 },
 {
 "text": "on",
 "line": 25,
-"start": 236.908,
-"end": 237.282
+"start": 236.94,
+"end": 237.297
 },
 {
 "text": "top",
 "line": 25,
-"start": 237.282,
-"end": 237.75
+"start": 237.297,
+"end": 237.744
 },
 {
 "text": "of",
 "line": 25,
-"start": 237.75,
+"start": 237.744,
 "end": 237.87
 },
 {
 "text": "her,",
 "line": 25,
-"start": 237.875,
-"end": 238.355
+"start": 237.9,
+"end": 238.32
 },
 {
 "text": "and",
 "line": 26,
 "start": 239.07,
-"end": 239.43
+"end": 239.46
 },
 {
 "text": "a",
 "line": 26,
 "start": 239.52,
-"end": 239.61
+"end": 239.64
 },
 {
 "text": "lot",
 "line": 26,
-"start": 239.659,
-"end": 239.97
+"start": 239.64,
+"end": 239.94
 },
 {
 "text": "of",
 "line": 26,
-"start": 239.97,
-"end": 240.24
+"start": 239.94,
+"end": 240.36
 },
 {
 "text": "workers",
 "line": 26,
-"start": 241.23,
+"start": 241.2,
 "end": 242.22
 },
 {
@@ -2145,49 +2145,49 @@
 "text": "around:",
 "line": 26,
 "start": 243.18,
-"end": 243.69
+"end": 243.66
 },
 {
 "text": "nurses,",
 "line": 26,
-"start": 244.02,
+"start": 244.05,
 "end": 245.19
 },
 {
 "text": "the",
 "line": 26,
-"start": 245.73,
-"end": 245.846
+"start": 245.19,
+"end": 245.77
 },
 {
 "text": "pediatrician,",
 "line": 26,
-"start": 245.846,
-"end": 248.503
+"start": 245.77,
+"end": 246.72
 },
 {
 "text": "the",
 "line": 26,
-"start": 248.503,
-"end": 249.389
+"start": 246.72,
+"end": 248.1
 },
 {
 "text": "surgeon.",
 "line": 26,
-"start": 249.389,
-"end": 251.16
+"start": 248.1,
+"end": 248.67
 },
 {
 "text": "And",
 "line": 27,
-"start": 251.16,
+"start": 251.19,
 "end": 251.43
 },
 {
 "text": "then",
 "line": 27,
 "start": 251.43,
-"end": 251.91
+"end": 251.935
 },
 {
 "text": "they",
@@ -2199,18 +2199,18 @@
 "text": "started.",
 "line": 27,
 "start": 253.41,
-"end": 253.86
+"end": 253.89
 },
 {
 "text": "Things",
 "line": 27,
-"start": 254.045,
-"end": 254.315
+"start": 253.89,
+"end": 254.46
 },
 {
 "text": "got",
 "line": 27,
-"start": 254.34,
+"start": 254.46,
 "end": 254.55
 },
 {
@@ -2229,66 +2229,66 @@
 "text": "My",
 "line": 27,
 "start": 255.45,
-"end": 255.721
+"end": 255.78
 },
 {
 "text": "only",
 "line": 27,
-"start": 255.752,
+"start": 255.78,
 "end": 256.44
 },
 {
 "text": "role",
 "line": 27,
-"start": 256.59,
-"end": 257.047
+"start": 256.62,
+"end": 257.082
 },
 {
 "text": "in",
 "line": 27,
-"start": 257.047,
-"end": 257.26
+"start": 257.13,
+"end": 257.25
 },
 {
 "text": "this",
 "line": 27,
-"start": 257.26,
-"end": 257.447
+"start": 257.25,
+"end": 257.46
 },
 {
 "text": "moment",
 "line": 27,
-"start": 257.435,
-"end": 257.765
+"start": 257.46,
+"end": 257.79
 },
 {
 "text": "was",
 "line": 27,
 "start": 257.79,
-"end": 257.939
+"end": 257.94
 },
 {
 "text": "sitting",
 "line": 27,
-"start": 257.939,
-"end": 258.251
+"start": 257.94,
+"end": 258.27
 },
 {
 "text": "next",
 "line": 27,
-"start": 258.251,
-"end": 258.459
+"start": 258.27,
+"end": 258.511
 },
 {
 "text": "to",
 "line": 27,
-"start": 258.459,
-"end": 258.597
+"start": 258.511,
+"end": 258.628
 },
 {
 "text": "my",
 "line": 27,
-"start": 258.597,
+"start": 258.628,
 "end": 258.75
 },
 {
@@ -2313,36 +2313,36 @@
 "text": "hand.",
 "line": 27,
 "start": 259.59,
-"end": 260.07
+"end": 260.1
 },
 {
 "text": "And",
 "line": 28,
-"start": 261.15,
+"start": 261.188,
 "end": 261.48
 },
 {
 "text": "I",
 "line": 28,
 "start": 261.57,
-"end": 261.66
+"end": 261.664
 },
 {
 "text": "said,",
 "line": 28,
-"start": 261.66,
-"end": 261.9
+"start": 261.664,
+"end": 261.887
 },
 {
 "text": "yeah,",
 "line": 28,
-"start": 262.113,
-"end": 262.415
+"start": 261.887,
+"end": 263.27
 },
 {
 "text": "this",
 "line": 28,
-"start": 263.278,
+"start": 263.27,
 "end": 263.4
 },
 {
@@ -2372,109 +2372,109 @@
 {
 "text": "fine.",
 "line": 28,
-"start": 264.57,
-"end": 264.87
+"start": 264.0,
+"end": 264.27
 },
 {
 "text": "Things",
 "line": 29,
-"start": 267.575,
-"end": 267.845
+"start": 266.33,
+"end": 266.73
 },
 {
 "text": "were",
 "line": 29,
-"start": 267.845,
-"end": 268.042
+"start": 266.73,
+"end": 267.03
 },
 {
 "text": "going",
 "line": 29,
-"start": 268.042,
-"end": 268.271
+"start": 267.03,
+"end": 267.529
 },
 {
 "text": "so",
 "line": 29,
-"start": 268.271,
-"end": 268.535
+"start": 267.529,
+"end": 268.56
 },
 {
 "text": "fast.",
 "line": 29,
-"start": 268.535,
-"end": 269.077
+"start": 268.56,
+"end": 269.1
 },
 {
 "text": "Beeping,",
 "line": 29,
-"start": 269.077,
-"end": 269.49
+"start": 269.16,
+"end": 269.52
 },
 {
 "text": "voices,",
 "line": 29,
-"start": 269.49,
-"end": 270.15
+"start": 269.52,
+"end": 270.12
 },
 {
 "text": "people",
 "line": 29,
-"start": 270.15,
-"end": 270.835
+"start": 270.63,
+"end": 270.9
 },
 {
 "text": "moving.",
 "line": 29,
-"start": 270.835,
+"start": 270.96,
 "end": 271.59
 },
 {
 "text": "Then",
 "line": 30,
-"start": 271.95,
-"end": 272.07
+"start": 272.11,
+"end": 272.46
 },
 {
 "text": "suddenly,",
 "line": 30,
-"start": 272.49,
-"end": 272.94
+"start": 272.46,
+"end": 272.97
 },
 {
 "text": "everything",
 "line": 30,
-"start": 272.94,
-"end": 273.421
+"start": 272.97,
+"end": 273.45
 },
 {
 "text": "went",
 "line": 30,
-"start": 273.421,
-"end": 273.74
+"start": 273.45,
+"end": 273.75
 },
 {
 "text": "so",
 "line": 30,
-"start": 273.74,
+"start": 273.75,
 "end": 274.11
 },
 {
 "text": "quiet.",
 "line": 30,
-"start": 274.11,
-"end": 276.78
+"start": 274.38,
+"end": 275.1
 },
 {
 "text": "And",
 "line": 31,
-"start": 276.78,
-"end": 276.96
+"start": 276.544,
+"end": 276.894
 },
 {
 "text": "then",
 "line": 31,
-"start": 276.96,
+"start": 276.894,
 "end": 277.41
 },
 {
@@ -2487,55 +2487,55 @@
 "text": "surgeon",
 "line": 31,
 "start": 277.65,
-"end": 278.37
+"end": 278.22
 },
 {
 "text": "lifted",
 "line": 31,
-"start": 278.37,
-"end": 279.57
+"start": 278.22,
+"end": 279.6
 },
 {
 "text": "this",
 "line": 31,
-"start": 279.57,
+"start": 279.6,
 "end": 279.87
 },
 {
 "text": "little",
 "line": 31,
-"start": 279.87,
+"start": 279.93,
 "end": 280.47
 },
 {
 "text": "reddish-pink",
 "line": 31,
-"start": 280.47,
-"end": 283.11
+"start": 280.8,
+"end": 281.64
 },
 {
 "text": "body.",
 "line": 31,
-"start": 283.11,
-"end": 284.43
+"start": 282.75,
+"end": 283.2
 },
 {
 "text": "And",
 "line": 32,
 "start": 284.43,
-"end": 284.97
+"end": 285.0
 },
 {
 "text": "for",
 "line": 32,
 "start": 285.03,
-"end": 285.234
+"end": 285.24
 },
 {
 "text": "a",
 "line": 32,
-"start": 285.217,
-"end": 285.245
+"start": 285.24,
+"end": 285.24
 },
 {
 "text": "few",
@@ -2552,13 +2552,13 @@
 {
 "text": "a",
 "line": 32,
-"start": 286.422,
-"end": 286.478
+"start": 286.26,
+"end": 286.35
 },
 {
 "text": "few",
 "line": 32,
-"start": 286.47,
+"start": 286.35,
 "end": 286.68
 },
 {
@@ -2570,50 +2570,50 @@
 {
 "text": "he",
 "line": 32,
-"start": 290.4,
-"end": 290.607
+"start": 287.34,
+"end": 288.244
 },
 {
 "text": "cried.",
 "line": 32,
-"start": 290.607,
-"end": 290.61
+"start": 288.244,
+"end": 288.63
 },
 {
 "text": "My",
 "line": 33,
-"start": 290.61,
+"start": 290.64,
 "end": 290.79
 },
 {
 "text": "wife",
 "line": 33,
-"start": 290.79,
+"start": 290.82,
 "end": 291.09
 },
 {
 "text": "cried.",
 "line": 33,
-"start": 291.095,
-"end": 291.515
+"start": 291.09,
+"end": 291.51
 },
 {
 "text": "I",
 "line": 33,
-"start": 291.515,
-"end": 292.61
+"start": 291.51,
+"end": 291.605
 },
 {
 "text": "cried.",
 "line": 33,
-"start": 292.61,
-"end": 295.53
+"start": 291.605,
+"end": 291.86
 },
 {
 "text": "And",
 "line": 34,
-"start": 295.53,
-"end": 296.01
+"start": 295.814,
+"end": 296.07
 },
 {
 "text": "in",
@@ -2630,20 +2630,20 @@
 {
 "text": "moment,",
 "line": 34,
-"start": 296.795,
-"end": 297.305
+"start": 296.79,
+"end": 297.42
 },
 {
 "text": "something",
 "line": 34,
-"start": 298.77,
+"start": 298.74,
 "end": 299.22
 },
 {
 "text": "inside",
 "line": 34,
 "start": 299.22,
-"end": 299.64
+"end": 299.61
 },
 {
 "text": "me",
@@ -2655,18 +2655,18 @@
 "text": "changed.",
 "line": 34,
 "start": 299.76,
-"end": 300.42
+"end": 300.36
 },
 {
 "text": "I",
 "line": 35,
-"start": 301.41,
-"end": 301.59
+"start": 301.296,
+"end": 301.646
 },
 {
 "text": "felt",
 "line": 35,
-"start": 301.59,
+"start": 301.646,
 "end": 301.98
 },
 {
@@ -2679,12 +2679,12 @@
 "text": "the",
 "line": 35,
 "start": 302.19,
-"end": 302.297
+"end": 302.31
 },
 {
 "text": "most",
 "line": 35,
-"start": 302.297,
+"start": 302.31,
 "end": 302.61
 },
 {
@@ -2696,13 +2696,13 @@
 {
 "text": "thing",
 "line": 35,
-"start": 303.21,
-"end": 303.651
+"start": 303.24,
+"end": 303.644
 },
 {
 "text": "in",
 "line": 35,
-"start": 303.651,
+"start": 303.644,
 "end": 303.99
 },
 {
@@ -2721,37 +2721,37 @@
 "text": "is",
 "line": 35,
 "start": 304.56,
-"end": 304.713
+"end": 304.74
 },
 {
 "text": "to",
 "line": 35,
-"start": 305.626,
-"end": 305.926
+"start": 304.74,
+"end": 305.04
 },
 {
 "text": "take",
 "line": 35,
-"start": 306.035,
-"end": 306.365
+"start": 305.04,
+"end": 305.546
 },
 {
 "text": "care",
 "line": 35,
-"start": 306.365,
-"end": 306.38
+"start": 305.546,
+"end": 306.052
 },
 {
 "text": "of",
 "line": 35,
-"start": 306.38,
+"start": 306.052,
 "end": 306.39
 },
 {
 "text": "this",
 "line": 35,
 "start": 306.39,
-"end": 306.93
+"end": 306.96
 },
 {
 "text": "little",
@@ -2781,19 +2781,19 @@
 "text": "need",
 "line": 35,
 "start": 310.41,
-"end": 310.62
+"end": 310.621
 },
 {
 "text": "to",
 "line": 35,
-"start": 310.62,
-"end": 310.71
+"start": 310.621,
+"end": 310.68
 },
 {
 "text": "raise",
 "line": 35,
-"start": 310.71,
-"end": 310.98
+"start": 310.698,
+"end": 310.89
 },
 {
 "text": "him",
@@ -2804,13 +2804,13 @@
 {
 "text": "really",
 "line": 35,
-"start": 311.455,
-"end": 311.829
+"start": 311.16,
+"end": 312.101
 },
 {
 "text": "well.",
 "line": 35,
-"start": 312.12,
+"start": 312.101,
 "end": 312.48
 },
 {
@@ -2823,42 +2823,42 @@
 "text": "forward,",
 "line": 36,
 "start": 314.25,
-"end": 314.97
+"end": 315.0
 },
 {
 "text": "the",
 "line": 36,
-"start": 315.138,
-"end": 315.223
+"start": 315.0,
+"end": 315.09
 },
 {
 "text": "pediatrician",
 "line": 36,
-"start": 315.223,
-"end": 315.667
+"start": 315.09,
+"end": 315.66
 },
 {
 "text": "came,",
 "line": 36,
-"start": 315.667,
+"start": 315.66,
 "end": 316.2
 },
 {
 "text": "took",
 "line": 36,
-"start": 316.2,
+"start": 316.65,
 "end": 316.86
 },
 {
 "text": "me",
 "line": 36,
 "start": 316.86,
-"end": 317.19
+"end": 317.207
 },
 {
 "text": "away",
 "line": 36,
-"start": 318.66,
+"start": 318.69,
 "end": 318.99
 },
 {
@@ -2876,13 +2876,13 @@
 {
 "text": "room,",
 "line": 36,
-"start": 319.505,
-"end": 319.805
+"start": 319.5,
+"end": 319.8
 },
 {
 "text": "while",
 "line": 36,
-"start": 319.506,
+"start": 319.8,
 "end": 320.19
 },
 {
@@ -2906,43 +2906,43 @@
 {
 "text": "team",
 "line": 36,
-"start": 322.23,
-"end": 322.74
+"start": 322.26,
+"end": 322.68
 },
 {
 "text": "was",
 "line": 36,
-"start": 322.74,
-"end": 322.955
+"start": 322.68,
+"end": 322.98
 },
 {
 "text": "stitching",
 "line": 36,
-"start": 322.955,
-"end": 323.525
+"start": 322.98,
+"end": 323.55
 },
 {
 "text": "and",
 "line": 36,
-"start": 323.52,
+"start": 323.55,
 "end": 323.67
 },
 {
 "text": "finishing",
 "line": 36,
 "start": 323.67,
-"end": 324.15
+"end": 324.18
 },
 {
 "text": "with",
 "line": 36,
-"start": 324.15,
-"end": 324.683
+"start": 324.18,
+"end": 324.72
 },
 {
 "text": "my",
 "line": 36,
-"start": 324.683,
+"start": 324.72,
 "end": 324.93
 },
 {
@@ -2979,18 +2979,18 @@
 "text": "weighed",
 "line": 37,
 "start": 327.63,
-"end": 328.055
+"end": 327.93
 },
 {
 "text": "him,",
 "line": 37,
-"start": 328.055,
-"end": 328.535
+"start": 328.14,
+"end": 328.53
 },
 {
 "text": "she",
 "line": 37,
-"start": 328.95,
+"start": 328.98,
 "end": 329.16
 },
 {
@@ -3002,19 +3002,19 @@
 {
 "text": "him,",
 "line": 37,
-"start": 329.49,
-"end": 329.82
+"start": 329.52,
+"end": 329.85
 },
 {
 "text": "and",
 "line": 38,
-"start": 329.82,
-"end": 329.993
+"start": 329.56,
+"end": 329.91
 },
 {
 "text": "walked",
 "line": 38,
-"start": 329.993,
+"start": 329.91,
 "end": 330.27
 },
 {
@@ -3026,32 +3026,32 @@
 {
 "text": "to",
 "line": 38,
-"start": 330.48,
-"end": 330.72
+"start": 330.54,
+"end": 330.711
 },
 {
 "text": "the",
 "line": 38,
 "start": 330.72,
-"end": 330.96
+"end": 330.9
 },
 {
 "text": "maternity",
 "line": 38,
-"start": 330.96,
+"start": 330.981,
 "end": 331.77
 },
 {
 "text": "hotel",
 "line": 38,
-"start": 331.77,
-"end": 333.04
+"start": 332.7,
+"end": 333.06
 },
 {
 "text": "room.",
 "line": 38,
-"start": 333.04,
-"end": 333.575
+"start": 333.18,
+"end": 333.48
 },
 {
 "text": "And",
@@ -3063,25 +3063,25 @@
 "text": "after",
 "line": 39,
 "start": 334.98,
-"end": 335.43
+"end": 335.58
 },
 {
 "text": "a",
 "line": 39,
-"start": 335.43,
-"end": 335.458
+"start": 335.58,
+"end": 335.91
 },
 {
 "text": "few",
 "line": 39,
 "start": 335.91,
-"end": 336.15
+"end": 336.18
 },
 {
 "text": "moments,",
 "line": 39,
-"start": 336.15,
-"end": 336.93
+"start": 336.18,
+"end": 336.96
 },
 {
 "text": "my",
@@ -3099,37 +3099,37 @@
 "text": "came,",
 "line": 39,
 "start": 337.77,
-"end": 338.25
+"end": 338.22
 },
 {
 "text": "and",
 "line": 39,
 "start": 338.64,
-"end": 338.91
+"end": 338.93
 },
 {
 "text": "we",
 "line": 39,
-"start": 338.91,
-"end": 339.12
+"start": 338.94,
+"end": 339.163
 },
 {
 "text": "were",
 "line": 39,
-"start": 339.12,
-"end": 339.815
+"start": 339.163,
+"end": 339.9
 },
 {
 "text": "united",
 "line": 39,
-"start": 339.815,
-"end": 340.295
+"start": 339.9,
+"end": 340.29
 },
 {
 "text": "for",
 "line": 39,
-"start": 340.295,
-"end": 340.475
+"start": 340.29,
+"end": 340.5
 },
 {
 "text": "the",
@@ -3158,73 +3158,73 @@
 {
 "text": "A",
 "line": 40,
-"start": 341.76,
-"end": 344.43
+"start": 342.034,
+"end": 342.142
 },
 {
 "text": "few",
 "line": 40,
 "start": 344.43,
-"end": 344.706
+"end": 344.82
 },
 {
 "text": "hours",
 "line": 40,
-"start": 344.706,
+"start": 344.82,
 "end": 345.09
 },
 {
 "text": "later,",
 "line": 40,
 "start": 345.09,
-"end": 345.81
+"end": 345.78
 },
 {
 "text": "they",
 "line": 40,
 "start": 346.65,
-"end": 346.86
+"end": 346.836
 },
 {
 "text": "told",
 "line": 40,
-"start": 346.86,
-"end": 347.121
+"start": 346.836,
+"end": 347.097
 },
 {
 "text": "me",
 "line": 40,
-"start": 347.121,
-"end": 347.296
+"start": 347.097,
+"end": 347.25
 },
 {
 "text": "to",
 "line": 40,
-"start": 347.296,
-"end": 347.4
+"start": 347.26,
+"end": 347.43
 },
 {
 "text": "go",
 "line": 40,
-"start": 347.4,
-"end": 347.94
+"start": 347.43,
+"end": 347.88
 },
 {
 "text": "home",
 "line": 40,
-"start": 347.94,
-"end": 348.379
+"start": 347.88,
+"end": 348.341
 },
 {
 "text": "and",
 "line": 40,
-"start": 348.379,
-"end": 348.744
+"start": 348.341,
+"end": 348.726
 },
 {
 "text": "let",
 "line": 40,
-"start": 348.744,
+"start": 348.726,
 "end": 349.11
 },
 {
@@ -3243,25 +3243,25 @@
 "text": "get",
 "line": 40,
 "start": 349.74,
-"end": 349.849
+"end": 349.852
 },
 {
 "text": "some",
 "line": 40,
-"start": 349.849,
-"end": 349.98
+"start": 349.852,
+"end": 349.986
 },
 {
 "text": "good",
 "line": 40,
-"start": 349.98,
-"end": 350.4
+"start": 349.986,
+"end": 350.52
 },
 {
 "text": "rest.",
 "line": 40,
 "start": 351.0,
-"end": 351.72
+"end": 351.3
 },
 {
 "text": "And",
@@ -3273,25 +3273,25 @@
 "text": "I",
 "line": 41,
 "start": 352.65,
-"end": 352.83
+"end": 352.86
 },
 {
 "text": "walked",
 "line": 41,
-"start": 352.83,
-"end": 353.55
+"start": 352.86,
+"end": 353.58
 },
 {
 "text": "out",
 "line": 41,
-"start": 353.55,
-"end": 353.85
+"start": 353.58,
+"end": 354.12
 },
 {
 "text": "of",
 "line": 41,
-"start": 353.85,
-"end": 354.72
+"start": 354.45,
+"end": 354.63
 },
 {
 "text": "the",
@@ -3315,36 +3315,36 @@
 "text": "this",
 "line": 41,
 "start": 358.17,
-"end": 358.381
+"end": 358.41
 },
 {
 "text": "time,",
 "line": 41,
-"start": 358.381,
-"end": 358.682
+"start": 358.41,
+"end": 358.655
 },
 {
 "text": "it",
 "line": 41,
-"start": 358.682,
-"end": 358.77
+"start": 358.655,
+"end": 358.71
 },
 {
 "text": "was",
 "line": 41,
-"start": 358.78,
+"start": 358.8,
 "end": 359.22
 },
 {
 "text": "around",
 "line": 41,
-"start": 359.52,
+"start": 359.55,
 "end": 359.88
 },
 {
 "text": "six",
 "line": 41,
-"start": 359.882,
+"start": 359.88,
 "end": 360.21
 },
 {
@@ -3357,13 +3357,13 @@
 "text": "seven,",
 "line": 41,
 "start": 360.36,
-"end": 360.81
+"end": 360.87
 },
 {
 "text": "and",
 "line": 42,
-"start": 361.95,
-"end": 362.67
+"start": 361.98,
+"end": 362.7
 },
 {
 "text": "the",
@@ -3375,90 +3375,90 @@
 "text": "streets",
 "line": 42,
 "start": 363.72,
-"end": 364.14
+"end": 364.17
 },
 {
 "text": "were",
 "line": 42,
-"start": 364.14,
+"start": 364.17,
 "end": 364.47
 },
 {
 "text": "quiet.",
 "line": 42,
-"start": 364.47,
-"end": 367.445
+"start": 364.71,
+"end": 365.4
 },
 {
 "text": "That",
 "line": 43,
-"start": 367.445,
-"end": 367.715
+"start": 367.44,
+"end": 367.71
 },
 {
 "text": "day",
 "line": 43,
-"start": 367.715,
-"end": 372.965
+"start": 367.71,
+"end": 368.28
 },
 {
 "text": "started",
 "line": 43,
-"start": 372.965,
-"end": 373.415
+"start": 368.28,
+"end": 369.11
 },
 {
 "text": "like",
 "line": 43,
-"start": 373.415,
-"end": 373.444
+"start": 369.11,
+"end": 369.663
 },
 {
 "text": "any",
 "line": 43,
-"start": 373.444,
-"end": 373.468
+"start": 369.663,
+"end": 370.124
 },
 {
 "text": "other",
 "line": 43,
-"start": 373.468,
-"end": 373.502
+"start": 370.124,
+"end": 370.77
 },
 {
 "text": "day:",
 "line": 43,
-"start": 373.502,
-"end": 373.531
+"start": 370.77,
+"end": 371.22
 },
 {
 "text": "a",
 "line": 43,
-"start": 373.531,
-"end": 373.59
+"start": 372.0,
+"end": 372.166
 },
 {
 "text": "husband",
 "line": 43,
 "start": 375.75,
-"end": 376.251
+"end": 376.23
 },
 {
 "text": "taking",
 "line": 43,
-"start": 376.251,
-"end": 376.508
+"start": 376.26,
+"end": 376.53
 },
 {
 "text": "care",
 "line": 43,
-"start": 376.508,
+"start": 376.53,
 "end": 376.74
 },
 {
 "text": "of",
 "line": 43,
-"start": 376.741,
+"start": 376.74,
 "end": 376.92
 },
 {
@@ -3470,31 +3470,31 @@
 {
 "text": "wife.",
 "line": 43,
-"start": 377.43,
-"end": 379.205
+"start": 377.73,
+"end": 378.03
 },
 {
 "text": "But",
 "line": 44,
-"start": 379.205,
-"end": 379.381
+"start": 379.2,
+"end": 379.38
 },
 {
 "text": "the",
 "line": 44,
-"start": 379.317,
-"end": 379.49
+"start": 379.38,
+"end": 379.5
 },
 {
 "text": "night",
 "line": 44,
-"start": 379.49,
-"end": 379.8
+"start": 379.5,
+"end": 379.83
 },
 {
 "text": "was",
 "line": 44,
-"start": 379.81,
+"start": 379.83,
 "end": 379.98
 },
 {
@@ -3507,12 +3507,12 @@
 "text": "That",
 "line": 45,
 "start": 380.94,
-"end": 381.15
+"end": 381.18
 },
 {
 "text": "was",
 "line": 45,
-"start": 381.15,
+"start": 381.18,
 "end": 381.36
 },
 {
@@ -3525,7 +3525,7 @@
 "text": "night",
 "line": 45,
 "start": 381.48,
-"end": 382.29
+"end": 382.02
 },
 {
 "text": "I",
@@ -3536,19 +3536,19 @@
 {
 "text": "became",
 "line": 45,
-"start": 382.417,
+"start": 382.41,
 "end": 382.92
 },
 {
 "text": "a",
 "line": 45,
 "start": 382.92,
-"end": 383.12
+"end": 382.98
 },
 {
 "text": "father.",
 "line": 45,
-"start": 383.12,
-"end": 383.72
+"start": 382.98,
+"end": 383.4
 }
 ]
