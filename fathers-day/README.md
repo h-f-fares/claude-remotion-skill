@@ -5,7 +5,7 @@
 - **Cameras:** A (front-side, master clock) and B (back of room, synced by audio cross-correlation, `B_OFFSET` in `src/edit.ts`). A third "close-up" angle crops camera A and follows the speaker using hand-marked keyframes (`src/track.json`).
 - **Pacing:** pauses longer than ~1 s are shortened (`scripts/cut-pauses.py` → `src/segments.json`); every cut lands on a camera change so the jump is hidden. The silent moment before the baby cries is kept.
 - **Captions:** word-synced, from `scripts/transcript.txt` force-aligned sentence by sentence against the cleaned voice with Vosk (`scripts/force-align.py` → `scripts/words.aligned.json` → `src/words.json`).
-- **Audio:** voice cleaned with the free DeepFilterNet3 model (`scripts/enhance-voice.py`, suppression capped at 22 dB so it stays natural), then EQ/compression; original synthesized piano/pad bed kept low and ducked under the voice (`scripts/gen-music.py`, `scripts/mix-audio.sh`).
+- **Audio:** voice enhanced with Adobe Podcast Enhance (`public/speech_adobe.mp3`, not committed; free fallback: DeepFilterNet3 via `scripts/enhance-voice.py`), light compression; original synthesized piano/pad bed kept low and ducked under the voice (`scripts/gen-music.py`, `scripts/mix-audio.sh`).
 
 ## Rebuild
 Footage and audio aren't committed. Put the transcoded clips in `public/` (`camA_matched.mp4` / `camB_matched.mp4`: 1080×1920 30fps with `scripts/camA.cube` / `camB.cube` applied), then:
