@@ -7,9 +7,9 @@ const W = 1080, H = 1920;
 const CLOSE_SCALE = 1.38;
 const FOCUS_Y = 0.43;
 
-// Both clips carry a baked per-camera LUT (scripts/match-cameras.py) that brings
-// the two phones to one base look; the warm grade is applied on top in Finish.tsx.
-const SRC = { A: "camA_matched.mp4", B: "camB_matched.mp4" } as const;
+// Both clips carry a baked per-camera LUT (scripts/grade.py): each phone is corrected
+// to match the other, then the same clean cool look is applied to both.
+const SRC = { A: "camA_graded.mp4", B: "camB_graded.mp4" } as const;
 const DISSOLVE = 12; // frames: incoming shot fades in over the outgoing one, ending on the cut
 const JUMP_DISSOLVE = 6; // shorter blend where a pause was removed
 const MIN_PIECE = 0.8; // seconds; shorter pieces take the next shot's camera

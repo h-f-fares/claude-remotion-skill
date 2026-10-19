@@ -14,7 +14,7 @@ export const Title: React.FC = () => {
   let k = 0;
   return (
     <AbsoluteFill>
-      <AbsoluteFill style={{ background: `linear-gradient(180deg, rgba(20,13,7,${veil}) 0%, rgba(20,13,7,${veil * 0.8}) 45%, rgba(20,13,7,${veil * 0.2}) 70%, transparent 100%)` }} />
+      <AbsoluteFill style={{ background: `linear-gradient(180deg, rgba(8,14,22,${veil}) 0%, rgba(8,14,22,${veil * 0.8}) 45%, rgba(8,14,22,${veil * 0.2}) 70%, transparent 100%)` }} />
       <AbsoluteFill style={{ justifyContent: "flex-start", alignItems: "center", paddingTop: 330, opacity: 1 - exit, transform: `translateY(${-40 * exit}px) scale(${breathe})` }}>
         {lines.map((ln, li) => (
           <div key={li} style={{ display: "flex", columnGap: 26, justifyContent: "center" }}>

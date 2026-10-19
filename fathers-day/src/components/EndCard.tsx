@@ -18,7 +18,7 @@ export const EndCard: React.FC = () => {
   const breathe = 1 + Math.sin(frame / 22) * 0.008;
   return (
     <AbsoluteFill>
-      <AbsoluteFill style={{ background: `linear-gradient(180deg, rgba(20,13,7,${veil * 0.25}) 0%, rgba(20,13,7,${veil * 0.35}) 45%, rgba(20,13,7,${veil}) 70%)` }} />
+      <AbsoluteFill style={{ background: `linear-gradient(180deg, rgba(8,14,22,${veil * 0.25}) 0%, rgba(8,14,22,${veil * 0.35}) 45%, rgba(8,14,22,${veil}) 70%)` }} />
       <AbsoluteFill style={{ justifyContent: "flex-start", alignItems: "center", paddingTop: 1120, transform: `scale(${breathe})` }}>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", columnGap: 24, rowGap: 6, maxWidth: 900 }}>
           {FINAL.map((w, i) => {

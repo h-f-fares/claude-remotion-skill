@@ -1,16 +1,15 @@
-// theme.ts — single source of truth. Warm-premium palette for an emotional speech.
+// theme.ts — single source of truth. Clean, cool palette matching the footage grade.
 import { Easing } from "remotion";
 
 export const theme = {
   colors: {
-    bg: "#140D07",
-    primary: "#F2B45A", // hero amber — active caption word / one accent per frame
-    accent: "#F4E9DA",
-    text: "#FFFDF8",
-    textDim: "rgba(255,253,248,0.72)",
-    shadow: "rgba(10,6,2,0.55)",
-    glow: "rgba(242,180,90,0.45)",
-    gradeWarm: "#E8A33D",
+    bg: "#080E16",
+    primary: "#A8DCFF", // hero ice blue — active caption word / one accent per frame
+    accent: "#E6F2FA",
+    text: "#FFFFFF",
+    textDim: "rgba(255,255,255,0.75)",
+    shadow: "rgba(4,8,14,0.6)",
+    glow: "rgba(168,220,255,0.45)",
   },
   fonts: {
     display: "Playfair Display",

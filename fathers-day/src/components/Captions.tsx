@@ -46,7 +46,7 @@ const CaptionPage: React.FC<{ page: Page; len: number }> = ({ page, len }) => {
           transform: `translateY(${interpolate(p, [0, 1], [26, 0])}px) scale(${interpolate(p, [0, 1], [0.94, 1])})`,
           fontFamily: theme.fonts.body, fontWeight: 800, fontSize: 68, lineHeight: 1.12,
           letterSpacing: "-0.01em", textAlign: "center",
-          background: "rgba(20,13,7,0.42)", borderRadius: 26, paddingTop: 14, paddingBottom: 18,
+          background: "rgba(8,14,22,0.42)", borderRadius: 26, paddingTop: 14, paddingBottom: 18,
           boxShadow: "0 10px 40px rgba(0,0,0,0.25)",
         }}
       >

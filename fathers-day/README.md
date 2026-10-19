@@ -8,7 +8,7 @@
 - **Audio:** voice enhanced with Adobe Podcast Enhance (`public/speech_adobe.mp3`, not committed; free fallback: DeepFilterNet3 via `scripts/enhance-voice.py`), light compression; original synthesized piano/pad bed kept low and ducked under the voice (`scripts/gen-music.py`, `scripts/mix-audio.sh`).
 
 ## Rebuild
-Footage and audio aren't committed. Put the transcoded clips in `public/` (`camA_matched.mp4` / `camB_matched.mp4`: 1080×1920 30fps with `scripts/camA.cube` / `camB.cube` applied), then:
+Footage and audio aren't committed. Put the transcoded clips in `public/` (`camA_graded.mp4` / `camB_graded.mp4`: 1080×1920 30fps with `scripts/camA.cube` / `camB.cube` from `scripts/grade.py` applied), then:
 ```bash
 npm install
 python3 scripts/cut-pauses.py public/speech_isolated.mp3 1.5 387.3 38

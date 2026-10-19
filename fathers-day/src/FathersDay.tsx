@@ -4,7 +4,7 @@ import { Chapter, CHAPTER_SECONDS } from "./components/Chapter";
 import { EndCard } from "./components/EndCard";
 import { useFonts } from "./components/Fonts";
 import { Footage } from "./components/Footage";
-import { Grade, Grain, Vignette } from "./components/Finish";
+import { Grade } from "./components/Finish";
 import { Title } from "./components/Title";
 import { CHAPTERS, FINAL_LINE_T, sec } from "./edit";
 
@@ -28,8 +28,6 @@ export const FathersDay: React.FC = () => {
       <Sequence from={endFrom} durationInFrames={durationInFrames - endFrom} name="End">
         <EndCard />
       </Sequence>
-      <Grain />
-      <Vignette />
       <Audio src={staticFile("mix.wav")} />
     </AbsoluteFill>
   );
