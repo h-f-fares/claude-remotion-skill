@@ -50,6 +50,9 @@ Arabic basics.
 - Per-beat pause detection sometimes finds 0 pauses for a 3-sentence beat. Delete
   that beat's cached pcm and regenerate, and have the timing script spread
   sentences by letter share as a fallback.
+- Flash TTS free tier allows 100 requests/day per model (429 `generate_requests_per_model_per_day`).
+  `gemini-2.5-pro-preview-tts` has its own quota and the same voices: regenerate ALL beats with it so
+  the voice stays consistent. Pro reads ~1 LUFS quieter; `loudnorm=I=-15` on the master fixes it.
 - Generate VO in the background (~10 min for 42 beats) and build the kit and
   scenes meanwhile.
 - Commit the VO as 192 kbps mp3, not wav (~40 MB for 7 min). Gitignore music/SFX
