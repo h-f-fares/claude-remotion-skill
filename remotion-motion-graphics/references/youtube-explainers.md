@@ -58,6 +58,11 @@ Arabic basics.
 - Tile 12 per sheet, read the sheets, fix, re-render the sheets, then do the full
   render. After the render, pull frames from the mp4 with ffmpeg and measure
   loudness with `ebur128` (aim for about -16 to -14 LUFS).
+- Stills don't catch hook-order bugs: `renderStill` mounts each frame fresh, but
+  a full render re-renders the same component frame after frame. A hook after
+  an early `return null` (e.g. `if (frame > 42) return null; useBob()`) passes
+  every still and then crashes the render minutes in (React error #300). Call
+  all hooks before any early return.
 
 ## 6. Render and deliver
 - 12k frames at 1080p on 4 cores ≈ 30 min. Make the thumbnail composition,
@@ -68,5 +73,32 @@ Arabic basics.
   object, the hero device), 3 title options, description with chapters, tags.
 
 ## 7. Shell gotcha
-- `pkill -f <script-name>` also matches the shell running the command and kills
-  it. Use `pgrep -f "python3 scripts/<name>"`, then `kill <pid>`.
+- `pkill -f <pattern>` AND `pgrep -f <pattern>` match the shell running the
+  command (its command line contains the pattern) and kill it. Anchor the
+  pattern to the process start: `pgrep -f "^python3 scripts/<name>"`.
+
+## 8. Real footage beats illustration (feedback on the first cut)
+- A "story of my site/app" video needs PROOF on screen: screenshots and scroll
+  recordings of each version, real PRs, real reports. Drawn cards alone read as
+  generic.
+- Old versions are in git: `git fetch --unshallow`, `git worktree add` each
+  version's commit, `npm ci`, run it (dev server, or the static build served
+  with `python3 -m http.server`), then Playwright: screenshots at 1440×900 and
+  390×844, click the cookie "Accept" button first, and `recordVideo` while
+  scrolling with an eased `scrollTo` loop. Trim the load time with
+  `ffmpeg -sseof -8.4`. Fall back to web.archive.org or the PR preview links.
+- Private repo pages can't be screenshotted: rebuild a GitHub-style row from
+  the PR data (title, +/− lines, merged badge) via the GitHub tools.
+- Re-running a benchmark (Lighthouse) gives slightly different numbers than the
+  article. Show the real report and phrase the VO so both are true ("+20
+  points", "hit 100").
+- Inside a browser frame, wrap `<OffthreadVideo>` in `<Sequence from={appearFrame}>`
+  so the recording starts when the frame appears, not mid-scroll.
+
+## 9. Backgrounds and subtitles
+- A light flat background for 5+ minutes reads as cheap. Use a dark base with
+  slow accent glows (one accent colour per chapter), a faint perspective grid,
+  and a heavily blurred screenshot of the current version behind for depth;
+  keep cards light or glass so they pop.
+- Don't burn subtitles into long-form YouTube videos: ship an `.srt` (one cue per
+  sentence from `timing.json`) and upload it as CC.

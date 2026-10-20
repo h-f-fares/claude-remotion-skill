@@ -35,3 +35,17 @@ npm run audio:v3    # music + SFX
 npm run render:v3   # out/v3-portfolio-ar.mp4
 npm run thumb:v3    # thumbnail PNG
 ```
+
+## 5-minute cut (`src/v3b`, `vo-ar-v2.txt`, `audio-v2/`)
+Feedback on the first cut: background too light and flat, no real screenshots of the three versions,
+too long, subtitles burned in.
+- Hook: real V1 (2025) recording, then V3 (2026) slides in beside it
+- Real footage in `public/videos/v3-portfolio/site/`: V1 (commit 3f4dcb1, Oct 2025), V2 (9f49b6b, before PR #5)
+  and V3 (main) run locally, screenshotted and scroll-recorded with Playwright; Lighthouse 12 mobile run on
+  the V2 and V3 static builds (47→71, 87→100, 85→100, LCP 12.3→5.1 s, 2,051→1,154 KiB); PR titles and
+  line counts for #5–#8 and the Cloudflare preview comment from GitHub
+- Lighthouse scores vary per run (article: 50→74), so the VO says "+20 points" and "accessibility and SEO hit 100"
+- Stage: dark base, two slow accent glows (one accent per chapter), perspective grid, blurred screenshot of the
+  section's version behind, grain + vignette; real footage in browser frames with 3D tilt
+- No burned-in subtitles; `v3-portfolio-ar-cut.srt` for YouTube CC
+- 30 beats, 80 sentences, 585 words, 4:22

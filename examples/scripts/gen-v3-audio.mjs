@@ -7,7 +7,8 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const SR = 44100;
-const OUT = join(dirname(fileURLToPath(import.meta.url)), "..", "public", "videos", "v3-portfolio", "audio");
+// usage: node gen-v3-audio.mjs [audio-dir]  (defaults to audio; the 5-minute cut uses audio-v2)
+const OUT = join(dirname(fileURLToPath(import.meta.url)), "..", "public", "videos", "v3-portfolio", process.argv[2] ?? "audio");
 mkdirSync(OUT, { recursive: true });
 const timing = JSON.parse(readFileSync(join(OUT, "timing.json"), "utf8"));
 
@@ -56,16 +57,19 @@ const seg = (b) => timing.segments[b - 1];
 const at = (b) => seg(b).start;
 const last = seg(timing.segments.length);
 const DUR = Math.ceil(last.start + last.dur + 4);
+// section boundaries as beat numbers: [groove-end/lite-start, pad, groove, drone, lite, groove, lite]
+// (full cut vs the 5-minute cut in audio-v2)
+const B = (process.argv[2] ?? "audio") === "audio-v2" ? [4, 18, 19, 21, 25, 26, 29] : [5, 21, 22, 30, 35, 36, 41];
 // [from, to, mode]: groove | lite (keys + soft hats) | pad | drone
 const SECTIONS = [
-  [0, at(5), "groove"],
-  [at(5), at(21), "lite"],
-  [at(21), at(22), "pad"],
-  [at(22), at(30), "groove"],
-  [at(30), at(35), "drone"],
-  [at(35), at(36), "lite"],
-  [at(36), at(41), "groove"],
-  [at(41), DUR, "lite"],
+  [0, at(B[0]), "groove"],
+  [at(B[0]), at(B[1]), "lite"],
+  [at(B[1]), at(B[2]), "pad"],
+  [at(B[2]), at(B[3]), "groove"],
+  [at(B[3]), at(B[4]), "drone"],
+  [at(B[4]), at(B[5]), "lite"],
+  [at(B[5]), at(B[6]), "groove"],
+  [at(B[6]), DUR, "lite"],
 ];
 const modeAt = (t) => (SECTIONS.find(([a, b]) => t >= a && t < b) ?? SECTIONS[SECTIONS.length - 1])[2];
 

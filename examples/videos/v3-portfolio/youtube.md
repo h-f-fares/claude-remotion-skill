@@ -47,3 +47,44 @@ Claude Code, Claude Opus, AI agents, بناء موقع, برمجة بالذكا�
 ## After upload
 
 Embed the YouTube link at the top of `content/en/blog/v3-portfolio.md` and `content/ar/blog/v3-portfolio.md` in the Personal-website repo.
+
+---
+
+# 5-minute cut (recommended upload)
+
+Video: `out/v3-portfolio-ar-cut.mp4`, 1920x1080, 4:22. No burned-in subtitles.
+Captions: upload `v3-portfolio-ar-cut.srt` as Arabic subtitles (YouTube Studio → Subtitles → Upload file → With timing).
+Thumbnail: `v3-portfolio-cut-thumbnail.png`
+
+## Title options
+
+1. بنيت موقعي من الموبايل في ساعتين… ومقريتش ولا سطر كود
+2. ده موقعي من سنة، وده النهارده: 4 PRs من الموبايل
+3. Claude Code من الموبايل: النسخة التالتة من موقعي بالأرقام
+
+## Description
+
+ده موقعي من سنة… وده موقعي النهارده. والفرق كله اتعمل في يوم واحد، من الموبايل.
+Claude Opus في cloud sessions من تطبيق Claude على أندرويد: ساعتين من وقتي، و4 pull requests اتعملهم merge.
+
+في الفيديو:
+- V1 وV2 وV3 جنب بعض (لقطات حقيقية من الموقع)
+- الـ 4 PRs: تنضيف الكود، الصور WebP (من 198.5 لـ 16.3 MB)، PostHog، وredesign كامل
+- تقارير Lighthouse الحقيقية قبل وبعد
+- ليه ما قريتش ولا diff، ومين راجع الكود بدالي
+- الفاتورة: 20$ اشتراك Claude Pro بدل ~72$ بأسعار الـ API
+
+المقال كامل: https://hfares.com/blog/v3-portfolio/
+
+وانت؟ تسيب الـ agent يراجع الكود لوحده، ولا لازم تقرا كل سطر؟ قولي في الكومنتات.
+
+00:00 قبل وبعد
+00:17 تلات نسخ
+00:46 ساعتين من الموبايل
+01:34 أربع PRs
+02:34 الأرقام (Lighthouse)
+03:00 ما قريتش الكود
+03:40 الفاتورة
+03:59 اللي جاي + سؤال ليك
+
+#ClaudeCode #AI #برمجة
