@@ -13,7 +13,7 @@ const SCENES: Record<number, React.FC<A.SceneProps>> = {
 // beats that open one of the five steps (step card + whoosh)
 export const STEPS_AT = [6, 7, 8, 9, 11];
 const accentOf = (b: number) => (b <= 4 ? ACCENT.hook : b <= 11 ? A.STEP : b <= 13 ? ACCENT.numbers : ACCENT.outro);
-const behindOf = (b: number) => (b <= 3 ? "v3-bloglist.jpg" : b === 10 ? "v3-arblog.jpg" : b >= 15 ? "v3-post.jpg" : undefined);
+const behindOf = (b: number) => (b <= 3 ? "v3-bloglist.jpg" : b === 10 ? "v3-arblog.jpg" : b === 15 ? "v3-post.jpg" : undefined);
 const enterFor = (b: number): Enter => (b === 1 || STEPS_AT.includes(b) ? "cut" : b % 2 ? "zoom" : "slide");
 
 type Cue = { f: number; src: string; vol: number };

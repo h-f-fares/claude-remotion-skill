@@ -65,7 +65,7 @@ def pick_cuts(cands, parts, dur):
             if k == 0: best[k][j] = (cost, None)
             else:
                 prev = min(((best[k-1][i][0], i) for i in range(j)), default=(INF, None))
-                if prev[1] is not None: best[k][j] = (prev[0] + cost, prev[1])
+                if prev[0] < INF: best[k][j] = (prev[0] + cost, prev[1])  # skip chains through unreachable states
     j = min(range(len(cands)), key=lambda j: best[n-1][j][0])
     if best[n-1][j][0] >= INF: return sorted(sorted(cands, key=lambda p: p[0] - p[1])[:n])
     out = []
