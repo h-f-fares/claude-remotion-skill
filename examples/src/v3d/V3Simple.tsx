@@ -8,7 +8,7 @@ import * as A from "./scenes/S";
 
 const SCENES: Record<number, React.FC<A.SceneProps>> = {
   1: A.S1, 2: A.S2, 3: A.S3, 4: A.S4, 5: A.S5, 6: A.S6, 7: A.S7, 8: A.S8,
-  9: A.S9, 10: A.S10, 11: A.S11, 12: A.S12, 13: A.S13, 14: A.S14, 15: A.S15, 16: A.S16,
+  9: A.S9, 10: A.S10, 11: A.S11, 12: A.S12, 13: A.S13, 14: A.S14, 15: A.S15, 16: A.S16, 17: A.S17,
 };
 // beats that open one of the five steps (step card + whoosh)
 export const STEPS_AT = [6, 7, 8, 9, 11];

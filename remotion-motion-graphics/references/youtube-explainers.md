@@ -20,7 +20,14 @@ Arabic basics.
    chapters in the YouTube description; compute timestamps from `timing.json`.
 4. **Mid-video reset (~45%):** dark scene, "nice words… but is it actually
    faster?" before the numbers.
-5. **Close on a comment question** with two clear choices, then link + subscribe.
+5. **Close on a comment question** with two clear choices, then link + subscribe,
+   then a callback line that loops back to the hook visual.
+- **Every re-cut keeps this structure.** Simplifying or shortening a script once
+  dropped the before/after hook, the open loop, the mid-video reset and the
+  subscribe + callback close, and the user had to point it out again. Before
+  writing each new script version, tick off: hook visual in the first second,
+  open loop, its payoff, mid-video reset, two-choice question, link,
+  subscribe, callback.
 - **Ask who the audience is before writing the hook.** For practitioners, a
   "look what I did" hook ("0 diffs read", "2 hours", "$20 instead of $72") reads
   as bragging. Frame it as a showcase: a short personal story, then numbered
