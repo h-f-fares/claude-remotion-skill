@@ -5,7 +5,8 @@
 import json, os, re, sys, time, base64, subprocess, urllib.request, urllib.error
 import numpy as np
 SP, src, outdir = sys.argv[1], sys.argv[2], sys.argv[3]
-MODEL, VOICE, SR = "gemini-2.5-flash-preview-tts", "Charon", 24000
+# TTS_MODEL=gemini-2.5-pro-preview-tts switches to Pro, which has its own daily quota
+MODEL, VOICE, SR = os.environ.get("TTS_MODEL", "gemini-2.5-flash-preview-tts"), "Charon", 24000
 PERSONA = ("Read the Arabic transcript below exactly as written, word for word, in natural Egyptian Arabic "
            "with a Cairo accent, never MSA or Gulf. You are an Egyptian tech YouTuber from Cairo in his thirties, "
            "telling your viewers about something you just built: warm, energetic, confident, conversational, "
