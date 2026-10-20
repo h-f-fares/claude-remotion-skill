@@ -28,6 +28,15 @@ Arabic basics.
   writing each new script version, tick off: hook visual in the first second,
   open loop, its payoff, mid-video reset, two-choice question, link,
   subscribe, callback.
+- **The hook line and the closing question belong to the author.** Draft them
+  as options, but expect a rewrite: here the author replaced both with their own
+  words (hook = the story in one line, "I rebuilt my blog a third time and
+  didn't even need the laptop; let's see how you can, phone only"; question =
+  the post's real debate, "review every line, or move fast and let the AI
+  review?"). Use their wording verbatim, and drop parts of the template they
+  leave out (the callback here) instead of adding them back.
+- The closing question works best when it is the post's own open debate, not a
+  generic "what will you build first?".
 - **Ask who the audience is before writing the hook.** For practitioners, a
   "look what I did" hook ("0 diffs read", "2 hours", "$20 instead of $72") reads
   as bragging. Frame it as a showcase: a short personal story, then numbered
@@ -77,6 +86,9 @@ Arabic basics.
 - `remotion still` re-bundles every call. For a contact sheet, bundle once with
   `@remotion/bundler` and loop `renderStill` (scale 0.5) over one frame per
   sentence (last frame before the next sentence starts): 136 frames in ~2 min.
+- In that script pass `browserExecutable` to `selectComposition` as well as
+  `renderStill`; without it Remotion tries to download a browser from
+  remotion.media and fails offline (`ENOTFOUND`).
 - Tile 12 per sheet, read the sheets, fix, re-render the sheets, then do the full
   render. After the render, pull frames from the mp4 with ffmpeg and measure
   loudness with `ebur128` (aim for about -16 to -14 LUFS).
@@ -105,7 +117,8 @@ Arabic basics.
   match its style (here: dark + red diagonal, white-outlined face on the right,
   three short stacked lines with the key line in red). Use the author's own
   words for the text; Arabic text goes on the left, right-aligned to one edge.
-  Render 3–4 layouts side by side and let the author pick.
+  Render 3–4 layouts side by side and let the author pick (here they chose
+  the tilted yellow sticker band over the channel's red style).
 
 ## 7. Shell gotcha
 - `pkill -f <pattern>` AND `pgrep -f <pattern>` match the shell running the
