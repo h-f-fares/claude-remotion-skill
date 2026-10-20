@@ -21,6 +21,14 @@ Arabic basics.
 4. **Mid-video reset (~45%):** dark scene, "nice words… but is it actually
    faster?" before the numbers.
 5. **Close on a comment question** with two clear choices, then link + subscribe.
+- **Ask who the audience is before writing the hook.** For practitioners, a
+  "look what I did" hook ("0 diffs read", "2 hours", "$20 instead of $72") reads
+  as bragging. Frame it as a showcase: a short personal story, then numbered
+  steps the viewer can repeat, then honest lessons and risks. Build the steps
+  from real artifacts (PR descriptions, their Checks sections, CLAUDE.md), and
+  say when a rule was written after the fact.
+- Don't show the person's portrait or home page unless they ask; the content
+  pages (blog list, articles) carry the story better.
 - Only use numbers that are in the article. If a TTS workaround forces a
   rewording, check it still matches the article, and tell the user if it doesn't.
 

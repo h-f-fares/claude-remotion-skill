@@ -59,6 +59,6 @@ def ts(x):
     ms = int(round(x * 1000))
     return f"{ms // 3600000:02d}:{ms // 60000 % 60:02d}:{ms // 1000 % 60:02d},{ms % 1000:03d}"
 srt = [f"{i}\n{ts(x['start'])} --> {ts(x['end'] + 0.25)}\n{x['text'].strip()}\n" for i, x in enumerate(sents, 1)]
-name = "v3-portfolio-ar-cut.srt" if OUT.endswith("audio-v2") else "v3-portfolio-ar.srt"
+name = {"audio-v2": "v3-portfolio-ar-cut.srt", "audio-v3": "v3-portfolio-ar-show.srt"}.get(os.path.basename(OUT), "v3-portfolio-ar.srt")
 open(os.path.join(os.path.dirname(__file__), "..", "videos", "v3-portfolio", name), "w", encoding="utf-8").write("\n".join(srt))
 print("beats", len(segs), "sentences", len(sents), "words", len(words), "dur", round(segs[-1]["start"] + segs[-1]["dur"], 1))

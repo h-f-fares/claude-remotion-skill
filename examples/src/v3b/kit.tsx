@@ -262,17 +262,19 @@ const SHOTS = [
   { s: 1.05, x: 0, y: -12, r: 0 },
 ];
 export type Enter = "zoom" | "slide" | "cut";
-export const Beat: React.FC<{ b: number; len: number; accent: string; behind?: string; enter?: Enter; children: React.ReactNode }> = ({
+// `cutFrames` lets another cut (with its own timing) reuse the wrapper
+export const Beat: React.FC<{ b: number; len: number; accent: string; behind?: string; enter?: Enter; cutFrames?: number[]; children: React.ReactNode }> = ({
   b,
   len,
   accent,
   behind,
   enter = "zoom",
+  cutFrames,
   children,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const cf = cuts(b);
+  const cf = cutFrames ?? cuts(b);
   let i = 0;
   cf.forEach((c, k) => {
     if (frame >= c) i = k;

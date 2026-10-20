@@ -58,8 +58,9 @@ const at = (b) => seg(b).start;
 const last = seg(timing.segments.length);
 const DUR = Math.ceil(last.start + last.dur + 4);
 // section boundaries as beat numbers: [groove-end/lite-start, pad, groove, drone, lite, groove, lite]
-// (full cut vs the 5-minute cut in audio-v2)
-const B = (process.argv[2] ?? "audio") === "audio-v2" ? [4, 18, 19, 21, 25, 26, 29] : [5, 21, 22, 30, 35, 36, 41];
+// for the full cut, the 5-minute cut (audio-v2) and the showcase cut (audio-v3)
+// (the showcase cut in audio-v3 has no pad or drone: empty ranges)
+const B = { "audio-v2": [4, 18, 19, 21, 25, 26, 29], "audio-v3": [5, 13, 13, 13, 13, 16, 18] }[process.argv[2]] ?? [5, 21, 22, 30, 35, 36, 41];
 // [from, to, mode]: groove | lite (keys + soft hats) | pad | drone
 const SECTIONS = [
   [0, at(B[0]), "groove"],

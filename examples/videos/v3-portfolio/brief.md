@@ -49,3 +49,17 @@ too long, subtitles burned in.
   section's version behind, grain + vignette; real footage in browser frames with 3D tilt
 - No burned-in subtitles; `v3-portfolio-ar-cut.srt` for YouTube CC
 - 30 beats, 80 sentences, 585 words, 4:22
+
+## Showcase cut (`src/v3c`, `vo-ar-v3.txt`, `audio-v3/`)
+Feedback on the 4-minute cut: focus on blog pages, not the home page or the portrait; the audience is
+people in the field who dislike showing off; frame it as a personal story whose point is that the viewer
+understands how it was done and can repeat it.
+- Structure: short story (V1→V2→V3 blog pages, article page before/after) → 7 numbered steps → lessons →
+  cost (plain, no API comparison) → recap → comment question
+- Steps come from the PRs (#5–#8 bodies, the Checks section of #8, the Cloudflare preview comment) and
+  CLAUDE.md. The preview and Lighthouse rules were added to CLAUDE.md at the end of that day (PRs #9/#11),
+  so the VO presents them as "what I added afterwards"
+- Tone: "I didn't review line by line, and that's a risk" instead of "0 diff"; no time/cost bragging
+- Footage: blog list (V1/V2/V3, Arabic, dark), article pages (V2 vs V3), a 390px mobile recording for the
+  preview step; no home page, no portrait
+- 23 beats, 57 sentences, 509 words, ~3:40

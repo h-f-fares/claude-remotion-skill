@@ -88,3 +88,47 @@ Claude Opus في cloud sessions من تطبيق Claude على أندرويد: س
 03:59 اللي جاي + سؤال ليك
 
 #ClaudeCode #AI #برمجة
+
+---
+
+# Showcase cut (recommended upload)
+
+Video: `out/v3-portfolio-ar-show.mp4`, 1920x1080, ~3:40. Story + 7 steps, blog pages only, no portrait.
+Captions: `v3-portfolio-ar-show.srt` (YouTube Studio → Subtitles → Upload file → With timing).
+Thumbnail: `v3-portfolio-show-thumbnail.png`
+
+## Title options
+
+1. إزاي تطور موقعك بالـ AI من الموبايل: 7 خطوات من تجربة حقيقية
+2. Claude Code من الموبايل: الخطوات اللي مشيت عليها في موقعي
+3. طوّرت مدونتي من الموبايل… ودي الطريقة عشان تعملها انت كمان
+
+## Description
+
+لو عندك موقع شخصي أو مدونة، وعايز تطورها بالـ AI: دي الخطوات اللي مشيت عليها عشان أعمل النسخة التالتة من مدونتي، كلها من تطبيق Claude على الموبايل، بـ Claude Code في الكلاود.
+
+الخطوات:
+1. ملف CLAUDE.md يشرح المشروع للـ agent
+2. قسّم الشغل لـ sessions صغيرة، كل واحدة ليها مهمة واضحة
+3. خلي الشغل يكمل في الكلاود من غيرك
+4. اطلب اختيارات (artifacts) قبل التنفيذ
+5. راجع من لينك الـ preview قبل الـ merge
+6. خلي agent تاني يراجع الكود، واعرف إن دي مخاطرة
+7. قيس قبل ما تصدق (Lighthouse قبل وبعد)
+
+المقال كامل بكل التفاصيل: https://hfares.com/blog/v3-portfolio/
+
+إيه أول مهمة هتديها للـ agent؟ قولي في الكومنتات.
+
+00:00 الحكاية
+00:39 1. ملف CLAUDE.md
+00:51 2. قسّم الشغل
+01:11 3. خليه يكمل من غيرك
+01:24 4. اختيارات قبل التنفيذ
+01:51 5. راجع من الـ preview
+02:04 6. agent تاني يراجع
+02:28 7. قيس قبل ما تصدق
+02:46 الدروس
+03:24 ابدأ منين
+
+#ClaudeCode #AI #برمجة
