@@ -1,4 +1,4 @@
-// Thumbnail (1280x720) for the beginner cut: face + phone, three words, dark base with a strong teal light.
+// Thumbnail (1280x720) for the beginner cut: face + phone, one line in the user's words, dark base with a strong teal light.
 import React from "react";
 import { AbsoluteFill, Img, staticFile } from "remotion";
 import { theme } from "../v3/theme";
@@ -57,10 +57,11 @@ export const ThumbnailSimple: React.FC = () => (
       </div>
     </div>
 
-    {/* three words */}
-    <div style={{ position: "absolute", right: 44, top: 130, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 6 }}>
-      <div style={word(104, "#ffffff")}>من الموبايل</div>
-      <div style={{ ...word(230, YELLOW), transform: "rotate(-4deg)", marginTop: 10 }}>بس!</div>
+    {/* the line, in the user's words */}
+    <div style={{ position: "absolute", right: 44, top: 90, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 4 }}>
+      <div style={word(96, "#ffffff")}>طوّرت مدونتي</div>
+      <div style={word(96, TEAL)}>لتالت مرة</div>
+      <div style={{ ...word(104, YELLOW), transform: "rotate(-3deg)", marginTop: 14 }}>بالموبايل بس</div>
     </div>
 
     <Finish />
