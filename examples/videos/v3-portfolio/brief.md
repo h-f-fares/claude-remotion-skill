@@ -63,3 +63,13 @@ understands how it was done and can repeat it.
 - Footage: blog list (V1/V2/V3, Arabic, dark), article pages (V2 vs V3), a 390px mobile recording for the
   preview step; no home page, no portrait
 - 23 beats, 57 sentences, 509 words, ~3:40
+
+## Beginner cut (`src/v3d`, `vo-ar-v4.txt`, `audio-v4/`)
+Feedback on the showcase cut: still too technical; simplify for a wide audience (beginners in the field),
+move technical steps to the blog post.
+- Article: new section 10 "Step by Step, If You Want to Try It" (EN + AR) in Personal-website PR #14, with
+  the eight technical steps from the PRs and CLAUDE.md; the video points there
+- Video: every term explained once in plain words (Claude Code = "a helper programmer you talk to"; the
+  CLAUDE.md = "a file that briefs it like a new colleague"; preview = "a link with a test copy of the site");
+  no PR, diff, CLAUDE.md, artifacts or Lighthouse jargon on screen except one labelled report
+- 16 beats, 44 sentences, 347 words, ~2:32

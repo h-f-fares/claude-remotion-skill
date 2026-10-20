@@ -29,7 +29,11 @@
     "vo:v3show": "python3 scripts/gen-v3-vo-ar-gemini.py .v3vo3 videos/v3-portfolio/vo-ar-v3.txt x && python3 scripts/v3-timing.py .v3vo3 audio-v3",
     "audio:v3show": "node scripts/gen-v3-audio.mjs audio-v3",
     "render:v3show": "remotion render src/v3c/index.ts V3PortfolioARShow out/v3-portfolio-ar-show.mp4 --codec h264 --crf 18",
-    "thumb:v3show": "remotion still src/v3c/index.ts V3ShowThumbnail videos/v3-portfolio/v3-portfolio-show-thumbnail.png"
+    "thumb:v3show": "remotion still src/v3c/index.ts V3ShowThumbnail videos/v3-portfolio/v3-portfolio-show-thumbnail.png",
+    "vo:v3simple": "python3 scripts/gen-v3-vo-ar-gemini.py .v3vo4 videos/v3-portfolio/vo-ar-v4.txt x && python3 scripts/v3-timing.py .v3vo4 audio-v4",
+    "audio:v3simple": "node scripts/gen-v3-audio.mjs audio-v4",
+    "render:v3simple": "remotion render src/v3d/index.ts V3PortfolioARSimple out/v3-portfolio-ar-simple.mp4 --codec h264 --crf 18",
+    "thumb:v3simple": "remotion still src/v3d/index.ts V3SimpleThumbnail videos/v3-portfolio/v3-portfolio-simple-thumbnail.png"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",

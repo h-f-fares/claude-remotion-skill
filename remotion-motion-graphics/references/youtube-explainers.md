@@ -27,6 +27,10 @@ Arabic basics.
   steps the viewer can repeat, then honest lessons and risks. Build the steps
   from real artifacts (PR descriptions, their Checks sections, CLAUDE.md), and
   say when a rule was written after the fact.
+- For a wide audience, explain each term once in plain words ("a helper
+  programmer you talk to", "a link with a test copy of the site") and move the
+  technical steps into the article; the video points there. Ask the audience
+  level (non-technical vs beginner) before rewriting.
 - Don't show the person's portrait or home page unless they ask; the content
   pages (blog list, articles) carry the story better.
 - Only use numbers that are in the article. If a TTS workaround forces a

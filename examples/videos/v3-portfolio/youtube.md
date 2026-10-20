@@ -132,3 +132,46 @@ Thumbnail: `v3-portfolio-show-thumbnail.png`
 03:24 ابدأ منين
 
 #ClaudeCode #AI #برمجة
+
+---
+
+# Beginner cut (recommended upload)
+
+Video: `out/v3-portfolio-ar-simple.mp4`, 1920x1080, ~2:32. Plain words, five simple steps; the technical
+steps live in the article's new section 10 ("Step by Step").
+Captions: `v3-portfolio-ar-simple.srt` (YouTube Studio → Subtitles → Upload file → With timing).
+Thumbnail: `v3-portfolio-simple-thumbnail.png`
+
+## Title options
+
+1. طوّر موقعك بالـ AI من الموبايل: 5 خطوات بسيطة
+2. إزاي تطور موقعك بالـ AI من غير ما تفتح اللابتوب
+3. الـ AI طوّر مدونتي من الموبايل… ودي الطريقة ببساطة
+
+## Description
+
+لو عندك موقع أو مدونة وعايز تطورها بالـ AI: ده اللي عملته على مدونتي، من الموبايل، في خمس خطوات بسيطة.
+
+1. عرّفه على المشروع
+2. ادي كل مهمة لوحدها
+3. سيبه يشتغل
+4. اطلب اختيارات قبل التنفيذ
+5. شوف بعينك قبل ما توافق
+
+التفاصيل التقنية (الملفات، وطريقة المراجعة، والقياس) خطوة بخطوة في المقال:
+https://hfares.com/blog/v3-portfolio/
+
+إيه أول حاجة نفسك تطورها في موقعك؟ قولي في الكومنتات.
+
+00:00 الحكاية
+00:22 Claude Code يعني إيه
+00:42 1. عرّفه على المشروع
+00:58 2. كل مهمة لوحدها
+01:11 3. سيبه يشتغل
+01:22 4. اختيارات قبل التنفيذ
+01:40 5. شوف بعينك قبل ما توافق
+01:50 النتيجة
+02:01 بصراحة
+02:16 التفاصيل التقنية
+
+#ClaudeCode #AI
