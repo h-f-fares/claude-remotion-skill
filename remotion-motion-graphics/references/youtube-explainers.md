@@ -81,8 +81,16 @@ Arabic basics.
   YouTube copy and brief while it renders.
 - Master is ~220 MB at CRF 18. Send that to the user; commit a CRF 28 copy
   (~40 MB) to stay under GitHub's 100 MB limit.
-- Deliver: video, 1280×720 thumbnail (one bold claim, a crossed-out "before"
-  object, the hero device), 3 title options, description with chapters, tags.
+- Deliver: video, 1280×720 thumbnail, 3 title options, description with
+  chapters, tags.
+- Thumbnail (rejected as "worse than a basic Canva one" when it was a small
+  browser screenshot + 4 lines of text on a flat dark stage): one focal point,
+  at most 3 words, readable at phone size. Ask face or no face first. Recipe
+  that worked: face cut out with `rembg` (`isnet-general-use`, alpha matting),
+  big on one side with a coloured rim light (`drop-shadow` glow) and a strong
+  radial key light behind; a phone showing the real page; 2 lines of huge text
+  (second word in yellow, slight tilt). Build it at native 1280×720 and check
+  that nothing overlaps.
 
 ## 7. Shell gotcha
 - `pkill -f <pattern>` AND `pgrep -f <pattern>` match the shell running the
