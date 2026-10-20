@@ -10,42 +10,49 @@ const C = theme.colors;
 export type SceneProps = { b: number; len: number };
 export const STEP = "#2BB3A3";
 
-// 1 — hook: my blog a year ago… and today; all of it from the phone, never the laptop; open loop to the end
+// 1 — hook: I developed my blog a third time without even needing the laptop; let's see how you can, phone only
 export const S1: React.FC<SceneProps> = ({ b }) => {
   const frame = useCurrentFrame();
+  const phone = s(b, 1);
   return (
     <Stage gap={40}>
       <Row gap={50} ltr>
         <Pop at={2}>
           <Col gap={18}>
             <Frame src="v1-bloglist.mp4" w={760} url="2025" />
-            <Chip size={44}>من سنة</Chip>
+            <Chip size={44}>المرة الأولى</Chip>
           </Col>
         </Pop>
-        {frame >= s(b, 1) && (
-          <Pop at={s(b, 1)} x={60} from={0}>
-            <Col gap={18}>
-              <Frame src="v3-bloglist.mp4" w={760} url="2026" accent={ACCENT.hook} from={s(b, 1)} />
-              <Chip size={44} bg={C.mustard}>النهارده</Chip>
-            </Col>
+        <Pop at={14} x={60} from={0}>
+          <Col gap={18}>
+            <Frame src="v3-bloglist.mp4" w={760} url="2026" accent={ACCENT.hook} from={14} />
+            <Chip size={44} bg={C.mustard}>المرة التالتة</Chip>
+          </Col>
+        </Pop>
+      </Row>
+      <div style={{ height: 110 }}>
+        {frame >= w(b, "اللابتوب") && frame < phone && (
+          <Pop at={w(b, "اللابتوب")}>
+            <Row gap={20}>
+              <div style={{ position: "relative" }}>
+                <Icon name="laptop" size={90} color={D.text} sw={6} />
+                <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <Icon name="x" size={100} color={C.red} sw={9} draw={w(b, "اللابتوب") + 6} />
+                </div>
+              </div>
+              <T size={60}>ما احتجتش اللابتوب</T>
+            </Row>
           </Pop>
         )}
-      </Row>
-      <div style={{ height: 100 }}>
-        {frame >= s(b, 2) && frame < s(b, 3) && (
-          <Slam at={s(b, 2)}>
+        {frame >= phone && (
+          <Slam at={phone}>
             <Row gap={24}>
               <Icon name="phone" size={80} color={ACCENT.hook} sw={7} />
               <T size={70}>
-                <Mark at={s(b, 2) + 8} color={ACCENT.hook}>من الموبايل بس</Mark>
+                <Mark at={phone + 8} color={ACCENT.hook}>بالموبايل بس</Mark>
               </T>
             </Row>
           </Slam>
-        )}
-        {frame >= s(b, 3) && (
-          <Pop at={s(b, 3)}>
-            <Chip size={50} bg={C.orangeSoft}>وفي الآخر: حاجة لازم تخلي بالك منها</Chip>
-          </Pop>
         )}
       </div>
     </Stage>
@@ -519,14 +526,14 @@ export const S12: React.FC<SceneProps> = ({ b }) => {
   );
 };
 
-// 13 — pays off the hook's open loop. Honesty: I didn't read the code; another tool reviewed it and its issues were fixed; it's a risk, your call
+// 13 — honesty: I didn't read the code; another tool reviewed it and its issues were fixed; it's a risk, your call
 export const S13: React.FC<SceneProps> = ({ b }) => {
   const frame = useCurrentFrame();
   return (
     <Stage gap={40} zoom={1.15}>
       <Pop at={2}>
         <T size={62}>
-          الحاجة اللي لازم <Mark at={10} color={C.orange}>تخلي بالك منها</Mark>
+          لازم أكون <Mark at={10} color={C.orange}>صريح</Mark>
         </T>
       </Pop>
       <Row gap={70}>
@@ -604,39 +611,39 @@ export const S15: React.FC<SceneProps> = ({ b }) => {
   );
 };
 
-// 16 — comment question with two choices: design or speed?
+// 16 — comment question with two choices: review every line, or move fast and let the AI review?
 export const S16: React.FC<SceneProps> = ({ b }) => {
   const frame = useCurrentFrame();
   const bob = useBob(10, 8);
-  const card = (icon: "brush" | "bolt", label: string, at: number) => (
+  const card = (icon: "eye" | "robot", label: string, at: number) => (
     <Pop at={at}>
-      <Glass style={{ padding: "36px 60px" }}>
+      <Glass style={{ padding: "36px 56px" }}>
         <Col gap={16}>
           <Icon name={icon} size={120} color={D.text} sw={7} />
-          <T size={64}>{label}</T>
+          <T size={54}>{label}</T>
         </Col>
       </Glass>
     </Pop>
   );
   return (
-    <Stage gap={44} zoom={1.1}>
+    <Stage gap={44} zoom={1.05}>
       <Pop at={2}>
         <T size={80}>وانت؟</T>
       </Pop>
       <div style={{ height: 330 }}>
-        {frame >= s(b, 1) && (
-          <Row gap={50}>
-            {card("brush", "الشكل", s(b, 1) + 4)}
-            <Slam at={s(b, 1) + 14}>
+        <Row gap={50}>
+          {frame >= s(b, 1) && card("eye", "تراجع سطر سطر", s(b, 1) + 4)}
+          {frame >= s(b, 2) && (
+            <Slam at={s(b, 2)}>
               <T size={60} color={D.dim}>ولا</T>
             </Slam>
-            {card("bolt", "السرعة", s(b, 1) + 22)}
-          </Row>
-        )}
+          )}
+          {frame >= s(b, 2) && card("robot", "سريع · والـ AI يراجع", s(b, 2) + 10)}
+        </Row>
       </div>
       <div style={{ height: 90 }}>
-        {frame >= s(b, 2) && (
-          <Pop at={s(b, 2)}>
+        {frame >= s(b, 3) && (
+          <Pop at={s(b, 3)}>
             <Chip bg={C.mustard} size={50} style={{ transform: `translateY(${bob}px)` }}>
               <Icon name="comment" size={58} sw={8} /> قولي في الكومنتات
             </Chip>
@@ -647,48 +654,19 @@ export const S16: React.FC<SceneProps> = ({ b }) => {
   );
 };
 
-// 17 — subscribe, then the callback to the hook: a year ago vs today… the difference was five steps
-export const S17: React.FC<SceneProps> = ({ b }) => {
-  const frame = useCurrentFrame();
-  const back = s(b, 1);
+// 17 — subscribe for the next experiment
+export const S17: React.FC<SceneProps> = () => {
+  const bob = useBob(10, 8);
   return (
-    <Stage gap={40}>
-      {frame < back ? (
-        <Pop at={2}>
-          <Col gap={30}>
-            <Chip size={70} bg="#E0252B" style={{ color: "#fff" }}>
-              <Icon name="bell" size={70} color="#fff" sw={8} /> اشترك في القناة
-            </Chip>
-            <T size={46} color={D.dim}>عشان تشوف التجربة الجاية</T>
-          </Col>
-        </Pop>
-      ) : (
-        <>
-          <Row gap={50} ltr>
-            <Pop at={back}>
-              <Col gap={18}>
-                <Frame src="v1-bloglist.mp4" w={700} url="2025" from={back} />
-                <Chip size={44}>من سنة</Chip>
-              </Col>
-            </Pop>
-            <Pop at={back + 8}>
-              <Col gap={18}>
-                <Frame src="v3-bloglist.mp4" w={700} url="2026" accent={ACCENT.outro} from={back + 8} />
-                <Chip size={44} bg={C.mustard}>النهارده</Chip>
-              </Col>
-            </Pop>
-          </Row>
-          <div style={{ height: 100 }}>
-            {frame >= s(b, 2) && (
-              <Slam at={s(b, 2)}>
-                <T size={80}>
-                  الفرق كان <Mark at={s(b, 2) + 8} color={ACCENT.outro}>خمس خطوات بس</Mark>
-                </T>
-              </Slam>
-            )}
-          </div>
-        </>
-      )}
+    <Stage gap={36} zoom={1.1}>
+      <Pop at={2}>
+        <Chip size={80} bg="#E0252B" style={{ color: "#fff", transform: `translateY(${bob}px)` }}>
+          <Icon name="bell" size={80} color="#fff" sw={8} /> اشترك في القناة
+        </Chip>
+      </Pop>
+      <Pop at={14}>
+        <T size={50} color={D.dim}>عشان تشوف التجربة الجاية</T>
+      </Pop>
     </Stage>
   );
 };
