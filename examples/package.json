@@ -17,7 +17,11 @@
     "render:squirrel": "remotion render src/squirrel/index.ts SquirrelBurger out/squirrel-burger.mp4 --codec h264 --crf 17",
     "render:squirrel-long": "remotion render src/squirrel/index.ts SquirrelBurgerLong out/squirrel-burger-long.mp4 --codec h264 --crf 18",
     "render:squirrel-long-ar": "remotion render src/squirrel/index.ts SquirrelBurgerLongAR out/squirrel-burger-long-ar.mp4 --codec h264 --crf 18",
-    "audio:squirrel-ar": "LANG_CUT=ar node scripts/gen-squirrel-audio.mjs"
+    "audio:squirrel-ar": "LANG_CUT=ar node scripts/gen-squirrel-audio.mjs",
+    "vo:v3": "python3 scripts/gen-v3-vo-ar-gemini.py .v3vo videos/v3-portfolio/vo-ar.txt x && python3 scripts/v3-timing.py .v3vo",
+    "audio:v3": "node scripts/gen-v3-audio.mjs",
+    "render:v3": "remotion render src/v3/index.ts V3PortfolioAR out/v3-portfolio-ar.mp4 --codec h264 --crf 18",
+    "thumb:v3": "remotion still src/v3/index.ts V3Thumbnail videos/v3-portfolio/v3-portfolio-thumbnail.png"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",
