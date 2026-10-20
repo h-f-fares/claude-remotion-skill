@@ -1,7 +1,7 @@
 import React from "react";
 import { Composition, cancelRender, continueRender, delayRender, staticFile } from "remotion";
 import { V3Simple } from "./V3Simple";
-import { ThumbnailSimple } from "./Thumbnail";
+import { ThumbA, ThumbB, ThumbC, ThumbD, ThumbnailSimple } from "./Thumbnail";
 import { FPS, TOTAL_F } from "./timing";
 
 // IBM Plex Sans Arabic (OFL), bundled in public/fonts so renders work offline
@@ -23,5 +23,9 @@ export const V3SimpleRoot: React.FC = () => (
   <>
     <Composition id="V3PortfolioARSimple" component={V3Simple} durationInFrames={TOTAL_F} fps={FPS} width={1920} height={1080} />
     <Composition id="V3SimpleThumbnail" component={ThumbnailSimple} durationInFrames={1} fps={FPS} width={1280} height={720} />
+    <Composition id="V3SimpleThumbA" component={ThumbA} durationInFrames={1} fps={FPS} width={1280} height={720} />
+    <Composition id="V3SimpleThumbB" component={ThumbB} durationInFrames={1} fps={FPS} width={1280} height={720} />
+    <Composition id="V3SimpleThumbD" component={ThumbD} durationInFrames={1} fps={FPS} width={1280} height={720} />
+    <Composition id="V3SimpleThumbC" component={ThumbC} durationInFrames={1} fps={FPS} width={1280} height={720} />
   </>
 );

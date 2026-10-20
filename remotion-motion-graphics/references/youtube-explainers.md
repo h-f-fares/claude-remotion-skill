@@ -91,6 +91,11 @@ Arabic basics.
   radial key light behind; a phone showing the real page; 2 lines of huge text
   (second word in yellow, slight tilt). Build it at native 1280×720 and check
   that nothing overlaps.
+- Before designing, ask for (or look at) the channel's existing thumbnails and
+  match its style (here: dark + red diagonal, white-outlined face on the right,
+  three short stacked lines with the key line in red). Use the author's own
+  words for the text; Arabic text goes on the left, right-aligned to one edge.
+  Render 3–4 layouts side by side and let the author pick.
 
 ## 7. Shell gotcha
 - `pkill -f <pattern>` AND `pgrep -f <pattern>` match the shell running the
