@@ -126,6 +126,11 @@ speech, see the captions section of `references/motion-patterns.md`.
   environment preflight (free Kokoro voice, local fonts, caption timing without
   Whisper), ~2-min retention script structure, viral-grade edit checklist.
   Read FIRST for any "animate this story/post" request.
+- `references/youtube-explainers.md` — long-form landscape YouTube videos from
+  an article: hook + chapters + mid-video reset script, Gemini TTS failure
+  workarounds, landscape layout scale and subtitle band, fast contact sheets,
+  render and delivery. Read FIRST for any "make a YouTube video of this article"
+  request.
 
 ## Common failure modes to actively avoid
 - **Emoji as icons.** Emoji render as full-color platform glyphs (green ✳️,
