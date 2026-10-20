@@ -144,4 +144,4 @@ export const ThumbD: React.FC = () => (
   </AbsoluteFill>
 );
 
-export const ThumbnailSimple = ThumbA;
+export const ThumbnailSimple = ThumbB;
