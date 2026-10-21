@@ -124,7 +124,12 @@ proof lines in 3.5 s). Format and options: `tools/vo.py`.
    running it.
 3. `python3 tools/vo.py voice/script.json`, then align the words
    (`examples/scripts/align-vo-gemini.py`). Takes are cached per line id and text, so re-doing one
-   line re-generates only that line. Scenes cued from the words move with the new timing; re-check
+   line re-generates only that line.
+4. **Check the pronunciation before the user hears it:** `python3 tools/pron.py voice/vo.wav
+   voice/script.json`. Fix each finding with a `say` respelling on that line (the caption keeps the
+   normal spelling) and re-generate. For Egyptian, put the dialect's sounds in the persona too
+   (ق = glottal stop, ج = g, ث = s/t) and ask for a calm pace: Gemini read VeilLLM too fast and with
+   formal ق/ج/ث until it was told. Gemini Pro TTS allows 50 requests a day: count the lines first. Scenes cued from the words move with the new timing; re-check
    the cues on any changed line.
 
 ### 8. Look and storyboard

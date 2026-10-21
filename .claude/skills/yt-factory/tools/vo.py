@@ -11,7 +11,9 @@ Run it from the video's project folder. script.json:
      "lines": [{"id": "hook1", "scene": 1, "text": "...", "after": 0.45},
                {"id": "proof2", "scene": 6, "text": "ده اللي انت كتبته.", "after": 1.8}]}
 
-One sentence per line. `after` is the silence that follows it: give a line a long one (1-2 s) where
+One sentence per line. Optional `say`: what the voice reads when it differs from the caption text,
+e.g. a respelling that forces the dialect ("أدْرة" for قادرة, so the ق becomes a glottal stop).
+`after` is the silence that follows it: give a line a long one (1-2 s) where
 the picture needs time to be read, and put the payoff hit in that pause, not under the next line.
 Lines that share a `scene` become one segment.
 
@@ -59,9 +61,10 @@ def tts(text, path):
 
 def take(line):
     if scratch: return np.zeros(int(est_seconds(line["text"]) * SR), dtype=np.float32)
-    h = hashlib.sha1((line["text"] + spec.get("voice", "") + spec.get("persona", "")).encode()).hexdigest()[:8]
+    said = line.get("say", line["text"])
+    h = hashlib.sha1((said + spec.get("voice", "") + spec.get("persona", "") + spec.get("model", "")).encode()).hexdigest()[:8]
     path = os.path.join(takes, f"{line['id']}-{h}.pcm")
-    tts(line["text"], path)
+    tts(said, path)
     a = np.frombuffer(open(path, "rb").read(), dtype=np.int16).astype(np.float32) / 32768
     loud = np.where(np.abs(a) > 0.012)[0]
     return a[max(0, loud[0] - 240): loud[-1] + 600] if len(loud) else a

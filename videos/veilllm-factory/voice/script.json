@@ -1,0 +1,106 @@
+{
+ "voice": "Charon",
+ "model": "gemini-2.5-pro-preview-tts",
+ "lead": 0.3,
+ "tail": 0.9,
+ "persona": "Read the transcript below exactly as written, word for word, in natural Egyptian Arabic with a Cairo accent. You are a warm Egyptian software developer from Cairo in his thirties telling a friend about a tool he built: relaxed, calm, conversational. Speak SLOWLY and clearly, about 20% slower than a normal conversation, with a short breath between phrases. Never rush. Egyptian pronunciation only, never MSA, Levantine or Gulf: ق is a glottal stop (قادرة = 'adra), ج is a hard g (جهاز = gihaaz), ث is s or t, ذ is z or d. Say the English technical words (AI, cloud, AI harness, local LLM, local models, proxy, harness, API keys, placeholders, request, millisecond, base URL, open source, GitHub) in natural English, the way Egyptian developers mix them in. Say VeilLLM as 'Veil L L M'. Do not add or skip any words.",
+ "lines": [
+  {
+   "id": "hook1",
+   "scene": 1,
+   "text": "كل مرة بتكلّم الـ AI، أسامي عملائك وإيميلاتهم بتخرج من جهازك.",
+   "after": 0.45,
+   "say": "كل مرة بتكلّم الـ AI، أسامي عملائك وإيميلاتهم بتخرج من گِهازَك."
+  },
+  {
+   "id": "hook2",
+   "scene": 1,
+   "text": "استنى للآخر، وهوريك الموديل بيشوف إيه بالظبط.",
+   "after": 0.6
+  },
+  {
+   "id": "story1",
+   "scene": 2,
+   "text": "من كام أسبوع كنت بتكلم مع صحابي عن الـ AI harness بتاع كل واحد فينا.",
+   "after": 0.5
+  },
+  {
+   "id": "story2",
+   "scene": 2,
+   "text": "كلهم عايزين local LLM عشان الداتا الحساسة.",
+   "after": 0.5
+  },
+  {
+   "id": "story3",
+   "scene": 2,
+   "text": "بس الـ local models لسه مش قادرة زي موديلات الـ cloud.",
+   "after": 0.6,
+   "say": "بس الـ local models لسه مش أدْرة زي موديلات الـ cloud."
+  },
+  {
+   "id": "reveal",
+   "scene": 3,
+   "text": "فعملت VeilLLM، proxy لوكال بيقف بين الـ harness بتاعك والموديل.",
+   "after": 0.6,
+   "say": "فعملت VeilLLM، proxy لوكال بِيُؤَف بين الـ harness بتاعك والموديل."
+  },
+  {
+   "id": "mask1",
+   "scene": 4,
+   "text": "بيلاقي الأسامي والإيميلات والـ API keys، ويبدّلها بـ placeholders قبل ما الـ request يخرج.",
+   "after": 0.5
+  },
+  {
+   "id": "mask2",
+   "scene": 4,
+   "text": "ولما الرد يرجع، بيرجّع القيم الحقيقية مكانها.",
+   "after": 0.6,
+   "say": "ولما الرد يرجع، بيرجّع الإِيَم الحأيأية مكانها."
+  },
+  {
+   "id": "reset",
+   "scene": 5,
+   "text": "طب بجد بيشتغل؟",
+   "after": 0.5
+  },
+  {
+   "id": "proof1",
+   "scene": 6,
+   "text": "ده اللي انت كتبته.",
+   "after": 1.6
+  },
+  {
+   "id": "proof2",
+   "scene": 7,
+   "text": "وده اللي الموديل شافه.",
+   "after": 1.8
+  },
+  {
+   "id": "speed",
+   "scene": 8,
+   "text": "وكل ده بيزوّد من 20 لـ 50 millisecond بس، والتركيب سطر واحد: تغيّر الـ base URL وخلاص.",
+   "after": 0.6,
+   "say": "وكل ده بيزوّد من عشرين لـ خمسين millisecond بس، والتركيب سطر واحد: تغيّر الـ base URL وخلاص."
+  },
+  {
+   "id": "ask1",
+   "scene": 9,
+   "text": "وانت؟ تثق في موديلات الـ cloud بداتا عملائك، ولا local بس حتى لو أضعف؟",
+   "after": 0.45,
+   "say": "وانت؟ تِسِق في موديلات الـ cloud بداتا عملائك، ولا local بس حتى لو أضعف؟"
+  },
+  {
+   "id": "ask2",
+   "scene": 9,
+   "text": "قولي في الكومنتات.",
+   "after": 0.6,
+   "say": "أولّي في الكومنتات."
+  },
+  {
+   "id": "cta",
+   "scene": 10,
+   "text": "الكود open source على GitHub، دوّر على VeilLLM.",
+   "after": 0.3
+  }
+ ]
+}
