@@ -3,12 +3,12 @@ import { AbsoluteFill, Audio, interpolate, Sequence, staticFile } from "remotion
 import { clamp } from "./theme";
 import { at, from, len, SCENES, TOTAL, type SceneKey } from "./timing";
 import { BgMesh, FontStyles, Grade, Grain, SceneExit, Vignette } from "./components";
-import { ChoiceScene, Config, Cta, Demo, Friends, Hook, Mask, Reset, Reveal } from "./scenes";
+import { ChoiceScene, Config, Cta, Demo, Friends, Hook, Mask, Reset, Reveal, Risk } from "./scenes";
 import { Captions } from "./Captions";
 import { TextCheck } from "./TextCheck";
 
 const SCENE_COMPONENTS: Record<SceneKey, React.FC> = {
-  hook: Hook, friends: Friends, reveal: Reveal, mask: Mask, reset: Reset, demo: Demo, config: Config, choice: ChoiceScene, cta: Cta,
+  hook: Hook, risk: Risk, friends: Friends, reveal: Reveal, mask: Mask, reset: Reset, demo: Demo, config: Config, choice: ChoiceScene, cta: Cta,
 };
 
 const sfx = (f: string) => staticFile(`sfx/${f}`);
@@ -41,6 +41,7 @@ export const Main: React.FC = () => {
       <Audio src={sfx("pad19.wav")} loop volume={(f) => 0.13 * interpolate(f, [reset[0] - 6, reset[0], reset[1] + 10, reset[1] + 30, TOTAL - 30, TOTAL], [1, 0, 0, 1, 1, 0], clamp)} />
       {keys.slice(1).map((k) => <Sfx key={k} at={from(k) - 4} file="whoosh.wav" volume={0.3} />)}
       <Sfx at={at("بتخرج")} file="whoosh.wav" volume={0.35} />
+      {["DeepSeek", "Samsung"].map((w) => <Sfx key={w} at={at(w)} file="bass.wav" volume={0.45} />)}
       <Sfx at={at("VeilLLM")} file="bass.wav" volume={0.55} />
       <Sfx at={reset[0]} file="bass.wav" volume={0.6} />
       {[0, 5, 10].map((d) => <Sfx key={d} at={at("ويبدّلها") + d} file="pop.wav" volume={0.3} />)}

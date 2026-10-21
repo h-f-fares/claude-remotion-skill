@@ -1,161 +1,194 @@
 {
  "segments": [
   {
-   "scene": 1,
+   "scene": "hook",
    "start": 0.3,
    "dur": 10.482
   },
   {
-   "scene": 2,
+   "scene": "risk",
    "start": 10.782,
+   "dur": 21.798
+  },
+  {
+   "scene": "friends",
+   "start": 32.58,
    "dur": 15.284
   },
   {
-   "scene": 3,
-   "start": 26.066,
+   "scene": "reveal",
+   "start": 47.864,
    "dur": 5.573
   },
   {
-   "scene": 4,
-   "start": 31.639,
+   "scene": "mask",
+   "start": 53.437,
    "dur": 11.348
   },
   {
-   "scene": 5,
-   "start": 42.987,
+   "scene": "reset",
+   "start": 64.785,
    "dur": 1.77
   },
   {
-   "scene": 6,
-   "start": 44.757,
-   "dur": 2.553
+   "scene": "demo",
+   "start": 66.555,
+   "dur": 2.552
   },
   {
-   "scene": 7,
-   "start": 47.31,
+   "scene": "saw",
+   "start": 69.107,
    "dur": 3.577
   },
   {
-   "scene": 8,
-   "start": 50.887,
-   "dur": 5.873
+   "scene": "speed",
+   "start": 72.684,
+   "dur": 5.874
   },
   {
-   "scene": 9,
-   "start": 56.76,
+   "scene": "choice",
+   "start": 78.558,
    "dur": 7.798
   },
   {
-   "scene": 10,
-   "start": 64.558,
+   "scene": "cta",
+   "start": 86.356,
    "dur": 3.487
   }
  ],
  "sentences": [
   {
-   "beat": 1,
+   "beat": "hook",
    "id": "hook1",
    "text": "كل مرة بتكلّم الـ AI، أسامي عملائك وإيميلاتهم بتخرج من جهازك.",
    "start": 0.3,
    "end": 6.346
   },
   {
-   "beat": 1,
+   "beat": "hook",
    "id": "hook2",
    "text": "استنى للآخر، وهوريك الموديل بيشوف إيه بالظبط.",
    "start": 6.796,
    "end": 10.182
   },
   {
-   "beat": 2,
+   "beat": "risk",
+   "id": "risk1",
+   "text": "والمشكلة إنك بتبعت داتا حساسة للموديل من غير ما يكون محتاجها.",
+   "start": 10.782,
+   "end": 14.569
+  },
+  {
+   "beat": "risk",
+   "id": "risk2",
+   "text": "وده حصل فعلًا: DeepSeek ساب داتابيز مفتوحة فيها شاتات الناس والـ API keys.",
+   "start": 15.069,
+   "end": 21.693
+  },
+  {
+   "beat": "risk",
+   "id": "risk3",
+   "text": "وموظفين في Samsung سرّبوا كود سري في ChatGPT.",
+   "start": 22.143,
+   "end": 25.528
+  },
+  {
+   "beat": "risk",
+   "id": "risk4",
+   "text": "وفي نفس الوقت، مش عملي إنك كل شوية تشيل الأسامي والـ keys بإيدك قبل ما تبعت.",
+   "start": 26.928,
+   "end": 31.98
+  },
+  {
+   "beat": "friends",
    "id": "story1",
    "text": "من كام أسبوع كنت بتكلم مع صحابي عن الـ AI harness بتاع كل واحد فينا.",
-   "start": 10.782,
-   "end": 16.185
+   "start": 32.58,
+   "end": 37.983
   },
   {
-   "beat": 2,
+   "beat": "friends",
    "id": "story2",
    "text": "كلهم عايزين local LLM عشان الداتا الحساسة.",
-   "start": 16.685,
-   "end": 20.365
+   "start": 38.483,
+   "end": 42.163
   },
   {
-   "beat": 2,
+   "beat": "friends",
    "id": "story3",
    "text": "بس الـ local models لسه مش قادرة زي موديلات الـ cloud.",
-   "start": 20.865,
-   "end": 25.466
+   "start": 42.663,
+   "end": 47.264
   },
   {
-   "beat": 3,
+   "beat": "reveal",
    "id": "reveal",
    "text": "فعملت VeilLLM، proxy لوكال بيقف بين الـ harness بتاعك والموديل.",
-   "start": 26.066,
-   "end": 31.039
+   "start": 47.864,
+   "end": 52.837
   },
   {
-   "beat": 4,
+   "beat": "mask",
    "id": "mask1",
    "text": "بيلاقي الأسامي والإيميلات والـ API keys، ويبدّلها بـ placeholders قبل ما الـ request يخرج.",
-   "start": 31.639,
-   "end": 37.333
+   "start": 53.437,
+   "end": 59.13
   },
   {
-   "beat": 4,
+   "beat": "mask",
    "id": "mask2",
    "text": "ولما الرد يرجع، بيرجّع القيم الحقيقية مكانها.",
-   "start": 37.833,
-   "end": 42.387
+   "start": 59.63,
+   "end": 64.185
   },
   {
-   "beat": 5,
+   "beat": "reset",
    "id": "reset",
    "text": "طب بجد بيشتغل؟",
-   "start": 42.987,
-   "end": 44.257
+   "start": 64.785,
+   "end": 66.055
   },
   {
-   "beat": 6,
+   "beat": "demo",
    "id": "proof1",
    "text": "ده اللي انت كتبته.",
-   "start": 44.757,
-   "end": 45.71
+   "start": 66.555,
+   "end": 67.507
   },
   {
-   "beat": 7,
+   "beat": "saw",
    "id": "proof2",
    "text": "وده اللي الموديل شافه.",
-   "start": 47.31,
-   "end": 49.087
+   "start": 69.107,
+   "end": 70.884
   },
   {
-   "beat": 8,
+   "beat": "speed",
    "id": "speed",
    "text": "وكل ده بيزوّد من 20 لـ 50 millisecond بس، والتركيب سطر واحد: تغيّر الـ base URL وخلاص.",
-   "start": 50.887,
-   "end": 56.16
+   "start": 72.684,
+   "end": 77.958
   },
   {
-   "beat": 9,
+   "beat": "choice",
    "id": "ask1",
    "text": "وانت؟ تثق في موديلات الـ cloud بداتا عملائك، ولا local بس حتى لو أضعف؟",
-   "start": 56.76,
-   "end": 62.403
+   "start": 78.558,
+   "end": 84.2
   },
   {
-   "beat": 9,
+   "beat": "choice",
    "id": "ask2",
    "text": "قولي في الكومنتات.",
-   "start": 62.853,
-   "end": 63.958
+   "start": 84.65,
+   "end": 85.756
   },
   {
-   "beat": 10,
+   "beat": "cta",
    "id": "cta",
    "text": "الكود open source على GitHub، دوّر على VeilLLM.",
-   "start": 64.558,
-   "end": 67.745
+   "start": 86.356,
+   "end": 89.543
   }
  ]
 }

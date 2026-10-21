@@ -1,8 +1,8 @@
 import React from "react";
 import { AbsoluteFill, Img, interpolate, OffthreadVideo, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { clamp, theme } from "./theme";
-import { at, from, sec, SCENES, segments, type SceneKey } from "./timing";
-import { BubbleIcon, Card, CloudIcon, Entrance, GithubIcon, Kicker, LockIcon, ShieldIcon, useBreath, useSpring } from "./components";
+import { at, from, sec, seg, sentences, SCENES, type SceneKey } from "./timing";
+import { BubbleIcon, Card, CloudIcon, Entrance, GithubIcon, Kicker, LockIcon, SceneExit, ShieldIcon, useBreath, useSpring } from "./components";
 import { MessageCard, Packet, Token } from "./Message";
 
 const C = theme.colors;
@@ -86,6 +86,112 @@ export const Hook: React.FC = () => {
           </div>
         </Card>
       </div>
+    </AbsoluteFill>
+  );
+};
+
+// ---------- 1b. Risk: the model doesn't need it, leaks happen, and removing it by hand doesn't scale ----------
+// incidents, sourced in FACTORY.md: Wiz on DeepSeek (Jan 2025), Samsung via Economist Korea (Mar 2023), OpenAI's own post-mortem (Mar 2023)
+const INCIDENTS = [
+  { name: "DeepSeek", year: "2025", what: "داتابيز مفتوحة فيها شاتات و API keys" },
+  { name: "Samsung", year: "2023", what: "موظفين لزقوا كود سري في ChatGPT" },
+  { name: "ChatGPT", year: "2023", what: "bug ورّى ناس عناوين شاتات ناس تانية" },
+];
+
+const Need: React.FC<{ ok: boolean; title: string; text: string; enter: number }> = ({ ok, title, text, enter }) => (
+  <Entrance delay={enter} y={40} config="bouncy">
+    <Card glow={ok ? C.heroGlow : C.leakGlow} style={{ display: "flex", alignItems: "center", gap: 24, padding: "26px 34px", direction: "rtl", border: `2px solid ${ok ? C.hero : C.leak}` }}>
+      <div style={{ width: 76, height: 76, borderRadius: 38, flexShrink: 0, background: ok ? C.hero : C.leak, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <svg width="40" height="40" viewBox="0 0 40 40">{ok
+          ? <path d="M8 21l8 8 16-17" stroke={C.bg} strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          : <path d="M10 10l20 20M30 10L10 30" stroke={C.bg} strokeWidth="6" strokeLinecap="round" />}</svg>
+      </div>
+      <div>
+        <div style={{ ...AR, fontWeight: 700, fontSize: 44, color: ok ? C.hero : C.leak }}>{title}</div>
+        <div style={{ ...AR, fontWeight: 500, fontSize: 42, color: C.text }}>{text}</div>
+      </div>
+    </Card>
+  </Entrance>
+);
+
+const Incident: React.FC<{ i: number; enter: number }> = ({ i, enter }) => {
+  const frame = useCurrentFrame();
+  const p = useSpring(enter, "snappy");
+  const shake = interpolate(frame, [enter, enter + 10], [10, 0], clamp) * Math.sin(frame * 2.1);
+  const it = INCIDENTS[i];
+  return (
+    <div style={{ opacity: p, transform: `translateX(${shake}px) scale(${interpolate(p, [0, 1], [1.4, 1])})` }}>
+      <Card glow={C.leakGlow} style={{ padding: "22px 30px", border: `2px solid ${C.leak}` }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", direction: "ltr" }}>
+          <div style={{ fontFamily: "'Plex Sans'", fontWeight: 700, fontSize: 56, color: C.text }}>{it.name}</div>
+          <div style={{ fontFamily: theme.fonts.mono, fontSize: 44, color: C.leak }}>{it.year}</div>
+        </div>
+        <div style={{ ...AR, fontWeight: 500, fontSize: 42, color: "#FFD4D4", marginTop: 6 }}>{it.what}</div>
+      </Card>
+    </div>
+  );
+};
+
+// removing the sensitive parts by hand, message after message
+const ManualRedact: React.FC = () => {
+  const frame = useCurrentFrame();
+  const P = 26;
+  const n = Math.floor(frame / P), t = frame % P;
+  const bar = (at: number) => interpolate(t, [at, at + 5], [0, 1], clamp);
+  const word = (txt: string, at: number) => (
+    <span style={{ position: "relative", display: "inline-block", margin: "0 6px" }}>
+      {txt}
+      <span style={{ position: "absolute", inset: "4px -4px", borderRadius: 6, background: "#000", transformOrigin: "left", transform: `scaleX(${bar(at)})` }} />
+    </span>
+  );
+  return (
+    <AbsoluteFill>
+      <div style={{ position: "absolute", top: 440, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
+        <div style={{ ...AR, fontWeight: 700, fontSize: 54, color: C.text, padding: "10px 30px", borderRadius: 18, background: C.card, border: `2px solid ${C.line}` }}>
+          رسالة رقم <span style={{ color: C.leak, fontFamily: "'Plex Sans'", display: "inline-block", transform: `scale(${t < 4 ? 1.25 : 1})` }}>{n + 1}</span>
+        </div>
+      </div>
+      <div style={{ position: "absolute", top: 580, left: 60, right: 60, transform: `translateY(${t < 3 ? (3 - t) * 14 : 0}px)`, opacity: t < 2 ? 0.4 : 1 }}>
+        <Card style={{ padding: "30px 36px", direction: "ltr", fontFamily: "'Plex Sans'", fontWeight: 500, fontSize: 46, lineHeight: 1.8, color: C.text }}>
+          Hi, I'm {word("Sarah Mitchell", 5)} from Acme. Email me at {word("sarah.m@acme.com", 11)}. Key: {word("sk-proj-8fK2Lw9xQ7", 17)}
+        </Card>
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+export const Risk: React.FC = () => {
+  const k = "risk";
+  const need = cue(k, "محتاجها");
+  const b = cue(k, "وده");
+  const deep = cue(k, "DeepSeek");
+  const sam = cue(k, "Samsung");
+  const c = cue(k, "نفس");
+  const more = sec(sentences.find((x) => x.id === "risk3")!.end) - from(k) + 4;
+  return (
+    <AbsoluteFill>
+      <Swap items={[{ at: 0, text: "الموديل مش محتاج دول", color: C.leak }, { at: b, text: "وده حصل فعلًا", color: C.leak }, { at: c, text: "كل مرة بإيدك؟" }]} />
+      <Sequence durationInFrames={b} layout="none">
+        <SceneExit dur={b}>
+          <div style={{ position: "absolute", top: 440, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
+            <MessageCard width={960} cues={[{ leak: -20 }, { leak: -16 }, { leak: -12 }]} />
+          </div>
+          <div style={{ position: "absolute", top: 820, left: 60, right: 60, display: "flex", flexDirection: "column", gap: 26 }}>
+            <Need ok title="الموديل محتاج" text="الطلب: اكتب رد على الإيميل" enter={8} />
+            <Need ok={false} title="مش محتاج" text="الأسامي والإيميلات والـ keys" enter={need - 6} />
+          </div>
+        </SceneExit>
+      </Sequence>
+      <Sequence from={b} durationInFrames={c - b} layout="none">
+        <SceneExit dur={c - b}>
+          <div style={{ position: "absolute", top: 440, left: 60, right: 60, display: "flex", flexDirection: "column", gap: 28 }}>
+            <Incident i={0} enter={deep - b} />
+            <Incident i={1} enter={sam - b} />
+            <Incident i={2} enter={more - b} />
+          </div>
+        </SceneExit>
+      </Sequence>
+      <Sequence from={c} layout="none"><ManualRedact /></Sequence>
     </AbsoluteFill>
   );
 };
@@ -179,7 +285,7 @@ const Node: React.FC<{ x: number; enter: number; label: string; children: React.
   <div style={{ position: "absolute", left: x, top: 820, transform: "translate(-50%, -50%)" }}>
     <Entrance delay={enter} y={40} config="bouncy" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
       {children}
-      <div style={{ ...AR, fontWeight: 700, fontSize: 40, color: C.dim, whiteSpace: "nowrap" }}>{label}</div>
+      <div style={{ ...AR, fontWeight: 700, fontSize: 44, color: C.dim, whiteSpace: "nowrap" }}>{label}</div>
     </Entrance>
   </div>
 );
@@ -251,10 +357,10 @@ export const Mask: React.FC = () => {
         </Entrance>
         <Entrance delay={8} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
           <CloudIcon size={170} color={C.text} />
-          <div style={{ ...AR, fontWeight: 700, fontSize: 40, color: C.dim }}>الموديل</div>
+          <div style={{ ...AR, fontWeight: 700, fontSize: 44, color: C.dim }}>الموديل</div>
         </Entrance>
       </div>
-      <Packet start={send} dur={18} from={[840, 1060]} to={[250, 1060]} color={C.hero} label="<PERSON_0> <EMAIL_0>" arc={-90} />
+      <Packet start={send} dur={18} from={[760, 1060]} to={[250, 1060]} color={C.hero} label="<PERSON_0> <EMAIL_0>" arc={-90} />
       <Packet start={back} dur={18} from={[250, 1060]} to={[840, 1060]} color={C.hero} label="<PERSON_0>" arc={-90} />
     </AbsoluteFill>
   );
@@ -296,7 +402,7 @@ const FOUND = [
 export const Demo: React.FC = () => {
   const k = "demo";
   const frame = useCurrentFrame();
-  const saw = sec(segments[6].start) - from(k); // beat 7: "and this is what the model saw"
+  const saw = sec(seg("saw")) - from(k); // "and this is what the model saw"
   const speed = cue(k, "بيزوّد");
   const num = cue(k, "20");
   const typed = sec(1.6 - 0.8); // the clip starts mid-typing, so the input is complete within the line

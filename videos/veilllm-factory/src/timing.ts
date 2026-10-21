@@ -20,17 +20,24 @@ export const at = (text: string, nth = 0, after = 0) => {
 };
 
 // Scene windows in seconds: [start, end). Boundaries sit on VO beats or on a spoken word.
-const seg = (n: number) => segments[n - 1].start;
+// segments are named by the `scene` field of voice/script.json, so inserting a scene shifts nothing
+export const seg = (name: string) => {
+  const s = segments.find((x) => x.scene === name);
+  if (!s) throw new Error(`no voice segment "${name}"`);
+  return s.start;
+};
+const install = aligned.find((w) => w.w.startsWith("والتركيب"))!.start - 0.15;
 export const SCENES = {
-  hook: [0, seg(2)],
-  friends: [seg(2), seg(3)],
-  reveal: [seg(3), seg(4)],
-  mask: [seg(4), seg(5)],
-  reset: [seg(5), seg(6)],
-  demo: [seg(6), aligned.find((w) => w.w.startsWith("والتركيب"))!.start - 0.15],
-  config: [aligned.find((w) => w.w.startsWith("والتركيب"))!.start - 0.15, seg(9)],
-  choice: [seg(9), seg(10)],
-  cta: [seg(10), TOTAL / FPS],
+  hook: [0, seg("risk")],
+  risk: [seg("risk"), seg("friends")],
+  friends: [seg("friends"), seg("reveal")],
+  reveal: [seg("reveal"), seg("mask")],
+  mask: [seg("mask"), seg("reset")],
+  reset: [seg("reset"), seg("demo")],
+  demo: [seg("demo"), install],
+  config: [install, seg("choice")],
+  choice: [seg("choice"), seg("cta")],
+  cta: [seg("cta"), TOTAL / FPS],
 } as const;
 export type SceneKey = keyof typeof SCENES;
 export const from = (k: SceneKey) => sec(SCENES[k][0]);

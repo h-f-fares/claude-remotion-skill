@@ -33,6 +33,9 @@ format: short (9:16, ~62s)     language: ar (Egyptian)     viewer: a developer o
 ## Sources
 - 20-50 ms per request, masks names / emails / API keys, one `base_url` change, `pip install veil-llm`: the VeilLLM post, https://hfares.com/blog/veilllm-local-dlp-proxy-ai-harness/
 - "4 entity(s) found in 23.8ms" on screen: the project's own Gradio playground (recording in `public/clips/demo.mp4`)
+- DeepSeek exposed database (chat history, API keys), found by Wiz, disclosed Jan 2025: https://www.wiz.io/blog/wiz-research-uncovers-exposed-deepseek-database-leak
+- Samsung engineers pasted confidential source code and meeting notes into ChatGPT, March 2023 (Economist Korea, via TechRadar): https://www.techradar.com/news/samsung-workers-leaked-company-secrets-by-using-chatgpt
+- ChatGPT bug showed some users other users' chat titles, March 2023 (OpenAI post-mortem): https://openai.com/index/march-20-chatgpt-outage/
 - Researched, not used in the script: 30% of 600+ developers entered secrets into a GenAI tool (Bitwarden 2024 survey, vendor source), https://bitwarden.com/resources/security-survey-developer-secrets-and-the-future-of-passkeys/
 
 ## Log
@@ -42,3 +45,4 @@ format: short (9:16, ~62s)     language: ar (Egyptian)     viewer: a developer o
 - `review.mjs` caught captions below the safe line on every frame; moved from y 1400 to 1270.
 - Weakest scene: the friends scene's first 6 s (only four small avatars enter; flagged as a dead stretch). Fix: give each friend a speech bubble on "صحابي".
 - Rules proposed and added: one sentence per TTS line, phone numbers, hit in the pause, measured review.
+- User feedback round 2: on-screen text too small to read on a phone, and the first seconds did not say what problem the tool solves. Fixed with the three-step problem at frame 0, large-print cards over the demo, and review.mjs failing text under 40px. Added a "why it matters" scene (3 sourced leak incidents + the cost of removing data by hand).

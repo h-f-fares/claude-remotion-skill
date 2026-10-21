@@ -10,6 +10,16 @@ type Box = { x0: number; y0: number; x1: number; y1: number };
 const area = (b: Box) => Math.max(0, b.x1 - b.x0) * Math.max(0, b.y1 - b.y0);
 const inter = (a: Box, b: Box): Box => ({ x0: Math.max(a.x0, b.x0), y0: Math.max(a.y0, b.y0), x1: Math.min(a.x1, b.x1), y1: Math.min(a.y1, b.y1) });
 
+// text in the middle of a 3D flip (rotateX/Y) is squashed for a few frames on purpose; don't size it then
+const flipping = (el: Element | null) => {
+  for (let e = el; e && e instanceof HTMLElement; e = e.parentElement) {
+    const t = getComputedStyle(e).transform;
+    // matrix3d(a1 b1 c1 d1, a2 b2 ...): b2 (index 5) is the vertical scale; at rest it is ~1
+    if (t.startsWith("matrix3d") && Math.abs(parseFloat(t.slice(9).split(",")[5])) < 0.95) return true;
+  }
+  return false;
+};
+
 // opacity is multiplied down the tree; a parent at 0.2 makes its text unreadable too
 const opacity = (el: Element | null) => {
   let o = 1;
@@ -51,7 +61,7 @@ export const TextCheck: React.FC = () => {
       const b = it.box;
       if (b.x0 < -1 || b.y0 < -1 || b.x1 > W + 1 || b.y1 > H + 1) issues.push({ kind: "CUT", text: it.text, detail: `box ${Math.round(b.x0)},${Math.round(b.y0)}-${Math.round(b.x1)},${Math.round(b.y1)}` });
       else if (b.x0 < safe.x0 || b.y0 < safe.y0 || b.x1 > safe.x1 || b.y1 > safe.y1) issues.push({ kind: "UNSAFE", text: it.text, detail: `box ${Math.round(b.x0)},${Math.round(b.y0)}-${Math.round(b.x1)},${Math.round(b.y1)}, safe ${safe.x0},${safe.y0}-${safe.x1},${safe.y1}` });
-      if (it.px < 40) issues.push({ kind: "SMALL", text: it.text, detail: `${it.px}px (40px minimum at 1080 wide)` });
+      if (it.px < 40 && !flipping(it.el)) issues.push({ kind: "SMALL", text: it.text, detail: `${it.px}px (40px minimum at 1080 wide)` });
     }
     for (let i = 0; i < items.length; i++)
       for (let j = i + 1; j < items.length; j++) {
