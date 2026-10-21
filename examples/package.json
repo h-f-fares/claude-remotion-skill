@@ -17,7 +17,8 @@
     "render:squirrel": "remotion render src/squirrel/index.ts SquirrelBurger out/squirrel-burger.mp4 --codec h264 --crf 17",
     "render:squirrel-long": "remotion render src/squirrel/index.ts SquirrelBurgerLong out/squirrel-burger-long.mp4 --codec h264 --crf 18",
     "render:squirrel-long-ar": "remotion render src/squirrel/index.ts SquirrelBurgerLongAR out/squirrel-burger-long-ar.mp4 --codec h264 --crf 18",
-    "audio:squirrel-ar": "LANG_CUT=ar node scripts/gen-squirrel-audio.mjs"
+    "audio:squirrel-ar": "LANG_CUT=ar node scripts/gen-squirrel-audio.mjs",
+    "render:veilllm": "remotion render src/veilllm/index.ts VeilLLMShortAR out/veilllm-short-ar.mp4 --codec h264 --crf 18"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.0",
