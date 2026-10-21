@@ -126,7 +126,7 @@ something that fails:
     (`ffmpeg -ss <t> -frames:v 1`) instead.
   - Cards with `padding` overflowed the frame: add `* { box-sizing: border-box; }` to the global style.
   - Word cues found "the first `cloud`" in the whole voiceover, not in the scene. Look words up from
-    the scene's start time.
+    the scene's start time, and match whole words: a substring cue on «زي» fired on «عايزين».
   - A camera move over a clip showed empty space above it. Clamp the focus point so the clip always
     covers the view.
 

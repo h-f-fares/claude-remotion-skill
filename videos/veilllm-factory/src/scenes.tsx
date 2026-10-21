@@ -24,11 +24,14 @@ export const Hook: React.FC = () => {
   const frame = useCurrentFrame();
   const out = cue(k, "بتخرج");
   const wait = cue(k, "استنى");
+  const names = cue(k, "أسامي");
+  const mails = cue(k, "وإيميلاتهم");
+  const push = interpolate(frame, [0, wait + 60], [1, 1.06], clamp);
   const b = useBreath(5, 36);
   const cloudHit = interpolate(frame, [out + 14, out + 24], [0, 1], clamp);
   const pulse = interpolate(frame, [wait, wait + 8, wait + 30], [1, 1.12, 1], clamp);
   return (
-    <AbsoluteFill>
+    <AbsoluteFill style={{ transform: `scale(${push})` }}>
       <Kicker delay={-30} color={C.hero}>
         <span style={{ fontSize: 64, transform: `scale(${pulse})`, display: "inline-block" }}>الموديل شاف إيه؟</span>
       </Kicker>
@@ -39,7 +42,7 @@ export const Hook: React.FC = () => {
         <div style={{ ...AR, fontWeight: 700, fontSize: 34, color: C.dim }}>موديل في الـ cloud</div>
       </div>
       <div style={{ position: "absolute", top: 780, left: 0, right: 0, display: "flex", justifyContent: "center", transform: `translateY(${-b}px)` }}>
-        <MessageCard label="رسالة لعميل، من جهازك" cues={[{ leak: -20 }, { leak: -16 }, { leak: -12 }]} />
+        <MessageCard label="رسالة لعميل، من جهازك" cues={[{ leak: -20, ping: names }, { leak: -16, ping: mails }, { leak: -12, ping: out - 8 }]} />
       </div>
       {[0, 1, 2].map((i) => (
         <Packet key={i} start={out + i * 4} dur={20} from={[[330, 780, 560][i], [930, 1010, 1080][i]]} to={[540, 560]} color={C.leak} arc={-60} />
@@ -76,10 +79,14 @@ const Side: React.FC<{ title: string; icon: React.ReactNode; enter: number; bars
   );
 };
 
-const Friend: React.FC<{ i: number; enter: number }> = ({ i, enter }) => {
+const Friend: React.FC<{ i: number; enter: number; talk: number }> = ({ i, enter, talk }) => {
   const b = useBreath(4, 30, i * 1.3);
+  const bubble = useSpring(talk + i * 5, "bouncy");
   return (
-    <Entrance delay={enter + i * 4} y={30} config="snappy">
+    <Entrance delay={enter + i * 4} y={30} config="snappy" style={{ position: "relative" }}>
+      <div style={{ position: "absolute", top: -34, right: -22, opacity: bubble, transform: `scale(${bubble}) rotate(${Math.sin(i * 2) * 8}deg)` }}>
+        <BubbleIcon size={58} color={i === 0 ? C.hero : C.dim} />
+      </div>
       <svg width="120" height="120" viewBox="0 0 100 100" style={{ transform: `translateY(${b}px)` }}>
         <circle cx="50" cy="50" r="48" fill={C.card} stroke={i === 0 ? C.hero : C.line} strokeWidth="3" />
         <circle cx="50" cy="40" r="15" fill={i === 0 ? C.hero : C.dim} />
@@ -91,7 +98,10 @@ const Friend: React.FC<{ i: number; enter: number }> = ({ i, enter }) => {
 
 export const Friends: React.FC = () => {
   const k = "friends";
-  const friends = cue(k, "صحابي");
+  const friends = cue(k, "أسبوع");
+  const talk = cue(k, "صحابي");
+  const vs = cue(k, "موديلات"); // "زي موديلات الـ cloud" ("زي" alone also matches inside "عايزين")
+  const vsP = useSpring(vs, "bouncy");
   const local = cue(k, "local");
   const weak = cue(k, "local", 1);
   const but = cue(k, "بس"); // "but local models still can't match the cloud": the cloud card arrives here
@@ -100,7 +110,7 @@ export const Friends: React.FC = () => {
     <AbsoluteFill>
       <Kicker delay={2}>الـ AI harness بتاعنا</Kicker>
       <div style={{ position: "absolute", top: 440, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 26 }}>
-        {[0, 1, 2, 3].map((i) => <Friend key={i} i={i} enter={friends} />)}
+        {[0, 1, 2, 3].map((i) => <Friend key={i} i={i} enter={friends} talk={talk} />)}
       </div>
       <div style={{ position: "absolute", top: 650, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 40, direction: "rtl" }}>
         <Side title="local" phase={0} enter={local} icon={<LockIcon size={70} />} bars={[
@@ -112,6 +122,7 @@ export const Friends: React.FC = () => {
           { label: "القوة", value: 96, at: cloud + 12, good: true },
         ]} />
       </div>
+      <div style={{ position: "absolute", top: 760, left: 540 - 48, width: 96, height: 96, borderRadius: 48, display: "flex", alignItems: "center", justifyContent: "center", background: C.bg, border: `3px solid ${C.hero}`, boxShadow: `0 0 30px ${C.heroGlow}`, fontFamily: "'Plex Sans'", fontWeight: 700, fontSize: 44, color: C.hero, opacity: vsP, transform: `scale(${interpolate(vsP, [0, 1], [2, 1])})` }}>VS</div>
     </AbsoluteFill>
   );
 };
@@ -241,6 +252,11 @@ export const Demo: React.FC = () => {
   const s = BASE * z;
   const tx = VIEW_W / 2 - cx * s, ty = VIEW_H / 2 - cy * s;
   const ring = interpolate(frame, [num, num + 10], [0, 1], clamp);
+  const typedBox = interpolate(frame, [6, 14, saw - 4, saw], [0, 1, 1, 0], clamp);
+  const sawBox = interpolate(frame, [saw + 18, saw + 26, speed - 4, speed], [0, 1, 1, 0], clamp);
+  const frameBox = (o: number, color: string, glow: string, top: number, h: number) => (
+    <div style={{ position: "absolute", left: 14, right: 14, top, height: h, borderRadius: 18, border: `5px solid ${color}`, boxShadow: `0 0 40px ${glow}, inset 0 0 30px ${glow}`, opacity: o, transform: `scale(${interpolate(o, [0, 1], [1.08, 1])})` }} />
+  );
   return (
     <AbsoluteFill>
       <Swap items={[{ at: 0, text: "ده اللي انت كتبته", color: C.leak }, { at: saw, text: "وده اللي الموديل شافه" }, { at: speed, text: "23.8ms بس" }]} />
@@ -253,6 +269,8 @@ export const Demo: React.FC = () => {
               <Sequence from={typed} durationInFrames={Math.max(1, saw - typed)} layout="none"><Img src={staticFile("clips/demo-typed.png")} style={{ width: CLIP_W, display: "block" }} /></Sequence>
               <Sequence from={saw} layout="none"><Clip startSec={1.9} /></Sequence>
             </div>
+            {frameBox(typedBox, C.leak, C.leakGlow, 190, 330)}
+            {frameBox(sawBox, C.hero, C.heroGlow, 310, 320)}
           </Card>
         </Entrance>
       </div>
@@ -292,14 +310,18 @@ export const Config: React.FC = () => {
 };
 
 // ---------- 8. Choice: the comment question ----------
-const Choice: React.FC<{ enter: number; icon: React.ReactNode; label: string; phase: number }> = ({ enter, icon, label, phase }) => {
+const Choice: React.FC<{ enter: number; icon: React.ReactNode; label: string; phase: number; on: number; off: number }> = ({ enter, icon, label, phase, on, off }) => {
+  const frame = useCurrentFrame();
   const b = useBreath(1, 22, phase);
+  const lit = interpolate(frame, [on, on + 8, off, off + 8], [0, 1, 1, 0], clamp);
   return (
     <Entrance delay={enter} y={60} config="bouncy">
-      <Card style={{ width: 420, height: 380, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 26, transform: `scale(${1 + 0.02 * b})` }}>
+      <div style={{ transform: `scale(${1 + 0.06 * lit})` }}>
+      <Card glow={lit > 0.05 ? `rgba(242,169,59,${0.4 * lit})` : undefined} style={{ border: `2px solid rgba(242,169,59,${lit})`, width: 420, height: 380, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 26, transform: `scale(${1 + 0.02 * b})` }}>
         {icon}
         <div style={{ ...AR, fontWeight: 700, fontSize: 52, color: C.text }}>{label}</div>
       </Card>
+      </div>
     </Entrance>
   );
 };
@@ -314,8 +336,8 @@ export const ChoiceScene: React.FC = () => {
     <AbsoluteFill>
       <Kicker delay={0}>وانت؟</Kicker>
       <div style={{ position: "absolute", top: 520, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 40, direction: "rtl" }}>
-        <Choice enter={cloud - 4} phase={0} icon={<CloudIcon size={170} color={C.text} />} label="الـ cloud" />
-        <Choice enter={local - 4} phase={Math.PI} icon={<LockIcon size={130} />} label="local بس" />
+        <Choice enter={cloud - 4} on={cloud} off={local - 4} phase={0} icon={<CloudIcon size={170} color={C.text} />} label="الـ cloud" />
+        <Choice enter={local - 4} on={local} off={ask - 4} phase={Math.PI} icon={<LockIcon size={130} />} label="local بس" />
       </div>
       <div style={{ position: "absolute", top: 1000, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
         <Entrance delay={ask} y={30} config="bouncy">

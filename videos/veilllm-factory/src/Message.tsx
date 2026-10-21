@@ -6,13 +6,15 @@ import { Card } from "./components";
 const C = theme.colors;
 const NEVER = 1e9;
 
-export type Cue = { leak?: number; mask?: number; unmask?: number };
+export type Cue = { leak?: number; mask?: number; unmask?: number; ping?: number };
 
 // One sensitive value: plain → flagged red (leaking) → flipped to an amber placeholder → flipped back.
 export const Token: React.FC<{ real: string; placeholder: string; cue: Cue }> = ({ real, placeholder, cue }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const { leak = NEVER, mask = NEVER, unmask = NEVER } = cue;
+  const { leak = NEVER, mask = NEVER, unmask = NEVER, ping = NEVER } = cue;
+  // a quick bump + flare when the voice names this value
+  const bump = interpolate(frame, [ping, ping + 5, ping + 16], [0, 1, 0], clamp);
   const flag = spring({ frame: frame - leak, fps, config: theme.spring.snappy });
   const m = spring({ frame: frame - mask, fps, config: theme.spring.snappy });
   const u = spring({ frame: frame - unmask, fps, config: theme.spring.snappy });
@@ -28,10 +30,10 @@ export const Token: React.FC<{ real: string; placeholder: string; cue: Cue }> = 
         margin: "0 4px",
         padding: "0 10px",
         borderRadius: 10,
-        transform: `rotateX(${(1 - flip) * 90}deg) scale(${1 + 0.06 * leakAmt})`,
+        transform: `rotateX(${(1 - flip) * 90}deg) scale(${1 + 0.06 * leakAmt + 0.08 * bump})`,
         background: showPh ? `${C.hero}26` : `rgba(240,82,82,${0.22 * leakAmt})`,
         border: `2px solid ${showPh ? C.hero : `rgba(240,82,82,${0.9 * leakAmt})`}`,
-        boxShadow: showPh ? `0 0 26px ${C.heroGlow}` : `0 0 ${30 * leakAmt}px ${C.leakGlow}`,
+        boxShadow: showPh ? `0 0 26px ${C.heroGlow}` : `0 0 ${30 * leakAmt + 50 * bump}px ${C.leakGlow}`,
         color: showPh ? C.hero : restored > 0.5 ? C.text : leakAmt > 0.3 ? "#FFD4D4" : C.text,
         fontFamily: showPh ? theme.fonts.mono : undefined,
         fontSize: showPh ? "0.82em" : undefined,

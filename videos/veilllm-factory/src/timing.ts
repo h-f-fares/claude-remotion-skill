@@ -11,10 +11,10 @@ export const TOTAL = sec(last.start + last.dur + 0.9);
 const strip = (w: string) => w.replace(/[.,،؟?!:]/g, "");
 export const words = aligned.map((w) => ({ ...w, w: strip(w.w) }));
 
-// Absolute frame of the nth spoken word containing `text`, at or after `after` seconds.
-// Cues hang off words, not sentence indexes.
+// Absolute frame of the nth spoken word equal to `text`, at or after `after` seconds.
+// Cues hang off words, not sentence indexes. Whole words only: "زي" must not match "عايزين".
 export const at = (text: string, nth = 0, after = 0) => {
-  const hits = words.filter((w) => w.w.includes(text) && w.start >= after - 0.01);
+  const hits = words.filter((w) => w.w === text && w.start >= after - 0.01);
   if (!hits[nth]) throw new Error(`no spoken word "${text}" #${nth}`);
   return sec(hits[nth].start);
 };
