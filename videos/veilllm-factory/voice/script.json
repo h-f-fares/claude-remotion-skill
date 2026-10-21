@@ -102,5 +102,6 @@
    "text": "الكود open source على GitHub، دوّر على VeilLLM.",
    "after": 0.3
   }
- ]
+ ],
+ "speed": 1.2
 }

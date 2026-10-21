@@ -15,7 +15,9 @@ One sentence per line. Optional `say`: what the voice reads when it differs from
 e.g. a respelling that forces the dialect ("أدْرة" for قادرة, so the ق becomes a glottal stop).
 `after` is the silence that follows it: give a line a long one (1-2 s) where
 the picture needs time to be read, and put the payoff hit in that pause, not under the next line.
-Lines that share a `scene` become one segment.
+Lines that share a `scene` become one segment. Top-level `speed` (e.g. 1.2) time-stretches every take
+without changing pitch: asking the TTS to "speak slowly" overshoots (VeilLLM went from 52 s of speech
+to 76 s), so ask for calm, then set the exact pace here. Changing it re-uses the cached takes.
 
 Writes public/vo.mp3 and src/vo.json ({segments, sentences}). With --scratch it also writes
 src/words.json from estimated word times, so the whole video can be built and reviewed before any
@@ -67,7 +69,14 @@ def take(line):
     tts(said, path)
     a = np.frombuffer(open(path, "rb").read(), dtype=np.int16).astype(np.float32) / 32768
     loud = np.where(np.abs(a) > 0.012)[0]
-    return a[max(0, loud[0] - 240): loud[-1] + 600] if len(loud) else a
+    a = a[max(0, loud[0] - 240): loud[-1] + 600] if len(loud) else a
+    speed = spec.get("speed", 1.0)
+    if speed != 1.0:
+        pcm = (a * 32767).astype(np.int16).tobytes()
+        out = subprocess.run(["ffmpeg", "-v", "error", "-f", "s16le", "-ar", str(SR), "-ac", "1", "-i", "-", "-af", f"atempo={speed}",
+                              "-f", "s16le", "-ar", str(SR), "-ac", "1", "-"], input=pcm, capture_output=True, check=True).stdout
+        a = np.frombuffer(out, dtype=np.int16).astype(np.float32) / 32768
+    return a
 
 t = spec.get("lead", 0.3)
 chunks = [np.zeros(int(t * SR), dtype=np.float32)]

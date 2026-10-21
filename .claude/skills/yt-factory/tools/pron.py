@@ -29,7 +29,7 @@ req = urllib.request.Request("https://generativelanguage.googleapis.com/v1beta/m
     data=json.dumps(body).encode(), headers={"Content-Type": "application/json", "x-goog-api-key": os.environ["GEMINI_API_KEY"]})
 res = json.loads(json.load(urllib.request.urlopen(req, timeout=300))["candidates"][0]["content"]["parts"][0]["text"])
 for i in res.get("issues", []):
-    print(f"  {i.get('t', '?'):>5}s  {i['word']}  heard {i['heard']}  ->  say: {i['respell']}\n          {i['why']}")
+    print(f"  {i.get('t', '?'):>5}s  {i.get('word')}  heard {i.get('heard')}  ->  say: {i.get('respell', '?')}\n          {i.get('why', '')}")
 if not res.get("issues"): print("  no pronunciation issues heard")
 p = res.get("pace", {})
 print(f"\n  pace: {p.get('wps')} words/s. {p.get('verdict', '')}")
