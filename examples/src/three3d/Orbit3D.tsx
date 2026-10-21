@@ -78,8 +78,14 @@ const CameraDriver: React.FC = () => {
   const camera = useThree((s) => s.camera);
   const z = interpolate(frame, [0, durationInFrames], [9, 7.6], {
     easing: Easing.bezier(0.33, 0, 0.2, 1),
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
   });
-  const x = interpolate(frame, [0, durationInFrames], [-0.6, 0.6]);
+  const x = interpolate(frame, [0, durationInFrames], [-0.6, 0.6], {
+    easing: Easing.inOut(Easing.sin),
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
   camera.position.set(x, 0.8, z);
   camera.lookAt(0, -0.2, 0);
   return null;
