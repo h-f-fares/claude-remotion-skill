@@ -76,3 +76,36 @@ npm run lyrics:images -- --set chorus --plates # chorus-XX-plate.png
 npm run lyrics:depth
 npx remotion render src/lyrics/index.ts WahdyShort out/wahdy-short.mp4 --gl=angle
 ```
+
+## VeilLLMShortAR (Egyptian Arabic YouTube Short, 9:16, 60s)
+
+A Short about [VeilLLM](https://github.com/h-f-fares/VeilLLM), a local DLP proxy, built from the
+author's blog post and the real story behind it. It follows the skill's explainer structure in
+Short form: direct-question hook with an open loop ("I'll show you what reaches the model, at the
+end"), the story, a dark "does it actually work?" reset, real proof, a two-choice comment question,
+GitHub, subscribe.
+
+The proof is a screen recording of the project's own Gradio playground masking a real message.
+It shows "4 entity(s) found in 23.8ms", which backs up the latency line in the voiceover. The
+playground rebuilds its analyzer on every click (about 6s), so the cut jumps from the click to
+the result.
+
+Arabic RTL details: the whole stage is `direction: rtl`, code cards stay `ltr`, and in captions
+consecutive English words are merged into one LTR token so "AI harness" doesn't read
+"harness AI". Captions drop punctuation, which otherwise lands on the wrong side of English words.
+
+```bash
+npm run audio                         # sfx (shared with the other examples)
+npm run render:veilllm                # VO, demo clip and fonts are committed in public/veilllm/
+
+# Regenerate the voiceover and caption timing (needs GEMINI_API_KEY):
+TTS_MODEL=gemini-2.5-pro-preview-tts python3 scripts/gen-veilllm-vo-ar-gemini.py /tmp/vo videos/veilllm/vo-ar.txt x
+python3 scripts/align-vo-gemini.py /tmp/vo/vo2_raw.wav /tmp/vo/vo2_sents.json src/veilllm/words.json
+cp /tmp/vo/vo2_sents.json src/veilllm/vo.json && ffmpeg -i /tmp/vo/vo2_raw.wav -b:a 192k public/veilllm/vo.mp3
+
+# Re-record the demo (VeilLLM playground running on :7860):
+node scripts/record-veilllm-demo.mjs
+ffmpeg -i vid/<recording>.webm -filter_complex "[0:v]trim=1.6:9.3,setpts=(PTS-STARTPTS)/4,crop=1200:1540:0:380,fps=30[a];[0:v]trim=15.0:17.3,setpts=PTS-STARTPTS,crop=1200:1540:0:380,fps=30,tpad=stop_mode=clone:stop_duration=6[b];[a][b]concat=n=2:v=1:a=0,format=yuv420p[v]" -map "[v]" -c:v libx264 -crf 16 -an public/veilllm/clips/demo.mp4
+```
+
+Finished video: [`videos/veilllm/veilllm-short-ar.mp4`](videos/veilllm/veilllm-short-ar.mp4). Titles, description and tags: [`videos/veilllm/youtube.md`](videos/veilllm/youtube.md).

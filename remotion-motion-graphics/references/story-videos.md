@@ -85,6 +85,12 @@ something that fails:
   strip tashkeel for display (keep it in the TTS text).
 - Map every word-anchored cue to the Arabic word spoken at the same moment, and keep the same sentence
   count per beat as the source language so sentence-indexed cuts still line up.
+- **Mixed Arabic + English captions:** merge consecutive English words into one token rendered
+  `direction: ltr; unicode-bidi: isolate`, or "API key" reads "key API" in the RTL row. Drop caption
+  punctuation; a period or `،` next to an English word lands on the wrong side. Never letter-space
+  Arabic text (it breaks the joining), so uppercase/tracked label styles need an Arabic variant.
+- Keep code, emails and URLs in `direction: ltr` cards inside the RTL stage; flip directional
+  graphics (flow arrows, packets moving harness → model) to run right to left.
 
 ## 6. Multi-part Shorts
 - Split long stories into ~60–90s parts: Part 1 = hook → story → cliffhanger, Part 2 = 5–8s recap →
@@ -94,7 +100,27 @@ something that fails:
 - Build parts as offset `<Sequence from={-start}>` windows over the long composition plus new
   recap/cliffhanger segments; no scene code is duplicated.
 
-## 7. Delivery
+## 7. Product and tool videos (lessons from the VeilLLM Short)
+- **The script's story must be the author's real one.** A plausible story built from the post
+  (here: "I almost pasted an API key") was replaced twice before the author gave the true origin
+  (friends who wanted local LLMs but needed cloud quality). Ask "what actually made you build
+  this?" before writing the first script, and paste the full script into the approval question:
+  never ask "script OK?" without the script.
+- **Show the real tool.** Run the project's demo and screen-record it with Playwright
+  (`recordVideo`; for a vertical frame, a narrow viewport plus `document.body.style.zoom = "2"`
+  stacks the layout and keeps text sharp). Warm the app up first, cut slow waits with ffmpeg
+  (`trim` + `setpts` + `tpad` to hold the result), and move a camera over the clip (scale +
+  translate keyframes) to the part the line is about. Check that numbers on screen match the
+  voiceover; here the demo's "23.8ms" proved the "20–50 ms" line.
+- **Frame 0 is the thumbnail**: start the hook scene fully composed (entrances with negative delays).
+- **Fonts: no module-level `delayRender` around `FontFace.load()`.** It hung random render tabs
+  until timeout, even with data URLs and a `setTimeout` fallback. Plain CSS `@font-face` in a
+  `<style>` element (files from `public/` via `staticFile`) rendered reliably.
+- Caption word timing without Whisper: `examples/scripts/align-vo-gemini.py` has Gemini align
+  the script's words, then maps them onto the measured sentence bounds.
+- Normalize the master to about -14 LUFS (`loudnorm=I=-14:TP=-1.5`); raw TTS mixes came out near -17.5.
+
+## 8. Delivery
 - Render, extract a 1-frame-per-4s contact sheet, fix, re-render.
 - GitHub rejects files >100 MB: commit a CRF ~24 re-encode, send the
   full-quality file to the user directly.
