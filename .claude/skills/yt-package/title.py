@@ -42,7 +42,9 @@ def check(title, thumb=None):
     v = [w for w in words(t) if w in VAGUE or w in ar.VAGUE]
     if v: issues.append(("vague", f"{', '.join(sorted(set(v)))} - swap for a number, a name or a date"))
     nums = re.findall(r"\d[\d,.]*%?", t)
+    names = ar.LATIN_NAME.findall(t) if ar.is_arabic(t) else []
     if nums: good.append(f"carries a concrete figure ({', '.join(nums[:3])})")
+    elif names: good.append(f"carries a name ({', '.join(names[:3])})")
     else: issues.append(("no-number", "no number, date or name - the most reliable single fix"))
     if t.endswith(("?", "؟")): good.append("open question in the title")
     front = [w for w in words(t)[:3] if w not in STOP and w not in ar.STOP]

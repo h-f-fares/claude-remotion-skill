@@ -41,15 +41,20 @@ FILLER = _set("يعني طيب اه آه امم اممم ام اوكي أوكي 
 VAGUE = _set("مذهل مذهله رهيب رهيبه خرافي خرافيه جنوني جنونيه ضخم هائل افضل أفضل احسن أحسن سري سر "
              "قوي ثوري اسطوري أسطوري مستحيل عظيم خطير نار")
 YOU = _set("انت أنت انتي أنتي انتم أنتم انتو انتوا لك لكم عندك عندكم عليك عليكم نفسك نفسكم منك")
-CURIOSITY = _set("لماذا ليش ليه كيف ازاي إزاي ماذا ايش إيش شو اي أي حتى لكن بس احد أحد محدش تقريبا "
-                 "الا إلا السبب سبب فعلا حقيقه")
+CURIOSITY = _set("لماذا ليش ليه كيف ازاي إزاي ماذا ايش إيش ايه إيه شو اي أي حتى لكن بس احد أحد محدش تقريبا "
+                 "الا إلا السبب سبب فعلا حقيقه للاخر للآخر")
 CLOSED = _set("لان لأن عشان علشان بسبب يعني")
 # stems that start a stake word: تخسر / خسرت / خسارة, تضيع / ضياع, تفشل, توقف, قبل, أبدا, خطر, تكلفة
 STAKE_PREFIXES = tuple(normalize(w) for w in
                        "خسر تخسر يخسر خسار ضيع تضيع ضياع فشل تفشل توقف تتوقف قبل ابدا أبدا خطر "
                        "تكلف يكلف كلف تموت موت مفلس ترك يترك تترك سيب تسيب "
+                       # leaks: تتسرب / تسريب, and data "leaving" the machine (داتاك تخرج)
+                       "تسرب تتسرب يتسرب تسريب متتسربش تخرج يخرج تطلع "
                        # Egyptian / Levantine present tense: بـ / هـ / عم in front of the verb
                        "بتخسر هتخسر بيخسر بتضيع هتضيع بتفشل هتفشل بتترك بتسيب".split())
+# Latin words inside Arabic text are almost always named things: tools, products, acronyms
+LATIN_NAME = re.compile(r"\b[A-Z][A-Za-z0-9]+\b")
+
 def is_second_person(w):
     # "قناتك" (your channel), "عندكم": the second-person suffix, on words long enough not to be a root
     return hit(w, YOU) or (len(w) >= 4 and not w.startswith("ال") and (w.endswith("ك") or w.endswith("كم")))

@@ -67,6 +67,11 @@ Ask in one `AskUserQuestion` call: **format** (long video / Short / both), **lan
 the dialect / English / both), **target length**, and **who it is for** (one specific viewer). Repeat
 the idea back as one sentence and ask whether that is it.
 
+Then ask for **the real story**: "what actually made you build / learn / notice this?" Never build
+the video on a plausible story drawn from a post or README. On VeilLLM a made-up origin was replaced
+twice before the true one came out. If the video is about a product or tool, also ask for its repo
+or a running demo (step 8 records it).
+
 ### 2. Research
 Find what is already working on this topic. Collect 4+ videos from each of 3-6 channels in the niche
 (`yt-dlp --flat-playlist -J <channel>` if it is installed, otherwise web search and public pages) and
@@ -91,14 +96,17 @@ panels. The hook must confirm the chosen title in its first sentence.
 Write the full script with `yt-script`, beat by beat with `[ON SCREEN: ...]` on every beat, at the
 pace of the chosen voice (~150 wpm English, ~120 wpm narrated story). For a Short, follow the
 structure in `story-videos.md` §3. Fact-check every claim with WebSearch and list the sources. Show
-the runtime estimate. Ask: approve it, or which beat to change. Loop until approved.
+the runtime estimate. Paste the **full script inside the approval question**, never "script OK?"
+without it. Ask: approve it, or which beat to change. Loop until approved. The user owns the hook
+and the closing comment question: offer options, but use their words when they give them.
 
 For "both languages": approve the first-language script, then write the second as a native
 adaptation (not a translation) and approve that separately.
 
 ### 7. Voice
-Check what actually works first (`story-videos.md` §2): the ElevenLabs connector, Gemini TTS if a
-key is set, Kokoro offline. Offer 2-3 voices that work, rendered as the **hook line only**, so the
+First ask whether the user already has a voice setup and reuse it (for Egyptian Arabic, the known-good
+one is Gemini TTS, voice Charon, `story-videos.md` §5). Otherwise check what actually works
+(`story-videos.md` §2): the ElevenLabs connector, Gemini TTS if a key is set, Kokoro offline. Offer 2-3 voices that work, rendered as the **hook line only**, so the
 user hears them before choosing. After approval, generate the full voiceover, one call per beat,
 and keep the word timings (they drive captions, cuts and chapters).
 
@@ -106,11 +114,15 @@ and keep the word timings (they drive captions, cuts and chapters).
 Offer 2-3 visual directions: a palette from `references/design-rules.md`, a font (for Arabic, a
 full font file such as Lalezar), the caption style, and whether to use generated stills or pure
 motion graphics. Then a storyboard: one line per beat with what is on screen and the transition.
+For a product or tool video, **show the real tool**: run its demo, screen-record it with Playwright
+and cut it as `story-videos.md` §7 describes, and check that numbers on screen match the voiceover.
 Render 3-4 key frames with `npx remotion still` and show them. Approve the look before the full build.
 
 ### 9. Build and render
 Build in `videos/<slug>/` following the remotion skill: theme, five-layer stack, captions synced to
-the voice timings, SFX and music. Render, extract a contact sheet (one frame every 4s), fix what is
+the voice timings, SFX and music. Normalise the master to about -14 LUFS
+(`loudnorm=I=-14:TP=-1.5`). For a Short, frame 0 is the thumbnail: the hook scene starts fully
+composed. Render, extract a contact sheet (one frame every 4s), fix what is
 wrong, and re-render. Then show the user the video and the contact sheet. Ask: approve, or list what
 to change (by timestamp). Loop until approved.
 

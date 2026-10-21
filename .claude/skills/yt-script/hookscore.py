@@ -41,8 +41,9 @@ def specificity(t):
         nums = len(AR_CONCRETE.findall(ar.normalize(t)))
         vague = sum(1 for x in w if ar.hit(x, ar.VAGUE))
         filler = sum(1 for x in w if ar.hit(x, ar.FILLER))
-        # Arabic has no capitals, so there is no proper-noun bonus to give
-        return max(0, min(100, 34 + nums * 22 - vague * 16 - filler * 5))
+        # Arabic has no capitals: the named things are the capitalised Latin words (VeilLLM, API)
+        names = min(18, 6 * len(ar.LATIN_NAME.findall(t)))
+        return max(0, min(100, 34 + nums * 22 - vague * 16 - filler * 5 + names))
     nums = len(CONCRETE.findall(t))
     vague = sum(1 for x in w if x in VAGUE)
     filler = sum(1 for x in w if x in FILLER)
