@@ -18,6 +18,7 @@ export const SHOTS = {
 export const theme = {
   color: {
     orange: "#D97757",
+    clawd: "#E8773A", // the printed-figure orange
     orangeDeep: "#B9573A",
     cream: "#F0EEE6",
     ink: "#141413",

@@ -10,7 +10,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { Figure } from "./Figure";
+import { CLAWD_GRID, Clawd } from "./Clawd";
 import { BEAT_F, SHOTS, beatPulse, theme } from "./theme";
 
 const { color } = theme;
@@ -31,7 +31,7 @@ const is2DSlot = (f: number) => STUTTER.some((s) => s.kind === "2d" && f >= s.fr
 
 // Claude's starburst, flat: 12 tapered rays of uneven length
 const RAYS = [1, 0.74, 0.9, 0.68, 1, 0.8, 0.94, 0.7, 0.98, 0.82, 0.88, 0.72];
-const Spark2D: React.FC<{ size: number; fill: string; rot?: number; pulse?: number; style?: React.CSSProperties }> = ({
+export const Spark2D: React.FC<{ size: number; fill: string; rot?: number; pulse?: number; style?: React.CSSProperties }> = ({
   size, fill, rot = 0, pulse = 0, style,
 }) => (
   <svg width={size} height={size} viewBox="-100 -100 200 200" style={style}>
@@ -52,7 +52,32 @@ const Spark2D: React.FC<{ size: number; fill: string; rot?: number; pulse?: numb
   </svg>
 );
 
-const Halftone: React.FC<{ tint: string; pulse: number; opacity: number }> = ({ tint, pulse, opacity }) => (
+// Clawd as flat pixel art, from the same grid as the 3D voxels.
+// armsUp swaps in a second sprite frame; build (0→1) pops pixels in diagonally.
+export const PixelClawd: React.FC<{ px: number; fill: string; armsUp?: boolean; build?: number; shadow?: string }> = ({
+  px, fill, armsUp = false, build = 1, shadow,
+}) => {
+  const cells: [number, number][] = [];
+  CLAWD_GRID.body.forEach(([r, cols]) => cols.forEach((c) => cells.push([c, r])));
+  const armRow = armsUp ? 1 : 2;
+  [...CLAWD_GRID.armsL, ...CLAWD_GRID.armsR].forEach((c) => cells.push([c, armRow]));
+  if (armsUp) [1, 16].forEach((c) => cells.push([c, 0]));
+  CLAWD_GRID.legs.forEach((c) => cells.push([c, 4]));
+  CLAWD_GRID.eyes.forEach((c) => cells.push([c, -1])); // -1 marks an eye, drawn in ink on row 1
+  return (
+    <svg width={18 * px} height={10 * px} viewBox="0 0 18 10" shapeRendering="crispEdges" style={{ overflow: "visible", filter: shadow ? `drop-shadow(${px * 0.35}px ${px * 0.35}px 0 ${shadow})` : undefined }}>
+      {cells.map(([c, r]) => {
+        const k = Math.min(1, Math.max(0, build * 22 - (c + r * 2) * 0.9));
+        if (r === -1) {
+          return k < 1 ? null : <rect key={`eye-${c}`} x={c + 0.2} y={2.2} width={0.6} height={1.6} fill={theme.color.ink} />;
+        }
+        return <rect key={`${c}-${r}`} x={c + (1 - k) / 2} y={r * 2 + (1 - k)} width={k} height={2 * k} fill={fill} />;
+      })}
+    </svg>
+  );
+};
+
+export const Halftone: React.FC<{ tint: string; pulse: number; opacity: number }> = ({ tint, pulse, opacity }) => (
   <AbsoluteFill
     style={{
       opacity,
@@ -69,8 +94,8 @@ const Background: React.FC = () => {
   const pulse = beatPulse(frame);
   const intro = inRange(frame, SHOTS.intro);
   const flat = is2DSlot(frame);
-  const bg = intro || flat ? color.orange : color.ink;
-  const glow = intro || flat ? color.glow : color.orangeDeep;
+  const bg = intro || flat ? color.cream : color.ink;
+  const glow = intro || flat ? "#FFFFFF" : color.orangeDeep;
   return (
     <AbsoluteFill style={{ backgroundColor: bg }}>
       <AbsoluteFill
@@ -84,12 +109,12 @@ const Background: React.FC = () => {
           <Spark2D size={1700} fill={color.orange} rot={frame * 0.6} pulse={pulse} style={{ opacity: 0.13 }} />
         </AbsoluteFill>
       )}
-      <Halftone tint={intro || flat ? color.cream : color.orange} pulse={pulse} opacity={intro || flat ? 0.22 : 0.35} />
+      <Halftone tint={intro || flat ? color.clawd : color.orange} pulse={pulse} opacity={intro || flat ? 0.22 : 0.35} />
     </AbsoluteFill>
   );
 };
 
-const Word: React.FC<{ text: string; at: number; until: number; top: number; size: number; fill?: string; tilt?: number }> = ({
+export const Word: React.FC<{ text: string; at: number; until: number; top: number; size: number; fill?: string; tilt?: number }> = ({
   text, at, until, top, size, fill = color.cream, tilt = -4,
 }) => {
   const frame = useCurrentFrame();
@@ -127,8 +152,8 @@ const Intro: React.FC = () => {
   const pulse = beatPulse(frame);
   return (
     <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
-      <div style={{ position: "absolute", top: 520, transform: `scale(${logo})` }}>
-        <Spark2D size={420} fill={color.cream} rot={(1 - logo) * -120 + frame * 1.5} pulse={pulse} />
+      <div style={{ position: "absolute", top: 520, transform: `translateY(${-pulse * 24}px) scale(${1 + pulse * 0.04}, ${1 - pulse * 0.06})` }}>
+        <PixelClawd px={40} fill={color.clawd} build={logo} armsUp={frame >= 15 && frame < 22} shadow={color.ink} />
       </div>
       <div style={{ position: "absolute", top: 1010, display: "flex", gap: 6 }}>
         {letters.map((l, i) => {
@@ -151,7 +176,7 @@ const Intro: React.FC = () => {
           );
         })}
       </div>
-      <Word text="can dance?" at={15} until={30} top={1260} size={96} fill={color.cream} tilt={-3} />
+      <Word text="can dance?" at={15} until={30} top={1260} size={96} fill={color.clawd} tilt={-3} />
     </AbsoluteFill>
   );
 };
@@ -166,7 +191,7 @@ const FlatSlot: React.FC = () => {
   return (
     <AbsoluteFill style={{ justifyContent: "center", alignItems: "center" }}>
       <div style={{ transform: `scale(${k}) rotate(${(slot.from === 98 ? -1 : 1) * local * 2}deg)` }}>
-        <Spark2D size={760} fill={color.cream} rot={frame * 3} pulse={beatPulse(frame * 2)} style={{ filter: `drop-shadow(16px 16px 0 ${color.ink})` }} />
+        <PixelClawd px={46} fill={color.clawd} armsUp={Math.floor(frame / 4) % 2 === 0} shadow={color.ink} />
       </div>
     </AbsoluteFill>
   );
@@ -217,15 +242,15 @@ const Outro: React.FC = () => {
 type Cam = { from: [number, number, number]; to: [number, number, number]; look: [number, number, number] };
 const camFor = (f: number): { cam: Cam; t: number } => {
   const shot = (a: number, b: number, cam: Cam) => ({ cam, t: (f - a) / (b - a) });
-  if (f < 60) return shot(30, 60, { from: [0, 2.1, 8.6], to: [0.7, 1.9, 7.2], look: [0, 1.55, 0] });
-  if (f < 75) return shot(60, 75, { from: [0.45, 2.75, 2.7], to: [0.2, 2.7, 2.3], look: [0, 2.55, 0] });
-  if (f < 90) return shot(75, 90, { from: [-3.4, 0.4, 6.6], to: [-2.6, 0.5, 6.0], look: [0, 1.9, 0] });
-  if (f < 98) return shot(90, 98, { from: [5.2, 1.7, 2.2], to: [4.6, 1.6, 2.6], look: [0, 1.5, 0] });
-  if (f < 113) return shot(105, 113, { from: [0.4, 7.2, 3.4], to: [0, 6.6, 3.0], look: [0, 1.2, 0] });
+  if (f < 60) return shot(30, 60, { from: [0, 2.1, 9.4], to: [0.5, 1.9, 8.2], look: [0, 1.15, 0] });
+  if (f < 75) return shot(60, 75, { from: [0.5, 1.9, 7.0], to: [0.25, 1.8, 6.4], look: [0, 1.25, 0] });
+  if (f < 90) return shot(75, 90, { from: [-3.2, 0.15, 7.6], to: [-2.5, 0.25, 7.0], look: [0, 1.7, 0] });
+  if (f < 98) return shot(90, 98, { from: [6.4, 1.6, 3.0], to: [5.8, 1.5, 3.4], look: [0, 1.3, 0] });
+  if (f < 113) return shot(105, 113, { from: [0.4, 7.4, 3.8], to: [0, 6.8, 3.4], look: [0, 0.6, 0] });
   // outro: slow orbit pull-back, dancer framed low under the title card
   const a = interpolate(f, [120, 150], [0.55, -0.12], { ...clamp, easing: theme.ease.out });
-  const r = interpolate(f, [120, 150], [5.2, 6.3], { ...clamp, easing: theme.ease.out });
-  return { cam: { from: [Math.sin(a) * r, 1.9, Math.cos(a) * r], to: [Math.sin(a) * r, 1.9, Math.cos(a) * r], look: [0, 2.2, 0] }, t: 0 };
+  const r = interpolate(f, [120, 150], [7.0, 8.4], { ...clamp, easing: theme.ease.out });
+  return { cam: { from: [Math.sin(a) * r, 1.8, Math.cos(a) * r], to: [Math.sin(a) * r, 1.8, Math.cos(a) * r], look: [0, 2.3, 0] }, t: 0 };
 };
 
 const CameraRig: React.FC = () => {
@@ -253,16 +278,16 @@ const Stage: React.FC = () => {
         <shadowMaterial opacity={0.45} />
       </mesh>
       <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]}>
-        <circleGeometry args={[1.6, 64]} />
+        <circleGeometry args={[2.3, 64]} />
         <meshStandardMaterial color={color.inkSoft} roughness={0.5} metalness={0.2} />
       </mesh>
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.01, 0]}>
-        <torusGeometry args={[1.6, 0.035, 12, 96]} />
+        <torusGeometry args={[2.3, 0.04, 12, 96]} />
         <meshStandardMaterial color={color.orange} emissive={color.orange} emissiveIntensity={0.6 + pulse * 2.2} />
       </mesh>
       {/* beat ring expanding across the floor */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 0]} scale={1 + ringT * 1.6}>
-        <torusGeometry args={[1.6, 0.02, 8, 96]} />
+        <torusGeometry args={[2.3, 0.025, 8, 96]} />
         <meshBasicMaterial color={color.glow} transparent opacity={(1 - ringT) * 0.7} />
       </mesh>
     </>
@@ -284,14 +309,14 @@ const Scene3D: React.FC = () => {
         shadow-bias={-0.0004}
         shadow-camera-left={-4}
         shadow-camera-right={4}
-        shadow-camera-top={5}
+        shadow-camera-top={4}
         shadow-camera-bottom={-3}
       />
       <directionalLight position={[-4, 3, -5]} intensity={2.2} color={color.cool} />
       <pointLight position={[0, 4.2, 1.5]} intensity={8 + pulse * 22} distance={9} color={color.glow} />
       <CameraRig />
       <Stage />
-      <Figure />
+      <Clawd />
     </>
   );
 };
@@ -305,11 +330,11 @@ const Flash: React.FC = () => {
   return <AbsoluteFill style={{ backgroundColor: color.cream, opacity: o, mixBlendMode: "screen" }} />;
 };
 
-const Grade: React.FC = () => (
+export const Grade: React.FC = () => (
   <AbsoluteFill style={{ background: "linear-gradient(180deg, rgba(255,170,120,0.10), rgba(40,20,60,0.14))", mixBlendMode: "soft-light" }} />
 );
 
-const Grain: React.FC = () => {
+export const Grain: React.FC = () => {
   const frame = useCurrentFrame();
   return (
     <AbsoluteFill style={{ opacity: 0.09, mixBlendMode: "overlay" }}>
@@ -323,7 +348,7 @@ const Grain: React.FC = () => {
   );
 };
 
-const Vignette: React.FC = () => (
+export const Vignette: React.FC = () => (
   <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(0,0,0,0.55) 100%)" }} />
 );
 
