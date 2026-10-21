@@ -30,7 +30,7 @@ export const Captions: React.FC<{ hide?: [number, number][] }> = ({ hide = [] })
   if (!page) return null;
   const out = interpolate(frame, [page.end - 5, page.end], [1, 0], clamp);
   return (
-    <div style={{ position: "absolute", left: 80, right: 80, top: 1400, height: 230, display: "flex", alignItems: "center", justifyContent: "center", opacity: out }}>
+    <div style={{ position: "absolute", left: 80, right: 80, top: 1270, height: 230, display: "flex", alignItems: "center", justifyContent: "center", opacity: out }}>
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", columnGap: 30, rowGap: 6, fontFamily: theme.fonts.ar, fontWeight: 700, fontSize: 76, direction: "rtl", lineHeight: 1.2 }}>
         {page.toks.map((t, i) => {
           const p = spring({ frame: frame - t.at, fps, config: theme.spring.snappy });

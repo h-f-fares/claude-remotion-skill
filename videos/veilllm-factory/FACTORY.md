@@ -19,6 +19,7 @@ format: short (9:16, ~62s)     language: ar (Egyptian)     viewer: a developer o
 - [x] 10 Shorts: n/a (the video is a Short)
 - [x] 11 Publish pack: `youtube.md`. Thumbnail = frame 0
 - [x] 12 Final approval (simulated)
+- [x] 13 Learn: see Log
 
 ## Decisions
 - **Angle:** استخدم أقوى موديلات الـ cloud من غير ما داتا عملائك تخرج من جهازك
@@ -33,3 +34,11 @@ format: short (9:16, ~62s)     language: ar (Egyptian)     viewer: a developer o
 - 20-50 ms per request, masks names / emails / API keys, one `base_url` change, `pip install veil-llm`: the VeilLLM post, https://hfares.com/blog/veilllm-local-dlp-proxy-ai-harness/
 - "4 entity(s) found in 23.8ms" on screen: the project's own Gradio playground (recording in `public/clips/demo.mp4`)
 - Researched, not used in the script: 30% of 600+ developers entered secrets into a GenAI tool (Bitwarden 2024 survey, vendor source), https://bitwarden.com/resources/security-survey-developer-secrets-and-the-future-of-passkeys/
+
+## Log
+- The real-story question at intake kept the blog post's invented origin out of the script.
+- Rushed proof beat: three sentences in one TTS call. Fixed with one line each plus holds; now `tools/vo.py`.
+- Still pass caught 4 render bugs (Freeze blank, card overflow, word cues across scenes, camera gap).
+- `review.mjs` caught captions below the safe line on every frame; moved from y 1400 to 1270.
+- Weakest scene: the friends scene's first 6 s (only four small avatars enter; flagged as a dead stretch). Fix: give each friend a speech bubble on "صحابي".
+- Rules proposed and added: one sentence per TTS line, phone numbers, hit in the pause, measured review.

@@ -5,6 +5,7 @@ import { at, from, len, SCENES, TOTAL, type SceneKey } from "./timing";
 import { BgMesh, FontStyles, Grade, Grain, SceneExit, Vignette } from "./components";
 import { ChoiceScene, Config, Cta, Demo, Friends, Hook, Mask, Reset, Reveal } from "./scenes";
 import { Captions } from "./Captions";
+import { TextCheck } from "./TextCheck";
 
 const SCENE_COMPONENTS: Record<SceneKey, React.FC> = {
   hook: Hook, friends: Friends, reveal: Reveal, mask: Mask, reset: Reset, demo: Demo, config: Config, choice: ChoiceScene, cta: Cta,
@@ -34,6 +35,7 @@ export const Main: React.FC = () => {
       <Grain />
       <Vignette />
       <Captions hide={[reset]} />
+      <TextCheck />
       <Audio src={staticFile("vo.mp3")} />
       {/* music bed: drops out for the reset beat, then comes back */}
       <Audio src={sfx("pad19.wav")} loop volume={(f) => 0.13 * interpolate(f, [reset[0] - 6, reset[0], reset[1] + 10, reset[1] + 30, TOTAL - 30, TOTAL], [1, 0, 0, 1, 1, 0], clamp)} />

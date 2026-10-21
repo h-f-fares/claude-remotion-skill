@@ -79,6 +79,10 @@ lighting, deep shadows, shallow depth of field, 9:16
 - [ ] Pixel gaps (not em) between large text blocks
 - [ ] Holds exist: ≥3 moments of stillness
 - [ ] SFX on major hits, cuts on beat (if audio in scope)
-- [ ] Text inside safe zone; nothing touching frame edges
+- [ ] Text inside safe zone; nothing touching frame edges. 9:16 numbers: x 60–1020,
+      y 250–1500 (the caption line ends above 1500); text ≥40px, captions ≥50px,
+      anything that must be seen ≥~100px; something new on screen at least every 3s
+- [ ] With a voiceover: the big hit sits in the pause before the line that names it
+      (under speech the voice masks it); master at -14 LUFS, true peak ≤ -1 dBTP
 - [ ] Rendered, frames extracted with ffmpeg, every extracted frame visually
       inspected, issues fixed, re-rendered, re-inspected

@@ -34,6 +34,8 @@ help and cannot be found, say so and write the line without it.
 ## State file: resume anywhere
 
 Every video lives in `videos/<slug>/`, with its own Remotion project (same layout as `fathers-day/`).
+Tools live in `tools/` next to this file; run them from the video's folder (paths below are relative
+to this skill).
 Create `videos/<slug>/FACTORY.md` at step 1 and keep it current:
 
 ```markdown
@@ -107,35 +109,63 @@ For "both languages": approve the first-language script, then write the second a
 adaptation (not a translation) and approve that separately.
 
 ### 7. Voice
-First ask whether the user already has a voice setup and reuse it (for Egyptian Arabic, the known-good
-one is Gemini TTS, voice Charon, `story-videos.md` §5). Otherwise check what actually works
-(`story-videos.md` §2): the ElevenLabs connector, Gemini TTS if a key is set, Kokoro offline. Offer 2-3 voices that work, rendered as the **hook line only**, so the
-user hears them before choosing. After approval, generate the full voiceover, one call per beat,
-and keep the word timings (they drive captions, cuts and chapters).
+Write the approved script as `voice/script.json`, **one sentence per line**, each with the pause that
+follows it (`after`). Give a line a long pause (1-2 s) when the picture under it has to be read (a
+demo result, a code card). Several short sentences in one TTS call come out rushed (VeilLLM: three
+proof lines in 3.5 s). Format and options: `tools/vo.py`.
 
-Put each sentence that sits on top of something the viewer must read (a demo result, a code card) on
-its own line. Several short sentences in one TTS call come out rushed (VeilLLM: three proof lines in
-3.5 s), and a line of their own gets a pause around it. Then add holds of 1-2 s of silence after them
-so the screen can be read. Decide the line breaks before generating: the generator caches audio by
-line number, so splitting a line later means renaming the cached files.
+1. **Timing voice first, free:** `python3 tools/vo.py voice/script.json --scratch` writes a silent
+   track with estimated timings, plus `src/vo.json` and `src/words.json`. Build and review the whole
+   video (steps 8-9) against it. Script edits now cost nothing.
+2. **The real voice:** ask whether the user already has a voice setup and reuse it (for Egyptian
+   Arabic, the known-good one is Gemini TTS, voice Charon, `story-videos.md` §5). Otherwise check
+   what works (`story-videos.md` §2): the ElevenLabs connector, Gemini TTS if a key is set. Offer 2-3
+   voices, rendered as the **hook line only** (one take each). Say what the full run costs before
+   running it.
+3. `python3 tools/vo.py voice/script.json`, then align the words
+   (`examples/scripts/align-vo-gemini.py`). Takes are cached per line id and text, so re-doing one
+   line re-generates only that line. Scenes cued from the words move with the new timing; re-check
+   the cues on any changed line.
 
 ### 8. Look and storyboard
 Offer 2-3 visual directions: a palette from `references/design-rules.md`, a font (for Arabic, a
 full font file such as Lalezar), the caption style, and whether to use generated stills or pure
-motion graphics. Then a storyboard: one line per beat with what is on screen and the transition.
+motion graphics. Render 2-4 style frames of the most different beats and approve the look first.
+
 For a product or tool video, **show the real tool**: run its demo, screen-record it with Playwright
-and cut it as `story-videos.md` §7 describes, and check that numbers on screen match the voiceover. Record at a zoom where the text is readable on a
-phone: about 40 px or more at 1080 wide. A 1200 px wide browser recording shrinks its text to ~27 px.
-Render 3-4 key frames with `npx remotion still` and show them. Approve the look before the full build.
+and cut it as `story-videos.md` §7 describes, and check that numbers on screen match the voiceover.
+
+Then draw every scene in the approved look and render the board:
+`node tools/storyboard.mjs <CompositionId>` gives one numbered panel per scene of `src/vo.json`.
+Ask for thumbs up or down **by panel number**, redraw the rejected ones, repeat. The panels are the
+video's own scenes, so nothing is redrawn later.
+
+**Phone rules** (9:16, 1080x1920; `tools/review.mjs` measures them):
+- Everything that matters sits inside x 60-1020, y 250-1500. The platform UI covers the rest. The
+  caption line must end above y 1500.
+- Text is at least 40 px (captions at least 50 px); anything that must be seen is at least ~100 px.
+  Screen recordings count too: record at a zoom where their text stays at 40 px or more.
+- Something new on screen at least every 3 s.
 
 ### 9. Build and render
 Build in `videos/<slug>/` following the remotion skill: theme, five-layer stack, captions synced to
-the voice timings, SFX and music. Normalise the master to about -14 LUFS
-(`loudnorm=I=-14:TP=-1.5`). For a Short, frame 0 is the thumbnail: the hook scene starts fully
-composed. Before the full render, render 10-15 stills across the whole video (one per scene, plus every
-word-cued moment) and fix them: it is far cheaper than a full render. Then render, extract a contact sheet (one frame every 4s), fix what is
-wrong, and re-render. Then show the user the video and the contact sheet. Ask: approve, or list what
-to change (by timestamp). Loop until approved.
+the voice timings, SFX and music. For a Short, frame 0 is the thumbnail: the hook scene starts fully
+composed.
+
+**Sound:** with a voice, the voice is the clock. Put the big hit (bass, slam) in the **pause before**
+the line that names it, not under speech, where the voice masks it. Drop the music for about a second
+before the turn. Normalise the master to -14 LUFS (`loudnorm=I=-14:TP=-1.5`, two passes).
+
+**Review is measured, not eyeballed.** Copy `tools/TextCheck.tsx` into `src/` and render
+`<TextCheck />` as the last child of the composition (it does nothing in a normal render). Then:
+1. While building: `node tools/review.mjs <CompositionId>` checks the text on a still every second
+   (cut off, outside the safe area, too small, overlapping). Much cheaper than a full render.
+2. After the render: `node tools/review.mjs <CompositionId> <video.mp4>` adds dead stretches and
+   loudness. It must PASS (warnings are allowed when you can say why).
+3. Look at a contact sheet too (one frame every 4 s): the review can't judge taste.
+
+Show the user the video, the contact sheet and the review numbers. Ask: approve, or list what to
+change (by timestamp). Loop until approved.
 
 ### 10. Shorts (when the format is long or both)
 Run `yt-shorts` on the voiceover transcript. Show the top 3-5 candidates with timecodes and the new
@@ -155,6 +185,11 @@ Approve each item.
 One message: the video file(s), thumbnail, title, description, chapters, and Shorts, each with its
 path. Ask for a final approval. After it: commit `videos/<slug>/` (re-encode at CRF ~24 if any file is
 over 100 MB and send the full-quality file directly), push, and mark `FACTORY.md` done.
+
+### 13. Learn
+Append a `## Log` to `FACTORY.md`: what went wrong, what the review caught, and the weakest scene
+with what would fix it. If something new went wrong or worked, propose a one-line rule for this
+skill, the `yt-*` skills or the remotion skill, and add it when the user agrees.
 
 ## The gate
 

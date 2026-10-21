@@ -33,11 +33,21 @@ simulated from the real VeilLLM decisions. The finished cut to compare against i
 - Step 8: the reused recording's text is ~27 px on a 1080 wide frame, small on a phone. Now: record at ~40 px or more.
 - Step 9: a still pass across the whole video before the full render caught 4 bugs (below) cheaply. Now a required step.
 
-**Remotion bugs caught by the still pass** (worth adding to the remotion skill; not changed here)
+**Remotion bugs caught by the still pass** (now in the remotion skill)
 - `<Freeze>` around `<OffthreadVideo>` rendered a blank frame. A still image of that frame works.
 - Cards with `padding` overflowed the frame: the theme has no `box-sizing: border-box`.
 - Word cues looked up "the first `cloud`" across the whole voiceover, not inside the scene. Search from the scene's start.
 - A camera move over a clip can show empty space above it. Clamp the focus point so the clip always covers the frame.
+
+## Added after the run (ideas from cth9191/animate)
+- `tools/review.mjs` + `tools/TextCheck.tsx`: measured text, dead-stretch and loudness checks. On this
+  video it found what the contact sheets missed: **every caption sat ~60px below the phone-safe line**
+  (y 1500). Captions moved up; the review now passes (0 fail; warnings for 30-36px labels).
+- `tools/vo.py`: one sentence per line with its own pause, a free silent timing voice (`--scratch`),
+  takes cached per line id instead of line number.
+- `tools/storyboard.mjs`: one numbered panel per scene, rendered from the real scenes.
+- Phone numbers, the "hit in the pause" sound rule and a Learn step in the factory; the four bugs
+  above in the remotion skill (`story-videos.md` §7, design-rules checklist).
 
 ## Not tested
 - Real user choices (simulated from the finished video).

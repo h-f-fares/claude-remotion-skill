@@ -120,6 +120,16 @@ something that fails:
   the script's words, then maps them onto the measured sentence bounds.
 - Normalize the master to about -14 LUFS (`loudnorm=I=-14:TP=-1.5`); raw TTS mixes came out near -17.5.
 
+- **Bugs a still pass catches cheaply** (from the yt-factory rebuild of VeilLLM). Render one still per
+  scene plus every word-cued moment before the full render:
+  - `<Freeze>` around `<OffthreadVideo>` rendered a blank frame. Hold a frame with an `<Img>` of it
+    (`ffmpeg -ss <t> -frames:v 1`) instead.
+  - Cards with `padding` overflowed the frame: add `* { box-sizing: border-box; }` to the global style.
+  - Word cues found "the first `cloud`" in the whole voiceover, not in the scene. Look words up from
+    the scene's start time.
+  - A camera move over a clip showed empty space above it. Clamp the focus point so the clip always
+    covers the view.
+
 ## 8. Delivery
 - Render, extract a 1-frame-per-4s contact sheet, fix, re-render.
 - GitHub rejects files >100 MB: commit a CRF ~24 re-encode, send the
