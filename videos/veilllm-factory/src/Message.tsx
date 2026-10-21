@@ -36,7 +36,7 @@ export const Token: React.FC<{ real: string; placeholder: string; cue: Cue }> = 
         boxShadow: showPh ? `0 0 26px ${C.heroGlow}` : `0 0 ${30 * leakAmt + 50 * bump}px ${C.leakGlow}`,
         color: showPh ? C.hero : restored > 0.5 ? C.text : leakAmt > 0.3 ? "#FFD4D4" : C.text,
         fontFamily: showPh ? theme.fonts.mono : undefined,
-        fontSize: showPh ? "0.82em" : undefined,
+        fontSize: showPh ? "1em" : undefined,
         textDecoration: restored > 0.5 && !showPh ? `underline 3px ${C.hero}` : undefined,
         textUnderlineOffset: 8,
       }}
@@ -53,14 +53,14 @@ export const MSG = [
 ];
 
 // The client message used in the hook and the mask scene: English content, so the card is LTR.
-export const MessageCard: React.FC<{ cues: [Cue, Cue, Cue]; label: string; width?: number; style?: React.CSSProperties }> = ({ cues, label, width = 900, style }) => {
+export const MessageCard: React.FC<{ cues: [Cue, Cue, Cue]; label?: string; width?: number; style?: React.CSSProperties }> = ({ cues, label, width = 900, style }) => {
   const frame = useCurrentFrame();
   return (
     <Card style={{ width, padding: "34px 40px 40px", ...style }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 22, direction: "rtl" }}>
+      {label && <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 22, direction: "rtl" }}>
         <div style={{ width: 16, height: 16, borderRadius: 8, background: C.hero, opacity: 0.6 + 0.4 * Math.sin(frame / 8) }} />
-        <div style={{ fontFamily: theme.fonts.ar, fontWeight: 700, fontSize: 34, color: C.dim }}>{label}</div>
-      </div>
+        <div style={{ fontFamily: theme.fonts.ar, fontWeight: 700, fontSize: 40, color: C.dim }}>{label}</div>
+      </div>}
       <div style={{ direction: "ltr", fontFamily: "'Plex Sans', system-ui", fontWeight: 500, fontSize: 44, lineHeight: 1.75, color: C.text, perspective: 600 }}>
         Hi, I'm <Token {...MSG[0]} cue={cues[0]} /> from Acme. Email me at <Token {...MSG[1]} cue={cues[1]} />. Deploy key: <Token {...MSG[2]} cue={cues[2]} />
       </div>
@@ -77,7 +77,7 @@ export const Packet: React.FC<{ start: number; dur: number; from: [number, numbe
   const y = from[1] + (to[1] - from[1]) * t + arc * Math.sin(Math.PI * t);
   const o = interpolate(frame, [start, start + 4, start + dur, start + dur + 6], [0, 1, 1, 0], clamp);
   return (
-    <div style={{ position: "absolute", left: x, top: y, transform: "translate(-50%, -50%)", opacity: o, padding: label ? "8px 16px" : 0, width: label ? undefined : 26, height: label ? undefined : 26, borderRadius: 14, background: `${color}30`, border: `2px solid ${color}`, boxShadow: `0 0 24px ${color}88`, fontFamily: theme.fonts.mono, fontSize: 26, color, whiteSpace: "nowrap" }}>
+    <div style={{ position: "absolute", left: x, top: y, transform: "translate(-50%, -50%)", opacity: o, padding: label ? "8px 16px" : 0, width: label ? undefined : 26, height: label ? undefined : 26, borderRadius: 14, background: `${color}30`, border: `2px solid ${color}`, boxShadow: `0 0 24px ${color}88`, fontFamily: theme.fonts.mono, fontSize: 40, color, whiteSpace: "nowrap" }}>
       {label}
     </div>
   );

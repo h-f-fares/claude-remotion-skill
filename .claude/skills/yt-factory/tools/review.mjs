@@ -70,7 +70,7 @@ if (!seen) fail("no TEXTCHECK output: copy tools/TextCheck.tsx into src/ and ren
 for (const e of report.text) {
   const what = e.n > 1 ? `${e.n} texts, e.g. "${e.samples.join('", "')}"` : `"${e.text}"`;
   const msg = `${e.kind.padEnd(7)} ${e.from}s-${e.to}s  ${what}  ${e.detail}`;
-  e.kind === "SMALL" ? warn(msg) : fail(msg);
+  fail(msg); // small text is a failure too: viewers squinting at a screen was the top complaint on VeilLLM
 }
 if (seen && !report.text.length) console.log("  ok    no text problems");
 

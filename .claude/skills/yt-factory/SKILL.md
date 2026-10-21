@@ -149,7 +149,13 @@ video's own scenes, so nothing is redrawn later.
 - Everything that matters sits inside x 60-1020, y 250-1500. The platform UI covers the rest. The
   caption line must end above y 1500.
 - Text is at least 40 px (captions at least 50 px); anything that must be seen is at least ~100 px.
-  Screen recordings count too: record at a zoom where their text stays at 40 px or more.
+  `review.mjs` fails anything smaller.
+- Screen recordings count too, and the review cannot measure text inside video pixels. Show the real
+  screen as proof, smaller, and repeat what it says underneath in large-print cards (exactly the
+  same strings). On VeilLLM the viewer had to squint at the playground until it got these cards.
+- **Show the problem before the product.** The first seconds act the problem out in 2-3 big,
+  numbered steps (you type → it leaves your machine → it lands on a server that isn't yours), on
+  screen from frame 0. A viewer who can't say what's wrong in 5 seconds won't care about the fix.
 - Something new on screen at least every 3 s.
 
 ### 9. Build and render

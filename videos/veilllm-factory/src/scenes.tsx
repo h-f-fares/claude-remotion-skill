@@ -3,7 +3,7 @@ import { AbsoluteFill, Img, interpolate, OffthreadVideo, Sequence, spring, stati
 import { clamp, theme } from "./theme";
 import { at, from, sec, SCENES, segments, type SceneKey } from "./timing";
 import { BubbleIcon, Card, CloudIcon, Entrance, GithubIcon, Kicker, LockIcon, ShieldIcon, useBreath, useSpring } from "./components";
-import { MessageCard, Packet } from "./Message";
+import { MessageCard, Packet, Token } from "./Message";
 
 const C = theme.colors;
 // a spoken word's frame, relative to the start of scene k
@@ -18,40 +18,74 @@ const Swap: React.FC<{ items: { at: number; text: string; color?: string }[] }> 
   return <Sequence key={i} from={Math.max(0, it.at)} layout="none"><Kicker color={it.color}>{it.text}</Kicker></Sequence>;
 };
 
-// ---------- 1. Hook: frame 0 is the thumbnail, so everything starts composed ----------
+// ---------- 1. Hook: the problem in three steps. Frame 0 is the thumbnail, so the diagram starts composed ----------
+const StepLabel: React.FC<{ n: string; text: string; on: number; off: number; color?: string }> = ({ n, text, on, off, color = C.leak }) => {
+  const frame = useCurrentFrame();
+  const lit = interpolate(frame, [on, on + 6, off, off + 6], [0, 1, 1, 0.35], clamp);
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 18, direction: "rtl", opacity: 0.45 + 0.55 * lit, transform: `scale(${1 + 0.05 * lit})`, transformOrigin: "right center" }}>
+      <div style={{ width: 64, height: 64, borderRadius: 32, background: lit > 0.5 ? color : C.card, border: `3px solid ${color}`, display: "flex", alignItems: "center", justifyContent: "center", ...AR, fontWeight: 700, fontSize: 40, color: lit > 0.5 ? C.bg : color }}>{n}</div>
+      <div style={{ ...AR, fontWeight: 700, fontSize: 48, color: C.text }}>{text}</div>
+    </div>
+  );
+};
+
+const LEAKED = ["Sarah Mitchell", "sarah.m@acme.com", "sk-proj-8fK2Lw9xQ7"];
+
 export const Hook: React.FC = () => {
   const k = "hook";
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
   const out = cue(k, "بتخرج");
   const wait = cue(k, "استنى");
   const names = cue(k, "أسامي");
   const mails = cue(k, "وإيميلاتهم");
-  const push = interpolate(frame, [0, wait + 60], [1, 1.06], clamp);
-  const look = cue(k, "الموديل");
+  const look = cue(k, "بيشوف");
+  const land = out + 22; // the values arrive on the other company's server
   const beam = interpolate(frame, [look - 4, look + 8], [0, 1], clamp);
-  const scanY = 780 + ((frame - look) * 9) % 420; // a scan line sweeping down the card, again and again
-  const b = useBreath(5, 36);
-  const cloudHit = interpolate(frame, [out + 14, out + 24], [0, 1], clamp);
   const pulse = interpolate(frame, [wait, wait + 8, wait + 30], [1, 1.12, 1], clamp);
+  const b = useBreath(4, 36);
   return (
-    <AbsoluteFill style={{ transform: `scale(${push})` }}>
+    <AbsoluteFill>
       <Kicker delay={-30} color={C.hero}>
-        <span style={{ fontSize: 64, transform: `scale(${pulse})`, display: "inline-block" }}>الموديل شاف إيه؟</span>
+        <span style={{ fontSize: 60, transform: `scale(${pulse})`, display: "inline-block" }}>الموديل شاف إيه؟</span>
       </Kicker>
-      <div style={{ position: "absolute", top: 480, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
-        <div style={{ filter: `drop-shadow(0 0 ${40 * cloudHit}px ${C.leakGlow})`, transform: `translateY(${b}px)` }}>
-          <CloudIcon size={200} color={cloudHit > 0.5 ? C.leak : C.text} />
-        </div>
-        <div style={{ ...AR, fontWeight: 700, fontSize: 34, color: C.dim }}>موديل في الـ cloud</div>
+      {/* 1. you write to the AI, from your machine */}
+      <div style={{ position: "absolute", top: 425, right: 70 }}><StepLabel n="١" text="انت بتكتب للـ AI" on={-30} off={out} color={C.hero} /></div>
+      <div style={{ position: "absolute", top: 505, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
+        <MessageCard width={960} cues={[{ leak: -20, ping: names }, { leak: -16, ping: mails }, { leak: -12, ping: out - 8 }]} />
       </div>
-      <div style={{ position: "absolute", top: 780, left: 0, right: 0, display: "flex", justifyContent: "center", transform: `translateY(${-b}px)` }}>
-        <MessageCard label="رسالة لعميل، من جهازك" cues={[{ leak: -20, ping: names }, { leak: -16, ping: mails }, { leak: -12, ping: out - 8 }]} />
-      </div>
-      {[0, 1, 2].map((i) => (
-        <Packet key={i} start={out + i * 4} dur={20} from={[[330, 780, 560][i], [930, 1010, 1080][i]]} to={[540, 560]} color={C.leak} arc={-60} />
+      {/* 2. it leaves your machine */}
+      <div style={{ position: "absolute", top: 837, right: 70 }}><StepLabel n="٢" text="بتخرج من جهازك" on={out} off={land} /></div>
+      <svg style={{ position: "absolute", left: 160, top: 815, overflow: "visible" }} width="10" height="110">
+        <path d="M5 0 V100" stroke={C.leak} strokeWidth="5" strokeDasharray="12 10" strokeDashoffset={-frame * 2} opacity={0.8} />
+        <path d="M-10 86 L5 104 L20 86" stroke={C.leak} strokeWidth="5" fill="none" />
+      </svg>
+      {LEAKED.map((v, i) => (
+        <Packet key={v} start={out + i * 3} dur={20} from={[[360, 640, 560][i], [600, 680, 750][i]]} to={[540, 1035 + i * 66]} color={C.leak} label={v} arc={-30} />
       ))}
-      <div style={{ position: "absolute", left: 90, right: 90, top: 640, height: 580, opacity: 0.55 * beam, clipPath: "polygon(40% 0, 60% 0, 100% 24%, 100% 100%, 0 100%, 0 24%)", background: `linear-gradient(180deg, ${C.leak}aa, ${C.leak}22 40%, transparent)` }} />
-      {beam > 0 && <div style={{ position: "absolute", left: 90, right: 90, top: scanY, height: 6, borderRadius: 3, background: C.leak, opacity: beam, boxShadow: `0 0 30px ${C.leakGlow}` }} />}
+      {/* 3. it lands on a server that isn't yours, where the model reads it */}
+      <div style={{ position: "absolute", top: 930, left: 60, right: 60 }}>
+        <Card glow={frame > land ? C.leakGlow : undefined} style={{ padding: "22px 34px 26px", transform: `translateY(${b}px)`, border: `2px solid ${frame > land ? C.leak : C.line}` }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 20, direction: "rtl", marginBottom: 12 }}>
+            <CloudIcon size={86} color={frame > land ? C.leak : C.text} />
+            <StepLabel n="٣" text="على سيرفر مش بتاعك" on={land} off={1e9} />
+          </div>
+          <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", gap: 10, direction: "ltr" }}>
+            {LEAKED.map((v, i) => {
+              const p = spring({ frame: frame - land - i * 3, fps, config: theme.spring.snappy });
+              return (
+                <div key={v} style={{ height: 56, minWidth: 420, padding: "0 22px", borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Plex Sans'", fontWeight: 500, fontSize: 42,
+                  border: `2px ${p > 0.5 ? "solid" : "dashed"} ${p > 0.5 ? C.leak : C.line}`, background: p > 0.5 ? "rgba(240,82,82,0.16)" : "transparent", color: "#FFD4D4", boxShadow: `0 0 ${24 * p}px ${C.leakGlow}` }}>
+                  <span style={{ opacity: p, transform: `scale(${interpolate(p, [0, 1], [1.3, 1])})` }}>{v}</span>
+                </div>
+              );
+            })}
+            {/* the model reading them: a scan line sweeping the leaked values */}
+            {beam > 0 && <div style={{ position: "absolute", left: 0, right: 0, top: ((frame - look) * 6) % 200, height: 6, borderRadius: 3, background: C.leak, opacity: beam, boxShadow: `0 0 30px ${C.leakGlow}` }} />}
+          </div>
+        </Card>
+      </div>
     </AbsoluteFill>
   );
 };
@@ -61,7 +95,7 @@ const Bar: React.FC<{ label: string; value: number; at: number; good: boolean }>
   const p = useSpring(start, "smooth");
   return (
     <div style={{ marginTop: 26 }}>
-      <div style={{ ...AR, fontSize: 30, fontWeight: 500, color: C.dim, marginBottom: 10 }}>{label}</div>
+      <div style={{ ...AR, fontSize: 40, fontWeight: 500, color: C.dim, marginBottom: 10 }}>{label}</div>
       <div style={{ height: 22, borderRadius: 11, background: "rgba(255,255,255,0.07)", overflow: "hidden", direction: "rtl" }}>
         <div style={{ height: "100%", width: `${value * p}%`, borderRadius: 11, background: good ? C.hero : C.leak, boxShadow: `0 0 18px ${good ? C.heroGlow : C.leakGlow}` }} />
       </div>
@@ -145,7 +179,7 @@ const Node: React.FC<{ x: number; enter: number; label: string; children: React.
   <div style={{ position: "absolute", left: x, top: 820, transform: "translate(-50%, -50%)" }}>
     <Entrance delay={enter} y={40} config="bouncy" style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
       {children}
-      <div style={{ ...AR, fontWeight: 700, fontSize: 32, color: C.dim, whiteSpace: "nowrap" }}>{label}</div>
+      <div style={{ ...AR, fontWeight: 700, fontSize: 40, color: C.dim, whiteSpace: "nowrap" }}>{label}</div>
     </Entrance>
   </div>
 );
@@ -171,7 +205,7 @@ export const Reveal: React.FC = () => {
           <div style={{ ...AR, fontWeight: 700, fontSize: 40, color: C.text, padding: "8px 26px", borderRadius: 999, background: C.card, border: `2px solid ${C.line}` }}>proxy لوكال على جهازك</div>
         </Entrance>
       </div>
-      <Node x={870} enter={harness} label="الـ harness بتاعك">
+      <Node x={840} enter={harness} label="الـ harness بتاعك">
         <Card style={{ width: 170, height: 150, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: theme.fonts.mono, fontSize: 52, color: C.text }}>{">_"}</Card>
       </Node>
       <Node x={540} enter={name + 4} label="VeilLLM">
@@ -213,11 +247,11 @@ export const Mask: React.FC = () => {
       <div style={{ position: "absolute", top: 1010, left: 0, right: 0, display: "flex", justifyContent: "space-between", padding: "0 120px", alignItems: "center", direction: "rtl" }}>
         <Entrance delay={4} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
           <ShieldIcon size={110} />
-          <div style={{ fontFamily: "'Plex Sans'", fontWeight: 700, fontSize: 30, color: C.hero }}>VeilLLM</div>
+          <div style={{ fontFamily: "'Plex Sans'", fontWeight: 700, fontSize: 44, color: C.hero }}>VeilLLM</div>
         </Entrance>
         <Entrance delay={8} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
           <CloudIcon size={170} color={C.text} />
-          <div style={{ ...AR, fontWeight: 700, fontSize: 30, color: C.dim }}>الموديل</div>
+          <div style={{ ...AR, fontWeight: 700, fontSize: 40, color: C.dim }}>الموديل</div>
         </Entrance>
       </div>
       <Packet start={send} dur={18} from={[840, 1060]} to={[250, 1060]} color={C.hero} label="<PERSON_0> <EMAIL_0>" arc={-90} />
@@ -245,11 +279,19 @@ export const Reset: React.FC = () => {
   );
 };
 
-// ---------- 6. Demo: the real playground, with a camera moving to what the line is about ----------
-const CLIP_W = 1200, VIEW_W = 1000, VIEW_H = 900, BASE = VIEW_W / CLIP_W;
+// ---------- 6. Demo: the real playground as proof, and its text again in large print underneath ----------
+// The recording's own text is ~30px on a phone; the cards below repeat exactly what it shows, at 42px.
+const CLIP_W = 1200, VIEW_W = 1000, VIEW_H = 500, BASE = VIEW_W / CLIP_W;
 const Clip: React.FC<{ startSec: number; rate?: number }> = ({ startSec, rate = 1 }) => (
   <OffthreadVideo src={staticFile("clips/demo.mp4")} startFrom={sec(startSec)} playbackRate={rate} muted style={{ width: CLIP_W, height: "auto", display: "block" }} />
 );
+// exactly what the playground found in the recording
+const FOUND = [
+  { real: "Sarah Mitchell", placeholder: "<PERSON_81ca33>" },
+  { real: "sarah.m@acme.com", placeholder: "<EMAIL_ADDRESS_d5c8b2>" },
+  { real: "+1 415 555 0142", placeholder: "<PHONE_NUMBER_201310>" },
+  { real: "sk-proj-8fK2Lw9xQ7mR3t…", placeholder: "<API_KEY_24529d>" },
+];
 
 export const Demo: React.FC = () => {
   const k = "demo";
@@ -258,8 +300,8 @@ export const Demo: React.FC = () => {
   const speed = cue(k, "بيزوّد");
   const num = cue(k, "20");
   const typed = sec(1.6 - 0.8); // the clip starts mid-typing, so the input is complete within the line
-  // camera keyframes: [frame, focus y in clip px, focus x, zoom]
-  const keys: [number, number, number, number][] = [[0, 530, 600, 1.03], [saw, 530, 600, 1.03], [saw + 18, 1010, 600, 1.03], [speed, 1010, 600, 1.03], [speed + 20, 1290, 430, 1.7]];
+  // camera keyframes: [frame, focus y in clip px, focus x, zoom]: the input box, the output box, then the timing line
+  const keys: [number, number, number, number][] = [[0, 425, 600, 1.1], [saw, 425, 600, 1.1], [saw + 18, 1035, 600, 1.1], [speed, 1035, 600, 1.1], [speed + 20, 1290, 430, 1.7]];
   const pick = (i: number) => interpolate(frame, keys.map((x) => x[0]), keys.map((x) => x[i]), { ...clamp, easing: theme.ease.inOut });
   const cy = pick(1), cx = pick(2), z = pick(3);
   const s = BASE * z;
@@ -267,13 +309,15 @@ export const Demo: React.FC = () => {
   const ring = interpolate(frame, [num, num + 10], [0, 1], clamp);
   const typedBox = interpolate(frame, [6, 14, saw - 4, saw], [0, 1, 1, 0], clamp);
   const sawBox = interpolate(frame, [saw + 18, saw + 26, speed - 4, speed], [0, 1, 1, 0], clamp);
-  const frameBox = (o: number, color: string, glow: string, top: number, h: number) => (
-    <div style={{ position: "absolute", left: 14, right: 14, top, height: h, borderRadius: 18, border: `5px solid ${color}`, boxShadow: `0 0 40px ${glow}, inset 0 0 30px ${glow}`, opacity: o, transform: `scale(${interpolate(o, [0, 1], [1.08, 1])})` }} />
+  const listOut = interpolate(frame, [speed - 2, speed + 8], [1, 0], clamp);
+  const stat = useSpring(speed + 6, "snappy");
+  const frameBox = (o: number, color: string, glow: string) => (
+    <div style={{ position: "absolute", left: 12, right: 12, top: 80, height: 340, borderRadius: 18, border: `5px solid ${color}`, boxShadow: `0 0 40px ${glow}, inset 0 0 30px ${glow}`, opacity: o, transform: `scale(${interpolate(o, [0, 1], [1.08, 1])})` }} />
   );
   return (
     <AbsoluteFill>
       <Swap items={[{ at: 0, text: "ده اللي انت كتبته", color: C.leak }, { at: saw, text: "وده اللي الموديل شافه" }, { at: speed, text: "23.8ms بس" }]} />
-      <div style={{ position: "absolute", top: 420, left: (1080 - VIEW_W) / 2 }}>
+      <div style={{ position: "absolute", top: 400, left: (1080 - VIEW_W) / 2 }}>
         <Entrance delay={-4} y={50}>
           <Card glow={ring > 0 ? C.heroGlow : undefined} style={{ width: VIEW_W, height: VIEW_H, overflow: "hidden", position: "relative", padding: 0 }}>
             <div style={{ position: "absolute", left: 0, top: 0, transformOrigin: "0 0", transform: `translate(${tx}px, ${ty}px) scale(${s})` }}>
@@ -282,10 +326,23 @@ export const Demo: React.FC = () => {
               <Sequence from={typed} durationInFrames={Math.max(1, saw - typed)} layout="none"><Img src={staticFile("clips/demo-typed.png")} style={{ width: CLIP_W, display: "block" }} /></Sequence>
               <Sequence from={saw} layout="none"><Clip startSec={1.9} /></Sequence>
             </div>
-            {frameBox(typedBox, C.leak, C.leakGlow, 190, 330)}
-            {frameBox(sawBox, C.hero, C.heroGlow, 310, 320)}
+            {frameBox(typedBox, C.leak, C.leakGlow)}
+            {frameBox(sawBox, C.hero, C.heroGlow)}
           </Card>
         </Entrance>
+      </div>
+      {/* the same values in large print: red as typed, flipping to the playground's placeholders on beat 7 */}
+      <div style={{ position: "absolute", top: 930, left: 40, right: 40, opacity: listOut }}>
+        <Card style={{ padding: "18px 26px", display: "flex", flexDirection: "column", gap: 6, direction: "ltr", fontFamily: "'Plex Sans'", fontWeight: 500, fontSize: 42, lineHeight: 1.45, perspective: 600 }}>
+          {FOUND.map((f, i) => (
+            <div key={f.real}><Token real={f.real} placeholder={f.placeholder} cue={{ leak: 4 + i * 4, mask: saw + 20 + i * 5 }} /></div>
+          ))}
+        </Card>
+      </div>
+      <div style={{ position: "absolute", top: 990, left: 0, right: 0, display: "flex", justifyContent: "center", opacity: stat, transform: `scale(${interpolate(stat, [0, 1], [1.3, 1])})` }}>
+        <div style={{ fontFamily: theme.fonts.mono, fontSize: 56, color: C.hero, padding: "22px 36px", borderRadius: 20, border: `3px solid ${C.hero}`, background: `${C.hero}14`, boxShadow: `0 0 40px ${C.heroGlow}`, direction: "ltr" }}>
+          4 found in <b>23.8ms</b>
+        </div>
       </div>
     </AbsoluteFill>
   );
@@ -307,7 +364,7 @@ export const Config: React.FC = () => {
       <Kicker delay={line}>سطر config واحد</Kicker>
       <div style={{ position: "absolute", top: 560, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
         <Entrance delay={0} y={50}>
-          <Card style={{ width: 960, padding: "40px 44px", direction: "ltr", fontFamily: theme.fonts.mono, fontSize: 36, lineHeight: 1.9 }}>
+          <Card style={{ width: 960, padding: "40px 44px", direction: "ltr", fontFamily: theme.fonts.mono, fontSize: 40, lineHeight: 1.9 }}>
             {row("# before", C.dim)}
             {row("base_url: https://api.openai.com/v1", C.text, <div style={{ position: "absolute", left: 0, top: "52%", height: 5, width: `${strike * 100}%`, background: C.leak, boxShadow: `0 0 12px ${C.leakGlow}` }} />)}
             <div style={{ height: 24 }} />
