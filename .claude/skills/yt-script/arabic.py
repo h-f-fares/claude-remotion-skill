@@ -23,9 +23,12 @@ def stem(w):
     s = PREFIX.sub("", w)
     return s if len(s) >= 2 else w
 
+SPOKEN_PRESENT = re.compile(r"^(?:[به]|عم)(?=[تينا])")  # Egyptian / Levantine: بتخسر، هتخسر، بيخرج
+
 def forms(w):
     # both, because a word can genuinely start with و or ف ("فشل", "وقت") and stripping breaks it
-    return {w, stem(w)}
+    f = {w, stem(w)}
+    return f | {SPOKEN_PRESENT.sub("", x) for x in f if len(x) >= 4}
 
 def hit(w, words): return bool(forms(w) & words)
 
@@ -49,9 +52,11 @@ STAKE_PREFIXES = tuple(normalize(w) for w in
                        "خسر تخسر يخسر خسار ضيع تضيع ضياع فشل تفشل توقف تتوقف قبل ابدا أبدا خطر "
                        "تكلف يكلف كلف تموت موت مفلس ترك يترك تترك سيب تسيب "
                        # leaks: تتسرب / تسريب, and data "leaving" the machine (داتاك تخرج)
-                       "تسرب تتسرب يتسرب تسريب متتسربش تخرج يخرج تطلع "
-                       # Egyptian / Levantine present tense: بـ / هـ / عم in front of the verb
-                       "بتخسر هتخسر بيخسر بتضيع هتضيع بتفشل هتفشل بتترك بتسيب".split())
+                       "تسرب تتسرب يتسرب تسريب متتسربش تخرج يخرج تطلع".split())
+# Number words count as concrete figures, as digits do ("سطر واحد", "تلات خطوات")
+NUMBERS = _set("واحد واحده اتنين اثنين اثنان تلاته ثلاثه ثلاث تلات اربعه اربع خمسه خمس سته ست سبعه سبع "
+               "تمانيه ثمانيه تمن ثمان تسعه تسع عشره عشر عشرين ثلاثين تلاتين مية ميه مائه الف مليون نص نصف ربع")
+
 # Latin words inside Arabic text are almost always named things: tools, products, acronyms
 LATIN_NAME = re.compile(r"\b[A-Z][A-Za-z0-9]+\b")
 

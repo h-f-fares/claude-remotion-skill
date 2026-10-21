@@ -43,6 +43,8 @@ def check(title, thumb=None):
     if v: issues.append(("vague", f"{', '.join(sorted(set(v)))} - swap for a number, a name or a date"))
     nums = re.findall(r"\d[\d,.]*%?", t)
     names = ar.LATIN_NAME.findall(t) if ar.is_arabic(t) else []
+    if not nums and ar.is_arabic(t):
+        nums = [w for w in ar.tokens(t) if ar.hit(w, ar.NUMBERS)]
     if nums: good.append(f"carries a concrete figure ({', '.join(nums[:3])})")
     elif names: good.append(f"carries a name ({', '.join(names[:3])})")
     else: issues.append(("no-number", "no number, date or name - the most reliable single fix"))

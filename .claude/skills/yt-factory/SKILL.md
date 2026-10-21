@@ -75,7 +75,9 @@ or a running demo (step 8 records it).
 ### 2. Research
 Find what is already working on this topic. Collect 4+ videos from each of 3-6 channels in the niche
 (`yt-dlp --flat-playlist -J <channel>` if it is installed, otherwise web search and public pages) and
-run `yt-viral` (`swipe.py`). Add a quick WebSearch for recent news or data on the topic. Show the top
+run `yt-viral` (`swipe.py`). Check first that YouTube is reachable (`curl -sI https://www.youtube.com`);
+cloud sessions often block it. If it is blocked, say so in one line, skip the outlier ranking and
+rely on WebSearch. Add a quick WebSearch for recent news or data on the topic. Show the top
 3 outliers (multiple, title, formula) and the one thing they share. Ask: is this the right niche to
 compare against, or should the research look somewhere else?
 
@@ -86,7 +88,8 @@ the research found. Recommend one. This sentence is the brief for every later st
 ### 4. Packaging (before the script)
 Run `yt-package`: ten titles through `title.py`, top three shown with scores, and a thumbnail concept
 for each (3 words max, the expression or visual, the background). For a Short, the on-screen hook
-text replaces the thumbnail. Package first, because the script has to deliver what the title promises.
+text replaces the thumbnail. `title.py` does not check facts: every number in a title must match a
+source in the state file ("في 20ms" is wrong when the source says 20-50 ms). Package first, because the script has to deliver what the title promises.
 
 ### 5. Hook
 Run `yt-script` hooks: five off `hooks.json`, scored with `hookscore.py`, top two shown with their
@@ -110,19 +113,27 @@ one is Gemini TTS, voice Charon, `story-videos.md` §5). Otherwise check what ac
 user hears them before choosing. After approval, generate the full voiceover, one call per beat,
 and keep the word timings (they drive captions, cuts and chapters).
 
+Put each sentence that sits on top of something the viewer must read (a demo result, a code card) on
+its own line. Several short sentences in one TTS call come out rushed (VeilLLM: three proof lines in
+3.5 s), and a line of their own gets a pause around it. Then add holds of 1-2 s of silence after them
+so the screen can be read. Decide the line breaks before generating: the generator caches audio by
+line number, so splitting a line later means renaming the cached files.
+
 ### 8. Look and storyboard
 Offer 2-3 visual directions: a palette from `references/design-rules.md`, a font (for Arabic, a
 full font file such as Lalezar), the caption style, and whether to use generated stills or pure
 motion graphics. Then a storyboard: one line per beat with what is on screen and the transition.
 For a product or tool video, **show the real tool**: run its demo, screen-record it with Playwright
-and cut it as `story-videos.md` §7 describes, and check that numbers on screen match the voiceover.
+and cut it as `story-videos.md` §7 describes, and check that numbers on screen match the voiceover. Record at a zoom where the text is readable on a
+phone: about 40 px or more at 1080 wide. A 1200 px wide browser recording shrinks its text to ~27 px.
 Render 3-4 key frames with `npx remotion still` and show them. Approve the look before the full build.
 
 ### 9. Build and render
 Build in `videos/<slug>/` following the remotion skill: theme, five-layer stack, captions synced to
 the voice timings, SFX and music. Normalise the master to about -14 LUFS
 (`loudnorm=I=-14:TP=-1.5`). For a Short, frame 0 is the thumbnail: the hook scene starts fully
-composed. Render, extract a contact sheet (one frame every 4s), fix what is
+composed. Before the full render, render 10-15 stills across the whole video (one per scene, plus every
+word-cued moment) and fix them: it is far cheaper than a full render. Then render, extract a contact sheet (one frame every 4s), fix what is
 wrong, and re-render. Then show the user the video and the contact sheet. Ask: approve, or list what
 to change (by timestamp). Loop until approved.
 

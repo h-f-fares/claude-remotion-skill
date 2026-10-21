@@ -1,0 +1,20 @@
+{
+  "name": "veilllm-factory",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VeilLLM Short rebuilt from scratch by the yt-factory skill (test run)",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts VeilFactoryAR out/veilllm-factory-ar.mp4 --codec h264 --crf 18 --browser-executable=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.290",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "remotion": "4.0.290"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "typescript": "^5.6.3"
+  }
+}

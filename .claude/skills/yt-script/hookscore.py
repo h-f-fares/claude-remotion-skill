@@ -38,7 +38,7 @@ def specificity(t):
     w = words(t)
     if not w: return 0
     if ar.is_arabic(t):
-        nums = len(AR_CONCRETE.findall(ar.normalize(t)))
+        nums = len(AR_CONCRETE.findall(ar.normalize(t))) + sum(1 for x in w if ar.hit(x, ar.NUMBERS))
         vague = sum(1 for x in w if ar.hit(x, ar.VAGUE))
         filler = sum(1 for x in w if ar.hit(x, ar.FILLER))
         # Arabic has no capitals: the named things are the capitalised Latin words (VeilLLM, API)
