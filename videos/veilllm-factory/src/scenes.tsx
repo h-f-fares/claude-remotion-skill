@@ -94,6 +94,7 @@ export const Friends: React.FC = () => {
   const friends = cue(k, "صحابي");
   const local = cue(k, "local");
   const weak = cue(k, "local", 1);
+  const but = cue(k, "بس"); // "but local models still can't match the cloud": the cloud card arrives here
   const cloud = cue(k, "cloud");
   return (
     <AbsoluteFill>
@@ -106,7 +107,7 @@ export const Friends: React.FC = () => {
           { label: "الداتا بتفضل عندك", value: 100, at: local + 10, good: true },
           { label: "القوة", value: 34, at: weak + 6, good: false },
         ]} />
-        <Side title="cloud" phase={2} enter={cloud - 6} icon={<CloudIcon size={84} color={C.text} />} bars={[
+        <Side title="cloud" phase={2} enter={but} icon={<CloudIcon size={84} color={C.text} />} bars={[
           { label: "الداتا بتفضل عندك", value: 12, at: cloud + 6, good: false },
           { label: "القوة", value: 96, at: cloud + 12, good: true },
         ]} />

@@ -37,7 +37,7 @@ export const Captions: React.FC<{ hide?: [number, number][] }> = ({ hide = [] })
           const next = page.toks[i + 1]?.at ?? page.end;
           const active = frame >= t.at && frame < next;
           return (
-            <span key={i} style={{ display: "inline-block", direction: latin(t.w) ? "ltr" : "rtl", unicodeBidi: "isolate", opacity: interpolate(p, [0, 1], [0, 1]), transform: `translateY(${interpolate(p, [0, 1], [26, 0])}px) scale(${interpolate(p, [0, 1], [1.25, 1]) * (active ? 1.06 : 1)})`, color: active ? theme.colors.hero : theme.colors.text, WebkitTextStroke: "2px rgba(0,0,0,0.55)", paintOrder: "stroke fill", textShadow: "0 6px 24px rgba(0,0,0,0.75)" }}>
+            <span key={i} style={{ display: "inline-block", direction: latin(t.w) ? "ltr" : "rtl", unicodeBidi: "isolate", opacity: interpolate(p, [0, 1], [0, 1]), transform: `translateY(${interpolate(p, [0, 1], [26, 0])}px) scale(${interpolate(p, [0, 1], [1.12, 1]) * (active ? 1.06 : 1)})`, color: active ? theme.colors.hero : theme.colors.text, WebkitTextStroke: "2px rgba(0,0,0,0.55)", paintOrder: "stroke fill", textShadow: "0 6px 24px rgba(0,0,0,0.75)" }}>
               {t.w}
             </span>
           );

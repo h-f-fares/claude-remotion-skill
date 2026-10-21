@@ -15,7 +15,7 @@ format: short (9:16, ~62s)     language: ar (Egyptian)     viewer: a developer o
 - [x] 6 Script: `vo-ar.txt`, approved with the user's own closing question
 - [x] 7 Voice: existing setup reused (Gemini Pro TTS, Charon). Proof beat split into 3 lines + holds
 - [x] 8 Look: "redacted file" (warm near-black, amber hero, red for leaks), Plex Arabic, 3-word captions. Existing demo recording reused
-- [x] 9 Build and render: `out/veilllm-factory-ar.mp4`, loudness normalised to -14 LUFS
+- [x] 9 Build and render: `veilllm-factory-ar.mp4` (62.7s), loudness normalised to -14.1 LUFS
 - [x] 10 Shorts: n/a (the video is a Short)
 - [x] 11 Publish pack: `youtube.md`. Thumbnail = frame 0
 - [x] 12 Final approval (simulated)
