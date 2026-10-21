@@ -1,6 +1,6 @@
 # YouTube Short: VeilLLM, factory cut (Arabic)
 
-Video: `veilllm-factory-ar.mp4`, 1080x1920, 62.7s, -14.1 LUFS, Egyptian Arabic (Gemini Pro TTS, Charon)
+Video: `veilllm-factory-ar.mp4`, 1080x1920, 75s, -14.1 LUFS, Egyptian Arabic (Gemini Pro TTS, Charon, 1.2x)
 
 ## Title (title.py)
 

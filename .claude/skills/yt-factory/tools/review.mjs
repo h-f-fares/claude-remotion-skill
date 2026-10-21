@@ -101,7 +101,7 @@ if (video && existsSync(video)) {
   const I = parseFloat(/I:\s+(-?[\d.]+) LUFS/.exec(e.slice(e.lastIndexOf("Summary")))?.[1]);
   const TP = parseFloat(/Peak:\s+(-?[\d.]+) dBFS/.exec(e.slice(e.lastIndexOf("Summary")))?.[1]);
   report.sound = { lufs: I, truePeak: TP };
-  Math.abs(I + 14) <= 1 ? console.log(`  ok    ${I} LUFS`) : fail(`${I} LUFS (target -14 +/-1): loudnorm=I=-14:TP=-1.5, two passes`);
+  Math.abs(I + 14) <= 1 ? console.log(`  ok    ${I} LUFS`) : fail(`${I} LUFS (target -14 +/-1): loudnorm=I=-14:TP=-2, two passes`);
   TP <= -1 ? console.log(`  ok    true peak ${TP} dBTP`) : fail(`true peak ${TP} dBTP (max -1)`);
 } else if (video) fail(`video not found: ${video}`);
 

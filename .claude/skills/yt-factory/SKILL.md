@@ -159,7 +159,7 @@ composed.
 
 **Sound:** with a voice, the voice is the clock. Put the big hit (bass, slam) in the **pause before**
 the line that names it, not under speech, where the voice masks it. Drop the music for about a second
-before the turn. Normalise the master to -14 LUFS (`loudnorm=I=-14:TP=-1.5`, two passes).
+before the turn. Normalise the master to -14 LUFS (`loudnorm=I=-14:TP=-2`, two passes; AAC overshoots a -1.5 target past -1 dBTP).
 
 **Review is measured, not eyeballed.** Copy `tools/TextCheck.tsx` into `src/` and render
 `<TextCheck />` as the last child of the composition (it does nothing in a normal render). Then:
