@@ -27,6 +27,9 @@ export const Hook: React.FC = () => {
   const names = cue(k, "أسامي");
   const mails = cue(k, "وإيميلاتهم");
   const push = interpolate(frame, [0, wait + 60], [1, 1.06], clamp);
+  const look = cue(k, "الموديل");
+  const beam = interpolate(frame, [look - 4, look + 8], [0, 1], clamp);
+  const scanY = 780 + ((frame - look) * 9) % 420; // a scan line sweeping down the card, again and again
   const b = useBreath(5, 36);
   const cloudHit = interpolate(frame, [out + 14, out + 24], [0, 1], clamp);
   const pulse = interpolate(frame, [wait, wait + 8, wait + 30], [1, 1.12, 1], clamp);
@@ -47,6 +50,8 @@ export const Hook: React.FC = () => {
       {[0, 1, 2].map((i) => (
         <Packet key={i} start={out + i * 4} dur={20} from={[[330, 780, 560][i], [930, 1010, 1080][i]]} to={[540, 560]} color={C.leak} arc={-60} />
       ))}
+      <div style={{ position: "absolute", left: 90, right: 90, top: 640, height: 580, opacity: 0.55 * beam, clipPath: "polygon(40% 0, 60% 0, 100% 24%, 100% 100%, 0 100%, 0 24%)", background: `linear-gradient(180deg, ${C.leak}aa, ${C.leak}22 40%, transparent)` }} />
+      {beam > 0 && <div style={{ position: "absolute", left: 90, right: 90, top: scanY, height: 6, borderRadius: 3, background: C.leak, opacity: beam, boxShadow: `0 0 30px ${C.leakGlow}` }} />}
     </AbsoluteFill>
   );
 };
@@ -79,19 +84,23 @@ const Side: React.FC<{ title: string; icon: React.ReactNode; enter: number; bars
   );
 };
 
-const Friend: React.FC<{ i: number; enter: number; talk: number }> = ({ i, enter, talk }) => {
+const Friend: React.FC<{ i: number; enter: number; talk: number; tool: number; toolOut: number }> = ({ i, enter, talk, tool, toolOut }) => {
+  const frame = useCurrentFrame();
   const b = useBreath(4, 30, i * 1.3);
   const bubble = useSpring(talk + i * 5, "bouncy");
+  // each friend's own harness: a little terminal that pops in on "harness" and leaves before the cards
+  const t = useSpring(tool + i * 4, "bouncy") * interpolate(frame, [toolOut - 8, toolOut], [1, 0], clamp);
   return (
     <Entrance delay={enter + i * 4} y={30} config="snappy" style={{ position: "relative" }}>
       <div style={{ position: "absolute", top: -34, right: -22, opacity: bubble, transform: `scale(${bubble}) rotate(${Math.sin(i * 2) * 8}deg)` }}>
-        <BubbleIcon size={58} color={i === 0 ? C.hero : C.dim} />
+        <BubbleIcon size={80} color={i === 0 ? C.hero : C.dim} />
       </div>
-      <svg width="120" height="120" viewBox="0 0 100 100" style={{ transform: `translateY(${b}px)` }}>
+      <svg width="160" height="160" viewBox="0 0 100 100" style={{ transform: `translateY(${b}px)` }}>
         <circle cx="50" cy="50" r="48" fill={C.card} stroke={i === 0 ? C.hero : C.line} strokeWidth="3" />
         <circle cx="50" cy="40" r="15" fill={i === 0 ? C.hero : C.dim} />
         <path d="M22 82c4-16 16-22 28-22s24 6 28 22" fill={i === 0 ? C.hero : C.dim} />
       </svg>
+      <div style={{ position: "absolute", top: 176, left: "50%", width: 110, height: 76, marginLeft: -55, borderRadius: 14, background: C.card, border: `2px solid ${i === 0 ? C.hero : C.line}`, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: theme.fonts.mono, fontSize: 40, color: i === 0 ? C.hero : C.text, opacity: t, transform: `translateY(${interpolate(t, [0, 1], [24, 0])}px) scale(${t})` }}>{">_"}</div>
     </Entrance>
   );
 };
@@ -102,6 +111,10 @@ export const Friends: React.FC = () => {
   const talk = cue(k, "صحابي");
   const vs = cue(k, "موديلات"); // "زي موديلات الـ cloud" ("زي" alone also matches inside "عايزين")
   const vsP = useSpring(vs, "bouncy");
+  const frame = useCurrentFrame();
+  const local0 = cue(k, "local");
+  // punch in on the friends while they talk, back out before the cards arrive
+  const punch = interpolate(frame, [talk - 2, talk + 10, local0 - 12, local0], [1, 1.18, 1.18, 1], { ...clamp, easing: theme.ease.inOut });
   const local = cue(k, "local");
   const weak = cue(k, "local", 1);
   const but = cue(k, "بس"); // "but local models still can't match the cloud": the cloud card arrives here
@@ -109,8 +122,8 @@ export const Friends: React.FC = () => {
   return (
     <AbsoluteFill>
       <Kicker delay={2}>الـ AI harness بتاعنا</Kicker>
-      <div style={{ position: "absolute", top: 440, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 26 }}>
-        {[0, 1, 2, 3].map((i) => <Friend key={i} i={i} enter={friends} talk={talk} />)}
+      <div style={{ position: "absolute", top: 430, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 34, transformOrigin: "50% 0", transform: `scale(${punch})` }}>
+        {[0, 1, 2, 3].map((i) => <Friend key={i} i={i} enter={friends} talk={talk} tool={cue(k, "harness")} toolOut={local0} />)}
       </div>
       <div style={{ position: "absolute", top: 650, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 40, direction: "rtl" }}>
         <Side title="local" phase={0} enter={local} icon={<LockIcon size={70} />} bars={[
