@@ -189,12 +189,34 @@ Approve each item.
 ### 12. Final approval
 One message: the video file(s), thumbnail, title, description, chapters, and Shorts, each with its
 path. Ask for a final approval. After it: commit `videos/<slug>/` (re-encode at CRF ~24 if any file is
-over 100 MB and send the full-quality file directly), push, and mark `FACTORY.md` done.
+over 100 MB and send the full-quality file directly), push, open the PR, and mark `FACTORY.md` done.
+Subscribe to the PR's activity so its merge wakes this session for step 14.
 
 ### 13. Learn
 Append a `## Log` to `FACTORY.md`: what went wrong, what the review caught, and the weakest scene
 with what would fix it. If something new went wrong or worked, propose a one-line rule for this
 skill, the `yt-*` skills or the remotion skill, and add it when the user agrees.
+
+### 14. Retro (after the PR is merged)
+The run is finished only when the skills have learned from it. When the video's PR merges, read back
+the whole run and look for what to change, not what went well:
+- **Every change the user asked for** after a draft (in this conversation, PR comments, review
+  threads). Each one is a step that got it wrong first. VeilLLM: the voice pace was changed three
+  times (slow persona overshot, then +5%, +5%), and pronunciation needed respellings.
+- **Every fix you made that the review did not catch** (a bug found by eye, a re-render).
+- **Every number that moved**: renders, voice re-takes, quota hit, approval loops per step.
+- The `## Log` in `FACTORY.md`.
+
+For each, write one line: what happened, which step should have prevented it, the rule that would
+have. Then:
+1. Show the user the list as options (multi-select, the strongest first). Never apply a rule they did
+   not pick.
+2. Apply the picked ones where they belong: this file, a `yt-*` skill, a tool in `tools/`, or the
+   remotion skill (then run `scripts/build-skill.sh`). Prefer a check in `tools/review.mjs` or a
+   default in a tool over prose: a rule the tools enforce cannot be forgotten.
+3. Add a `## Retro` section to `FACTORY.md` with the picked rules and where each went.
+4. Commit as "Skill retro: <slug>" on a fresh branch from the default branch and open a PR. That PR
+   is the run's last output.
 
 ## The gate
 
