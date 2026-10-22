@@ -69,16 +69,17 @@ lighting, deep shadows, shallow depth of field, 9:16
   at 1x are obvious at quarter speed.
 
 ## PRE-DELIVERY CHECKLIST — run against every video before presenting it
-- [ ] Zero linear easing anywhere; every interpolate clamped
+- [ ] Zero linear easing anywhere; every frame-driven interpolate clamped
 - [ ] Entrances = 2–3 properties, staggered; nothing enters simultaneously
 - [ ] Exits animated, faster than entrances
 - [ ] Every still has Ken Burns; fast moves have motion blur
-- [ ] 5-layer stack present (bg mesh, assets, graphics, grade, grain+vignette)
+- [ ] 5-layer stack present (bg mesh, assets, graphics, grade, grain+vignette;
+      speech footage: grade only)
 - [ ] One hero color, ≤1 hero-colored/glowing element per frame
 - [ ] Display font ≥600 weight on heroes; no default-font hero text
 - [ ] Pixel gaps (not em) between large text blocks
 - [ ] Holds exist: ≥3 moments of stillness
 - [ ] SFX on major hits, cuts on beat (if audio in scope)
 - [ ] Text inside safe zone; nothing touching frame edges
-- [ ] Rendered, frames extracted with ffmpeg, every extracted frame visually
-      inspected, issues fixed, re-rendered, re-inspected
+- [ ] Rendered, frames extracted (remotion still or ffmpeg), every extracted
+      frame visually inspected, issues fixed, re-rendered, re-inspected

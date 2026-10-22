@@ -135,12 +135,13 @@ const Vignette: React.FC = () => (
 
 ## 8. Ken Burns — every still, no exceptions
 ```tsx
-const KenBurns: React.FC<{src: string; zoomTo?: number}> = ({ src, zoomTo = 1.1 }) => {
+const KenBurns: React.FC<{src: string; zoomTo?: number}> = ({ src, zoomTo = 1.08 }) => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
-  const scale = interpolate(frame, [0, durationInFrames], [1, zoomTo],
-    { easing: theme.ease.inOut });
-  const pan = interpolate(frame, [0, durationInFrames], [0, -25]);
+  const scale = interpolate(frame, [0, durationInFrames], [1, zoomTo], {
+    easing: theme.ease.inOut, extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const pan = interpolate(frame, [0, durationInFrames], [0, -25], {
+    easing: theme.ease.inOut, extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return <Img src={staticFile(src)} style={{ width: "100%", height: "100%",
     objectFit: "cover", transform: `scale(${scale}) translateX(${pan}px)` }}/>;
 };
@@ -152,7 +153,7 @@ boxShadow: "0 40px 80px -20px rgba(0,0,0,0.6)"`.
 ## 9. Animated counter
 ```tsx
 const value = interpolate(
-  spring({ frame: frame - delay, fps, config: { damping: 30, stiffness: 60 } }),
+  spring({ frame: frame - delay, fps, config: theme.spring.smooth }), // overdamped: never overshoots target
   [0, 1], [0, target]);
 <span style={{ fontVariantNumeric: "tabular-nums" }}>{value.toFixed(1)}%</span>
 ```
@@ -179,7 +180,8 @@ const exitY = interpolate(frame, [durationInFrames - 12, durationInFrames - 2],
   [0, -42], { easing: theme.ease.in,
   extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 const exitO = interpolate(frame, [durationInFrames - 12, durationInFrames - 2],
-  [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  [1, 0], { easing: theme.ease.in,
+  extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 ```
 Apply to every visible element, or to a scene wrapper.
 
@@ -187,12 +189,14 @@ Apply to every visible element, or to a scene wrapper.
 ```tsx
 const breathe = 1 + Math.sin(frame / 22) * 0.015;          // scale
 const float = Math.sin(frame / 30) * 3;                     // translateY px
-const drift = interpolate(frame, [0, 300], [0, -20]);       // slow parallax
+const drift = interpolate(frame, [0, 10 * fps], [0, -20], { // slow parallax
+  easing: theme.ease.inOut, extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 ```
 
 ## 13. Parallax (3 layers, instant depth)
 ```tsx
-const x = interpolate(frame, [0, 90], [0, -120], { easing: theme.ease.inOut });
+const x = interpolate(frame, [0, 3 * fps], [0, -120], { easing: theme.ease.inOut,
+  extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 <Bg style={{ transform: `translateX(${x * 0.3}px)` }}/>
 <Mid style={{ transform: `translateX(${x * 0.6}px)` }}/>
 <Fg style={{ transform: `translateX(${x}px)` }}/>
@@ -201,12 +205,12 @@ const x = interpolate(frame, [0, 90], [0, -120], { easing: theme.ease.inOut });
 ## 14. Transitions
 Library (`npm i @remotion/transitions`):
 ```tsx
-import { TransitionSeries, linearTiming } from "@remotion/transitions";
+import { TransitionSeries, springTiming } from "@remotion/transitions";
 import { slide } from "@remotion/transitions/slide";
 <TransitionSeries>
   <TransitionSeries.Sequence durationInFrames={90}><A/></TransitionSeries.Sequence>
   <TransitionSeries.Transition presentation={slide({ direction: "from-right" })}
-    timing={linearTiming({ durationInFrames: 12 })}/>
+    timing={springTiming({ config: theme.spring.smooth, durationInFrames: 12 })}/>
   <TransitionSeries.Sequence durationInFrames={150}><B/></TransitionSeries.Sequence>
 </TransitionSeries>
 ```
@@ -231,7 +235,7 @@ import { Audio, Sequence, staticFile } from "remotion";
 </Sequence>
 ```
 Cut on the music beat: framesPerBeat = fps * 60 / BPM. Place scene cuts and hits
-on multiples of it. Background music -18dB under SFX/VO.
+on multiples of it. Music bed ~0.2–0.3 (about -12 dB), ducked further under VO.
 
 ## 17. Word-synced captions over footage
 For speech footage: get word timestamps (Whisper or `@remotion/install-whisper-cpp`),
@@ -242,5 +246,7 @@ const { pages } = createTikTokStyleCaptions({ captions, combineTokensWithinMilli
 // render each page in a Sequence from msToFrame(page.startMs),
 // highlight the active token by comparing currentTime to token timestamps
 ```
-Style: heavy display weight, 2–4 words per page, active word in theme.colors.primary,
+Style: heavy display weight, 2–4 words per page for footage captions (story Shorts
+use 1–2 words, active word in accent and key nouns in the hero color: see
+`story-videos.md` §4), active word in theme.colors.primary,
 positioned at ~65% height (inside the 9:16 safe zone).

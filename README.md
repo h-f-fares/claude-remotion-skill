@@ -48,7 +48,7 @@ Those generate pixels and hallucinate. This produces *deterministic, editable, b
 | Everything enters at once | Staggered choreography (3–6 frame offsets) |
 | Flat solid backgrounds | Drifting gradient mesh + grade + grain + vignette stack |
 | Static pasted images | Ken Burns on every still, `OffthreadVideo` for footage |
-| Ships unverified renders | ffmpeg frame extraction + visual inspection, every time |
+| Ships unverified renders | Frame extraction (remotion still or ffmpeg) + visual inspection, every time |
 
 ## 📦 What's inside
 
@@ -58,7 +58,10 @@ remotion-motion-graphics/
 ├── references/
 │   ├── motion-patterns.md      # 17 copy-paste components (reveals, grade, grain,
 │   │                           #   Ken Burns, counters, transitions, captions...)
-│   └── design-rules.md         # Palettes, typography, pacing, sound, checklist
+│   ├── design-rules.md         # Palettes, typography, pacing, sound, checklist
+│   ├── footage-edits.md        # Editing real camera footage (talks, speeches, multicam)
+│   ├── 3d-motion.md            # When to go 3D, @remotion/three setup, frame-driven 3D rules
+│   └── story-videos.md         # Narrated story Shorts/Reels: intake, voice, script, edit
 └── assets/
     └── theme.ts                # Theme template (colors, easings, spring presets)
 ```
@@ -94,11 +97,11 @@ Just talk to Claude normally — the skill triggers itself:
 - *"Add word-synced captions to this clip"*
 - *"Build a vertical Reel intro, dark tech aesthetic"*
 
-Claude reads the skill, applies the motion rules, renders with Remotion, extracts frames with ffmpeg, inspects them, fixes issues, and only then delivers.
+Claude reads the skill, applies the motion rules, renders with Remotion, extracts frames (remotion still or ffmpeg), inspects them, fixes issues, and only then delivers.
 
 ## 🧠 The 10 rules (short version)
 
-1. Never linear interpolation — springs/bezier + clamp, always
+1. Never linear interpolation — springs/bezier, frame-driven `interpolate()` always clamped
 2. Entrances animate 2–3 properties together
 3. Stagger everything
 4. Exits exist and are faster than entrances
@@ -111,13 +114,13 @@ Claude reads the skill, applies the motion rules, renders with Remotion, extract
 
 ## Examples
 
-[`examples/`](examples/) is a Remotion project with four finished compositions built with this skill: a profile promo, the Focus Cat app promo, a "watch this video fix itself" demo where the motion rules apply themselves one by one, and a beat-synced code edit with a synthesized 120 BPM track. Each shipped only after the render, inspect frames, fix, re-render loop.
+[`examples/`](examples/) is a Remotion project with finished compositions built with this skill: a profile promo, the Focus Cat app promo, a "watch this video fix itself" demo where the motion rules apply themselves one by one, a beat-synced code edit with a synthesized 120 BPM track, plus lyric videos, narrated Shorts, a 3D scene and dance shorts. [`examples/README.md`](examples/README.md) lists every composition and its render command. Each shipped only after the render, inspect frames, fix, re-render loop.
 
 Here is the Focus Cat promo, 15.5 seconds, with a pixel-art mascot drawn in code. Click it for the MP4 with sound:
 
 [![Focus Cat promo, made with this skill](examples/videos/focus-cat.gif)](https://github.com/haidrrrry/claude-remotion-skill/raw/main/examples/videos/focus-cat-promo.mp4)
 
-The other three render from source in a few minutes:
+The others render from source, for example:
 
 ```bash
 cd examples

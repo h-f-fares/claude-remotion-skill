@@ -12,19 +12,24 @@ opacity-only fades, simultaneous entrances, flat colors, and no texture. That is
 
 ## Non-negotiable rules (apply to EVERY composition)
 
-1. **NEVER use linear interpolation.** Every `interpolate()` gets an easing curve;
-   every entrance prefers `spring()`. Always `extrapolateLeft/Right: "clamp"`.
+1. **NEVER use linear interpolation.** Every frame-driven `interpolate(frame, ...)`
+   gets an easing curve and `extrapolateLeft/Right: "clamp"`; every entrance prefers
+   `spring()`. Mapping spring progress (`interpolate(p, [0, 1], ...)`) stays
+   unclamped on purpose so the overshoot survives.
 2. **Entrances animate 2–3 properties together** (opacity + translateY + scale).
    A lone fade is forbidden.
-3. **Stagger everything.** Lists, words, rays, cards: 3–6 frame offsets. Nothing
+3. **Stagger everything.** Lists, words, cards: 3–6 frame offsets (dense radial sets like spark rays: ~1 frame). Nothing
    enters simultaneously.
 4. **Exits exist and are faster than entrances** (~10 frames vs ~20).
 5. **Five-layer stack in every scene**, bottom to top: background mesh → assets →
    graphics/type → color grade → grain + vignette. Never a flat solid background.
+   Exception: real speech/talk footage gets a grade only, no grain or vignette
+   (`references/footage-edits.md` §7).
 6. **Every still image gets Ken Burns** (slow scale 1→1.08 + pan). Every video asset
    uses `<OffthreadVideo>`, never `<Video>`.
 7. **Idle elements breathe**: anything on screen >2s gets sin-wave micro-motion.
 8. **All timing derives from `fps`** via `useVideoConfig()`. No magic frame numbers.
+   Frame counts in this skill assume 30 fps; scale them by fps/30.
 9. **One theme object** at the top of the project (colors, easings, spring presets,
    fonts). Never inline a hex color or easing in a component.
 10. **Render, extract frames, LOOK at them, fix, re-render.** Never deliver an
@@ -66,7 +71,7 @@ in the first 15 frames. Never >90 frames without a new visual element.
 
 ### Step 4 — Render
 ```bash
-npx remotion render src/index.ts <CompId> out/video.mp4 --codec h264 --crf 17
+npx remotion render src/index.ts <CompId> out/video.mp4 --codec h264 --crf 16
 ```
 Remotion needs a Chromium binary. If its auto-download fails (sandboxes, offline CI),
 find one and pass it explicitly:
@@ -109,7 +114,7 @@ Then run the final checklist at the bottom of `references/design-rules.md`.
 To enhance an existing mp4 (captions, grade, intro/outro) rather than build from
 scratch: put the file in `public/`, render it as the asset layer with
 `<OffthreadVideo src={staticFile("clip.mp4")} />`, set composition duration from the
-clip length, and stack graphics/grade/grain above it. Get the clip's duration and fps
+clip length, and stack graphics and a grade above it (grain only for stylized edits, not speech footage). Get the clip's duration and fps
 with `ffprobe` before setting up the composition. For word-synced captions over
 speech, see the captions section of `references/motion-patterns.md`.
 
@@ -143,10 +148,14 @@ speech, see the captions section of `references/motion-patterns.md`.
 - **No SFX assets is not a reason to ship silent.** Synthesize a minimal kit as
   16-bit WAVs from a Node script (noise-burst whoosh, pitch-drop pop, sine-thump
   kick/bass, detuned-sine pad) into `public/sfx/` — see `examples/scripts/` in
-  the repo. Zero downloads, fully deterministic.
+  the claude-remotion-skill GitHub repo (not bundled with the installed skill).
+  Zero downloads, fully deterministic.
 - Generating one giant component instead of themed, reusable pieces.
 - `durationInFrames` mismatch between Composition and scene content (dead air).
 - Forgetting `--overwrite` on re-renders, then inspecting the stale file.
-- Fonts: never rely on system defaults for hero text; load a display font via
-  `@remotion/google-fonts` or `@font-face` + `staticFile`.
+- Fonts: never rely on system defaults for hero text. Load fonts with CSS
+  `@font-face` in a `<style>` element pointing at `public/` files via
+  `staticFile()` (or `@remotion/google-fonts` when fonts.gstatic.com is
+  reachable; its `loadFont()` does its own `delayRender`, so if renders hang or time
+  out, switch to `@font-face`). Never call `delayRender` at module top level.
 - Trying to "describe" the result to the user instead of rendering and verifying it.

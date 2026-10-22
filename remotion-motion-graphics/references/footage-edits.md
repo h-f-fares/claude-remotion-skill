@@ -86,8 +86,8 @@ Read before any "edit / montage my video(s)" request with real footage.
 
 ## 10. Render and environment pitfalls
 - Never call `delayRender` at module top level: idle bundle tabs are
-  timer-throttled and abort the render. Load fonts inside the component; bundle
-  them as data URLs (webpack `asset/inline`).
+  timer-throttled and abort the render. Load fonts with CSS `@font-face` in a
+  `<style>` element pointing at `public/` files via `staticFile` (SKILL.md, Fonts).
 - Audio-only changes: remux (`-c:v copy`) instead of re-rendering.
 - Jobs over ~2 h: start with `setsid nohup … &` and poll for a done-file.
 - `pkill -f <pattern>` also matches your own shell if the pattern is in the

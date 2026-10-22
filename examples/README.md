@@ -1,6 +1,6 @@
 # Examples
 
-Four videos built with the remotion-motion-graphics skill, in one Remotion project. Claude Code produced each one by following the skill: theme object, five-layer scene stack, spring entrances, staggered timing, and the mandatory render, extract frames, inspect, fix, re-render loop. The audio comes from the scripts in `scripts/`, which synthesize every sound as a WAV; there are no asset downloads.
+Videos built with the remotion-motion-graphics skill, in one Remotion project. Claude Code produced each one by following the skill: theme object, five-layer scene stack, spring entrances, staggered timing, and the mandatory render, extract frames, inspect, fix, re-render loop. FocusCatPromo, SelfFix and CodeEdit get their audio from the scripts in `scripts/`, which synthesize every sound as a WAV; there are no asset downloads (HaidrrrryPromo is silent). The other compositions are documented further down.
 
 | Composition | What it is |
 |---|---|
@@ -18,7 +18,7 @@ Preview of `FocusCatPromo`. Click it for the MP4 with sound:
 ```bash
 npm install
 npm run audio            # writes deterministic 16-bit WAVs into public/sfx/
-npm run studio           # browse all four in Remotion Studio
+npm run studio           # Remotion Studio for src/index.ts (other entries: npx remotion studio src/<dir>/index.ts)
 npm run render:focuscat  # or render:selffix / render:codeedit / render:profile
 ```
 
@@ -109,3 +109,20 @@ ffmpeg -i vid/<recording>.webm -filter_complex "[0:v]trim=1.6:9.3,setpts=(PTS-ST
 ```
 
 Finished video: [`videos/veilllm/veilllm-short-ar.mp4`](videos/veilllm/veilllm-short-ar.mp4). Titles, description and tags: [`videos/veilllm/youtube.md`](videos/veilllm/youtube.md).
+
+## Other compositions
+
+Scripts are from `package.json` (`npm run <script>`). The audio scripts regenerate audio that is already committed in `public/`.
+
+| Composition | Scripts | Notes |
+|---|---|---|
+| `SkillPromo` | no render script: `npx remotion render src/index.ts SkillPromo` | |
+| `SquirrelBurger` | `audio:squirrel`, `render:squirrel` | The squirrel-burger Short (`src/squirrel/`) |
+| `SquirrelBurgerLong` | `audio:squirrel`, `render:squirrel-long` | |
+| `SquirrelBurgerLongAR` | `audio:squirrel-ar`, `render:squirrel-long-ar` | |
+| `SquirrelPart1AR`, `SquirrelPart2AR` | `audio:squirrel-ar`; no render script: `npx remotion render src/squirrel/index.ts <id>` | Two-part Shorts cut of the long video (Arabic) |
+| `Orbit3D` | `render:orbit3d` | 3D test composition built with the threejs-skills, renders offline |
+| `ClaudeDance` | `audio:claudedance`, `render:claudedance` | 2D + 3D dance short, fully offline (local font, synthesized audio) |
+| `ClawdFeelIt` | `audio:feelit`, `render:feelit` | |
+
+Font loading: SquirrelBurger, SolitudeLyrics and ClaudeDance/ClawdFeelIt predate the skill's font rule and use a module-level `delayRender` + `FontFace.load()`. Copy the `@font-face` `<style>` pattern in `src/veilllm/components.tsx` instead.

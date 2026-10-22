@@ -13,6 +13,8 @@ export const theme = {
     textDim: "#A1A1AA",
     glow: "rgba(124, 58, 237, 0.4)",
   },
+  // 3D scenes only: warm key, cool rim, hemisphere fill (sky/ground) light colors.
+  light: { key: "#ffe2c4", rim: "#6fb8ff", sky: "#9fb4ff", ground: "#1a1020" },
   fonts: {
     display: "Clash Display", // load via @font-face + staticFile, or google-fonts
     body: "Inter",

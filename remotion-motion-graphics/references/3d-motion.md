@@ -2,8 +2,9 @@
 
 Read this when Step 1 decides a scene goes 3D. For deep three.js topics (materials,
 lighting, shaders, loaders, post-processing) read the matching file in the
-`threejs-skills/skills/` folder of this repo — but the Remotion rules below win
-wherever they conflict.
+`threejs-skills/skills/` folder of the claude-remotion-skill GitHub repo (not
+bundled with the installed skill) — but the Remotion rules below win wherever
+they conflict.
 
 ## When to go 3D (decide in Step 1, without being asked)
 
@@ -34,13 +35,13 @@ Keep `@remotion/three` on the same version as `remotion`.
 ## Non-negotiable 3D rules
 
 1. **Never `useFrame`, never `clock`, never `Date.now()`.** Every rotation,
-   position, scale and camera move comes from `useCurrentFrame()` + `spring()` /
-   `interpolate()` with easing. Frames render out of order in parallel — anything
+   position, scale and camera move comes from `useCurrentFrame()`: `spring()` /
+   eased `interpolate()` for moves, `frame / fps` for a constant idle spin and sin bob. Frames render out of order in parallel — anything
    time-based from three.js renders wrong.
 2. **Use `<ThreeCanvas width={width} height={height}>`** from `@remotion/three`,
    not r3f's `<Canvas>`. Pass `width`/`height` from `useVideoConfig()`.
 3. **Animate the camera too.** A static camera on a spinning object reads as a
-   screensaver. Minimum: eased push-in (z 9 → 7.5) + small truck (x −0.6 → 0.6),
+   screensaver. Minimum: eased push-in (z 9 → 7.6) + small truck (x −0.6 → 0.6),
    `camera.lookAt(...)` every frame (via `useThree((s) => s.camera)`).
 4. **Three-point light rig, never a lone ambient.** Warm key (directional, casts
    shadows) + cool rim from behind + low hemisphere fill. Add one colored point
@@ -65,17 +66,22 @@ Keep `@remotion/three` on the same version as `remotion`.
 ```tsx
 import { useThree } from "@react-three/fiber";
 import { ThreeCanvas } from "@remotion/three";
-import { AbsoluteFill, Easing, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { theme } from "../theme";
 
 const CameraDriver: React.FC = () => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
   const camera = useThree((s) => s.camera);
   const z = interpolate(frame, [0, durationInFrames], [9, 7.6], {
-    easing: Easing.bezier(0.33, 0, 0.2, 1),
+    easing: theme.ease.inOut,
     extrapolateLeft: "clamp", extrapolateRight: "clamp",
   });
-  camera.position.set(0, 0.8, z);
+  const x = interpolate(frame, [0, durationInFrames], [-0.6, 0.6], {
+    easing: theme.ease.inOut,
+    extrapolateLeft: "clamp", extrapolateRight: "clamp",
+  });
+  camera.position.set(x, 0.8, z);
   camera.lookAt(0, -0.2, 0);
   return null;
 };
@@ -83,13 +89,13 @@ const CameraDriver: React.FC = () => {
 const Hero: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const pop = spring({ frame, fps, config: { damping: 14 } });
+  const pop = spring({ frame, fps, config: theme.spring.snappy });
   const t = frame / fps;
   return (
     <mesh castShadow scale={pop} rotation={[t * 0.6, t * 0.9, 0]}
           position={[0, 0.35 + Math.sin(t * 1.6) * 0.08, 0]}>
       <torusKnotGeometry args={[1, 0.32, 256, 48]} />
-      <meshPhysicalMaterial color={theme.hero} roughness={0.18} clearcoat={1} />
+      <meshPhysicalMaterial color={theme.colors.primary} roughness={0.18} clearcoat={1} />
     </mesh>
   );
 };
@@ -99,16 +105,17 @@ export const Scene3D: React.FC = () => {
   return (
     <AbsoluteFill>
       <ThreeCanvas width={width} height={height} shadows camera={{ fov: 40 }}>
-        <color attach="background" args={[theme.bg]} />
-        <fog attach="fog" args={[theme.bg, 7, 14]} />
-        <hemisphereLight args={["#9fb4ff", "#1a1020", 0.5]} />
-        <directionalLight castShadow position={[4, 6, 5]} intensity={2.4} color="#ffe2c4" />
-        <directionalLight position={[-5, 2, -4]} intensity={1.6} color="#6fb8ff" />
+        <color attach="background" args={[theme.colors.bg]} />
+        <fog attach="fog" args={[theme.colors.bg, 7, 14]} />
+        <hemisphereLight args={[theme.light.sky, theme.light.ground, 0.5]} />
+        <directionalLight castShadow position={[4, 6, 5]} intensity={2.4} color={theme.light.key} />
+        <directionalLight position={[-5, 2, -4]} intensity={1.6} color={theme.light.rim} />
+        <pointLight position={[0, -2, 3]} intensity={6} distance={8} color={theme.colors.accent} />
         <CameraDriver />
         <Hero />
         <mesh receiveShadow rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.9, 0]}>
           <circleGeometry args={[9, 64]} />
-          <meshStandardMaterial color={theme.floor} roughness={0.9} />
+          <meshStandardMaterial color={theme.colors.bgAlt} roughness={0.9} />
         </mesh>
       </ThreeCanvas>
       {/* DOM title, then Grade, Grain, Vignette */}
@@ -117,7 +124,9 @@ export const Scene3D: React.FC = () => {
 };
 ```
 
-Full working example: `examples/src/three3d/Orbit3D.tsx` in this repo.
+Full working example: `examples/src/three3d/Orbit3D.tsx` in the claude-remotion-skill
+GitHub repo (not bundled with the installed skill). It predates the theme rules and
+inlines colors and easings; follow the skeleton above for theme usage.
 
 ## Render
 

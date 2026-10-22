@@ -6,6 +6,7 @@ This is an active, open-source project — contributions welcome. 🙌
 
 - **New motion patterns** — add a reusable component to `remotion-motion-graphics/references/motion-patterns.md`.
 - **New palettes / type / pacing** — extend `remotion-motion-graphics/references/design-rules.md`.
+- **Footage, 3D and story lessons** — extend `footage-edits.md`, `3d-motion.md` or `story-videos.md` in the same `references/` folder.
 - **Theme presets** — improve `remotion-motion-graphics/assets/theme.ts`.
 - **Docs & examples** — clearer install steps, usage recipes, demo clips.
 - **Bug fixes** — broken rules, wrong code, typos.

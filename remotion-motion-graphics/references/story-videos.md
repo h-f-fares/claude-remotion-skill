@@ -4,9 +4,11 @@ Lessons from building a narrated cartoon story Short end to end. Read before
 starting any "make an animated short about this story/post" request.
 
 ## 1. Intake — ask once, then deliver
-Ask everything in ONE round of multiple-choice questions, then build straight
-through to the final render. No mid-way approval stops unless you are blocked
-(missing credentials, a choice only the user can make). Ask:
+Run the §2 preflight first. Then ask everything in ONE round of multiple-choice
+questions, and build straight
+through to the final render. The only mid-way stops: a blocker (missing
+credentials, a choice only the user can make), the script approval when the
+story is the author's own (§7), and the multi-part split point (§6). Ask:
 - Language / dialect, voice gender and feel.
 - Length. Default **~2 minutes** for a story that has a lesson. 30–45s only
   fits a single joke; it rushes setup and the lesson never lands.
@@ -30,7 +32,8 @@ something that fails:
   symlink that path to the package's bundled `espeak-ng-data`.
 - **Fonts.** Headless Chrome may reject a proxy's TLS cert for
   fonts.gstatic.com even when curl works. Download the woff2 with curl into
-  `public/fonts/` and load via `FontFace` + `staticFile` + `delayRender`.
+  `public/fonts/` and load it with CSS `@font-face` in a `<style>` element via
+  `staticFile` (no `delayRender`, see §7).
 - **Captions timing.** If Whisper/model hosts are unreachable, synthesize the
   voice **one sentence at a time**, record each sentence's start/end, then
   split words inside each sentence by silence detection + word length. Good
@@ -116,7 +119,8 @@ something that fails:
 - **Fonts: no module-level `delayRender` around `FontFace.load()`.** It hung random render tabs
   until timeout, even with data URLs and a `setTimeout` fallback. Plain CSS `@font-face` in a
   `<style>` element (files from `public/` via `staticFile`) rendered reliably.
-- Caption word timing without Whisper: `examples/scripts/align-vo-gemini.py` has Gemini align
+- Caption word timing without Whisper: `examples/scripts/align-vo-gemini.py` (in the
+  claude-remotion-skill GitHub repo, not bundled with the installed skill) has Gemini align
   the script's words, then maps them onto the measured sentence bounds.
 - Normalize the master to about -14 LUFS (`loudnorm=I=-14:TP=-1.5`); raw TTS mixes came out near -17.5.
 
