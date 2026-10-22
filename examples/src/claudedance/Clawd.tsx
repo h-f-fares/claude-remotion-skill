@@ -1,4 +1,5 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
+import type { Plane } from "three";
 import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 import { extend } from "@react-three/fiber";
 import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
@@ -37,17 +38,40 @@ const LEG_X = [-0.82, -0.4, 0.4, 0.82];
 const ARM = { out: 0.32, h: 0.4, d: 0.6, y: LEG_H + H * 0.42 };
 const EYE = { x: 0.42, y: LEG_H + H * 0.58, w: 0.13, h: 0.32 };
 
-const Plastic: React.FC = () => <meshStandardMaterial color={theme.color.clawd} roughness={0.62} metalness={0} />;
-const Ink: React.FC = () => <meshStandardMaterial color="#111111" roughness={0.35} />;
+// how this copy of Clawd renders: the hero, a floor reflection, or a motion-smear ghost
+type Look = { opacity: number; shadows: boolean; clip?: Plane[] };
+const LookCtx = createContext<Look>({ opacity: 1, shadows: true });
+
+const Plastic: React.FC = () => {
+  const { opacity, clip } = useContext(LookCtx);
+  return (
+    <meshStandardMaterial
+      clippingPlanes={clip}
+      color={theme.color.clawd}
+      roughness={0.62}
+      metalness={0}
+      transparent={opacity < 1}
+      opacity={opacity}
+      depthWrite={opacity >= 1}
+    />
+  );
+};
+const Ink: React.FC = () => {
+  const { opacity, clip } = useContext(LookCtx);
+  return <meshStandardMaterial clippingPlanes={clip} color="#111111" roughness={0.35} transparent={opacity < 1} opacity={opacity} />;
+};
 
 const Block: React.FC<{ size: [number, number, number]; r?: number; position?: [number, number, number] }> = ({
   size, r = 0.035, position,
-}) => (
-  <mesh castShadow receiveShadow position={position}>
-    <roundedBoxGeometry args={[...size, 3, r]} />
-    <Plastic />
-  </mesh>
-);
+}) => {
+  const { shadows } = useContext(LookCtx);
+  return (
+    <mesh castShadow={shadows} receiveShadow={shadows} position={position}>
+      <roundedBoxGeometry args={[...size, 3, r]} />
+      <Plastic />
+    </mesh>
+  );
+};
 
 // "> <" happy squint, built from two thin bars per eye; dir points the tip
 const Chevron: React.FC<{ dir: 1 | -1 }> = ({ dir }) => (
@@ -151,10 +175,11 @@ export const Clawd: React.FC = () => {
   );
 };
 
-export type LegRig = { lift: number; tip: number; slide: number; kick: number };
+export type LegRig = { lift: number; tip: number; slide: number; kick: number; stretch?: number };
 export type ClawdRig = {
   pos: [number, number, number];
   rot: [number, number, number];
+  lean?: number; // pitch around the feet in Clawd's own frame (+ = forward)
   sx: number;
   sy: number;
   armL: number; // radians up from resting
@@ -172,9 +197,12 @@ export const restRig = (): ClawdRig => ({
 });
 
 // Pure model: draws Clawd from a rig. Origin is between the feet, so lean and squash pivot on the floor.
-export const ClawdModel: React.FC<{ rig: ClawdRig }> = ({ rig }) => (
+export const ClawdModel: React.FC<{ rig: ClawdRig; opacity?: number; shadows?: boolean; clip?: Plane[] }> = ({
+  rig, opacity = 1, shadows = true, clip,
+}) => (
+  <LookCtx.Provider value={{ opacity, shadows, clip }}>
   <group position={rig.pos} rotation={rig.rot}>
-    <group scale={[rig.sx, rig.sy, rig.sx]}>
+    <group rotation={[rig.lean ?? 0, 0, 0]} scale={[rig.sx, rig.sy, rig.sx]}>
       <Block size={[W, H, D]} r={0.05} position={[0, LEG_H + H / 2, 0]} />
       {/* eyes sit just proud of the front face */}
       {([-1, 1] as const).map((s) =>
@@ -200,7 +228,12 @@ export const ClawdModel: React.FC<{ rig: ClawdRig }> = ({ rig }) => (
         const side = x < 0 ? -1 : 1;
         const l = side < 0 ? rig.legL : rig.legR;
         return (
-          <group key={x} position={[x, LEG_H + l.lift * 0.24, l.slide]} rotation={[l.tip, 0, side * l.kick]}>
+          <group
+            key={x}
+            position={[x, LEG_H + l.lift * 0.24, l.slide]}
+            rotation={[l.tip, 0, side * l.kick]}
+            scale={[1, 1 + (l.stretch ?? 0), 1]}
+          >
             {[-1, 1].map((z) => (
               <Block key={z} size={[LEG_W, LEG_H + 0.04, LEG_W]} r={0.02} position={[0, -LEG_H / 2, z * (D / 2 - 0.2)]} />
             ))}
@@ -209,4 +242,5 @@ export const ClawdModel: React.FC<{ rig: ClawdRig }> = ({ rig }) => (
       })}
     </group>
   </group>
+  </LookCtx.Provider>
 );

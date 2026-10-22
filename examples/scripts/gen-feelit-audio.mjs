@@ -156,12 +156,28 @@ const grooveBar = (bar, { drums = true, bassOn = true, gtr = true, hats = true }
   if (bassOn) pat.forEach((m, i) => m && bass(t0 + i * S16, m, i % 4 === 0 ? 0.16 : 0.1));
 };
 
-// intro (0–2s): pad + filtered riser + chick guitar, brass hit on the downbeat of the groove
-pad(0, CH.Am9, 2.1, 1.4);
-for (let i = 0; i < 4; i++) { chick(i * B + S16, 0.45); chick(i * B + 3 * S16, -0.45); }
-kick(1.0, 0.6); kick(1.5, 0.6); kick(1.75, 0.5);
-riser(0.6, 1.4);
-whoosh(1.6, 0.45);
+// cold open (0–0.8s): straight into the groove so the first frame already moves
+kick(0); kick(0.5); clap(0.5);
+brass(0, CH.Am9, 0.18, 1.1); brass(0.25, [64, 67, 71], 0.1);
+BASS_A.slice(0, 6).forEach((m, i) => m && bass(i * S16, m));
+for (let b = 0; b < 2; b++) { hat(b * B + 2 * S16, true); chick(b * B + S16, 0.45); }
+whoosh(0.55, 0.3);
+
+// pixel build (0.8–1.33s): 8-bit square blips climbing as the sprite pops in
+const blip = (t, m) => {
+  let ph = 0;
+  add(t, 0.07, (x) => {
+    ph += mtof(m) / SR;
+    return (ph % 1 < 0.5 ? 1 : -1) * Math.exp(-x * 30);
+  }, 0.07, 0, 0.2);
+};
+[69, 72, 76, 81, 72, 76, 81, 84].forEach((m, i) => blip(0.8 + i * S16 * 0.5, m));
+pad(0.8, CH.Am9, 1.3, 1.2);
+
+// morph (1.33–2s): riser + a rising glide as the pixels extrude
+riser(1.2, 0.8);
+glide(1.33, 0.6);
+whoosh(1.62, 0.4);
 
 // groove (2–6s)
 impact(2.0, 0.8);
