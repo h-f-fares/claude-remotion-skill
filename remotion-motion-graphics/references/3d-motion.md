@@ -22,6 +22,18 @@ default for 3D**: a 3D hero scene with 2D type, grade, grain and vignette on top
 
 If unsure, pick 3D only for the hero/logo scene and keep the rest 2D.
 
+## Characters and mascots
+
+**Ask for a reference image before modeling** any named character or mascot. Names
+are ambiguous ("Claude figure" ≠ the logo ≠ the Clawd mascot); a guessed design
+costs a full build-and-render round. Once you have photos, measure proportions off
+them (width : height : depth, eye and leg positions) and match materials (matte
+plastic vs gloss).
+
+Build characters as a **pure model driven by a rig object** (pose numbers in, meshes
+out) and keep choreography in separate functions of the frame. Re-timing or
+replacing moves then never touches the model.
+
 ## Setup
 
 ```bash
@@ -54,9 +66,23 @@ Keep `@remotion/three` on the same version as `remotion`.
    idle objects breathe (sin bob), exits are faster than entrances, and the
    five-layer stack is kept: 3D canvas = asset layer, then DOM type, grade, grain
    and vignette on top.
-8. **Text over 3D goes in the DOM**, above the canvas, with a soft `textShadow`.
+8. **Characters need animation principles, not just poses.** Add a 3–6 frame
+   anticipation crouch before every jump or kick, hold the peak pose 4–6 frames
+   so it reads, and get follow-through for free by sampling the arms from the rig
+   2 frames earlier plus an overshoot term. Velocity squash & stretch: compare the
+   rig's height at `f` and `f - 1`, stretch rising, squash landing. Make repeated
+   moves different (side kick, split, spin kick) — four identical beats read as one.
+   Shoot each move from the angle that shows it: moonwalk and lean in profile, side
+   kicks from the front.
+9. **Mix 2D and 3D in the same frame.** Give `ThreeCanvas` `gl={{ alpha: true }}`
+   and no scene background so the 2D background shows through, and keep the canvas
+   mounted for the whole video (hide it with opacity on 2D frames) so the GL context
+   survives cuts. To pin 2D doodles to 3D action, build a `THREE.PerspectiveCamera`
+   with the same position/lookAt/fov per frame and `vector.project(cam)` world
+   points to pixels.
+10. **Text over 3D goes in the DOM**, above the canvas, with a soft `textShadow`.
    Use `Text3D` only when the text itself is the 3D hero.
-9. **Assets load through Suspense** (`useLoader`, `useGLTF`) with `staticFile()`
+11. **Assets load through Suspense** (`useLoader`, `useGLTF`) with `staticFile()`
    paths — `ThreeCanvas` holds the render until they load. For video on a 3D
    surface use `useOffthreadVideoTexture` from `@remotion/three`.
 
@@ -128,6 +154,22 @@ npx remotion render src/index.ts <CompId> out/video.mp4 --codec h264 --crf 16 --
 ```
 A black or blank render almost always means a missing `--gl` flag.
 
+In cloud containers where Remotion can't download its browser, or full Chrome fails
+with "Old Headless mode has been removed", point it at Playwright's headless shell:
+```bash
+--gl=swangle --browser-executable=/opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell
+```
+Budget render time: lighting extras (shadow-casting spotlights, reflections, ghost
+copies) can triple it.
+
+### Floor reflections
+Mirror the model under a semi-transparent glossy floor (`scale={[1, -1, 1]}`, low
+opacity, no shadows). It will leak past the floor edge on low cameras. Clip it with
+four `THREE.Plane`s through the camera position and each floor edge
+(`setFromCoplanarPoints`, oriented so a point under the floor center is kept), set
+`gl.localClippingEnabled = true` in `onCreated`, and skip the reflection entirely
+for floor-level shots.
+
 ## 3D verification (add to Step 5)
 
 Check the extracted frames for:
@@ -137,3 +179,8 @@ Check the extracted frames for:
 - Pure black shadows or a flat-looking hero → rim light missing or too weak.
 - Floor edge or fog band visible as a hard line → widen the floor / adjust fog.
 - Jitter between frames → something is still time-based instead of frame-based.
+- **Does each move read?** Make a contact sheet at 2 fps
+  (`ffmpeg -i out/video.mp4 -vf "fps=2,scale=180:-1" sheet/%02d.png`) and name
+  every move from the stills alone. If you can't tell a kick from a hop, or a
+  moonwalk from standing still, fix poses or camera angle before polishing
+  anything else. Framing checks alone miss this.
