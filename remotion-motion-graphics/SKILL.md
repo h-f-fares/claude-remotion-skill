@@ -29,6 +29,11 @@ opacity-only fades, simultaneous entrances, flat colors, and no texture. That is
    fonts). Never inline a hex color or easing in a component.
 10. **Render, extract frames, LOOK at them, fix, re-render.** Never deliver an
     unverified render. This loop is mandatory — see Verification below.
+11. **One timeline file is the source of truth** for anything with more than a few
+    events: layout, event times, camera shots and SFX cues all live there, and the
+    picture and the sound script both read it. Every event changes something visible.
+12. **Measure, don't guess.** Hero colour vs brand hex, loudness per half second and
+    true peak are checked with `scripts/qc.py`, not by eye.
 
 ## Workflow
 
@@ -39,7 +44,10 @@ audio, logos), and whether this is a new composition or an edit to an existing p
 **Decide 2D vs 3D here, on your own** — the user rarely says "3D". Use 3D for
 physical-object heroes (product, device, logo with thickness), spatial ideas
 (orbits, globes, fly-throughs, 3D data) or premium logo reveals; keep text-heavy,
-story, footage and UI videos 2D. If 3D: read `references/3d-motion.md` first.
+story, footage and UI videos 2D. If 3D: read `references/3d-motion.md` first. For a 3D or character film
+(a hero that does things, an app it "uses", anything past a logo sting) also read
+`references/3d-production.md` and write the six-block brief + one `timeline.ts`
+before any scene code.
 If editing an existing project: read `src/` fully first, find the theme (or create one),
 and refactor violations of the rules above before adding features.
 
@@ -80,6 +88,13 @@ If full Chrome errors with "Old Headless mode has been removed", use a
 `chromium_headless_shell-*/chrome-linux/headless_shell`).
 
 ### Step 5 — VERIFY (mandatory, never skip)
+Fastest gate: one bundle, N stills, one tiled contact sheet with time labels:
+```bash
+node <skill>/scripts/stills.mjs src/index.ts <CompId> --n 18 --scale 0.5   # add --gl angle on GPU
+```
+Read the sheet as one image. Name the 3 worst defects (timestamp, evidence, exact
+numeric fix), patch only those, re-render only those frames (`--frames 105,127`).
+Then measure: `python3 <skill>/scripts/qc.py loudness|frames|color …`.
 Extract frames at key moments and visually inspect each one. The portable
 method — works on machines with no system ffmpeg, renders the exact frame:
 ```bash
@@ -129,6 +144,13 @@ speech, see the captions section of `references/motion-patterns.md`.
 - `references/3d-motion.md` — when to go 3D, `@remotion/three` setup, frame-driven
   3D rules (no `useFrame`), camera/light/material defaults, `--gl` render flags,
   3D frame checks. Read FIRST whenever a scene is 3D.
+- `references/3d-production.md` — the production system for 3D/character films:
+  six-block brief, one timeline file read by picture + camera + sound, UI-as-slabs,
+  hop rigs, review gates (18-still contact sheet → 3 worst defects → targeted
+  re-render), CPU PNG-sequence render, measured colour/loudness/true-peak checks.
+  Read with `3d-motion.md` for any 3D film past a logo sting.
+- `scripts/stills.mjs` — N stills + tiled contact sheet from one bundle.
+- `scripts/qc.py` — loudness per 0.5 s + true peak, broken-frame scan, hero hex check.
 - `references/story-videos.md` — narrated story Shorts/Reels: one-round intake,
   environment preflight (free Kokoro voice, local fonts, caption timing without
   Whisper), ~2-min retention script structure, viral-grade edit checklist.

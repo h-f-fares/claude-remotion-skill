@@ -117,7 +117,23 @@ export const Scene3D: React.FC = () => {
 };
 ```
 
-Full working example: `examples/src/three3d/Orbit3D.tsx` in this repo.
+Full working examples in this repo: `examples/src/three3d/Orbit3D.tsx` (hero orbit)
+and `examples/src/clawdedit/` (character film on a fake editor, one timeline file,
+CPU-only). For films with a story, read `3d-production.md` next.
+
+## Look rules learned the hard way
+
+- **Screens/UI = emission under dark glass.** `emissiveMap` on a near-black
+  `meshPhysicalMaterial` with `specularIntensity ≈ 0.1`; bright specular mirrors the key
+  light as white blocks.
+- **Fog far distance > camera distance** in the widest shot, or the opening goes black.
+- **Tone mapping shifts brand colours** (ACES/AgX lighten and desaturate). Use `flat`
+  on `<ThreeCanvas>` for UI/brand-critical scenes, or lower light/exposure, then measure
+  the hero pixel against its hex (`scripts/qc.py color`).
+- **Any deterministic canvas can be a texture**: draw per frame from `t`, set
+  `tex.needsUpdate = true`. This is how a "live" comp, chart or screen plays on a 3D surface.
+- **Squash/stretch + anticipation** on every character hop (crouch 3 frames before
+  take-off, squash decaying over ~5 frames after landing).
 
 ## Render
 
@@ -127,6 +143,12 @@ npx remotion render src/index.ts <CompId> out/video.mp4 --codec h264 --crf 16 --
 # no GPU (cloud/sandbox/CI): use --gl=swangle
 ```
 A black or blank render almost always means a missing `--gl` flag.
+
+No GPU is fine: swangle (SwiftShader) renders the same pixels on CPU. Budget ~5 s per
+half-size still and ~1.5 s per 1080p frame on 4 cores (`--concurrency=3`). Iterate on stills
+(`scripts/stills.mjs`), render the film once as a PNG sequence (`--sequence`) so a broken
+range can be re-rendered alone with `--frames=a-b`. Skip effects that multiply cost on
+CPU (`CameraMotionBlur` samples, postprocessing DOF); fake depth with fog and lighting.
 
 ## 3D verification (add to Step 5)
 

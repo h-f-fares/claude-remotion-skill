@@ -109,3 +109,23 @@ ffmpeg -i vid/<recording>.webm -filter_complex "[0:v]trim=1.6:9.3,setpts=(PTS-ST
 ```
 
 Finished video: [`videos/veilllm/veilllm-short-ar.mp4`](videos/veilllm/veilllm-short-ar.mp4). Titles, description and tags: [`videos/veilllm/youtube.md`](videos/veilllm/youtube.md).
+
+## ClawdEdit (3D character film, CPU only, one timeline file)
+
+8 s, 1920x1080. Clawd lies in a fake editor's comp as a flat PNG layer, knocks twice,
+peels off and pops into 3D, then builds the title card by jumping on real buttons:
+Type, Rectangle, Pen, Effects > Glow (he kicks the chip into the comp), three keyframes
+on the Position row, Play. The panels power down and fall; only his work is left.
+
+Built the way `references/3d-production.md` describes: `src/clawdedit/timeline.ts` holds
+the layout in app pixels plus every hop, event, camera shot and sound cue; the UI is a
+canvas cut into slabs, the comp is a canvas redrawn per frame, and the sound script
+reads the same file. No GPU: three.js renders through `--gl=swangle`.
+
+```bash
+npm run audio:clawdedit     # synthesizes public/clawdedit/sound.wav from timeline.ts
+npm run stills:clawdedit    # gate: 18 half-size stills → out/qc/contact_sheet.png
+npm run render:clawdedit    # PNG sequence (re-render a range with --frames=105-145)
+npm run encode:clawdedit    # vignette + H.264 CRF 17 + AAC 320k → out/clawd-edit.mp4
+python3 ../remotion-motion-graphics/scripts/qc.py loudness public/clawdedit/sound.wav
+```
