@@ -47,7 +47,9 @@ More than one glowing element per frame = Vegas. Don't.
   lands (early feels synced; late feels broken).
 - Transitions: riser into the cut, bass hit ON the cut.
 - Counters: soft tick loop while counting.
-- Music bed at low volume (~0.2–0.3), ducked further under VO.
+- Under narration: music bed at low volume (~0.2–0.3), ducked further under VO.
+  Music-only films are mastered loud instead: integrated ≈ −11…−12 LUFS, quiet intro,
+  hard drop, true peak ≤ −1 dBTP (see `3d-production.md` §8).
 - Pick music FIRST when possible; compute framesPerBeat = fps*60/BPM and place
   cuts on beats.
 - Put sound on the SAME timeline as the picture: every SFX cue is computed from the

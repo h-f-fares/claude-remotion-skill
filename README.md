@@ -69,6 +69,9 @@ remotion-motion-graphics/
 │   └── qc.py                   # Loudness per 0.5 s, true peak, broken frames, hex check
 └── assets/
     └── theme.ts                # Theme template (colors, easings, spring presets)
+
+blender/                        # Optional GPU renderer (Mac M-series: Metal) for the
+                                #   3D films: same timeline baked into Cycles/EEVEE
 ```
 
 ## 🚀 Install

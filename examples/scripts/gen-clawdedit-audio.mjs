@@ -39,14 +39,14 @@ const key = (t, m) => add(t, 0.25, 0.1, (s, u) => sine(hz(m) + 3 * sine(hz(m) * 
 const beats = Math.round(TOTAL_S / BEAT_S);
 for (let b = 0; b < beats; b++) {
   const t = b * BEAT_S;
-  hat(t + BEAT_S / 2, t < EV.pop ? 0.06 : 0.12);
+  hat(t + BEAT_S / 2, t < EV.pop ? 0.03 : 0.12);
   if (t < EV.pop || t >= EV.play + 1.5) continue;
   kick(t);
   if (b % 2) snare(t);
   hat(t);
   if (b % 2 === 0) key(t + BEAT_S / 2, [72, 74, 76, 79][(b / 2) % 4]);
 }
-pad(0, [53, 60, 65], EV.pop + 0.2, 0.05); // F pad under the intro
+pad(0, [53, 60, 65], EV.pop, 0.025); // F pad under the intro
 const prog = [41, 43, 45, 48]; // F G Am C, one per bar (2 s)
 for (let bar = 0; bar * 2 + EV.pop < EV.play; bar++) {
   const t = EV.pop + bar * 2;
@@ -63,8 +63,8 @@ for (let i = 0; i < N; i++) {
 
 // ---- effects, one per timeline cue ----
 const FX = {
-  knock: (t) => add(t, 0.12, 0.6, (s, u) => (sine(1400, s) * 0.5 + sine(2300, s) * 0.3 + noise() * 0.2) * Math.exp(-u * 12)),
-  riser: (t) => add(t, 0.4, 0.25, (s, u) => noise() * u * u),
+  knock: (t) => add(t, 0.12, 0.22, (s, u) => (sine(1400, s) * 0.5 + sine(2300, s) * 0.3 + noise() * 0.2) * Math.exp(-u * 12)),
+  riser: (t) => add(t, 0.45, 0.16, (s, u) => noise() * u * u),
   pop: (t) => {
     add(t, 0.15, 0.7, (s, u) => sine(700 - 400 * u, s) * Math.exp(-u * 8));
     add(t, 0.5, 0.25, (s, u) => noise() * Math.exp(-u * 7) * (0.5 + 0.5 * sine(5200, s))); // breaking glass
@@ -83,14 +83,25 @@ const FX = {
   ding0: (t) => add(t, 0.5, 0.28, (s, u) => (sine(hz(84), s) + 0.4 * sine(hz(84) * 2.76, s)) * Math.exp(-u * 5)),
   ding1: (t) => add(t, 0.5, 0.28, (s, u) => (sine(hz(88), s) + 0.4 * sine(hz(88) * 2.76, s)) * Math.exp(-u * 5)),
   ding2: (t) => add(t, 0.5, 0.28, (s, u) => (sine(hz(91), s) + 0.4 * sine(hz(91) * 2.76, s)) * Math.exp(-u * 5)),
+  ding3: (t) => add(t, 0.6, 0.3, (s, u) => (sine(hz(96), s) + 0.4 * sine(hz(96) * 2.76, s)) * Math.exp(-u * 4)),
+  peel: (t) => { let lp = 0; add(t, 0.45, 0.14, (s, u) => { lp += 0.3 * (noise() - lp); return lp * (0.4 + 0.6 * Math.abs(sine(38 + 60 * u, s))) * Math.sin(Math.PI * u); }); },
+  rewind: (t) => [0, 0.1, 0.2, 0.3].forEach((d, i) => add(t + d, 0.09, 0.22, (s, u) => sine(2600 - i * 300 - 1800 * u, s) * Math.sin(Math.PI * u))),
+  skate: (t) => {
+    let lp = 0;
+    add(t, 1.1, 0.25, (s, u) => { lp += 0.08 * (noise() - lp); return (lp * 2 + 0.25 * sine(500 + 1000 * u, s)) * Math.min(1, s * 20) * (1 - u * 0.5); });
+    for (let k = 0; k < 11; k++) add(t + k * 0.1, 0.02, 0.15, (s, u) => noise() * (1 - u)); // scrub ticks
+  },
   brass: (t) => add(t, TOTAL_S - t, 0.16, (s, u) =>
     [60, 64, 67, 72].reduce((a, m) => a + Math.tanh(3 * sine(hz(m), s)), 0) * Math.min(1, s * 30) * Math.exp(-u * 2.2)),
   powerdown: (t) => add(t, 0.3, 0.22, (s, u) => sine(600 * (1 - u * 0.85), s) * (1 - u)),
   yay: (t) => [0, 0.12].forEach((d, i) => add(t + d, 0.15, 0.2, (s, u) => sine(1200 + i * 300 + 600 * u, s) * Math.sin(Math.PI * u))),
 };
 for (const c of SFX) FX[c.kind]?.(c.t);
+// silence for 50 ms right before the pop: the drop lands harder out of nothing
+for (let i = Math.round((EV.pop - 0.05) * SR); i < Math.round(EV.pop * SR); i++) mix[i] *= 0.05;
 
-// ---- master: gentle roll-off (tames inter-sample overshoot), soft clip, -1.5 dBFS ceiling, fade ----
+// ---- pre-master: gentle roll-off, soft clip, -1.5 dBFS ceiling, fade. The loudness master
+// (bus compressor + limiter + loudnorm to -11 LUFS / -1 dBTP) runs in ffmpeg: npm run master:clawdedit ----
 let lp = 0;
 for (let i = 0; i < N; i++) {
   lp += 0.55 * (mix[i] - lp); // ~ 10 kHz one-pole low-pass

@@ -39,15 +39,27 @@ const ARM = { out: 0.32, h: 0.4, d: 0.6, y: LEG_H + H * 0.42 };
 const EYE = { x: 0.42, y: LEG_H + H * 0.58, w: 0.13, h: 0.32 };
 
 // how this copy of Clawd renders: the hero, a floor reflection, or a motion-smear ghost
-type Look = { opacity: number; shadows: boolean; clip?: Plane[] };
+type Look = { opacity: number; shadows: boolean; clip?: Plane[]; color?: string; gloss?: boolean };
 const LookCtx = createContext<Look>({ opacity: 1, shadows: true });
 
 const Plastic: React.FC = () => {
-  const { opacity, clip } = useContext(LookCtx);
-  return (
+  const { opacity, clip, color, gloss } = useContext(LookCtx);
+  // gloss: a lacquered toy (clearcoat) instead of the matte printed figure
+  return gloss ? (
+    <meshPhysicalMaterial
+      clippingPlanes={clip}
+      color={color ?? theme.color.clawd}
+      roughness={0.42}
+      clearcoat={0.4}
+      clearcoatRoughness={0.3}
+      transparent={opacity < 1}
+      opacity={opacity}
+      depthWrite={opacity >= 1}
+    />
+  ) : (
     <meshStandardMaterial
       clippingPlanes={clip}
-      color={theme.color.clawd}
+      color={color ?? theme.color.clawd}
       roughness={0.62}
       metalness={0}
       transparent={opacity < 1}
@@ -197,10 +209,10 @@ export const restRig = (): ClawdRig => ({
 });
 
 // Pure model: draws Clawd from a rig. Origin is between the feet, so lean and squash pivot on the floor.
-export const ClawdModel: React.FC<{ rig: ClawdRig; opacity?: number; shadows?: boolean; clip?: Plane[] }> = ({
-  rig, opacity = 1, shadows = true, clip,
+export const ClawdModel: React.FC<{ rig: ClawdRig; opacity?: number; shadows?: boolean; clip?: Plane[]; color?: string; gloss?: boolean }> = ({
+  rig, opacity = 1, shadows = true, clip, color, gloss,
 }) => (
-  <LookCtx.Provider value={{ opacity, shadows, clip }}>
+  <LookCtx.Provider value={{ opacity, shadows, clip, color, gloss }}>
   <group position={rig.pos} rotation={rig.rot}>
     <group rotation={[rig.lean ?? 0, 0, 0]} scale={[rig.sx, rig.sy, rig.sx]}>
       <Block size={[W, H, D]} r={0.05} position={[0, LEG_H + H / 2, 0]} />

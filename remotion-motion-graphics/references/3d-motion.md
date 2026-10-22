@@ -40,8 +40,10 @@ Keep `@remotion/three` on the same version as `remotion`.
 2. **Use `<ThreeCanvas width={width} height={height}>`** from `@remotion/three`,
    not r3f's `<Canvas>`. Pass `width`/`height` from `useVideoConfig()`.
 3. **Animate the camera too.** A static camera on a spinning object reads as a
-   screensaver. Minimum: eased push-in (z 9 → 7.5) + small truck (x −0.6 → 0.6),
-   `camera.lookAt(...)` every frame (via `useThree((s) => s.camera)`).
+   screensaver. Minimum for a product orbit: eased push-in (z 9 → 7.5) + small truck
+   (x −0.6 → 0.6), `camera.lookAt(...)` every frame (via `useThree((s) => s.camera)`).
+   Anything with a character or a story needs a **shot list** (`3d-production.md` §4):
+   hero 18–28% of frame height, camera at hero eye-line (8–25°), Dutch angles, whips.
 4. **Three-point light rig, never a lone ambient.** Warm key (directional, casts
    shadows) + cool rim from behind + low hemisphere fill. Add one colored point
    light for an accent glow. Colors come from the theme.
@@ -123,13 +125,19 @@ CPU-only). For films with a story, read `3d-production.md` next.
 
 ## Look rules learned the hard way
 
-- **Screens/UI = emission under dark glass.** `emissiveMap` on a near-black
-  `meshPhysicalMaterial` with `specularIntensity ≈ 0.1`; bright specular mirrors the key
-  light as white blocks.
+- **Screens/UI = unlit emission.** `meshBasicMaterial({ map, color: k })` on the screen
+  top (k > 1 for HDR emitters), a dark box body underneath. Lit glossy screens mirror the
+  key light as white blocks.
 - **Fog far distance > camera distance** in the widest shot, or the opening goes black.
-- **Tone mapping shifts brand colours** (ACES/AgX lighten and desaturate). Use `flat`
-  on `<ThreeCanvas>` for UI/brand-critical scenes, or lower light/exposure, then measure
-  the hero pixel against its hex (`scripts/qc.py color`).
+- **Keep tone mapping on** — without it nothing can bloom and highlights clip. Use
+  `NeutralToneMapping` (keeps brand hues; AgX/ACES desaturate them), tune the hero base
+  colour, then measure a front face against its hex (`scripts/qc.py color`). `flat` is
+  only for 2D-looking scenes with no light sources.
+- **Bloom + depth of field are the premium read**, and they run on CPU: EffectComposer
+  (HalfFloat target) → BokehPass (focus = camera→hero distance each frame) →
+  UnrealBloomPass (threshold 1.0) → OutputPass, rendered from `useFrame(..., 1)`.
+  Recipe and numbers: `3d-production.md` §5.
+- **Never a black void.** A warm wall + table + a soft spot, fog in the same colour.
 - **Any deterministic canvas can be a texture**: draw per frame from `t`, set
   `tex.needsUpdate = true`. This is how a "live" comp, chart or screen plays on a 3D surface.
 - **Squash/stretch + anticipation** on every character hop (crouch 3 frames before
@@ -144,11 +152,15 @@ npx remotion render src/index.ts <CompId> out/video.mp4 --codec h264 --crf 16 --
 ```
 A black or blank render almost always means a missing `--gl` flag.
 
-No GPU is fine: swangle (SwiftShader) renders the same pixels on CPU. Budget ~5 s per
-half-size still and ~1.5 s per 1080p frame on 4 cores (`--concurrency=3`). Iterate on stills
+No GPU is fine: swangle (SwiftShader) renders the same pixels on CPU. Budget on 4 cores:
+~1.5 s per 1080p frame for a plain scene, ~11 s single-threaded (~4 s wall at
+`--concurrency=3`) with the bloom + DOF stack. Spend that time: the look stack is what
+separates a premium render from a screen recording. Iterate on stills
 (`scripts/stills.mjs`), render the film once as a PNG sequence (`--sequence`) so a broken
-range can be re-rendered alone with `--frames=a-b`. Skip effects that multiply cost on
-CPU (`CameraMotionBlur` samples, postprocessing DOF); fake depth with fog and lighting.
+range can be re-rendered alone with `--frames=a-b`. Avoid Remotion's `CameraMotionBlur`
+around a `ThreeCanvas` (N WebGL contexts). For path-traced light, true motion blur and lens
+DOF on a GPU machine (e.g. an M-series Mac), bake the same timeline into Blender:
+`blender/README.md`.
 
 ## 3D verification (add to Step 5)
 

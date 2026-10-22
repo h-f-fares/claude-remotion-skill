@@ -4,3 +4,5 @@ examples/out/
 examples/public/sfx/
 examples/models/
 examples/public/clawdedit/
+blender/build/
+__pycache__/

@@ -1,117 +1,32 @@
 // ClawdEdit: Clawd peels off a fake editor's comp, pops into 3D and builds the title card by
-// jumping on the real buttons. CPU-only: three.js through Remotion, rendered with --gl=swangle.
-// Every value comes from timeline.ts; every motion from the frame number (no useFrame, no clock).
+// jumping on the real buttons, then surfs the playhead. CPU-only: three.js through Remotion,
+// rendered with --gl=swangle. Every value comes from timeline.ts; every motion from the frame
+// number (no clock). The look is directed like macro toy photography: a low, close, canted
+// camera from a shot list, AgX tone mapping, HDR emitters that bloom over a black comp, depth of
+// field focused on Clawd, and a lit warm room behind the floating slabs.
 import React, { useEffect, useMemo, useState } from "react";
 import * as THREE from "three";
-import { useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { BokehPass } from "three/examples/jsm/postprocessing/BokehPass.js";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
 import { ThreeCanvas } from "@remotion/three";
 import { AbsoluteFill, continueRender, delayRender, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { ClawdModel, restRig, type ClawdRig } from "../claudedance/Clawd";
-import { BUTTONS, CAMERA, EV, FALL_ORDER, FLAT_AT, HOPS, KEYFRAME_X, PANELS, TL, APP, px, type Rect } from "./timeline";
+import { ClawdModel } from "../claudedance/Clawd";
+import { APP, BUTTONS, EV, PANELS, TL, VIEWER, px, playheadX, type Rect } from "./timeline";
+import {
+  BTN, BUTTON_PANEL, CLAWD_SCALE, SLAB, chipAt, ease, fallState, frameState, keyPos, keyScale, pressState, shardsAt,
+  type ShotState,
+} from "./motion.ts";
 import { C, FONT, drawComp, drawUI } from "./uiCanvas";
 
-const SLAB = 0.08; // panel thickness (world units)
-const BTN = 0.05; // buttons stand proud of their panel
-const CLAWD_SCALE = 0.3;
-const FILL = 3;
-const FLAT_HALF = 0.3; // half of Clawd's lying length, so he sits centred in his selection box
+// brand terracotta is #D97757; tone mapping shifts it, so the base is tuned and re-measured
+// with qc.py color until the rendered front face reads close to #D97757
+const HERO = "#CE7253";
 
-const clamp01 = (x: number) => Math.min(1, Math.max(0, x));
-const ease = (x: number) => 1 - Math.pow(1 - clamp01(x), 3);
-const inOut = (x: number) => {
-  const t = clamp01(x);
-  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-};
-const lerp = (a: number, b: number, k: number) => a + (b - a) * k;
-const lerp3 = (a: number[], b: number[], k: number) => a.map((v, i) => lerp(v, b[i], k));
-
-// which panel a button lives on, so it falls with it
-const BUTTON_PANEL: Record<string, string> = { type: "tools", rect: "tools", pen: "tools", play: "preview", glow: "effects" };
-
-// power-down then fall: returns {power 1→0, drop (world units), tilt}
-const fallState = (panel: string, t: number) => {
-  const i = FALL_ORDER.indexOf(panel);
-  if (i < 0) return { power: 1, drop: 0, tilt: 0 };
-  const t0 = EV.powerDown[i];
-  const power = 1 - clamp01((t - t0 + 0.12) / 0.12);
-  const s = Math.max(0, t - t0);
-  return { power, drop: 7 * s * s, tilt: s * s * (i % 2 ? 0.6 : -0.5) };
-};
-
-// press: a button dips for 4 frames on its landing, then stays lit
-const pressState = (key: string, t: number) => {
-  const hop = HOPS.find((h) => h.press === key);
-  if (!hop) return { dip: 0, lit: 0 };
-  const s = t - hop.t1;
-  return { dip: s > 0 && s < 0.18 ? Math.sin((s / 0.18) * Math.PI) * 0.035 : 0, lit: s > 0 ? 1 : 0 };
-};
-
-const surfaceY = (key?: string) => SLAB + (key && BUTTONS[key] ? BTN : 0);
-
-// ---- Clawd's rig and ground position at time t, straight from the hop list ----
-const clawdAt = (t: number, fps: number) => {
-  const rig: ClawdRig = restRig();
-  const [fx, fz] = px(FLAT_AT.x, FLAT_AT.y);
-  if (t < EV.pop) {
-    // a flat PNG lying on the comp; two knocks bump him from inside
-    const knock = [EV.knock1, EV.knock2].reduce((m, k) => Math.max(m, t > k && t < k + 0.2 ? Math.sin(((t - k) / 0.2) * Math.PI) : 0), 0);
-    return { rig: { ...rig, pos: [fx, SLAB + 0.01 + knock * 0.08, fz + FLAT_HALF] as [number, number, number] }, flat: 1, lie: 1, ground: [fx, fz] };
-  }
-  let i = -1;
-  HOPS.forEach((h, k) => t >= h.t0 && (i = k));
-  const hop = HOPS[i];
-  const from = i === 0 ? { x: FLAT_AT.x, y: FLAT_AT.y + FLAT_HALF * 100 } : HOPS[i - 1].to;
-  const fromY = i === 0 ? SLAB : surfaceY(HOPS[i - 1].press);
-  const toY = surfaceY(hop.press);
-  const [ax, az] = px(from.x, from.y);
-  const [bx, bz] = px(hop.to.x, hop.to.y);
-  const u = clamp01((t - hop.t0) / (hop.t1 - hop.t0));
-  const k = inOut(u);
-  const air = t < hop.t1;
-  const x = lerp(ax, bx, u);
-  const z = lerp(az, bz, u);
-  const dip = hop.press ? pressState(hop.press, t).dip : 0;
-  const y = lerp(fromY, toY, u) + hop.apex * 4 * u * (1 - u) - (air ? 0 : dip);
-
-  rig.pos = [x, y, z];
-  // first hop: peel up as a flat card, then inflate into 3D
-  const peel = i === 0 ? ease((t - EV.pop) / 0.25) : 1;
-  const flat = i === 0 ? 1 - ease((t - EV.pop - 0.1) / 0.18) : 0;
-
-  if (air) {
-    rig.armL = rig.armR = 0.9;
-    rig.legL = { lift: 0.6, tip: -0.3, slide: 0, kick: 0 };
-    rig.legR = { lift: 0.6, tip: -0.3, slide: 0, kick: 0 };
-    rig.rot = [hop.flip ? -Math.PI * 2 * k : 0, 0, -Math.sign(bx - ax) * Math.sin(Math.PI * u) * 0.25];
-    rig.sy = 1 + Math.sin(Math.PI * u) * 0.12; // stretch in the air
-    rig.sx = 1 - Math.sin(Math.PI * u) * 0.05;
-  } else {
-    // squash on landing, decaying over ~5 frames
-    const land = Math.exp(-((t - hop.t1) * fps) / 3);
-    rig.sx = 1 + land * 0.14;
-    rig.sy = 1 - land * 0.2;
-  }
-  // anticipation: crouch for 3 frames before the next take-off
-  const next = HOPS[i + 1];
-  if (next && !air) {
-    const pre = clamp01(1 - (next.t0 - t) * fps / 3);
-    rig.sy *= 1 - pre * 0.15;
-    rig.sx *= 1 + pre * 0.08;
-  }
-  // the kick that sends the Glow chip into the comp
-  const kk = t - EV.kick;
-  if (kk > -0.1 && kk < 0.3) rig.legR = { lift: 0.4, tip: 0, slide: 0, kick: Math.sin(clamp01((kk + 0.1) / 0.4) * Math.PI) * 0.9 };
-  // finale: wave with ^^ eyes
-  if (t > EV.wave) {
-    rig.armR = 1.3 + Math.sin((t - EV.wave) * 12) * 0.45;
-    rig.happy = true;
-  }
-  rig.blink = Math.max(0, 1 - Math.abs(t - 3.45) * 12);
-  const gu = hop.flip ? k : ease(u * 1.4);
-  return { rig, flat, lie: 1 - peel, ground: [lerp(ax, bx, gu), lerp(az, bz, gu)] };
-};
-
-// ---- slabs: a dark glossy body with its crop of the UI as emission on top ----
+// ---- slabs: a dark body with its crop of the UI on top, unlit so lights never mirror on it ----
 const cropTexture = (base: THREE.Texture, r: Rect) => {
   const tex = base.clone();
   tex.repeat.set(r.w / APP.w, r.h / APP.h);
@@ -120,31 +35,23 @@ const cropTexture = (base: THREE.Texture, r: Rect) => {
   return tex;
 };
 
-const Slab: React.FC<{ r: Rect; map: THREE.Texture; power: number; y: number; tilt?: number; lit?: number }> = ({
-  r, map, power, y, tilt = 0, lit = 0,
+const Slab: React.FC<{ r: Rect; map: THREE.Texture; power: number; y: number; tilt?: number; gain?: number; h?: number }> = ({
+  r, map, power, y, tilt = 0, gain = 1, h = SLAB,
 }) => {
   const [cx, cz] = px(r.x + r.w / 2, r.y + r.h / 2);
   const w = r.w / 100;
   const d = r.h / 100;
+  const k = gain * power;
   return (
     <group position={[cx, y, cz]} rotation={[tilt, 0, tilt * 0.4]}>
-      <mesh position={[0, -SLAB / 2, 0]} castShadow receiveShadow>
-        <boxGeometry args={[w, SLAB, d]} />
-        <meshStandardMaterial color="#0b0a09" roughness={0.45} />
+      <mesh position={[0, -h / 2, 0]} castShadow receiveShadow>
+        <boxGeometry args={[w, h, d]} />
+        <meshStandardMaterial color="#151413" roughness={0.35} metalness={0.2} />
       </mesh>
-      {/* LOOK: screen as emission under black glass; low specular so lights never blow it out */}
-      <mesh position={[0, 0.001, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+      {/* LOOK: the screen is pure emission — an unlit material can't mirror the key light as white blocks */}
+      <mesh position={[0, 0.001, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[w, d]} />
-        <meshPhysicalMaterial
-          color="#050505"
-          roughness={0.32}
-          specularIntensity={0.1}
-          clearcoat={0.35}
-          clearcoatRoughness={0.3}
-          emissiveMap={map}
-          emissive="#ffffff"
-          emissiveIntensity={(1.25 + lit * 0.5) * power}
-        />
+        <meshBasicMaterial map={map} color={new THREE.Color(k, k, k)} />
       </mesh>
     </group>
   );
@@ -154,9 +61,9 @@ const useFont = () => {
   const [handle] = useState(() => delayRender("font"));
   const [ready, setReady] = useState(false);
   useEffect(() => {
-    const ff = new FontFace(FONT, `url(${staticFile("fonts/Fredoka-Bold.woff2")})`, { weight: "600" });
-    ff.load()
-      .then((loaded) => document.fonts.add(loaded))
+    const ff = new FontFace(FONT, `url(${staticFile("fonts/Fredoka-Bold.woff2")})`, { weight: "700" });
+    Promise.all([ff.load().then((l) => document.fonts.add(l)), document.fonts.load("600 16px Inter")])
+      .catch(() => undefined)
       .finally(() => {
         setReady(true);
         continueRender(handle);
@@ -166,7 +73,6 @@ const useFont = () => {
 };
 
 const Workspace: React.FC<{ t: number }> = ({ t }) => {
-  // the whole UI drawn once at 2x, then cut into slabs
   const ui = useMemo(() => {
     const c = document.createElement("canvas");
     c.width = APP.w * APP.scale;
@@ -182,22 +88,17 @@ const Workspace: React.FC<{ t: number }> = ({ t }) => {
     for (const [k, r] of Object.entries({ ...PANELS, ...BUTTONS })) o[k] = cropTexture(ui, r);
     return o;
   }, [ui]);
-
-  // the comp is a canvas redrawn from the playhead time each frame
   const comp = useMemo(() => {
     const c = document.createElement("canvas");
-    const p = PANELS.comp;
-    c.width = p.w * APP.scale;
-    c.height = (p.h - 34) * APP.scale;
+    c.width = VIEWER.w * APP.scale;
+    c.height = VIEWER.h * APP.scale;
     const tex = new THREE.CanvasTexture(c);
     tex.colorSpace = THREE.SRGBColorSpace;
     tex.anisotropy = 8;
     return { c, tex };
   }, []);
-  drawComp(comp.c.getContext("2d")!, t, PANELS.comp.w, PANELS.comp.h - 34);
+  drawComp(comp.c.getContext("2d")!, t);
   comp.tex.needsUpdate = true;
-
-  const compView: Rect = { x: PANELS.comp.x, y: PANELS.comp.y + 34, w: PANELS.comp.w, h: PANELS.comp.h - 34 };
 
   return (
     <group>
@@ -205,81 +106,143 @@ const Workspace: React.FC<{ t: number }> = ({ t }) => {
         const fs = fallState(k, t);
         return <Slab key={k} r={r} map={crops[k]} power={fs.power} y={-fs.drop} tilt={fs.tilt} />;
       })}
-      {/* the live comp sits just above its panel slab */}
-      <group position={[0, 0.002, 0]}>
-        <Slab r={compView} map={comp.tex} power={1} y={0} lit={0.25} />
+      {/* the live comp: HDR gain so the title blooms against true black */}
+      <group position={[0, 0.003, 0]}>
+        <Slab r={VIEWER} map={comp.tex} power={1} y={0} gain={1.35} h={0.01} />
       </group>
       {Object.entries(BUTTONS).map(([k, r]) => {
         const fs = fallState(BUTTON_PANEL[k], t);
         const ps = pressState(k, t);
-        return <Slab key={k} r={r} map={crops[k]} power={fs.power} y={-fs.drop + BTN - ps.dip} tilt={fs.tilt} lit={ps.lit} />;
+        return <Slab key={k} r={r} map={crops[k]} power={fs.power} y={-fs.drop + BTN - ps.dip} tilt={fs.tilt} gain={1 + ps.lit * 0.9} h={BTN} />;
       })}
-      <TimelineMarks t={t} />
-      <GlowChip t={t} />
+      <TimelineProps t={t} />
+      <GlowChip t={t} map={crops.glow} />
+      <Shards t={t} />
     </group>
   );
 };
 
-// keyframe diamonds pop in as they are stamped; the playhead rewinds and plays
-const TimelineMarks: React.FC<{ t: number }> = ({ t }) => {
+// keyframes are glowing white cubes that pop in as they're stamped; the playhead is a light beam
+const TimelineProps: React.FC<{ t: number }> = ({ t }) => {
   const fs = fallState("timeline", t);
-  const head = t < EV.keys[0] ? TL.trackX0 + 20
-    : t < EV.play ? KEYFRAME_X[EV.keys.filter((k) => t >= k).length - 1]
-    : lerp(KEYFRAME_X[0], KEYFRAME_X[2], inOut(t - EV.play));
-  const [hx, hz] = px(head, (PANELS.timeline.y + PANELS.timeline.y + PANELS.timeline.h) / 2);
+  const [hx, hz] = px(playheadX(t), TL.rulerY);
+  const beamLen = (PANELS.timeline.y + PANELS.timeline.h - TL.rulerY) / 100;
   return (
     <group position={[0, -fs.drop, 0]} rotation={[fs.tilt, 0, fs.tilt * 0.4]}>
       {EV.keys.map((k, i) => {
-        const s = t > k ? Math.min(1.25, 1.25 * ease((t - k) / 0.1)) - Math.max(0, Math.min(0.25, (t - k - 0.1) * 2)) : 0;
-        const [x, z] = px(KEYFRAME_X[i], TL.posRowY + 22);
+        const s = keyScale(t, k);
+        const [x, y, z] = keyPos(i);
         return (
-          <mesh key={k} position={[x - 0.32, SLAB + 0.04, z]} rotation={[0, Math.PI / 4, 0]} scale={s}>
-            <boxGeometry args={[0.16, 0.06, 0.16]} />
-            <meshStandardMaterial color={C.accentHi} emissive={C.accent} emissiveIntensity={1.4 * fs.power} />
+          <mesh key={k} position={[x, y + 0.12 * s, z]} rotation={[0, Math.PI / 4, 0]} scale={s}>
+            <boxGeometry args={[0.2, 0.2, 0.2]} />
+            <meshBasicMaterial color={new THREE.Color(1.6, 1.6, 1.6).multiplyScalar(fs.power)} />
           </mesh>
         );
       })}
-      <mesh position={[hx, SLAB + 0.02, hz]}>
-        <boxGeometry args={[0.04, 0.03, PANELS.timeline.h / 100 - 0.1]} />
-        <meshStandardMaterial color={C.blue} emissive={C.blue} emissiveIntensity={1.2 * fs.power} />
+      {/* the CTI: a beam down the tracks and a head on the ruler he can ride */}
+      <mesh position={[hx, SLAB + 0.025, hz + beamLen / 2]}>
+        <boxGeometry args={[0.06, 0.05, beamLen]} />
+        <meshBasicMaterial color={new THREE.Color(0.5, 1.4, 2.6).multiplyScalar(fs.power)} />
+      </mesh>
+      <mesh position={[hx, SLAB + 0.08, hz]} castShadow>
+        <boxGeometry args={[0.3, 0.16, 0.34]} />
+        <meshBasicMaterial color={new THREE.Color(0.45, 0.95, 1.5).multiplyScalar(fs.power)} />
       </mesh>
     </group>
   );
 };
 
-// Effects > Glow: a chip pops up under Clawd, he kicks it into the comp
-const GlowChip: React.FC<{ t: number }> = ({ t }) => {
-  if (t < EV.glowChip || t > EV.glowOn + 0.05) return null;
-  const up = ease((t - EV.glowChip) / 0.15);
-  const [ax, az] = px(BUTTONS.glow.x + 70, BUTTONS.glow.y - 30);
-  const [bx, bz] = px(PANELS.comp.x + 580, PANELS.comp.y + 270);
-  const u = clamp01((t - EV.kick) / (EV.glowOn - EV.kick));
-  const k = inOut(u);
+// Effects > Glow: the row pops out as a chip, he kicks it into the comp
+const GlowChip: React.FC<{ t: number; map: THREE.Texture }> = ({ t, map }) => {
+  if (!chipAt(t)) return null;
   return (
-    <mesh
-      position={[lerp(ax, bx, k), SLAB + 0.2 * up + 1.6 * 4 * u * (1 - u), lerp(az, bz, k)]}
-      rotation={[u * 6, u * 4, 0]}
-      scale={up * (1 - u * 0.7)}
-      castShadow
-    >
-      <boxGeometry args={[0.7, 0.08, 0.3]} />
-      <meshStandardMaterial color={C.accentHi} emissive={C.accent} emissiveIntensity={1.6} />
-    </mesh>
+    <group>
+      {[0, 1, 2, 3].map((g) => {
+        const c = chipAt(t - g / 60);
+        if (!c || (g > 0 && c.u <= 0)) return null;
+        return (
+          <mesh key={g} position={c.pos} rotation={c.rot} scale={c.scale}>
+            <planeGeometry args={[3.0, 0.48]} />
+            <meshBasicMaterial map={map} color={new THREE.Color(2.4, 2.4, 2.4)} transparent opacity={g ? 0.4 / g : 1} side={THREE.DoubleSide} />
+          </mesh>
+        );
+      })}
+    </group>
   );
 };
 
-const CameraRig: React.FC<{ ground: number[]; t: number }> = ({ ground, t }) => {
-  const camera = useThree((s) => s.camera);
-  const wF = inOut((t - CAMERA.followIn[0]) / (CAMERA.followIn[1] - CAMERA.followIn[0]));
-  const wE = inOut((t - CAMERA.endIn[0]) / (CAMERA.endIn[1] - CAMERA.endIn[0]));
-  const [cx, cz] = px(PANELS.comp.x + PANELS.comp.w / 2, PANELS.comp.y + PANELS.comp.h / 2);
-  const gx = lerp(ground[0], cx, CAMERA.followBias);
-  const gz = lerp(ground[1], cz, CAMERA.followBias);
-  const follow = { pos: [gx + CAMERA.followOffset[0], CAMERA.followOffset[1], gz + CAMERA.followOffset[2]], look: [gx, 0.3, gz] };
-  const pos = lerp3(lerp3(CAMERA.wide.pos, follow.pos, wF), CAMERA.end.pos, wE);
-  const look = lerp3(lerp3(CAMERA.wide.look, follow.look, wF), CAMERA.end.look, wE);
-  camera.position.set(pos[0], pos[1], pos[2]);
-  camera.lookAt(look[0], look[1], look[2]);
+// the pop: glass shards burst from the comp toward the lens, an emissive ring expands
+const Shards: React.FC<{ t: number }> = ({ t }) => {
+  const st = shardsAt(t);
+  if (!st) return null;
+  return (
+    <group>
+      {st.shards.map((sh, i) => (
+        <mesh key={i} position={sh.pos} rotation={sh.rot}>
+          <boxGeometry args={sh.size} />
+          <meshBasicMaterial color={new THREE.Color(2.2, 2.1, 2.0)} transparent opacity={st.fade} />
+        </mesh>
+      ))}
+      <mesh position={st.center} rotation={[-Math.PI / 2, 0, 0]} scale={st.ring}>
+        <ringGeometry args={[0.94, 1.0, 64]} />
+        <meshBasicMaterial color={new THREE.Color(1.4, 1.1, 0.9)} transparent opacity={st.ringOpacity} />
+      </mesh>
+    </group>
+  );
+};
+
+// a warm pool of light on the back wall (the spot's target must live in the scene)
+const RoomLight: React.FC = () => {
+  const target = useMemo(() => {
+    const o = new THREE.Object3D();
+    o.position.set(0, 2, -10);
+    return o;
+  }, []);
+  return (
+    <>
+      <primitive object={target} />
+      <spotLight position={[1, 8, 4]} target={target} angle={0.75} penumbra={0.9} intensity={90} distance={40} decay={1.2} color="#ffb98a" />
+    </>
+  );
+};
+
+// the camera from the shot list, with the Dutch angle applied after lookAt
+const CameraRig: React.FC<{ shot: ShotState }> = ({ shot }) => {
+  const camera = useThree((s) => s.camera) as THREE.PerspectiveCamera;
+  camera.position.set(...shot.pos);
+  camera.up.set(0, 1, 0);
+  camera.lookAt(...shot.look);
+  camera.rotateZ(shot.roll);
+  if (camera.fov !== shot.fov) {
+    camera.fov = shot.fov;
+    camera.updateProjectionMatrix();
+  }
+  camera.updateMatrixWorld();
+  return null;
+};
+
+// Post stack on CPU: HDR target → depth of field on Clawd → bloom on HDR emitters → AgX output.
+// useFrame with priority 1 takes over rendering; Remotion's ThreeCanvas advances it once per frame.
+const Post: React.FC<{ focus: number; aperture: number }> = ({ focus, aperture }) => {
+  const { gl, scene, camera, size } = useThree();
+  const { composer, bokeh } = useMemo(() => {
+    gl.toneMapping = THREE.NeutralToneMapping;
+    gl.toneMappingExposure = 1.0;
+    const rt = new THREE.WebGLRenderTarget(size.width, size.height, { type: THREE.HalfFloatType, samples: 4 });
+    const c = new EffectComposer(gl, rt);
+    c.addPass(new RenderPass(scene, camera));
+    const b = new BokehPass(scene, camera, { focus: 3, aperture: 0.005, maxblur: 0.012 });
+    c.addPass(b);
+    c.addPass(new UnrealBloomPass(new THREE.Vector2(size.width / 2, size.height / 2), 0.55, 0.45, 1.0));
+    c.addPass(new OutputPass());
+    return { composer: c, bokeh: b };
+  }, [gl, scene, camera, size.width, size.height]);
+  useFrame(() => {
+    const u = bokeh.uniforms as Record<string, { value: number }>;
+    u.focus.value = focus;
+    u.aperture.value = aperture;
+    composer.render();
+  }, 1);
   return null;
 };
 
@@ -288,46 +251,53 @@ export const ClawdEdit: React.FC = () => {
   const { fps, width, height } = useVideoConfig();
   const fontReady = useFont();
   const t = frame / fps;
-  const c = clawdAt(t, fps);
+  const { clawd: c, shot } = frameState(t, fps);
+  // wide shots get less blur, close shots a shallow macro focus
+  const aperture = shot.focus > 6 ? 0.0015 : 0.006;
 
   return (
-    <AbsoluteFill style={{ background: C.bg }}>
-      <ThreeCanvas width={width} height={height} shadows flat camera={{ fov: 38, near: 0.1, far: 80 }}>
-        <color attach="background" args={["#0d0a08"]} />
-        <fog attach="fog" args={["#0d0a08", 15, 36]} />
-        <hemisphereLight args={["#ffd9c0", "#0a0706", 0.45]} />
+    <AbsoluteFill style={{ background: "#1c1410" }}>
+      <ThreeCanvas width={width} height={height} shadows camera={{ fov: 40, near: 0.1, far: 60 }}>
+        <color attach="background" args={["#2a1d16"]} />
+        <fog attach="fog" args={["#2a1d16", 14, 34]} />
+        <hemisphereLight args={["#ffd9c0", "#1a1210", 0.55]} />
         <directionalLight
           castShadow
-          position={[-4, 11, 7]}
-          intensity={2.1}
+          position={[-5, 11, 7]}
+          intensity={2.4}
           color="#ffe2c8"
           shadow-mapSize={[2048, 2048]}
           shadow-camera-left={-12}
           shadow-camera-right={12}
-          shadow-camera-top={8}
-          shadow-camera-bottom={-8}
+          shadow-camera-top={9}
+          shadow-camera-bottom={-9}
           shadow-bias={-0.0004}
         />
-        <directionalLight position={[7, 3, -6]} intensity={1.1} color="#8fb8ff" />
-        <pointLight position={[0, 1.4, -1.4]} intensity={4} distance={6} color="#ff9a6a" />
-        {/* hero fill: measured Clawd at L 46 vs 62 for his hex in the dark studio, so he gets his own soft light */}
-        <pointLight position={[c.rig.pos[0] + 0.6, c.rig.pos[1] + 1.3, c.rig.pos[2] + 1.4]} intensity={FILL} distance={4} decay={1.5} color="#ffe6d6" />
-        <CameraRig ground={c.ground} t={t} />
+        <directionalLight position={[7, 3, -6]} intensity={1.3} color="#8fb8ff" />
+        {/* hero fill that follows him, and a cool spill from the screens below */}
+        <pointLight position={[c.body[0] + 0.7, c.body[1] + 1.1, c.body[2] + 1.3]} intensity={1.7} distance={4} decay={1.5} color="#ffe6d6" />
+        <pointLight position={[c.body[0], c.body[1] - 0.15, c.body[2] + 0.4]} intensity={0.8} distance={1.6} decay={2} color="#9fc6ff" />
+        {/* the room: a warm table and back wall with a pool of light, so the slabs float in a place */}
+        <RoomLight />
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.4, 0]} receiveShadow>
+          <planeGeometry args={[80, 60]} />
+          <meshStandardMaterial color="#5a3e30" roughness={0.92} />
+        </mesh>
+        <mesh position={[0, 6, -10]}>
+          <planeGeometry args={[80, 20]} />
+          <meshStandardMaterial color="#4e362a" roughness={0.95} />
+        </mesh>
+        <CameraRig shot={shot} />
         {fontReady && <Workspace t={t} />}
         {/* lying flat = rotate face-up, then squash world-y: the "flat PNG" look */}
         <group position={c.rig.pos} scale={[1, 1 - c.flat * 0.93, 1]}>
-          <group rotation={[-Math.PI / 2 * c.lie, 0, 0]} scale={CLAWD_SCALE}>
-            <ClawdModel rig={{ ...c.rig, pos: [0, 0, 0] }} />
+          <group rotation={[(-Math.PI / 2) * c.lie, 0, 0]} scale={CLAWD_SCALE}>
+            <ClawdModel rig={{ ...c.rig, pos: [0, 0, 0] }} color={HERO} gloss />
           </group>
         </group>
-        {/* the studio floor far below the floating slabs */}
-        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -2.6, 0]} receiveShadow>
-          <planeGeometry args={[60, 40]} />
-          <meshStandardMaterial color="#17110d" roughness={0.95} />
-        </mesh>
+        <Post focus={shot.focus} aperture={aperture} />
       </ThreeCanvas>
-      {/* DOM finish: vignette on top (grain/grade from the 2D stack go here too) */}
-      <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(0,0,0,0.55) 100%)" }} />
+      <AbsoluteFill style={{ background: "radial-gradient(ellipse at 50% 48%, transparent 60%, rgba(0,0,0,0.35) 100%)" }} />
     </AbsoluteFill>
   );
 };

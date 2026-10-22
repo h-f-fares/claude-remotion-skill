@@ -145,10 +145,14 @@ speech, see the captions section of `references/motion-patterns.md`.
   3D rules (no `useFrame`), camera/light/material defaults, `--gl` render flags,
   3D frame checks. Read FIRST whenever a scene is 3D.
 - `references/3d-production.md` — the production system for 3D/character films:
-  six-block brief, one timeline file read by picture + camera + sound, UI-as-slabs,
-  hop rigs, review gates (18-still contact sheet → 3 worst defects → targeted
-  re-render), CPU PNG-sequence render, measured colour/loudness/true-peak checks.
+  six-block brief, one timeline file read by picture + camera + sound + Blender, a
+  camera SHOT LIST (hero 18–28% of frame, eye-line, Dutch angles, whips), the CPU look
+  stack (tone mapping + bloom + DOF + lit set), UI fidelity spec, character acting, review
+  gates with a reference A/B and numeric checks, loudness mastering, CPU render + Blender.
   Read with `3d-motion.md` for any 3D film past a logo sting.
+- `blender/` (repo root, next to this skill) — optional GPU renderer: bakes the same
+  timeline into Blender (Cycles/EEVEE, Metal on Apple silicon). Use when a GPU machine is
+  available and the film needs path-traced light; the CPU path stays the default.
 - `scripts/stills.mjs` — N stills + tiled contact sheet from one bundle.
 - `scripts/qc.py` — loudness per 0.5 s + true peak, broken-frame scan, hero hex check.
 - `references/story-videos.md` — narrated story Shorts/Reels: one-round intake,
