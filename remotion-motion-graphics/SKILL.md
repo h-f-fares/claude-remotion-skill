@@ -1,6 +1,6 @@
 ---
 name: remotion-motion-graphics
-description: Create and edit professional motion graphics videos with Remotion (React-based video). Use this skill EVERY time the user wants to create a video, edit a video, animate something, build an intro/outro/logo animation, make a Reel/Short/promo/launch video, add text animations or captions to footage, composite images and B-roll into a video, or mentions Remotion, motion graphics, video rendering, or "make this video look better/less generic". Also trigger when editing an existing Remotion project or when the user complains their video looks basic, generic, or amateur — this skill contains the exact fixes. Always read this skill BEFORE writing any Remotion code.
+description: Create and edit professional motion graphics videos with Remotion (React-based video). Use this skill EVERY time the user wants to create a video, edit a video, animate something, build an intro/outro/logo animation, make a Reel/Short/promo/launch video, add text animations or captions to footage, composite images and B-roll into a video, or mentions Remotion, motion graphics, 3D, three.js, rotating/orbiting objects, product shots, video rendering, or "make this video look better/less generic". Also trigger when editing an existing Remotion project or when the user complains their video looks basic, generic, or amateur — this skill contains the exact fixes. Always read this skill BEFORE writing any Remotion code.
 ---
 
 # Remotion Motion Graphics
@@ -36,6 +36,10 @@ opacity-only fades, simultaneous entrances, flat colors, and no texture. That is
 Determine: duration, fps (30 default; 60 only for heavy fast motion), dimensions
 (1080×1920 Reels/Shorts, 1920×1080 landscape), what assets exist (images, footage,
 audio, logos), and whether this is a new composition or an edit to an existing project.
+**Decide 2D vs 3D here, on your own** — the user rarely says "3D". Use 3D for
+physical-object heroes (product, device, logo with thickness), spatial ideas
+(orbits, globes, fly-throughs, 3D data) or premium logo reveals; keep text-heavy,
+story, footage and UI videos 2D. If 3D: read `references/3d-motion.md` first.
 If editing an existing project: read `src/` fully first, find the theme (or create one),
 and refactor violations of the rules above before adding features.
 
@@ -122,6 +126,9 @@ speech, see the captions section of `references/motion-patterns.md`.
   enhancement + putting audience reactions back, forced-aligned captions,
   pause trimming, camera colour matching, master-editor checklist.
   Read FIRST for any "edit / montage my video" request.
+- `references/3d-motion.md` — when to go 3D, `@remotion/three` setup, frame-driven
+  3D rules (no `useFrame`), camera/light/material defaults, `--gl` render flags,
+  3D frame checks. Read FIRST whenever a scene is 3D.
 - `references/story-videos.md` — narrated story Shorts/Reels: one-round intake,
   environment preflight (free Kokoro voice, local fonts, caption timing without
   Whisper), ~2-min retention script structure, viral-grade edit checklist.
