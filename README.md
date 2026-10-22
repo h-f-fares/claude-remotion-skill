@@ -54,13 +54,24 @@ Those generate pixels and hallucinate. This produces *deterministic, editable, b
 
 ```
 remotion-motion-graphics/
-├── SKILL.md                    # Workflow + 10 non-negotiable motion rules
+├── SKILL.md                    # Workflow + 12 non-negotiable motion rules
 ├── references/
 │   ├── motion-patterns.md      # 17 copy-paste components (reveals, grade, grain,
 │   │                           #   Ken Burns, counters, transitions, captions...)
-│   └── design-rules.md         # Palettes, typography, pacing, sound, checklist
+│   ├── design-rules.md         # Palettes, typography, pacing, sound, checklist
+│   ├── 3d-motion.md            # three.js in Remotion: frame-driven 3D, lights, look
+│   ├── 3d-production.md        # Brief → one timeline file → review gates → measured
+│   │                           #   fixes, CPU-only render (no GPU needed)
+│   ├── footage-edits.md        # Editing real camera footage
+│   └── story-videos.md         # Narrated story Shorts/Reels
+├── scripts/
+│   ├── stills.mjs              # 18 stills + tiled contact sheet from one bundle
+│   └── qc.py                   # Loudness per 0.5 s, true peak, broken frames, hex check
 └── assets/
     └── theme.ts                # Theme template (colors, easings, spring presets)
+
+blender/                        # Optional GPU renderer (Mac M-series: Metal) for the
+                                #   3D films: same timeline baked into Cycles/EEVEE
 ```
 
 ## 🚀 Install

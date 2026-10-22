@@ -23,7 +23,12 @@
     "audio:claudedance": "node scripts/gen-claude-dance-audio.mjs",
     "render:claudedance": "remotion render src/claudedance/index.ts ClaudeDance out/claude-dance.mp4 --codec h264 --crf 16 --gl=angle",
     "audio:feelit": "node scripts/gen-feelit-audio.mjs",
-    "render:feelit": "remotion render src/claudedance/index.ts ClawdFeelIt out/clawd-feel-it.mp4 --codec h264 --crf 17 --gl=angle"
+    "render:feelit": "remotion render src/claudedance/index.ts ClawdFeelIt out/clawd-feel-it.mp4 --codec h264 --crf 17 --gl=angle",
+    "audio:clawdedit": "node scripts/gen-clawdedit-audio.mjs",
+    "stills:clawdedit": "node ../remotion-motion-graphics/scripts/stills.mjs src/clawdedit/index.ts ClawdEdit --n 18",
+    "render:clawdedit": "remotion render src/clawdedit/index.ts ClawdEdit out/clawdedit/frames --sequence --image-format=png --gl=swangle --concurrency=3",
+    "encode:clawdedit": "ffmpeg -y -framerate 30 -i out/clawdedit/frames/element-%03d.png -i public/clawdedit/sound_master.wav -c:v libx264 -profile:v high -crf 17 -pix_fmt yuv420p -c:a aac -b:a 320k -movflags +faststart -shortest out/clawd-edit.mp4",
+    "master:clawdedit": "ffmpeg -y -v error -i public/clawdedit/sound.wav -af \"aformat=channel_layouts=stereo,acompressor=threshold=-20dB:ratio=2.5:attack=8:release=120,volume=10dB,alimiter=limit=0.79:attack=2:release=60:level=disabled,aresample=192000,alimiter=limit=0.84:level=disabled,aresample=48000\" -ar 48000 public/clawdedit/sound_master.wav"
   },
   "dependencies": {
     "@react-three/fiber": "9.8.2",

@@ -109,3 +109,26 @@ ffmpeg -i vid/<recording>.webm -filter_complex "[0:v]trim=1.6:9.3,setpts=(PTS-ST
 ```
 
 Finished video: [`videos/veilllm/veilllm-short-ar.mp4`](videos/veilllm/veilllm-short-ar.mp4). Titles, description and tags: [`videos/veilllm/youtube.md`](videos/veilllm/youtube.md).
+
+## ClawdEdit (3D character film, CPU only, one timeline file)
+
+12 s, 1920x1080. Clawd lies in a fake After Effects comp as a flat PNG layer, knocks twice,
+peels off as a card and pops into 3D, then builds the title card by jumping on real keycaps:
+Type, Rectangle, Pen, Effects > Glow (he kicks the chip into the comp), four keyframes on
+the Position row, a ride on the playhead while the comp plays the keys back, Play. The
+panels power down and fall; only his work is left.
+
+Built the way `references/3d-production.md` describes: `src/clawdedit/timeline.ts` holds
+the layout in app pixels plus every hop, event, camera shot and sound cue; `motion.ts`
+turns it into per-frame state; the UI is a canvas cut into slabs, the comp a canvas redrawn
+per frame. Look stack on CPU: shot-list camera, Neutral tone mapping, bloom, depth of field,
+a lit warm room. No GPU: three.js renders through `--gl=swangle` (~4 s wall per frame).
+The same film renders in Blender on a GPU machine: `../blender/README.md`.
+
+```bash
+npm run audio:clawdedit     # synthesizes public/clawdedit/sound.wav from timeline.ts
+npm run master:clawdedit    # compressor + limiter → sound_master.wav (≈ −11.6 LUFS, −1.5 dBTP)
+npm run stills:clawdedit    # gate: 18 half-size stills → out/qc/contact_sheet.png
+npm run render:clawdedit    # PNG sequence (re-render a range with --frames=105-145)
+npm run encode:clawdedit    # H.264 CRF 17 + AAC 320k → out/clawd-edit.mp4
+```

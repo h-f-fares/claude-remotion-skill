@@ -47,9 +47,17 @@ More than one glowing element per frame = Vegas. Don't.
   lands (early feels synced; late feels broken).
 - Transitions: riser into the cut, bass hit ON the cut.
 - Counters: soft tick loop while counting.
-- Music bed at low volume (~0.2–0.3), ducked further under VO.
+- Under narration: music bed at low volume (~0.2–0.3), ducked further under VO.
+  Music-only films are mastered loud instead: integrated ≈ −11…−12 LUFS, quiet intro,
+  hard drop, true peak ≤ −1 dBTP (see `3d-production.md` §8).
 - Pick music FIRST when possible; compute framesPerBeat = fps*60/BPM and place
   cuts on beats.
+- Put sound on the SAME timeline as the picture: every SFX cue is computed from the
+  event list the scene reads, so a click can never drift off its button press.
+- Shape the loudness: quiet before the drop, loud from it, softer on the fade. Check it
+  per half second (`scripts/qc.py loudness`). True peak ≤ −1 dBTP for phones.
+- Close your eyes and listen: if the sound has no shape without the picture, it is not
+  finished.
 - Free SFX sources to suggest: Pixabay, Mixkit, freesound.org. A 10-file kit
   covers everything: 2 whooshes, 2 clicks, riser, bass hit, shimmer, tick, pop,
   reverse-swoosh.
@@ -79,6 +87,11 @@ lighting, deep shadows, shallow depth of field, 9:16
 - [ ] Pixel gaps (not em) between large text blocks
 - [ ] Holds exist: ≥3 moments of stillness
 - [ ] SFX on major hits, cuts on beat (if audio in scope)
+- [ ] Loudness shape checked per 0.5 s; true peak ≤ −1 dBTP
+- [ ] Every hero action changes something visible; no filler moves
+- [ ] Hero colour measured against the brand hex (3D / lit scenes)
+- [ ] Last frame works as a poster
+- [ ] 9:16 variant (if any) is its own composition, not a crop
 - [ ] Text inside safe zone; nothing touching frame edges
 - [ ] Rendered, frames extracted with ffmpeg, every extracted frame visually
       inspected, issues fixed, re-rendered, re-inspected
